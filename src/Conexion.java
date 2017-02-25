@@ -10,7 +10,7 @@ public class Conexion {
 	/* 
 	Cabezón
 	*/
-	Connection conexion;
+	private Connection conexion;
 	public void conectar() throws ClassNotFoundException, SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
 		String url = "jdbc:mysql://31.200.243.193:51987/dbdamproject";
