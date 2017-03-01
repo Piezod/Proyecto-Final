@@ -71,7 +71,7 @@ function valideDatos() {
 					             password = cookie.getValue();
 					           }
 					           if(cookie.getName().equals("cookrem")){
-					          .   rememberVal = cookie.getValue();
+					           rememberVal = cookie.getValue();
 					           }
 					        }
 					    }
@@ -104,7 +104,7 @@ function valideDatos() {
 		 //esto seria en caso de recoger un atributo solo, un usuario, ahora vamos a probar a recoger un objeto con varios datos*/
 		 %>
 				<div class="group">
-					<input id="check" type="checkbox" class="check" name="check" checked>
+					<input id="check" type="checkbox" class="check" name="check" >
 					<label for="check"><span class="icon"></span> Recordar Usuario</label>
 				</div>
 				<div class="group">
