@@ -2,6 +2,40 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html >
+
+<script type="text/javascript">
+
+
+function carga() {
+	
+	document.getElementById("usuario").focus();
+	
+}
+
+function valideDatos() {
+	
+	var usuario = document.getElementById("usuario");
+	var password = document.getElementById("password");
+	
+	if (usuario.value == "" || usuario.value=='')
+		{
+			alert("Ingresa tu usuario");
+			usuario.focus();
+			return false;
+		}else if (password.value == "" || password.value=='')
+		{
+			alert("Ingresa tu password");
+			password.focus();
+			return false;
+		}
+		else {
+			return true;
+		}
+	
+}
+
+</script>
+
 <head>
   <meta charset="UTF-8">
   <title>Estudiantes Conecta2</title>
@@ -13,6 +47,7 @@
 </head>
 
 <body class="fondo">
+<form action="ServerletLogin" method="POST" onsubmit="return valideDatos();">
   <div class="login-wrap">
 	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Entrar</label>
@@ -21,11 +56,11 @@
 			<div class="sign-in-htm">
 				<div class="group">
 					<label for="user" class="label">Usuario</label>
-					<input id="user" type="text" class="input">
+					<input id="user" type="text" class="input" name="usuario" id="usuario">
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Contraseña</label>
-					<input id="pass" type="password" class="input" data-type="password">
+					<input id="pass" type="password" class="input" data-type="password" name="pass" id="pass">
 				</div>
 				<div class="group">
 					<input id="check" type="checkbox" class="check" checked>
@@ -42,6 +77,7 @@
 		</div>
 	</div>
 </div>
+</form>
   
 </body>
 </html>
