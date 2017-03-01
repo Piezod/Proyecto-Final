@@ -7,24 +7,7 @@
  <head> 
  		
  		<script>
- 		function generarusu(){
- 			if(document.getElementById("nombre").value.length==0){
- 				alert("Antes de utilizar esta funcion  rellene el nombre");
- 			}else if(document.getElementById("apellidos").value.length==0){
- 				alert("Antes de utilizar esta funcion  rellene los apellidos");
-
- 			}else if(document.getElementById("apellidos").value.split(" ").length<2){
- 				alert("Debe introducir los dos apellidos del usuario");
- 			}
- 			else if(document.getElementById("apellidos").value.split(" ")[0].length==0||document.getElementById("apellidos").value.split(" ")[1].length==0){
- 				alert("Debe introducir los dos apellidos del usuario completos no debe estar ninguno vacio");
- 			}else{
- 			var x = document.getElementById("nombre").value.charAt(0)+"."+document.getElementById("apellidos").value.split(" ")[0]+"."+document.getElementById("apellidos").value.split(" ")[1].charAt(0);
-			document.getElementById("user").value=x;
- 			}
-			return 0;
- 			
- 		}
+ 		
  		
  		function comprobarregistro(){
  			var error="";
@@ -42,17 +25,23 @@
  					error+="\n";
  				}
  				error+="El email no puede estar vacío antes de registrarse";
- 			}
- 			if(document.getElementById("user").value.length==0){
- 				if(error.length!=0){
- 					error+="\n";
+ 			}else{
+ 				var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+ 			    
+ 			
+ 				if(!re.test(document.getElementById("email").value)){
+ 					if(error.length!=0){
+ 	 					error+="\n";
+ 	 				}
+ 	 				error+="El email no tiene un formato válido";
  				}
- 				error+="El nombre de usuario no puede estar vacío antes de registrarse";
  			}
+ 			
 				if(error.length!=0){
  					alert(error);
  					return false;
 				}else{
+					alert("Registro correcto");
 					return true;
 				}
  			
@@ -110,15 +99,7 @@
 							</div>
 						</div>
 
-						<div class="form-group">
-							<label for="username" class="cols-sm-2 control-label">Nombre de Usuario</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><a onclick="generarusu();" href="#"><i class="fa fa-users fa" aria-hidden="true" ></i></a></span>
-									<input type="text" class="form-control" name="user" id="user"  placeholder="Genera el Nombre de usuario pulsando en la izquierda" readonly/>
-								</div>
-							</div>
-						</div>
+						
 
 						
 
