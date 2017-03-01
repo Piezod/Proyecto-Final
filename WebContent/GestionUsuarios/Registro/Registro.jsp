@@ -8,7 +8,19 @@
  		
  		<script>
  		function generarusu(){
- 			
+ 			if(document.getElementById("nombre").value.length==0){
+ 				alert("Antes de utilizar esta funcion  rellene el nombre");
+ 			}else if(document.getElementById("apellidos").value.length==0){
+ 				alert("Antes de utilizar esta funcion  rellene los apellidos");
+
+ 			}else if(document.getElementById("apellidos").value.split(" ").length<2){
+ 				alert("Debe introducir los dos apellidos del usuario");
+ 			}
+ 			else{
+ 			var x = document.getElementById("nombre").value.charAt(0)+"."+document.getElementById("apellidos").value.split(" ")[0]+"."+document.getElementById("apellidos").value.split(" ")[1].charAt(0);
+			document.getElementById("user").value=x;
+ 			}
+			return 0;
  			
  		}
  		
@@ -32,14 +44,14 @@
 		<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
-					<form class="" method="post" action="#">
+					<form class="" id="registro" method="post" action="#">
 						
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">Nombre</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="name" id="name"  placeholder="Nombre"/>
+									<input type="text" class="form-control" name="nombre" id="nombre"  placeholder="Nombre"/>
 								</div>
 							</div>
 						</div>
@@ -48,7 +60,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="name" id="name"  placeholder="Apellidos"/>
+									<input type="text" class="form-control" name="apellidos" id="apellidos"  placeholder="Apellidos"/>
 								</div>
 							</div>
 						</div>
@@ -68,7 +80,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><a onclick="generarusu();" href="#"><i class="fa fa-users fa" aria-hidden="true" ></i></a></span>
-									<input type="text" class="form-control" name="username" id="username"  placeholder="Genera el Nombre de usuario pulsando en la izquierda" readonly/>
+									<input type="text" class="form-control" name="user" id="user"  placeholder="Genera el Nombre de usuario pulsando en la izquierda" readonly/>
 								</div>
 							</div>
 						</div>
