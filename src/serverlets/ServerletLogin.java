@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ServerletLogin
  */
+@WebServlet("/ServeletLogin")
+
 public class ServerletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
