@@ -9,6 +9,7 @@
  		<script>
  		function generarusu(){
  			
+ 			
  		}
  		
  		</script>
