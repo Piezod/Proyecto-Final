@@ -68,13 +68,13 @@
 		<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
-					<form class="" id="registro" method="post" action="#" onsubmit="return comprobarregistro();">
+					<form class="" id="registro" method="post" action="../../ServeletRegistro" onsubmit="return comprobarregistro();">
 						
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">Nombre</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
 									<input type="text" class="form-control" name="nombre" id="nombre"  placeholder="Nombre"/>
 								</div>
 							</div>
@@ -83,7 +83,7 @@
 							<label for="name" class="cols-sm-2 control-label">Apellidos</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
 									<input type="text" class="form-control" name="apellidos" id="apellidos"  placeholder="Apellidos"/>
 								</div>
 							</div>
@@ -93,7 +93,7 @@
 							<label for="email" class="cols-sm-2 control-label">Email</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-envelope fa" ></i></span>
 									<input type="text" class="form-control" name="email" id="email"  placeholder="Email"/>
 								</div>
 							</div>
