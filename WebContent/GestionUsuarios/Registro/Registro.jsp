@@ -7,7 +7,43 @@
  <head> 
  		
  		<script>
- 		function generarusu(){
+ 		
+ 		
+ 		function comprobarregistro(){
+ 			var error="";
+ 			if(document.getElementById("nombre").value.length==0){
+ 				error+="El nombre no puede estar vacío antes de registrarse";
+ 			}
+ 			if(document.getElementById("apellidos").value.length==0){
+ 				if(error.length!=0){
+ 					error+="\n";
+ 				}
+ 				error+="Los apellidos no puede estar vacío antes de registrarse";
+ 			}
+ 			if(document.getElementById("email").value.length==0){
+ 				if(error.length!=0){
+ 					error+="\n";
+ 				}
+ 				error+="El email no puede estar vacío antes de registrarse";
+ 			}else{
+ 				var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+ 			    
+ 			
+ 				if(!re.test(document.getElementById("email").value)){
+ 					if(error.length!=0){
+ 	 					error+="\n";
+ 	 				}
+ 	 				error+="El email no tiene un formato válido";
+ 				}
+ 			}
+ 			
+				if(error.length!=0){
+ 					alert(error);
+ 					return false;
+				}else{
+					alert("Registro correcto");
+					return true;
+				}
  			
  			
  		}
@@ -32,14 +68,14 @@
 		<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
-					<form class="" method="post" action="#">
+					<form class="" id="registro" method="post" action="../../ServeletRegistro" onsubmit="return comprobarregistro();">
 						
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">Nombre</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="name" id="name"  placeholder="Nombre"/>
+									<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
+									<input type="text" class="form-control" name="nombre" id="nombre"  placeholder="Nombre"/>
 								</div>
 							</div>
 						</div>
@@ -47,8 +83,8 @@
 							<label for="name" class="cols-sm-2 control-label">Apellidos</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="name" id="name"  placeholder="Apellidos"/>
+									<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
+									<input type="text" class="form-control" name="apellidos" id="apellidos"  placeholder="Apellidos"/>
 								</div>
 							</div>
 						</div>
@@ -57,28 +93,20 @@
 							<label for="email" class="cols-sm-2 control-label">Email</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-envelope fa" ></i></span>
 									<input type="text" class="form-control" name="email" id="email"  placeholder="Email"/>
 								</div>
 							</div>
 						</div>
 
-						<div class="form-group">
-							<label for="username" class="cols-sm-2 control-label">Nombre de Usuario</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><a onclick="generarusu();" href="#"><i class="fa fa-users fa" aria-hidden="true" ></i></a></span>
-									<input type="text" class="form-control" name="username" id="username"  placeholder="Genera el Nombre de usuario pulsando en la izquierda" readonly/>
-								</div>
-							</div>
-						</div>
+						
 
 						
 
 						
 
 						<div class="form-group ">
-							<a href="http://deepak646.blogspot.in" target="_blank" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Register</a>
+							<input type="submit" value="Registrate" id="button" class="btn btn-primary btn-lg btn-block login-button">
 						</div>
 						
 					</form>
