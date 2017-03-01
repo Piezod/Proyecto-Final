@@ -29,4 +29,8 @@ public class Conexion {
 		//ResultSet res=consulta.executeQuery("select * from usuarios where idusuarios like '"+user+"' and pass like '"+pass+"'");
 		return res.next();
 	}
+	
+	public void InsertarRegistro(String usuario,String pass,String nombre,String apellido1,String apellido2,String email,String curso,String ciclo){
+		
+	}
 }
