@@ -13,14 +13,49 @@
  			}else if(document.getElementById("apellidos").value.length==0){
  				alert("Antes de utilizar esta funcion  rellene los apellidos");
 
- 			}else if(document.getElementById("apellidos").value.split(" ").length<2&&document.getElementById("apellidos").value.split(" ")[0].length>0&&document.getElementById("apellidos").value.split(" ")[1].length>0){
+ 			}else if(document.getElementById("apellidos").value.split(" ").length<2){
  				alert("Debe introducir los dos apellidos del usuario");
  			}
- 			else{
+ 			else if(document.getElementById("apellidos").value.split(" ")[0].length==0||document.getElementById("apellidos").value.split(" ")[1].length==0){
+ 				alert("Debe introducir los dos apellidos del usuario completos no debe estar ninguno vacio");
+ 			}else{
  			var x = document.getElementById("nombre").value.charAt(0)+"."+document.getElementById("apellidos").value.split(" ")[0]+"."+document.getElementById("apellidos").value.split(" ")[1].charAt(0);
 			document.getElementById("user").value=x;
  			}
 			return 0;
+ 			
+ 		}
+ 		
+ 		function comprobarregistro(){
+ 			var error="";
+ 			if(document.getElementById("nombre").value.length==0){
+ 				error+="El nombre no puede estar vacío antes de registrarse";
+ 			}
+ 			if(document.getElementById("apellidos").value.length==0){
+ 				if(error.length!=0){
+ 					error+="\n";
+ 				}
+ 				error+="Los apellidos no puede estar vacío antes de registrarse";
+ 			}
+ 			if(document.getElementById("email").value.length==0){
+ 				if(error.length!=0){
+ 					error+="\n";
+ 				}
+ 				error+="El email no puede estar vacío antes de registrarse";
+ 			}
+ 			if(document.getElementById("user").value.length==0){
+ 				if(error.length!=0){
+ 					error+="\n";
+ 				}
+ 				error+="El nombre de usuario no puede estar vacío antes de registrarse";
+ 			}
+				if(error.length!=0){
+ 					alert(error);
+ 					return false;
+				}else{
+					return true;
+				}
+ 			
  			
  		}
  		
@@ -44,7 +79,7 @@
 		<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
-					<form class="" id="registro" method="post" action="#">
+					<form class="" id="registro" method="post" action="#" onsubmit="return comprobarregistro();">
 						
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">Nombre</label>
@@ -90,7 +125,7 @@
 						
 
 						<div class="form-group ">
-							<a href="http://deepak646.blogspot.in" target="_blank" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Register</a>
+							<input type="submit" value="Registrate" id="button" class="btn btn-primary btn-lg btn-block login-button">
 						</div>
 						
 					</form>
