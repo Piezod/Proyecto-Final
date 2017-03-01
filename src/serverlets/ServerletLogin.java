@@ -16,7 +16,11 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ServerletLogin
  */
-@WebServlet("/ServerletLogin")
+
+@WebServlet("/ServeletLogin")
+
+
+
 public class ServerletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +39,7 @@ public class ServerletLogin extends HttpServlet {
 		// TODO Auto-generated method stub
 		String usuarios= request.getParameter("usuario");
 		String pass=request.getParameter("pass");
-		
+		System.out.println("serverlet");
 		Conexion c=new Conexion();
 		
 		try {
