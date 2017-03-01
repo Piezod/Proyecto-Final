@@ -68,7 +68,7 @@
 		<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
-					<form class="" id="registro" method="post" action="#" onsubmit="return comprobarregistro();">
+					<form class="" id="registro" method="post" action="../../ServeletRegistro" onsubmit="return comprobarregistro();">
 						
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">Nombre</label>
