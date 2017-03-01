@@ -57,16 +57,54 @@ function valideDatos() {
 		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
 		<div class="login-form">
 			<div class="sign-in-htm">
+			
+			   <%
+			   // Voy a recorrer un array con cookies para ver si estan almacenadas, en caso afirmativo le pondre al formulario las cookies que tnego almacenadas
+					    Cookie[] cookies=request.getCookies();
+					    String userName = "", password = "",rememberVal="";
+					    if (cookies != null) {
+					         for (Cookie cookie : cookies) {
+					           if(cookie.getName().equals("cookuser")) {
+					             userName = cookie.getValue();
+					           }
+					           if(cookie.getName().equals("cookpass")){
+					             password = cookie.getValue();
+					           }
+					           if(cookie.getName().equals("cookrem")){
+					          .   rememberVal = cookie.getValue();
+					           }
+					        }
+					    }
+					%>
+					
 				<div class="group">
 					<label for="user" class="label">Usuario</label>
-					<input type="text" class="input" name="usuario" id="usuario">
+					<input type="text" class="input" name="usuario" id="usuario" value="<%=userName%>" />
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Contraseña</label>
 					<input id="pass" type="password" class="input" data-type="password" name="password" >
 				</div>
+				
+				
+				
+		<%
+		//Si recojo que la variable erronea , debo poner en el jsp de login una etiqueta que ponga usuario erroneo
+		
+						   String titulo =""+session.getAttribute("fallo");
+						   System.out.print("lo que recojo"+titulo);
+						   if (titulo.equals("loginerroneo")) {
+							   %>
+							   <div class="error">
+							<label for="user" class="label">Usuario o contraseña Incorrectas</label>
+							</div>
+							   <%
+						   }
+						 
+		 //esto seria en caso de recoger un atributo solo, un usuario, ahora vamos a probar a recoger un objeto con varios datos*/
+		 %>
 				<div class="group">
-					<input id="check" type="checkbox" class="check" checked>
+					<input id="check" type="checkbox" class="check" name="check" checked>
 					<label for="check"><span class="icon"></span> Recordar Usuario</label>
 				</div>
 				<div class="group">
