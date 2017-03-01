@@ -16,12 +16,11 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ServerletLogin
  */
-<<<<<<< HEAD
-@WebServlet("/ServerletLogin")
-=======
-@WebServlet("/ServeletLogin")
 
->>>>>>> origin/Juankar
+@WebServlet("/ServerletLogin")
+
+
+
 public class ServerletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
