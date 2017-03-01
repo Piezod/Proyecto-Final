@@ -47,7 +47,8 @@ function valideDatos() {
 </head>
 
 <body class="fondo">
-<form action="ServerletLogin" method="POST" onsubmit="return valideDatos();">
+
+<form action="../../LoginWeb" method="POST" onsubmit="return valideDatos();">
   <div class="login-wrap">
 	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Entrar</label>
