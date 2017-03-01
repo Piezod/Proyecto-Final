@@ -41,6 +41,7 @@ public class ServerletLogin extends HttpServlet {
 		String pass=request.getParameter("pass");
 		System.out.println("serverlet");
 		Conexion c=new Conexion();
+		response.sendRedirect("GestionUsuarios/Login/Login.jsp");
 		
 		try {
 			c.conectar();

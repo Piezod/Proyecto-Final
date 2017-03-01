@@ -49,7 +49,7 @@ function valideDatos() {
 <body class="fondo">
 
 
-<form action="../../ServeletLogin" method="POST" onsubmit="return valideDatos();">
+<form action="../../ServerletLogin" method="POST" onsubmit="return valideDatos();">
 
   <div class="login-wrap">
 	<div class="login-html">
