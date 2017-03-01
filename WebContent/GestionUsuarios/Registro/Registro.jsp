@@ -14,11 +14,17 @@
  			if(document.getElementById("nombre").value.length==0){
  				error+="El nombre no puede estar vacío antes de registrarse";
  			}
- 			if(document.getElementById("apellidos").value.length==0){
+ 			if(document.getElementById("apellido1").value.length==0){
  				if(error.length!=0){
  					error+="\n";
  				}
- 				error+="Los apellidos no puede estar vacío antes de registrarse";
+ 				error+="El primer apellido no puede estar vacío antes de registrarse";
+ 			}
+ 			if(document.getElementById("apellido2").value.length==0){
+ 				if(error.length!=0){
+ 					error+="\n";
+ 				}
+ 				error+="El segundo apellido no puede estar vacío antes de registrarse";
  			}
  			if(document.getElementById("email").value.length==0){
  				if(error.length!=0){
@@ -79,12 +85,23 @@
 								</div>
 							</div>
 						</div>
+						
 						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Apellidos</label>
+							<label for="name" class="cols-sm-2 control-label">Apellido 1</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
-									<input type="text" class="form-control" name="apellidos" id="apellidos"  placeholder="Apellidos"/>
+									<input type="text" class="form-control" name="apellido1" id="apellido1"  placeholder="Primer apellido"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="name" class="cols-sm-2 control-label">Apellido 2</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
+									<input type="text" class="form-control" name="apellido2" id="apellido2"  placeholder="Segundo apellido"/>
 								</div>
 							</div>
 						</div>
