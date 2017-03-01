@@ -24,8 +24,9 @@ public class Conexion {
 	  
 	public boolean comprobarlogin(String user,String pass) throws SQLException{
 		Statement consulta=conexion.createStatement();
-		ResultSet res=consulta.executeQuery("select * from usuarios where idusuarios like '"+user+"' and pass like '"+pass+"'");
 		
+		ResultSet res=consulta.executeQuery("select * from usuarios where usuario like '"+user+"' and pass like '"+pass+"'");
+		//System.out.println("select * from dbdamproject.usuarios where usuario like '"+user+"' and pass like '"+pass+"'");
 		//ResultSet res=consulta.executeQuery("select * from usuarios where idusuarios like '"+user+"' and pass like '"+pass+"'");
 		return res.next();
 	}
