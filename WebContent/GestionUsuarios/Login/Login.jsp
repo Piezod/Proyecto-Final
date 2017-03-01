@@ -15,7 +15,7 @@ function carga() {
 function valideDatos() {
 	
 	var usuario = document.getElementById("usuario");
-	var password = document.getElementById("password");
+	var password = document.getElementById("pass");
 	
 	if (usuario.value == "" || usuario.value=='')
 		{
@@ -48,7 +48,7 @@ function valideDatos() {
 
 <body class="fondo">
 
-<form action="../../LoginWeb" method="POST" onsubmit="return valideDatos();">
+<form action="../../ServerletLogin" method="POST">
   <div class="login-wrap">
 	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Entrar</label>
@@ -57,11 +57,11 @@ function valideDatos() {
 			<div class="sign-in-htm">
 				<div class="group">
 					<label for="user" class="label">Usuario</label>
-					<input id="user" type="text" class="input" name="usuario" id="usuario">
+					<input type="text" class="input" name="usuario" id="usuario">
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Contraseña</label>
-					<input id="pass" type="password" class="input" data-type="password" name="pass" id="pass">
+					<input id="pass" type="password" class="input" data-type="password" name="password" >
 				</div>
 				<div class="group">
 					<input id="check" type="checkbox" class="check" checked>
