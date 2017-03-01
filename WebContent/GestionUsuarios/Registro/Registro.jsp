@@ -13,7 +13,7 @@
  			}else if(document.getElementById("apellidos").value.length==0){
  				alert("Antes de utilizar esta funcion  rellene los apellidos");
 
- 			}else if(document.getElementById("apellidos").value.split(" ").length<2){
+ 			}else if(document.getElementById("apellidos").value.split(" ").length<2&&document.getElementById("apellidos").value.split(" ")[0].length>0&&document.getElementById("apellidos").value.split(" ")[1].length>0){
  				alert("Debe introducir los dos apellidos del usuario");
  			}
  			else{
