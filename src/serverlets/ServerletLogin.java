@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class ServerletLogin
  */
 
-@WebServlet("/ServerletLogin")
+@WebServlet("/ServeletLogin")
 
 
 
