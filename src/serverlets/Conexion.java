@@ -64,4 +64,10 @@ public class Conexion {
 		
 		insertar.executeUpdate("Insert into dbdamproject.usuarios values ('"+generarusuario(nombre,apellido1,apellido2)+"','"+UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10)+"','"+nombre+"','"+apellido1+"','"+apellido2+"','"+Long.toHexString(Double.doubleToLongBits(Math.random()))+"','"+email+"','"+curso+"','"+ciclo+"')");
 	}
+	
+	public boolean comprobar(String query) throws SQLException{
+		Statement consulta=conexion.createStatement();		
+		ResultSet res=consulta.executeQuery(query);
+		return res.next();
+	}
 }

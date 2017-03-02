@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="serverlets.Conexion" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -51,6 +52,8 @@
 				error += "El email no tiene un formato válido";
 			}
 		}
+		
+		
 		if(document.getElementById("ciclo").value.length==0){
 			error += "Seleccione un ciclo";
 		}
@@ -83,6 +86,8 @@
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Oxygen'
 	rel='stylesheet' type='text/css'>
+	
+	<script src="../../Bootstrap/js/ajax.js"></script>
 
 <title>Admin</title>
 </head>
@@ -99,7 +104,14 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
+								<%if(!(session.getAttribute("apellido1")+"").equals("null")){
+									System.out.println(session.getAttribute("apellido1")+"");%>
+								<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="<%=session.getAttribute("nombre") %>"/>
+								
+								
+								<%}else{System.out.println(session.getAttribute("apellido1")+""); %>
 								<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" />
+								<%} %>
 							</div>
 						</div>
 					</div>
@@ -109,7 +121,13 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
+								<%if(!(session.getAttribute("apellido1")+"").equals("null")){ %>
+								<input type="text" class="form-control" name="apellido1" id="apellido1" placeholder="Primer apellido" value="<%=session.getAttribute("apellido1") %>"/>
+								
+								
+								<%}else{ %>
 								<input type="text" class="form-control" name="apellido1" id="apellido1" placeholder="Primer apellido" />
+								<%} %>
 							</div>
 						</div>
 					</div>
@@ -119,7 +137,13 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
+								<%if(!(session.getAttribute("apellido2")+"").equals("null")){ %>
+								<input type="text" class="form-control" name="apellido2" id="apellido2" placeholder="Segundo apellido" value="<%=session.getAttribute("apellido2") %>"/>
+								
+								
+								<%}else{ %>
 								<input type="text" class="form-control" name="apellido2" id="apellido2" placeholder="Segundo apellido" />
+								<%} %>
 							</div>
 						</div>
 					</div>
@@ -129,9 +153,21 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-envelope fa"></i></span>
+								<%if(!(session.getAttribute("email")+"").equals("null")){ %>
+								<input type="text" class="form-control" name="email" id="email" placeholder="Email" value="<%=session.getAttribute("email") %>"/>
+						
+								<%}else{%>
 								<input type="text" class="form-control" name="email" id="email" placeholder="Email" />
+								<%} %>
 							</div>
 						</div>
+						<%if( (session.getAttribute("Emailduplicado")+"").equals("si")&&!(session.getAttribute("email")+"").equals("null")){ %>
+						
+						<div class="error">
+						<p>El email está duplicado
+						</div>
+						
+						<%} %>
 					</div>
 
 					

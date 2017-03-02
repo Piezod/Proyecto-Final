@@ -109,4 +109,9 @@ span.input-group-addon i {
 	text-align: center;
 }
 
-
+.error
+{
+	text-align:center;
+	color: red;
+	background-color: red;
+}

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ServeletRegistro
@@ -32,17 +33,30 @@ public class ServeletRegistro extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
+		HttpSession sesion= request.getSession(true);
 		Conexion c=new Conexion();
 		try {
 			c.conectar();
-			c.InsertarRegistro( request.getParameter("nombre"), request.getParameter("apellido1"), request.getParameter("apellido2"), request.getParameter("email"), request.getParameter("curso"), request.getParameter("ciclo"));
+			if(c.comprobar("select * from dbdamproject.usuarios where email like '"+request.getParameter("email")+"'")){
+				sesion.setAttribute("Emailduplicado", "si");
+				sesion.setAttribute("nombre", request.getAttribute("nombre"));
+				sesion.setAttribute("apellido1", request.getAttribute("apellido1"));
+				sesion.setAttribute("apellido2", request.getAttribute("apellido2"));
+				sesion.setAttribute("ciclo", request.getAttribute("ciclo"));
+				sesion.setAttribute("curso", request.getAttribute("curso"));
+				System.out.println(request.getAttribute("nombre"));
+				response.sendRedirect("GestionUsuarios/Registro/Registro.jsp");
+				
+			}else{
+				c.InsertarRegistro( request.getParameter("nombre"), request.getParameter("apellido1"), request.getParameter("apellido2"), request.getParameter("email"), request.getParameter("curso"), request.getParameter("ciclo"));
+				response.sendRedirect("GestionUsuarios/Login/Login.jsp");
+
+			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("GestionUsuarios/Login/Login.jsp");
 	}
 
 }
