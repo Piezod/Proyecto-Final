@@ -36,12 +36,9 @@ public class Conexion {
 		Statement consulta=conexion.createStatement();
 		ResultSet res=consulta.executeQuery(query);
 		int dev;
-		if(res.next())
-		{
-			dev=res.getInt(0);
-		}else{
-			dev=0;
-		}
+		res.next();
+			dev=res.getInt(1);
+		
 		return dev;
 	}
 	
