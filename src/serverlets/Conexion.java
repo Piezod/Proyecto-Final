@@ -65,24 +65,4 @@ public class Conexion {
 		insertar.executeUpdate("Insert into dbdamproject.usuarios values ('"+generarusuario(nombre,apellido1,apellido2)+"','"+UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10)+"','"+nombre+"','"+apellido1+"','"+apellido2+"','"+Long.toHexString(Double.doubleToLongBits(Math.random()))+"','"+email+"','"+curso+"','"+ciclo+"')");
 	}
 	
-	/*
-	 * Metodo que recarga un array con los usuarios que tenemos en la base de datos
-	 */
-	public String [] nombredeusuarios() throws SQLException
-	{
-		int l=contar("select count(*) from dbdamproject.usuarios");
-		String []x = new String [l];
-		
-		Statement consulta=conexion.createStatement();
-		
-		ResultSet res=consulta.executeQuery("select * from dbdamproject.usuarios");
-		int i=0;
-			while (res.next())
-			{
-				
-				x[i]=res.getString("usuario");
-				i++;
-			}
-		return x;
-	}
 }

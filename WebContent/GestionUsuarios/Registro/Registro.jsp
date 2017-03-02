@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="serverlets.Conexion" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -7,6 +8,8 @@
 <head>
 
 <script>
+		
+
 
 	function cambiarhidden(id,valor){
 		
@@ -51,6 +54,8 @@
 				error += "El email no tiene un formato válido";
 			}
 		}
+		
+		
 		if(document.getElementById("ciclo").value.length==0){
 			error += "Seleccione un ciclo";
 		}
@@ -62,11 +67,19 @@
 			alert(error);
 			return false;
 		} else {
-			alert("Registro correcto");
 			return true;
 		}
 
 	}
+	
+	<% if((session.getAttribute("Emailduplicado")+"").equals("si")){ %>
+	window.onload=function emailduplicado(){
+	alert("El email está duplicado")
+	}
+	
+	
+	
+	<%} %>
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -83,10 +96,13 @@
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Oxygen'
 	rel='stylesheet' type='text/css'>
+	
+	<script src="../../Bootstrap/js/ajax.js"></script>
 
 <title>Admin</title>
 </head>
 <body>
+		
 	<div class="container">
 		<div class="row main">
 			<div class="main-login main-center">
@@ -99,7 +115,14 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
+								<%if(!(session.getAttribute("nombre")+"").equals("null")){
+									%>
+								<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="<%=session.getAttribute("nombre") %>"/>
+								
+								
+								<%}else{%>
 								<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" />
+								<%} %>
 							</div>
 						</div>
 					</div>
@@ -109,7 +132,13 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
+								<%if(!(session.getAttribute("apellido1")+"").equals("null")){ %>
+								<input type="text" class="form-control" name="apellido1" id="apellido1" placeholder="Primer apellido" value="<%=session.getAttribute("apellido1") %>"/>
+								
+								
+								<%}else{ %>
 								<input type="text" class="form-control" name="apellido1" id="apellido1" placeholder="Primer apellido" />
+								<%} %>
 							</div>
 						</div>
 					</div>
@@ -119,7 +148,13 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
+								<%if(!(session.getAttribute("apellido2")+"").equals("null")){ %>
+								<input type="text" class="form-control" name="apellido2" id="apellido2" placeholder="Segundo apellido" value="<%=session.getAttribute("apellido2") %>"/>
+								
+								
+								<%}else{ %>
 								<input type="text" class="form-control" name="apellido2" id="apellido2" placeholder="Segundo apellido" />
+								<%} %>
 							</div>
 						</div>
 					</div>
@@ -129,9 +164,21 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-envelope fa"></i></span>
+								<%if(!(session.getAttribute("email")+"").equals("null")){ %>
+								<input type="text" class="form-control" name="email" id="email" placeholder="Email" value="<%=session.getAttribute("email") %>"/>
+						
+								<%}else{%>
 								<input type="text" class="form-control" name="email" id="email" placeholder="Email" />
+								<%} %>
 							</div>
 						</div>
+						<%if( (session.getAttribute("Emailduplicado")+"").equals("si")&&!(session.getAttribute("email")+"").equals("null")){ %>
+						
+						<div class="error">
+						<p>El email está duplicado
+						</div>
+						
+						<%} %>
 					</div>
 
 					
@@ -140,12 +187,23 @@
 					<table width="100%">
 					<tr>
 					<td width="50%">
+					<%if(!(session.getAttribute("curso")+"").equals("null")){ %>
+					<input type="hidden" name="ciclo" id="ciclo" value="<%=session.getAttribute("ciclo") %>">
+						
+								<%}else{%>
 					<input type="hidden" name="ciclo" id="ciclo" value="">
+								<%} %>
+					
 					<label class="cols-sm-2 control-label">Ciclo</label>
 						
 					</td>
 					<td width="50%">
+					<%if(!(session.getAttribute("curso")+"").equals("null")){ %>
+					<input type="hidden" name="curso" id="curso" value="<%=session.getAttribute("curso") %>">
+						
+								<%}else{%>
 					<input type="hidden" name="curso" id="curso" value="">
+								<%} %>
 					<label class="cols-sm-2 control-label">Curso</label>
 						
 					</td>
@@ -153,7 +211,12 @@
 					<tr>
 					<td width="50%">
 					<div class="btn-group">
+					<%if(!(session.getAttribute("ciclo")+"").equals("null")){ %>
+						  <button id="btciclo" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("ciclo") %><span class="caret"></span></button>
+						
+								<%}else{%>
 						  <button id="btciclo" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seleccione el ciclo<span class="caret"></span></button>
+								<%} %>
 						  <ul class="dropdown-menu">
 
 						    <li><a href="#" onclick="cambiarhidden('ciclo','DAM');return false">Desarrollo de Aplicaciones Multiplataforma(D.A.M)</a></li>
@@ -168,7 +231,12 @@
 					<td width="50%">
 					
 					<div class="btn-group">
+					<%if(!(session.getAttribute("curso")+"").equals("null")){ %>
+						  <button id="btcurso" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("curso") %><span class="caret"></span></button>
+						
+								<%}else{%>
 						  <button id="btcurso" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seleccione el curso<span class="caret"></span></button>
+								<%} %>
 						  <ul class="dropdown-menu">
 						    <li><a href="#" onclick="cambiarhidden('curso','1º');return false">1º</a></li>
 						    <li><a href="#" onclick="cambiarhidden('curso','2º');return false">2º</a></li>
@@ -199,7 +267,7 @@
 			</div>
 		</div>
 	</div>
-
+	<% session.invalidate(); %>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="../../Bootstrap/js/jquery-1.11.3.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
