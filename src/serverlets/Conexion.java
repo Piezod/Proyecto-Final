@@ -26,7 +26,7 @@ public class Conexion {
 	public boolean comprobarlogin(String user,String pass) throws SQLException{
 		Statement consulta=conexion.createStatement();
 		
-		ResultSet res=consulta.executeQuery("select * from usuarios where usuario like '"+user+"' and pass like '"+pass+"'");
+		ResultSet res=consulta.executeQuery("select * from dbdamproject.usuarios where usuario like '"+user+"' and pass like '"+pass+"'");
 		//System.out.println("select * from dbdamproject.usuarios where usuario like '"+user+"' and pass like '"+pass+"'");
 		//ResultSet res=consulta.executeQuery("select * from usuarios where idusuarios like '"+user+"' and pass like '"+pass+"'");
 		return res.next();
@@ -65,9 +65,4 @@ public class Conexion {
 		insertar.executeUpdate("Insert into dbdamproject.usuarios values ('"+generarusuario(nombre,apellido1,apellido2)+"','"+UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10)+"','"+nombre+"','"+apellido1+"','"+apellido2+"','"+Long.toHexString(Double.doubleToLongBits(Math.random()))+"','"+email+"','"+curso+"','"+ciclo+"')");
 	}
 	
-	public boolean comprobar(String query) throws SQLException{
-		Statement consulta=conexion.createStatement();		
-		ResultSet res=consulta.executeQuery(query);
-		return res.next();
-	}
 }
