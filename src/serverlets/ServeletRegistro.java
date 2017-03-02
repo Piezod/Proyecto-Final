@@ -39,13 +39,12 @@ public class ServeletRegistro extends HttpServlet {
 			c.conectar();
 			if(c.comprobar("select * from dbdamproject.usuarios where email like '"+request.getParameter("email")+"'")){
 				sesion.setAttribute("Emailduplicado", "si");
-				sesion.setAttribute("nombre", request.getAttribute("nombre"));
-				sesion.setAttribute("email", request.getAttribute("email"));
-				sesion.setAttribute("apellido1", request.getAttribute("apellido1"));
-				sesion.setAttribute("apellido2", request.getAttribute("apellido2"));
-				sesion.setAttribute("ciclo", request.getAttribute("ciclo"));
-				sesion.setAttribute("curso", request.getAttribute("curso"));
-				System.out.println(request.getAttribute("nombre"));
+				sesion.setAttribute("nombre", request.getParameter("nombre"));
+				sesion.setAttribute("email", request.getParameter("email"));
+				sesion.setAttribute("apellido1", request.getParameter("apellido1"));
+				sesion.setAttribute("apellido2", request.getParameter("apellido2"));
+				sesion.setAttribute("ciclo", request.getParameter("ciclo"));
+				sesion.setAttribute("curso", request.getParameter("curso"));
 				response.sendRedirect("GestionUsuarios/Registro/Registro.jsp");
 				
 			}else{
