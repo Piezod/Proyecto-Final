@@ -40,6 +40,7 @@ public class ServeletRegistro extends HttpServlet {
 			if(c.comprobar("select * from dbdamproject.usuarios where email like '"+request.getParameter("email")+"'")){
 				sesion.setAttribute("Emailduplicado", "si");
 				sesion.setAttribute("nombre", request.getAttribute("nombre"));
+				sesion.setAttribute("email", request.getAttribute("email"));
 				sesion.setAttribute("apellido1", request.getAttribute("apellido1"));
 				sesion.setAttribute("apellido2", request.getAttribute("apellido2"));
 				sesion.setAttribute("ciclo", request.getAttribute("ciclo"));

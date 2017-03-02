@@ -104,12 +104,12 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
-								<%if(!(session.getAttribute("apellido1")+"").equals("null")){
-									System.out.println(session.getAttribute("apellido1")+"");%>
+								<%if(!(session.getAttribute("nombre")+"").equals("null")){
+									System.out.println(session.getAttribute("nombre")+"");%>
 								<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="<%=session.getAttribute("nombre") %>"/>
 								
 								
-								<%}else{System.out.println(session.getAttribute("apellido1")+""); %>
+								<%}else{System.out.println(session.getAttribute("nombre")+""); %>
 								<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" />
 								<%} %>
 							</div>
