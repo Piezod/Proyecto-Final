@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.UUID;
 
 
 public class Conexion {
@@ -31,7 +32,39 @@ public class Conexion {
 		return res.next();
 	}
 	
-	public void InsertarRegistro(String usuario,String pass,String nombre,String apellido1,String apellido2,String email,String curso,String ciclo){
+	private int contar(String query) throws SQLException{
+		Statement consulta=conexion.createStatement();
+		ResultSet res=consulta.executeQuery(query);
+		int dev;
+		if(res.next())
+		{
+			dev=res.getInt(0);
+		}else{
+			dev=0;
+		}
+		return dev;
+	}
+	
+	private String generarusuario(String nombre,String apellido1,String apellido2) throws SQLException{
+		String usuario="";
+		usuario+=nombre.charAt(0);
+		if(nombre.contains(" ")){
+			usuario+=nombre.split(" ")[1].charAt(0);
+		}
+		usuario+=apellido1;
+		usuario+=apellido2.charAt(0);
+		usuario=usuario.toLowerCase();
+		int num= contar("select count(*) from dbdamproject.usuarios where usuario like '"+usuario+"'");
+		if(num!=0){
+			usuario+=num;
+		}
+	
+		return usuario;
+	}
+	
+	public void InsertarRegistro(String nombre,String apellido1,String apellido2,String email,String curso,String ciclo) throws SQLException{
+		Statement insertar=conexion.createStatement();		
 		
+		insertar.executeUpdate("Insert into dbdamproject.usuarios values ('"+generarusuario(nombre,apellido1,apellido2)+"','"+UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10)+"','"+nombre+"','"+apellido1+"','"+apellido2+"','"+Long.toHexString(Double.doubleToLongBits(Math.random()))+"','"+email+"','"+curso+"','"+ciclo+"')");
 	}
 }

@@ -87,8 +87,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="name" class="cols-sm-2 control-label">Apellido
-							1</label>
+						<label for="name" class="cols-sm-2 control-label">Primer apellido</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
@@ -98,8 +97,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="name" class="cols-sm-2 control-label">Apellido
-							2</label>
+						<label for="name" class="cols-sm-2 control-label">Segundo apellido</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
@@ -121,9 +119,13 @@
 					
 
 					<div class="form-group">
-						<label class="cols-sm-2 control-label">Ciclo</label>
+					<table>
+					<tr>
+					<td>
+					<input type="hidden" name="ciclo" id="ciclo" value="">
+					<label class="cols-sm-2 control-label">Ciclo</label>
 						<div class="btn-group">
-						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Default button<span class="caret"></span></button>
+						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seleccione el ciclo<span class="caret"></span></button>
 						  <ul class="dropdown-menu">
 
 						    <li role="presentation"><a href="#">Desarrollo de Aplicaciones Multiplataforma(D.A.M)</a></li>
@@ -134,6 +136,22 @@
 						    
 						  </ul>
 						</div>
+					</td>
+					<td>
+					<input type="hidden" name="curso" id="curso" value="">
+					<label class="cols-sm-2 control-label">Curso</label>
+						<div class="btn-group">
+						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seleccione el curso<span class="caret"></span></button>
+						  <ul class="dropdown-menu">
+						    <li role="presentation"><a href="#">1º</a></li>
+						    <li role="presentation"><a href="#">2º</a></li>
+						    
+						  </ul>
+						</div>
+					</td>
+					</tr>
+					</table>
+						
 								
 							
 						</div>
