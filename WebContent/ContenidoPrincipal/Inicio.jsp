@@ -1,5 +1,7 @@
+<%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+   <%@ page import="serverlets.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -53,6 +55,8 @@
         </div>
         <button type="submit" class="btn btn-default">Enviar</button>
       </form>
+      
+      
        <div  class="nav navbar-nav navbar-right">
        <a class="navbar-brand" align="right">Bienvenido alumno <span class="label label-success"><%=session.getAttribute("usuario") %></span></a></div>
        
@@ -71,17 +75,56 @@
   <hr>
 </div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+    <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" align="center">NUEVA PREGUNTA</a>
+
+    </div>
+  </div>
+  <hr>
+</div>
+
 <div class="container">
 <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a href="#">Ultimas Respuestas</a></li>
+    
+    
     <li role="presentation"><a href="#">Mas Contestadas</a></li>
+    
+    
     <li role="presentation"><a href="#">Semana</a></li>
+    
+    
     <li role="presentation"><a href="#">Mes</a></li>
+    
+    
     <li class="disabled"><a href="#">Disabled tab</a></li>
+    
+    
   </ul>
 <hr>
   <div class="row">
     <div class="text-justify col-sm-4">  </div>
+   	        <% 
+   	        /*
+   	        Aqui estoy recargando los nombres del usuario de momento , habra que validar que si esta pulsado las mas visitas recargar
+   	        las preguntas segun el boton del tab pulsado.
+   	        */
+   		 	Conexion c=new Conexion();
+    		c.conectar();
+    			String[]x=c.nombredeusuarios();
+    		for (int i=0;i<c.nombredeusuarios().length;i++)
+    		{
+    			int j=new Random(300).nextInt();
+    		 %>
+    			<hr><h1></h1>
+    			<a href="#">La pregunta de este usuario <%=x[i] %> <span class="badge"><%=j %></span></a><br>
+    			<code><%=x[i] %></code><code>Etiqueta2</code>
+    		<%
+    		}
+    		
+    		%>
 </div>
   <hr>
   <div class="row">

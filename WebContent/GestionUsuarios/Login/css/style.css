@@ -10,9 +10,9 @@ body{
 a{color:inherit;text-decoration:none}
 
 .login-wrap{
-	margin: auto;
-    width: 50%;
-	max-width:525px;
+	margin:auto;
+    width: 400px;
+	
 	min-height:670px;
 	position:relative;
 	
@@ -20,10 +20,12 @@ a{color:inherit;text-decoration:none}
 }
 .fondo
 {
-	margin: auto;
-    width: 50%;
-    padding: 10px;
-	background-color: #75999C;
+	  height: 100%;
+ 	background-repeat: no-repeat;
+ 	background:url(https://i.ytimg.com/vi/4kfXjatgeEU/maxresdefault.jpg);
+ 	font-family: 'Oxygen', sans-serif;
+	    background-size: cover;
+	    margin: auto;
 }
 .login-html{
 	
