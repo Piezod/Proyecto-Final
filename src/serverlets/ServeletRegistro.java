@@ -1,6 +1,8 @@
 package serverlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,11 +31,16 @@ public class ServeletRegistro extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-		System.out.println(request.getParameter("nombre"));
-		System.out.println(request.getParameter("apellidos"));
-		System.out.println(request.getParameter("email"));
+
+		
+		Conexion c=new Conexion();
+		try {
+			c.conectar();
+			c.InsertarRegistro( request.getParameter("nombre"), request.getParameter("apellido1"), request.getParameter("apellido2"), request.getParameter("email"), request.getParameter("curso"), request.getParameter("ciclo"));
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		response.sendRedirect("GestionUsuarios/Login/Login.jsp");
 	}
