@@ -92,7 +92,7 @@ function valideDatos() {
 		//Si recojo que la variable erronea , debo poner en el jsp de login una etiqueta que ponga usuario erroneo
 		
 						   String titulo =""+session.getAttribute("fallo");
-						   System.out.print("lo que recojo"+titulo);
+						   System.out.print("fallo null o no "+titulo);
 						   if (titulo.equals("loginerroneo")) {
 							   %>
 							   <div class="error">
