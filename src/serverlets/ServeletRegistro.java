@@ -31,9 +31,8 @@ public class ServeletRegistro extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
 
+		
 		Conexion c=new Conexion();
 		try {
 			c.conectar();
@@ -42,6 +41,7 @@ public class ServeletRegistro extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		response.sendRedirect("GestionUsuarios/Login/Login.jsp");
 	}
 

@@ -7,6 +7,18 @@
 <head>
 
 <script>
+
+	function cambiarhidden(id,valor){
+		
+		document.getElementById("bt"+id).innerHTML=valor+'<span class="caret"></span>'
+		document.getElementById(id).value=valor
+		
+		
+		
+		
+		
+	}
+
 	function comprobarregistro() {
 		var error = "";
 		if (document.getElementById("nombre").value.length == 0) {
@@ -39,7 +51,13 @@
 				error += "El email no tiene un formato válido";
 			}
 		}
-
+		if(document.getElementById("ciclo").value.length==0){
+			error += "Seleccione un ciclo";
+		}
+		if(document.getElementById("curso").value.length==0){
+			error += "Seleccione un curso";
+		}
+		
 		if (error.length != 0) {
 			alert(error);
 			return false;
@@ -119,36 +137,46 @@
 					
 
 					<div class="form-group">
-					<table>
+					<table width="100%">
 					<tr>
-					<td>
+					<td width="50%">
 					<input type="hidden" name="ciclo" id="ciclo" value="">
 					<label class="cols-sm-2 control-label">Ciclo</label>
-						<div class="btn-group">
-						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seleccione el ciclo<span class="caret"></span></button>
-						  <ul class="dropdown-menu">
-
-						    <li role="presentation"><a href="#">Desarrollo de Aplicaciones Multiplataforma(D.A.M)</a></li>
-						    <li role="presentation"><a href="#">Asistencia a la Dirección</a></li>
-						    <li role="presentation"><a href="#">Administracion de Sistemas Informaticos y Redes(A.S.I.R)</a></li>
-						    <li role="presentation"><a href="#">Sistemas Electrotécnicos y Automatizados</a></li>
-						    <li role="presentation"><a href="#">Administración y Finanzas</a></li>
-						    
-						  </ul>
-						</div>
+						
 					</td>
-					<td>
+					<td width="50%">
 					<input type="hidden" name="curso" id="curso" value="">
 					<label class="cols-sm-2 control-label">Curso</label>
-						<div class="btn-group">
-						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seleccione el curso<span class="caret"></span></button>
+						
+					</td>
+					</tr>
+					<tr>
+					<td width="50%">
+					<div class="btn-group">
+						  <button id="btciclo" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seleccione el ciclo<span class="caret"></span></button>
 						  <ul class="dropdown-menu">
-						    <li role="presentation"><a href="#">1º</a></li>
-						    <li role="presentation"><a href="#">2º</a></li>
+
+						    <li><a href="#" onclick="cambiarhidden('ciclo','DAM');return false">Desarrollo de Aplicaciones Multiplataforma(D.A.M)</a></li>
+						    <li><a href="#" onclick="cambiarhidden('ciclo','AD');return false">Asistencia a la Dirección(A.D)</a></li>
+						    <li><a href="#" onclick="cambiarhidden('ciclo','ASIR');return false">Administracion de Sistemas Informaticos y Redes(A.S.I.R)</a></li>
+						    <li><a href="#" onclick="cambiarhidden('ciclo','SEA');return false">Sistemas Electrotécnicos y Automatizados(S.E.A)</a></li>
+						    <li><a href="#" onclick="cambiarhidden('ciclo','AF');return false">Administración y Finanzas(A.F)</a></li>
 						    
 						  </ul>
 						</div>
 					</td>
+					<td width="50%">
+					
+					<div class="btn-group">
+						  <button id="btcurso" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seleccione el curso<span class="caret"></span></button>
+						  <ul class="dropdown-menu">
+						    <li><a href="#" onclick="cambiarhidden('curso','1º');return false">1º</a></li>
+						    <li><a href="#" onclick="cambiarhidden('curso','2º');return false">2º</a></li>
+						    
+						  </ul>
+						</div>
+					</td>
+					
 					</tr>
 					</table>
 						
