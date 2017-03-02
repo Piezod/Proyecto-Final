@@ -42,10 +42,11 @@ public class ServerletLogin extends HttpServlet {
 		 * Recogemos los valores del formulario por nombre usuario y password, importante recordar que se recogen por el nombre y no por la id.
 		 * El formulario nos envia el action a este serverlet y el serverlet para poder ser llamado desde un jsp le ponemos el alias del webserverlet de arriba
 		 */
+		
 		String usuarios= request.getParameter("usuario");
 		String pass=request.getParameter("password");
 		Conexion c=new Conexion();
-		
+		//System.out.println("serverletlogin el usuario es"+usuarios+" la pass es "+pass);
 		/* Comprobacion de si esta o no esta seleccionado el check de recordar contraseña
 		en caso de que sea afirmativo creamos una cookie y le ponemos los datos, recordamos usuario y pass aunque solo cargaremos el usuario 
 		en caso contrario si no esta clickeado borraremos el valor de la cookie y lo pondremos a null.
