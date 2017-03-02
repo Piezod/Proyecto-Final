@@ -65,4 +65,31 @@ public class Conexion {
 		insertar.executeUpdate("Insert into dbdamproject.usuarios values ('"+generarusuario(nombre,apellido1,apellido2)+"','"+UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10)+"','"+nombre+"','"+apellido1+"','"+apellido2+"','"+Long.toHexString(Double.doubleToLongBits(Math.random()))+"','"+email+"','"+curso+"','"+ciclo+"')");
 	}
 	
+	public String[] sacarusuarios() throws SQLException
+	{
+		
+		String x[]=new String[contar("select count(*) from dbdamproject.usuarios")];
+		
+		Statement consulta=conexion.createStatement();
+		ResultSet res=consulta.executeQuery("select * from dbdamproject.usuarios");
+		
+		int i=0;
+		while (res.next())
+		{
+			x[i]=res.getString(1);
+			i++;
+			
+		}
+		
+		return x;
+	}
+
+	public boolean comprobar(String string) throws SQLException {
+		// TODO Auto-generated method stub
+		Statement consulta=conexion.createStatement();
+		ResultSet res=consulta.executeQuery(string);
+		
+		return res.next();
+	}
+	
 }

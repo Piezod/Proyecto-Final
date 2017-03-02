@@ -78,7 +78,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-    <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" align="center">NUEVA PREGUNTA</a>
+    <!--  le envio al boton la url directa para que recargue el jsp de altapregunta, no se si sera lo mas optimo pero ahora mismo esto funciona con el a
+    al enviarle la informacion del usuario esta en sesion con lo cual se puede recoger perfectamente -->
+    <a href="http://localhost:8080/Proyectoprueba/ContenidoPrincipal/Altapregunta.jsp" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" align="center">NUEVA PREGUNTA</a>
 
     </div>
   </div>
@@ -113,8 +115,8 @@
    	        */
    		 	Conexion c=new Conexion();
     		c.conectar();
-    			String[]x=c.nombredeusuarios();
-    		for (int i=0;i<c.nombredeusuarios().length;i++)
+    			String[]x=c.sacarusuarios();
+    		for (int i=0;i<c.sacarusuarios().length;i++)
     		{
     			int j=new Random(300).nextInt();
     		 %>
