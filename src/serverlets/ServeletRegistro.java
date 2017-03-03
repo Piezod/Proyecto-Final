@@ -2,6 +2,7 @@ package serverlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import Utilidades.Correo;
 
 /**
  * Servlet implementation class ServeletRegistro
@@ -36,6 +39,7 @@ public class ServeletRegistro extends HttpServlet {
 		HttpSession sesion= request.getSession(true);
 		Conexion c=new Conexion();
 		try {
+			
 			c.conectar();
 			if(c.comprobar("select * from dbdamproject.usuarios where email like '"+request.getParameter("email")+"'")){
 				sesion.setAttribute("Emailduplicado", "si");
@@ -48,7 +52,12 @@ public class ServeletRegistro extends HttpServlet {
 				response.sendRedirect("GestionUsuarios/Registro/Registro.jsp");
 				
 			}else{
-				c.InsertarRegistro( request.getParameter("nombre"), request.getParameter("apellido1"), request.getParameter("apellido2"), request.getParameter("email"), request.getParameter("curso"), request.getParameter("ciclo"));
+				String usuario=c.generarusuario(request.getParameter("nombre"), request.getParameter("apellido1"), request.getParameter("apellido2"));
+				String contraseña=UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10);
+				String validacion=Long.toHexString(Double.doubleToLongBits(Math.random()));
+				c.InsertarRegistro(usuario,contraseña,validacion, request.getParameter("nombre"), request.getParameter("apellido1"), request.getParameter("apellido2"), request.getParameter("email"), request.getParameter("curso"), request.getParameter("ciclo"));
+				Correo correo=new Correo("Enhorabuena por acceder a estudiantas conectados\nA continuación le otorgamos los datos del registro\n<strong>Usuario:</strong>"+usuario+"\n<strong>Contraseña:</strong>"+contraseña+"\nPara acceder al login y validar tu usuario accede desde <a href=\"localhost:8080/Proyectoprueba/GestionUsuarios/Login/Login.jsp?validacion="+validacion+"\">este link</a>", request.getParameter("email"), "Registro en Estudiantes Conectados");
+				correo.SendMail();
 				response.sendRedirect("GestionUsuarios/Login/Login.jsp");
 
 			}
