@@ -56,7 +56,7 @@ public class ServeletRegistro extends HttpServlet {
 				String contraseña=UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10);
 				String validacion=Long.toHexString(Double.doubleToLongBits(Math.random()));
 				c.InsertarRegistro(usuario,contraseña,validacion, request.getParameter("nombre"), request.getParameter("apellido1"), request.getParameter("apellido2"), request.getParameter("email"), request.getParameter("curso"), request.getParameter("ciclo"));
-				Correo correo=new Correo("Enhorabuena por acceder a estudiantas conectados\nA continuación le otorgamos los datos del registro\n<strong>Usuario:</strong>"+usuario+"\n<strong>Contraseña:</strong>"+contraseña+"\nPara acceder al login y validar tu usuario accede desde <a href=\"localhost:8080/Proyectoprueba/GestionUsuarios/Login/Login.jsp?validacion="+validacion+"\">este link</a>", request.getParameter("email"), "Registro en Estudiantes Conectados");
+				Correo correo=new Correo("Enhorabuena por acceder a estudiantas conectados<br>A continuación le otorgamos los datos del registro<br><strong>Usuario:</strong>"+usuario+"<br><strong>Contraseña:</strong>"+contraseña+"<br>Para acceder al login y validar tu usuario accede desde <a href="+'"'+"http://localhost:8080/Proyectoprueba/GestionUsuarios/Login/Login.jsp?validacion="+validacion+'"'+">este link</a>", request.getParameter("email"), "Registro en Estudiantes Conectados");
 				correo.SendMail();
 				response.sendRedirect("GestionUsuarios/Login/Login.jsp");
 

@@ -27,7 +27,8 @@ public class Conexion {
 	public boolean comprobarlogin(String user, String pass,String codvalid) throws SQLException {
 		boolean enc=false;
 		Statement consulta = conexion.createStatement();
-
+		user=user.replaceAll("\'\"\\@\\$", "");
+		pass=pass.replaceAll("\'\"\\@\\$", "");
 		ResultSet res = consulta.executeQuery(
 				"select * from dbdamproject.usuarios where usuario like '" + user + "' and pass like '" + pass + "' and validado like '1'");
 		enc= res.next();
