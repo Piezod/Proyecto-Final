@@ -49,16 +49,17 @@ public class ServeletRegistro extends HttpServlet {
 				sesion.setAttribute("apellido2", request.getParameter("apellido2"));
 				sesion.setAttribute("ciclo", request.getParameter("ciclo"));
 				sesion.setAttribute("curso", request.getParameter("curso"));
-				response.sendRedirect("GestionUsuarios/Registro/Registro.jsp");
+				response.sendRedirect("registro");
 				
 			}else{
 				String usuario=c.generarusuario(request.getParameter("nombre"), request.getParameter("apellido1"), request.getParameter("apellido2"));
 				String contraseña=UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10);
 				String validacion=Long.toHexString(Double.doubleToLongBits(Math.random()));
 				c.InsertarRegistro(usuario,contraseña,validacion, request.getParameter("nombre"), request.getParameter("apellido1"), request.getParameter("apellido2"), request.getParameter("email"), request.getParameter("curso"), request.getParameter("ciclo"));
-				Correo correo=new Correo("Enhorabuena por acceder a estudiantas conectados<br>A continuación le otorgamos los datos del registro<br><strong>Usuario:</strong>"+usuario+"<br><strong>Contraseña:</strong>"+contraseña+"<br>Para acceder al login y validar tu usuario accede desde <a href="+'"'+"http://localhost:8080/Proyectoprueba/GestionUsuarios/Login/Login.jsp?validacion="+validacion+'"'+">este link</a>", request.getParameter("email"), "Registro en Estudiantes Conectados");
+				String ruta="http://localhost:8080/Proyectoprueba/login";
+				Correo correo=new Correo("Enhorabuena por acceder a estudiantas conectados<br>A continuación le otorgamos los datos del registro<br><strong>Usuario: </strong>"+usuario+"<br><strong>Contraseña: </strong>"+contraseña+"<br>Para acceder al login y validar tu usuario accede desde <a href="+'"'+ruta+"?validacion="+validacion+'"'+">este link</a>", request.getParameter("email"), "Registro en Estudiantes Conectados");
 				correo.SendMail();
-				response.sendRedirect("GestionUsuarios/Login/Login.jsp");
+				response.sendRedirect("registro");
 
 			}
 		} catch (ClassNotFoundException | SQLException e) {
