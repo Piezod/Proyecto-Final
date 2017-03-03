@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.Normalizer;
 import java.util.UUID;
 
 public class Conexion {
@@ -30,6 +31,7 @@ public class Conexion {
 		ResultSet res = consulta.executeQuery(
 				"select * from dbdamproject.usuarios where usuario like '" + user + "' and pass like '" + pass + "' and validado like '1'");
 		enc= res.next();
+
 		if(!enc){
 			Statement consulta2=conexion.createStatement();
 			ResultSet res2=consulta2.executeQuery("select * from dbdamproject.usuarios where usuario like '" + user + "' and pass like '" + pass + "' and validacion like '"+codvalid+"' and validado like '0'");
@@ -68,7 +70,7 @@ public class Conexion {
 			num++;
 			usuario += num;
 		}
-
+		usuario=Normalizer.normalize(usuario, Normalizer.Form.NFD).replaceAll("[^a-zA-Z]", "");
 		return usuario;
 	}
 

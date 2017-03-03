@@ -50,7 +50,7 @@ function valideDatos() {
 
 <%System.out.println(request.getParameter("validacion")); %>
 <form action="../../ServeletLogin" method="POST" onsubmit="return valideDatos();">
-<inpupt type="hidden" name="validacion" value="<%=request.getParameter("validacion")  %>">
+<input type="hidden" name="validacion" value="<%=request.getParameter("validacion")  %>">
   <div class="login-wrap">
 	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Entrar</label>
