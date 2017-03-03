@@ -83,7 +83,7 @@ public class ServerletLogin extends HttpServlet {
 			 * en rojo diciendo que hay usuario o contraseña incorrecta.
 			 */
 			HttpSession sesion= request.getSession(true);
-			if (c.comprobarlogin(usuarios, pass))
+			if (c.comprobarlogin(usuarios, pass,request.getParameter("validacion")))
 			{ // variable de sesion donde metemos datos para todos los jsp
 				
 				System.out.println("login correcto");
