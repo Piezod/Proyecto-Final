@@ -44,7 +44,7 @@
       
       <!-- ** Boton del home ** -->
         <li class="active">
-        	<form action="ServerletContenido" method="POST">
+        	<form action="<%=session.getAttribute("ruta")%>ServerletContenido" method="POST">
 			<input type="hidden" name="pagina" value="home"></input>
 			<button class="btn btn-primary btn-lg active"  type="submit" name="contenido" value="home"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span> </button>			
 			</form>

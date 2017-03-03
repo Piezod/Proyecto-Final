@@ -51,7 +51,7 @@
     	 botones estaran incluiddos en un formulario que iran redirigidos a un serverlet que se llamara ***serverletcontenido***
     	  ** -->
     
-			<form action="ServerletContenido" method="POST">
+			<form action="<%=session.getAttribute("ruta")%>ServerletContenido" method="POST">
 			<input type="hidden" name="pagina" value="Altapregunta.jsp"></input>
 			<button class="btn btn-primary btn-lg active"  type="submit" name="contenido" value="AltaPregunta">Nueva pregunta</button>			
 			</form>

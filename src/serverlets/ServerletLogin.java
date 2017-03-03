@@ -89,12 +89,16 @@ public class ServerletLogin extends HttpServlet {
 				System.out.println("login correcto me caguen la leche merche");
 				//request.setAttribute("usuariologueado", usuarios+" "+pass); // le enviamos a nuestro jsp por atributo los datos recogidos en este servlet				
 				sesion.setAttribute("usuario", usuarios);
+				System.out.println("ruta del serverlet"+getServletContext().getRealPath("/"));
+				sesion.setAttribute("ruta", getServletContext().getRealPath("/"));
 				//request.setAttribute("usuario", vo); // le paso un objeto con todos sus datos
 				request.getRequestDispatcher("ContenidoPrincipal/Inicio.jsp").forward(request, response); //aqui llamamos a un jsp desde el servlet
 			
+				
 			}else {
 				
 				sesion.setAttribute("fallo", "loginerroneo");
+				
 				//request.setAttribute("usuariologueado","mal");
 				
 				response.sendRedirect("GestionUsuarios/Login/Login.jsp"); //si se confunde le redireccionamos a otro sitio  si ponemos / nos envia al raiz, pero si enviar datos
@@ -109,6 +113,7 @@ public class ServerletLogin extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }

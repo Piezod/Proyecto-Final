@@ -51,7 +51,10 @@ public class ServerletContenido extends HttpServlet {
 		/*
 		 * Redireccionamos a nuestra pagina inicial , en la cual mantendremos el navegador superior y recargaremos la parte central
 		 */
+		
+		System.out.println(getServletContext().getRealPath("/"));
 		response.sendRedirect("ContenidoPrincipal/Inicio.jsp");
+		
 		
 		
 	}
