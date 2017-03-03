@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="serverlets.Conexion" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -89,21 +88,24 @@
 
 
 <!-- Website CSS style -->
-<link href="../../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="../../Bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Website Font style -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-<link rel="stylesheet" href="registro.css">
+<!-- <link rel="stylesheet" href="registro.css"> -->
+<link rel="stylesheet" href="GestionUsuarios/Registro/registro.css">
 <!-- Google Fonts -->
 <link href='https://fonts.googleapis.com/css?family=Passion+One'
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Oxygen'
 	rel='stylesheet' type='text/css'>
 	
-	<script src="../../Bootstrap/js/ajax.js"></script>
+	
+<!-- <script src="../../Bootstrap/js/ajax.js"></script> -->
 
-<title>Admin</title>
+<title>Registro</title>
 </head>
 <body>
 		
@@ -111,7 +113,7 @@
 		<div class="row main">
 			<div class="main-login main-center">
 				<form class="" id="registro" method="post"
-					action="../../ServeletRegistro"
+					action="ServeletRegistro"
 					onsubmit="return comprobarregistro();">
 
 					<div class="form-group">
@@ -282,9 +284,10 @@
 	//queden los campos llenos
 	session.invalidate(); %>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="../../Bootstrap/js/jquery-1.11.3.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="../../Bootstrap/js/bootstrap.min.js"></script>
+	<script src="Bootstrap/js/jquery-1.11.3.min.js"></script>
+	<!-- <script src="../../Bootstrap/js/jquery-1.11.3.min.js"></script> -->
+	<script src="Bootstrap/js/bootstrap.min.js"></script>
+	<!--  <script src="../../Bootstrap/js/bootstrap.min.js"></script>-->
 </body>
 
 
