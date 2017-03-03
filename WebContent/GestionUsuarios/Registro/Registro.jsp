@@ -116,6 +116,7 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
 								<%if(!(session.getAttribute("nombre")+"").equals("null")){
+									
 									%>
 								<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="<%=session.getAttribute("nombre") %>"/>
 								
