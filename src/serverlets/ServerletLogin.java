@@ -86,11 +86,11 @@ public class ServerletLogin extends HttpServlet {
 			if (c.comprobarlogin(usuarios, pass,request.getParameter("validacion")))
 			{ // variable de sesion donde metemos datos para todos los jsp
 				
-				System.out.println("login correcto");
+				System.out.println("login correcto me caguen la leche merche");
 				//request.setAttribute("usuariologueado", usuarios+" "+pass); // le enviamos a nuestro jsp por atributo los datos recogidos en este servlet				
 				sesion.setAttribute("usuario", usuarios);
 				//request.setAttribute("usuario", vo); // le paso un objeto con todos sus datos
-				request.getRequestDispatcher("ContenidoPrincipal/Inicio2.jsp").forward(request, response); //aqui llamamos a un jsp desde el servlet
+				request.getRequestDispatcher("ContenidoPrincipal/Inicio.jsp").forward(request, response); //aqui llamamos a un jsp desde el servlet
 			
 			}else {
 				
