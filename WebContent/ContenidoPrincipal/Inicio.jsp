@@ -41,11 +41,17 @@
     
     <div class="collapse navbar-collapse" id="defaultNavbar1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span> </a></li>
-        <li><a href="#">Usuarios</a></li>
-       
-       
+      
+      <!-- ** Boton del home ** -->
+        <li class="active">
+        	<form action="ServerletContenido" method="POST">
+			<input type="hidden" name="pagina" value="home"></input>
+			<button class="btn btn-primary btn-lg active"  type="submit" name="contenido" value="home"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span> </button>			
+			</form>
+        </li>
         
+        
+        <li><a href="#">Usuarios</a></li>
 		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informacion <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#" align="center">Accion1</a></li>
@@ -76,17 +82,29 @@
 
 <body>
 <hr>
+
 <div class="container-fluid">
 								<%
-								out.println(session.getAttribute("contenido"));
+								
+								if (session.getAttribute("contenido")==null || session.getAttribute("contenido").equals("home"))
+								{
+									out.println("Debo de poner el home");
+								}
+								else
+								{
+									out.println("Debo poner el valor del contenido "+session.getAttribute("contenido"));
+								}
+								out.println("El valor de la sesion contenido es "+session.getAttribute("contenido"));
     							
+    						
     						String opcion=""+session.getAttribute("contenido");
+    		
 									switch (opcion)
 									{
 									case  "AltaPregunta" :
 										out.print("dentrodelsegunsea ponemos el jspdealtapregunta");
 										%>
-										<%@include file="Altapregunta.jsp"%> 
+										<%@include file="Altapregunta.jsp"%>
 										<%break;
 
 									default:

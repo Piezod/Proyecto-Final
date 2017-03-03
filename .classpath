@@ -18,9 +18,5 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="C:/Users/Juankar/Documents/Git/Proyecto-Final/WebContent/WEB-INF/lib/javax.mail.jar"/>
-=======
->>>>>>> refs/remotes/origin/master
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

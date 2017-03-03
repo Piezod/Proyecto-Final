@@ -11,14 +11,14 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class AltaPregunta
  */
-@WebServlet("/AltaPregunta")
-public class AltaPregunta extends HttpServlet {
+@WebServlet("/ServerletContenido")
+public class ServerletContenido extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AltaPregunta() {
+    public ServerletContenido() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,17 +38,20 @@ public class AltaPregunta extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		/*
-		 * Recoj por el metodo post el valor del boton que me han pulsado, me most
+		 * Recoj por el metodo post el valor del boton que me han pulsado
 		 */
 		HttpSession sesion= request.getSession(true);
 		
+		/*
+		 * tenemos la variable de sesion contenido que lo que nos realizara sera rellenar el valor de la variable en funcion del boton que nos ha sido pulsado
+		 * Segun sea el boton pulsado cargaremos un jsp u otro diferente
+		 */
 		sesion.setAttribute("contenido", request.getParameter("contenido"));
 		
-		System.out.println("Se llama al serverletaltapregunta");
-		String jsp=request.getParameter("contenido");
-		
-		System.out.println("lo que recojo es el contenido es "+jsp);
-		response.sendRedirect("ContenidoPrincipal/Inicio2.jsp");
+		/*
+		 * Redireccionamos a nuestra pagina inicial , en la cual mantendremos el navegador superior y recargaremos la parte central
+		 */
+		response.sendRedirect("ContenidoPrincipal/Inicio.jsp");
 		
 		
 	}
