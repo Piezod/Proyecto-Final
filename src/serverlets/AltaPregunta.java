@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AltaPregunta
@@ -36,6 +37,20 @@ public class AltaPregunta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		/*
+		 * Recoj por el metodo post el valor del boton que me han pulsado, me most
+		 */
+		HttpSession sesion= request.getSession(true);
+		
+		sesion.setAttribute("contenido", request.getParameter("contenido"));
+		
+		System.out.println("Se llama al serverletaltapregunta");
+		String jsp=request.getParameter("contenido");
+		
+		System.out.println("lo que recojo es el contenido es "+jsp);
+		response.sendRedirect("ContenidoPrincipal/Inicio2.jsp");
+		
+		
 	}
 
 }
