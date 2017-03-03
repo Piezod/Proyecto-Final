@@ -48,8 +48,10 @@ function valideDatos() {
 
 <body class="fondo">
 
-<%System.out.println(request.getParameter("validacion")); %>
 <form action="../../ServeletLogin" method="POST" onsubmit="return valideDatos();">
+		<!-- Creo un campo oculto con el valor del get con el código de la validación
+		para poder validar el usuario y que solo pueda acceder a la cuenta a través
+		del link que enviamos por correo -->
 <input type="hidden" name="validacion" value="<%=request.getParameter("validacion")  %>">
   <div class="login-wrap">
 	<div class="login-html">

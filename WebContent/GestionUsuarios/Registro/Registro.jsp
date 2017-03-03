@@ -16,13 +16,11 @@
 		document.getElementById("bt"+id).innerHTML=valor+'<span class="caret"></span>'
 		document.getElementById(id).value=valor
 		
-		
-		
-		
-		
 	}
 
 	function comprobarregistro() {
+		//Validaciones del formulario
+		
 		var error = "";
 		if (document.getElementById("nombre").value.length == 0) {
 			error += "El nombre no puede estar vacío antes de registrarse";
@@ -57,9 +55,15 @@
 		
 		
 		if(document.getElementById("ciclo").value.length==0){
+			if (error.length != 0) {
+				error += "\n";
+			}
 			error += "Seleccione un ciclo";
 		}
 		if(document.getElementById("curso").value.length==0){
+			if (error.length != 0) {
+				error += "\n";
+			}
 			error += "Seleccione un curso";
 		}
 		
@@ -115,13 +119,20 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"></i></span>
-								<%if(!(session.getAttribute("nombre")+"").equals("null")){
+								<%
+								//Esta comprobación nos vale para todo
+								//Compruebo que el atributo de la sesion del nombre no exista
+								//Así si existe lo relleno directamente con el valor en caso de
+								//Fallo del login
+								if(!(session.getAttribute("nombre")+"").equals("null")){
 									
 									%>
 								<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="<%=session.getAttribute("nombre") %>"/>
 								
 								
-								<%}else{%>
+								<%}else{
+								//Si no existe lo creo vacio
+								%>
 								<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" />
 								<%} %>
 							</div>
@@ -188,7 +199,11 @@
 					<table width="100%">
 					<tr>
 					<td width="50%">
-					<%if(!(session.getAttribute("curso")+"").equals("null")){ %>
+					<%
+					//Realizo la misma comprobación de la variable de sesión pero con los input hiddens que son los que pasan
+					//El valor del ciclo
+
+					if(!(session.getAttribute("curso")+"").equals("null")){ %>
 					<input type="hidden" name="ciclo" id="ciclo" value="<%=session.getAttribute("ciclo") %>">
 						
 								<%}else{%>
@@ -212,7 +227,9 @@
 					<tr>
 					<td width="50%">
 					<div class="btn-group">
-					<%if(!(session.getAttribute("ciclo")+"").equals("null")){ %>
+					<%
+					//Realizo la misma comprobación de la variable de sesión pero con los botones
+					if(!(session.getAttribute("ciclo")+"").equals("null")){ %>
 						  <button id="btciclo" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("ciclo") %><span class="caret"></span></button>
 						
 								<%}else{%>
@@ -247,17 +264,9 @@
 					</td>
 					
 					</tr>
-					</table>
-						
-								
-							
+					</table>							
 						</div>
 							
-
-
-
-
-
 
 					<div class="form-group ">
 						<input type="submit" value="Registrate" id="button"
@@ -268,7 +277,10 @@
 			</div>
 		</div>
 	</div>
-	<% session.invalidate(); %>
+	<%
+	//Destruyo la sesión para que si refrescas la página o sales no se te 
+	//queden los campos llenos
+	session.invalidate(); %>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="../../Bootstrap/js/jquery-1.11.3.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->

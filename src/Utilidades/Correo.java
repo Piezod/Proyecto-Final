@@ -3,11 +3,14 @@ package Utilidades;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.JOptionPane;
 
 /*
@@ -53,10 +56,20 @@ public class Correo {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
             message.setSubject(Subject);
-            message.setText(Mensage);
+            MimeBodyPart messageBodyPart = new MimeBodyPart();
+
+            // Fill the message
+            messageBodyPart.setText(Mensage,"UTF-8","html");
+
+            //message.setText(Mensage);
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+
+            // Put parts in message
+            message.setContent(multipart);
+
  
             Transport.send(message);
-            JOptionPane.showMessageDialog(null, "Email enviado");
  
         } catch (MessagingException e) {
             throw new RuntimeException(e);
