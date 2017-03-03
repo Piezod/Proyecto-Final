@@ -41,14 +41,14 @@ function valideDatos() {
   <title>Estudiantes Conecta2</title>
  	 <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'>
 
-      <link rel="stylesheet" href="css/style.css" type="text/css">
+      <link rel="stylesheet" href="GestionUsuarios/Login/css/style.css" type="text/css">
 
   
 </head>
 
 <body class="fondo">
 
-<form action="../../ServeletLogin" method="POST" onsubmit="return valideDatos();">
+<form action="ServeletLogin" method="POST" onsubmit="return valideDatos();">
 		<!-- Creo un campo oculto con el valor del get con el código de la validación
 		para poder validar el usuario y que solo pueda acceder a la cuenta a través
 		del link que enviamos por correo -->
