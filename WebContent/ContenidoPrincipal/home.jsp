@@ -8,11 +8,7 @@
 <head>
 
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<script src="file:///C|/Users/Juankar/Desktop/DreamWeaver/js/jquery-1.11.3.min.js"></script>
 
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
-<script src="file:///C|/Users/Juankar/Desktop/DreamWeaver/js/bootstrap.js"></script>
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../Bootstrap/js/jquery-1.11.3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -37,7 +33,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center">Usuarios Conecta2</h1>
+      <h1 class="text-center">Bienvenido a nuestra aplicacion, Home</h1>
     </div>
   </div>
   <hr>
@@ -49,11 +45,18 @@
     <!-- Envio al serverlet mediante un formulario por el methot post el valor altapregunta.jsp que sera el que recoja y luego sera el que
     recargue -->
     
-			<form action="../AltaPregunta" method="POST">
+    <!-- ** IMPORTANTE ** -->
+    	 <!-- ** Crearemos unos botones con el type submit y el name contenido, importante siempre se llamara contenido. Este boton
+    	 sera el encargado de mandarnos el valor del jsp a cargar. En el value pondremos el nombre del jsp sin la extension, todos los 
+    	 botones estaran incluiddos en un formulario que iran redirigidos a un serverlet que se llamara ***serverletcontenido***
+    	  ** -->
+    
+			<form action="<%=session.getAttribute("ruta")%>ServerletContenido" method="POST">
 			<input type="hidden" name="pagina" value="Altapregunta.jsp"></input>
-			<button class="btn btn-primary btn-lg active"  type="submit" name="contenido" value="AltaPregunta">Nueva pregunta</button>
-			
+			<button class="btn btn-primary btn-lg active"  type="submit" name="contenido" value="AltaPregunta">Nueva pregunta</button>			
 			</form>
+			
+	 <!-- ** IMPORTANTE ** -->
     </div>
   </div>
   <hr>

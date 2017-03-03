@@ -5,7 +5,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+
 <head>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="file:///C|/Users/Juankar/Desktop/DreamWeaver/js/jquery-1.11.3.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="file:///C|/Users/Juankar/Desktop/DreamWeaver/js/bootstrap.js"></script>
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../Bootstrap/js/jquery-1.11.3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -35,11 +41,17 @@
     
     <div class="collapse navbar-collapse" id="defaultNavbar1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span> </a></li>
-        <li><a href="#">Usuarios</a></li>
-       
-       
+      
+      <!-- ** Boton del home ** -->
+        <li class="active">
+        	<form action="<%=session.getAttribute("ruta")%>ServerletContenido" method="POST">
+			<input type="hidden" name="pagina" value="home"></input>
+			<button class="btn btn-primary btn-lg active"  type="submit" name="contenido" value="home"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span> </button>			
+			</form>
+        </li>
         
+        
+        <li><a href="#">Usuarios</a></li>
 		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informacion <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#" align="center">Accion1</a></li>
@@ -69,82 +81,44 @@
 </head>
 
 <body>
-
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center">Usuarios Conecta2</h1>
-    </div>
-  </div>
-  <hr>
-</div>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-    <!--  le envio al boton la url directa para que recargue el jsp de altapregunta, no se si sera lo mas optimo pero ahora mismo esto funciona con el a
-    al enviarle la informacion del usuario esta en sesion con lo cual se puede recoger perfectamente -->
-    <a href="Altapregunta.jsp" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" align="center">NUEVA PREGUNTA</a>
-
-    </div>
-  </div>
-  <hr>
-</div>
-
-<div class="container">
-<ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#">Ultimas Respuestas</a></li>
-    
-    
-    <li role="presentation"><a href="#">Mas Contestadas</a></li>
-    
-    
-    <li role="presentation"><a href="#">Semana</a></li>
-    
-    
-    <li role="presentation"><a href="#">Mes</a></li>
-    
-    
-    <li class="disabled"><a href="#">Disabled tab</a></li>
-    
-    
-  </ul>
 <hr>
-  <div class="row">
-    <div class="text-justify col-sm-4">  </div>
-   	        <% 
-   	        /*
-   	        Aqui estoy recargando los nombres del usuario de momento , habra que validar que si esta pulsado las mas visitas recargar
-   	        las preguntas segun el boton del tab pulsado.
-   	        */
-   		 	Conexion c=new Conexion();
-    		c.conectar();
-    			String[]x=c.sacarusuarios();
-    		for (int i=0;i<c.sacarusuarios().length;i++)
-    		{
-    			int j=new Random(300).nextInt();
-    		 %>
-    			<hr><h1></h1>
-    			<a href="#">La pregunta de este usuario <%=x[i] %> <span class="badge"><%=j %></span></a><br>
-    			<code><%=x[i] %></code><code>Etiqueta2</code>
-    		<%
-    		}
-    		
-    		%>
-</div>
-  <hr>
-  <div class="row">
-    <div class="text-center col-md-offset-0 col-md-12">
-      <p>Copyright &copy; 2017 &middot; Todos los derechos reservados &middot; <a href="http://localhost:8080/Proyectoprueba/GestionUsuarios/Login/Login.jsp.com/" >Estudiantes Conecta2</a></p>
-    </div>
-  </div>
-  <hr>
-</div>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<script src="file:///C|/Users/Juankar/Desktop/DreamWeaver/js/jquery-1.11.3.min.js"></script>
 
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
-<script src="file:///C|/Users/Juankar/Desktop/DreamWeaver/js/bootstrap.js"></script>
+<div class="container-fluid">
+								<%
+								
+								if (session.getAttribute("contenido")==null || session.getAttribute("contenido").equals("home"))
+								{
+									out.println("Debo de poner el home");
+								}
+								else
+								{
+									out.println("Debo poner el valor del contenido "+session.getAttribute("contenido"));
+								}
+								out.println("El valor de la sesion contenido es "+session.getAttribute("contenido"));
+    							
+    						
+    						String opcion=""+session.getAttribute("contenido");
+    		
+									switch (opcion)
+									{
+									case  "AltaPregunta" :
+										out.print("dentrodelsegunsea ponemos el jspdealtapregunta");
+										%>
+										<%@include file="Altapregunta.jsp"%>
+										<%break;
+
+									default:
+										out.print("dentrodelsegunsea ponemos el home");
+										%>
+									<%@include file="home.jsp"%> 
+										
+										<% break;
+									}
+								
+								%>
+</div>
+<div class="container-fluid">
+	<%@include file="pie.jsp"%> 
+</div>
 </body>
 </html>
