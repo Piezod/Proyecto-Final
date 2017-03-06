@@ -35,7 +35,7 @@ public class ServeletRegistro extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		System.out.println("hola?");
 		HttpSession sesion= request.getSession(true);
 		Conexion c=new Conexion();
 		try {

@@ -67,13 +67,14 @@ public class Conexion {
 		usuario += apellido2.charAt(0);
 		usuario = usuario.toLowerCase();
 		usuario=Normalizer.normalize(usuario, Normalizer.Form.NFD).replaceAll("[^a-zA-Z]", "");
-
-		int num = contar("select count(*) from dbdamproject.usuarios where usuario like '" + usuario + "'");
+		int num=0;
+		 num = contar("select count(*) from dbdamproject.usuarios where usuario like '" + usuario + "'");
 		if (num != 0) {
 			num++;
 			usuario += num;
 		}
-	
+		System.out.println(num);
+		System.out.println(usuario);
 		return usuario;
 	}
 
