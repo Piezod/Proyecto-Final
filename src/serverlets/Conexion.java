@@ -2,6 +2,7 @@ package serverlets;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,16 +27,25 @@ public class Conexion {
 
 	public boolean comprobarlogin(String user, String pass,String codvalid) throws SQLException {
 		boolean enc=false;
-		Statement consulta = conexion.createStatement();
+		String sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validado like ?";
+		PreparedStatement consulta = conexion.prepareStatement(sql);
 		user=user.replaceAll("\'\"\\@\\$", "");
 		pass=pass.replaceAll("\'\"\\@\\$", "");
-		ResultSet res = consulta.executeQuery(
-				"select * from dbdamproject.usuarios where usuario like '" + user + "' and pass like '" + pass + "' and validado like '1'");
+		consulta.setString(1, user);
+		consulta.setString(2, pass);
+		consulta.setInt(3, 1);
+		ResultSet res = consulta.executeQuery();
+		
 		enc= res.next();
 
 		if(!enc){
-			Statement consulta2=conexion.createStatement();
-			ResultSet res2=consulta2.executeQuery("select * from dbdamproject.usuarios where usuario like '" + user + "' and pass like '" + pass + "' and validacion like '"+codvalid+"' and validado like '0'");
+			sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validacion like ? and validado like ?";
+			PreparedStatement consulta2=conexion.prepareStatement(sql);
+			consulta2.setString(1, user);
+			consulta2.setString(2, pass);
+			consulta2.setString(3, codvalid);
+			consulta2.setInt(4, 1);
+			ResultSet res2=consulta2.executeQuery();
 			if(res2.next()){
 				Statement consulta3=conexion.createStatement();
 				consulta3.executeUpdate("update dbdamproject.usuarios set validacion='0', validado='1' where usuario like '"+user+"'");
@@ -67,25 +77,42 @@ public class Conexion {
 		usuario += apellido2.charAt(0);
 		usuario = usuario.toLowerCase();
 		usuario=Normalizer.normalize(usuario, Normalizer.Form.NFD).replaceAll("[^a-zA-Z]", "");
-
-		int num = contar("select count(*) from dbdamproject.usuarios where usuario like '" + usuario + "'");
+		int num=0;
+		 num = contar("select count(*) from dbdamproject.usuarios where usuario like '" + usuario + "'");
 		if (num != 0) {
+			String usuariotemp="";
+			do{
 			num++;
-			usuario += num;
+			usuariotemp=usuario;
+			usuariotemp += num;
+			}while(comprobar("select * from usuarios where usuario like '"+usuariotemp+"'"));
 		}
-	
+		if(num!=0){
+		usuario+=num;
+		}
 		return usuario;
 	}
 
-	public void InsertarRegistro(String usuario,String pass,String validacion,String nombre, String apellido1, String apellido2, String email, String curso,
+	public int InsertarRegistro(String usuario,String pass,String validacion,String nombre, String apellido1, String apellido2, String email, String curso,
 			String ciclo) throws SQLException {
-		Statement insertar = conexion.createStatement();
-
-		insertar.executeUpdate("Insert into dbdamproject.usuarios values ('"
-				+ usuario + "','"
-				+ pass + "','" + nombre + "','" + apellido1
-				+ "','" + apellido2 + "','" + validacion + "','" + email
-				+ "','" + curso + "','" + ciclo + "','0')");
+		String sql="Insert into dbdamproject.usuarios values (?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement insertar = conexion.prepareStatement(sql);
+		insertar.setString(1, usuario);
+		insertar.setString(2, pass);
+		insertar.setString(3, nombre);
+		insertar.setString(4, apellido1);
+		insertar.setString(5, apellido2);
+		insertar.setString(6, validacion);
+		insertar.setString(7, email);
+		insertar.setString(8, curso);
+		insertar.setString(9,ciclo);
+		insertar.setInt(10, 0);
+		
+		
+		
+		int res=insertar.executeUpdate();
+		
+		return res;
 	}
 
 	public String[] sacarusuarios() throws SQLException {
