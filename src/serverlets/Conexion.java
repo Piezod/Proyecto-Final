@@ -2,6 +2,7 @@ package serverlets;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -73,20 +74,30 @@ public class Conexion {
 			num++;
 			usuario += num;
 		}
-		System.out.println(num);
-		System.out.println(usuario);
+		
 		return usuario;
 	}
 
-	public void InsertarRegistro(String usuario,String pass,String validacion,String nombre, String apellido1, String apellido2, String email, String curso,
+	public int InsertarRegistro(String usuario,String pass,String validacion,String nombre, String apellido1, String apellido2, String email, String curso,
 			String ciclo) throws SQLException {
-		Statement insertar = conexion.createStatement();
-
-		insertar.executeUpdate("Insert into dbdamproject.usuarios values ('"
-				+ usuario + "','"
-				+ pass + "','" + nombre + "','" + apellido1
-				+ "','" + apellido2 + "','" + validacion + "','" + email
-				+ "','" + curso + "','" + ciclo + "','0')");
+		String sql="Insert into dbdamproject.usuarios values (?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement insertar = conexion.prepareStatement(sql);
+		insertar.setString(1, usuario);
+		insertar.setString(2, pass);
+		insertar.setString(3, nombre);
+		insertar.setString(4, apellido1);
+		insertar.setString(5, apellido2);
+		insertar.setString(6, validacion);
+		insertar.setString(7, email);
+		insertar.setString(8, curso);
+		insertar.setString(9,ciclo);
+		insertar.setInt(10, 0);
+		
+		
+		
+		int res=insertar.executeUpdate();
+		
+		return res;
 	}
 
 	public String[] sacarusuarios() throws SQLException {
