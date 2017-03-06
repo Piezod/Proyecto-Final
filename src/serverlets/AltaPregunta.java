@@ -1,6 +1,8 @@
 package serverlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,15 +49,26 @@ public class AltaPregunta extends HttpServlet {
 		 */
 		request.getAttribute("titulo");
 		String titulo= request.getParameter("titulo");
-		String mensaje= request.getParameter("mensaje");
-		System.out.println("Estoy en altapreguntaserverlet titulo"+titulo+" mensaje "+mensaje);
-		System.out.println(titulo);
-		System.out.println(mensaje);
-		System.out.println(titulo.length());
-		System.out.println(mensaje.length());
+		/*
+		 * Recogemos el valor del textarea y hacemos un replace \n por el <br> para guardar el salto de linea y el formato que nos ha introducido el 
+		 * usuario
+		 */
+		String mensaje=request.getParameter("mensaje").toString().replaceAll("\n"," <br> ");
+		
+		Conexion c=new Conexion();
 		
 		
-		
+		try {
+			c.conectar();
+			c.InsertarPregunta(titulo, mensaje, (String)sesion.getAttribute("usuario"));
+			System.out.println("haciendo insert en la tabla");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}
