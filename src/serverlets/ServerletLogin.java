@@ -101,7 +101,7 @@ public class ServerletLogin extends HttpServlet {
 				
 				//request.setAttribute("usuariologueado","mal");
 				
-				response.sendRedirect("GestionUsuarios/Login/Login.jsp"); //si se confunde le redireccionamos a otro sitio  si ponemos / nos envia al raiz, pero si enviar datos
+				response.sendRedirect("login"); //si se confunde le redireccionamos a otro sitio  si ponemos / nos envia al raiz, pero si enviar datos
 				//request.getRequestDispatcher("welcome.jsp").forward(request, response); //aqui llamamos a un jsp desde el servlet, pero mostrando otros datos erroneos
 				
 				
