@@ -49,7 +49,7 @@
 <div class="container">
   <h2 align="center">Nueva Pregunta </h2>
   <br>
-  <form class="form-horizontal" action="#" method="POST" onsubmit="return comprobarregistro();">
+  <form class="form-horizontal" action="AltaPregunta" method="POST" onsubmit="return comprobarregistro();">
   
   <div id="titulaso">
   	 <div class="form-group">

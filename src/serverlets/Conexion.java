@@ -114,6 +114,43 @@ public class Conexion {
 		
 		return res;
 	}
+	
+	/*
+	 * Metodo que nos devuelve el ultimo id de lo que queramos y la tabla, le pasamos la pk y la tabla
+	 */
+	
+	public int ultimoid(String primarykey,String tabla) throws SQLException
+	{
+		Statement consulta = conexion.createStatement();
+		ResultSet res = consulta.executeQuery("select "+primarykey+" from "+tabla);
+		int dev=0;
+		
+		while(res.next())
+			{
+			dev = res.getInt(primarykey);
+			}
+		return dev+1;
+	}
+	
+	/*
+	 * Metodo para insertar datos en la tabla preguntas, recogeremos del formulario el titulo y la pregunta en si 
+	 * y pondremos el usuario que lo ha realizado 
+	 */
+	public int InsertarPregunta(String titulo,String descripcion,String usuario) throws SQLException {
+		String sql="Insert into dbdamproject.preguntas values (?,?,?,?)";
+		System.out.println(ultimoid("idpreguntas", "preguntas")+titulo+descripcion+usuario);
+		PreparedStatement insertar = conexion.prepareStatement(sql);
+		insertar.setInt(1,ultimoid("idpreguntas", "preguntas") );
+		insertar.setString(2, titulo);
+		insertar.setString(3, descripcion);
+		insertar.setString(4, usuario);
+		
+		
+		
+		int res=insertar.executeUpdate();
+		
+		return res;
+	}
 
 	public String[] sacarusuarios() throws SQLException {
 
@@ -125,6 +162,27 @@ public class Conexion {
 		int i = 0;
 		while (res.next()) {
 			x[i] = res.getString(1);
+			i++;
+
+		}
+
+		return x;
+	}
+	
+	/*
+	 * Metodo que devuelve todas las preguntas
+	 */
+	
+	public String[] sacartodaslaspreguntas() throws SQLException {
+
+		String x[] = new String[contar("select count(*) from dbdamproject.preguntas")];
+
+		Statement consulta = conexion.createStatement();
+		ResultSet res = consulta.executeQuery("select * from dbdamproject.preguntas");
+
+		int i = 0;
+		while (res.next()) {
+			x[i] = res.getString(3);
 			i++;
 
 		}

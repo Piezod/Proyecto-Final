@@ -90,8 +90,8 @@
    	        */
    		 	Conexion c=new Conexion();
     		c.conectar();
-    			String[]x=c.sacarusuarios();
-    		for (int i=0;i<c.sacarusuarios().length;i++)
+    			String[]x=c.sacartodaslaspreguntas();
+    		for (int i=0;i<c.sacartodaslaspreguntas().length;i++)
     		{
     			int j=new Random(300).nextInt();
     		 %>
