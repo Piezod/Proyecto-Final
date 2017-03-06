@@ -30,6 +30,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <title>Estudiantes Conectados Main</title>
 
+<!-- **INFORMACION** -->
+
+<!-- Este jsp en un primer momento esta pensado para que sea el cuerpo principal de la aplicacion
+
+	 En el se iran recargando diferentes jsp en la parte central dependiendo de la opcion que nos solicite el usuario.
+	 
+	 Siempre mantendremos la barra de navegacion superior con sus diferentes opciones y en la parte inferior añadiremos siempre un jsp estatico que sera
+	 
+	 el pie de la aplicación. Cargar contenido en esta pagina estara gobernado a través de un switch explicado mas adelante. -->
 
 <nav class="navbar navbar-default">
   <div class="container-fluid"> 
@@ -44,7 +53,7 @@
       
       <!-- ** Boton del home ** -->
         <li class="active">
-        	<form action="../ServerletContenido" method="POST">
+        	<form action="ServerletContenido" method="POST">
 			<input type="hidden" name="pagina" value="home"></input>
 			<button class="btn btn-primary btn-lg active"  type="submit" name="contenido" value="home"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span> </button>			
 			</form>
@@ -86,17 +95,14 @@
 <div class="container-fluid">
 								<%
 								
-								if (session.getAttribute("contenido")==null || session.getAttribute("contenido").equals("home"))
-								{
-									out.println("Debo de poner el home");
-								}
-								else
-								{
-									out.println("Debo poner el valor del contenido "+session.getAttribute("contenido"));
-								}
-								out.println("El valor de la sesion contenido es "+session.getAttribute("contenido"));
     							
-    						
+    						/*
+    						 Este switch recojera el valor de la variable contenido y segun lo que contenga dentro nos pondra
+    						 un include diferente en l aparte central del main.
+    						 La primera vez que cargue la pagina el atributo estara null, por eso se le pondra que sea por defecto el home.
+    						 De igualmanera, la opcion con el valor home, no sera puesta ni añadida con lo cual nos dirigira automaticamnte al default
+    						 que sera home.
+    						*/
     						String opcion=""+session.getAttribute("contenido");
     		
 									switch (opcion)
