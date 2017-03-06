@@ -48,4 +48,13 @@
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>RecuperarPass</servlet-name>
+		<jsp-file>/GestionUsuarios/Login/RecuperarPass.jsp</jsp-file>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>RecuperarPass</servlet-name>
+		<url-pattern>/recuperarpass</url-pattern>
+	</servlet-mapping>
 </web-app>

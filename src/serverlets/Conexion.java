@@ -27,16 +27,25 @@ public class Conexion {
 
 	public boolean comprobarlogin(String user, String pass,String codvalid) throws SQLException {
 		boolean enc=false;
-		Statement consulta = conexion.createStatement();
+		String sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validado like ?";
+		PreparedStatement consulta = conexion.prepareStatement(sql);
 		user=user.replaceAll("\'\"\\@\\$", "");
 		pass=pass.replaceAll("\'\"\\@\\$", "");
-		ResultSet res = consulta.executeQuery(
-				"select * from dbdamproject.usuarios where usuario like '" + user + "' and pass like '" + pass + "' and validado like '1'");
+		consulta.setString(1, user);
+		consulta.setString(2, pass);
+		consulta.setInt(3, 1);
+		ResultSet res = consulta.executeQuery();
+		
 		enc= res.next();
 
 		if(!enc){
-			Statement consulta2=conexion.createStatement();
-			ResultSet res2=consulta2.executeQuery("select * from dbdamproject.usuarios where usuario like '" + user + "' and pass like '" + pass + "' and validacion like '"+codvalid+"' and validado like '0'");
+			sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validacion like ? and validado like ?";
+			PreparedStatement consulta2=conexion.prepareStatement(sql);
+			consulta2.setString(1, user);
+			consulta2.setString(2, pass);
+			consulta2.setString(3, codvalid);
+			consulta2.setInt(4, 1);
+			ResultSet res2=consulta2.executeQuery();
 			if(res2.next()){
 				Statement consulta3=conexion.createStatement();
 				consulta3.executeUpdate("update dbdamproject.usuarios set validacion='0', validado='1' where usuario like '"+user+"'");
@@ -71,10 +80,16 @@ public class Conexion {
 		int num=0;
 		 num = contar("select count(*) from dbdamproject.usuarios where usuario like '" + usuario + "'");
 		if (num != 0) {
+			String usuariotemp="";
+			do{
 			num++;
-			usuario += num;
+			usuariotemp=usuario;
+			usuariotemp += num;
+			}while(comprobar("select * from usuarios where usuario like '"+usuariotemp+"'"));
 		}
-		
+		if(num!=0){
+		usuario+=num;
+		}
 		return usuario;
 	}
 
