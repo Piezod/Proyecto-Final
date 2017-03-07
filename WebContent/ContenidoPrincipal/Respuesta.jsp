@@ -42,14 +42,10 @@
   		<li class="active">Data</li>
 	</ol>
 </div>
-<div class="row" style="margin-top: 5%">
+	<div class="row" style="margin-top: 5%">
 	    <div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-info">
 					  <div class="panel-heading">
-						<h3 class="panel-title" align="center">aqui recargo de bd titulo pregunta</h3>
-					  </div>
-					  
-					  <div class="panel-footer" align="center">
 					   <% 
 			   	        /*
 			   	        Aqui estoy recargando los nombres del usuario de momento , habra que validar que si esta pulsado las mas visitas recargar
@@ -57,17 +53,18 @@
 			   	        */
 			   		 	Conexion c=new Conexion();
 			    		c.conectar();
-			    			String[]x=c.sacartodaslaspreguntas();
-			    		for (int i=0;i<c.sacartodaslaspreguntas().length;i++)
-			    		{
-			    		 %>
-			    			<hr><h1></h1>
-			    			<a href="#">La pregunta de este usuario <%=x[i] %></a><br>
-			    			<code><%=x[i] %></code><code>Etiqueta2</code>
-			    		<%
-			    		}
+			    		String []xo=c.sacarpreguntaporid((int)session.getAttribute("idpregunta"));
 			    		
-			    		%>
+			    		 %>
+						<h3 class="panel-title" align="center"><%=xo[1]%></h3>
+					  </div>
+					  
+					  <div class="panel-footer" align="left" style="min-height: 200px;">
+					  
+			    			<div class="container-fluid">
+			    				<%=xo[2] %>
+			    			</div>
+			    		
 			    	 </div>
 			</div>
 

@@ -98,14 +98,23 @@
     						 De igualmanera, la opcion con el valor home, no sera puesta ni añadida con lo cual nos dirigira automaticamnte al default
     						 que sera home.
     						*/
-    						String opcion=""+session.getAttribute("contenido");
-    		
+    						String opcion=(String)session.getAttribute("contenido");
+    					//System.out.println("estoy en inicio, valor de sesion contenido "+session.getAttribute("contenido"));
+							    		if (opcion==null)
+							    		{
+							    			opcion="voyaldefault";
+							    		}
 									switch (opcion)
 									{
 									case  "AltaPregunta" :
 										//out.print("dentrodelsegunsea ponemos el jspdealtapregunta");
 										%>
 										<%@include file="Altapregunta.jsp"%>
+										<%break;
+									case  "Respuesta" :
+										//out.print("dentrodelsegunsea ponemos el jspdealtapregunta");
+										%>
+										<%@include file="Respuesta.jsp"%>
 										<%break;
 
 									default:
