@@ -7,11 +7,6 @@
 
 
 <head>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<script src="file:///C|/Users/Juankar/Desktop/DreamWeaver/js/jquery-1.11.3.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
-<script src="file:///C|/Users/Juankar/Desktop/DreamWeaver/js/bootstrap.js"></script>
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../Bootstrap/js/jquery-1.11.3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -91,7 +86,7 @@
 
 <body>
 <hr>
-
+<div class="row"></div>
 <div class="container-fluid">
 								<%
 								
@@ -108,13 +103,13 @@
 									switch (opcion)
 									{
 									case  "AltaPregunta" :
-										out.print("dentrodelsegunsea ponemos el jspdealtapregunta");
+										//out.print("dentrodelsegunsea ponemos el jspdealtapregunta");
 										%>
 										<%@include file="Altapregunta.jsp"%>
 										<%break;
 
 									default:
-										out.print("dentrodelsegunsea ponemos el home");
+										//out.print("dentrodelsegunsea ponemos el home");
 										%>
 									<%@include file="home.jsp"%> 
 										
