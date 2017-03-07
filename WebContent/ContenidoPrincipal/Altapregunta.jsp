@@ -44,37 +44,66 @@
   </script>
   
 </head>
-<body height="100%">
+<body>
 
-<div class="container">
-  <h2 align="center">Nueva Pregunta </h2>
-  <br>
-  <form class="form-horizontal" action="AltaPregunta" method="POST" onsubmit="return comprobarregistro();">
-  
-  <div id="titulaso">
-  	 <div class="form-group">
-      <label class="control-label col-sm-2" for="titulo">Titulo:</label>
-      <div class="col-sm-4 col-md-5">
-        <input type="text" class="form-control" id="titulo" placeholder="Titulo Pregunta" name="titulo">
-      </div>
-    </div>
-  	</div>
-    
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Descripcion</label>
-      <div class="col-sm-4 col-md-7">          
-         <textarea style="overflow-y: scroll;   height: 100px;  resize: none;" class="form-control" rows="10" id="comment" name="mensaje"></textarea>
-      </div>
-    </div>
-    
-    
-    <div class="form-group">
-	<div class="col-sm-offset-2 col-sm-2 col-md-2 col-md-offset-4">
-        <button align="center" type="submit" class="btn btn-default">Enviar Pregunta</button>
-      </div>
-    </div>
-  </form>
-</div>
+<div class="container-fluid" style=" margin-top: 5%; margin-right: 10%; margin-left: 10%;">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+				<div class="container-fluid">
+			  <div class="col-sm-2 col-md-offset-0 col-md-12">
+				  <h2 align="center">Nueva Pregunta</h21>
+				  
+				  
+					</div>
+				 </div>
+		</div>
+		<!-- El cuerpo de panel lo dejo en blanco pero relleno el formulario en el pie porque quiero el lightgrey -->
+		<div class="panel-body">
+		</div>
+		<div class="panel-footer">  
+		
+			<div class="container-fluid" style="margin-top: 3%">
+	  <br>
+	  <form class="form-horizontal" action="AltaPregunta" method="POST" onsubmit="return comprobarregistro();">
+	  
+	    <div id="titulaso">
+		  	 <div class="form-group">
+		      <label class="control-label col-sm-2" for="titulo">Titulo:</label>
+		      <div class="col-sm-6 col-md-8">
+		        <input type="text" class="form-control" id="titulo" placeholder="Titulo Pregunta" name="titulo">
+		      </div>
+		    </div>
+	  	</div>
+	    
+	    <div class="form-group">
+	      <label class="control-label col-sm-2" for="pwd">Descripcion</label>
+	      <div class="col-sm-4 col-md-8">          
+	         <textarea style="overflow-y: scroll;   height: 50%;  resize: none;" class="form-control" rows="10" id="comment" name="mensaje"></textarea>
+	      </div>
+	    </div>
+	    
+	    
+	    <div class="form-group">
+		<div class="col-sm-offset-2 col-sm-2 col-md-2 col-md-offset-5">
+	        <button align="center" type="submit" class="btn btn-primary">Enviar Pregunta</button>
+	      </div>
+	    </div>
+	  </form>
+	</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		 <div class="form-group">
+				  <label class="col-md-offset-2 control-label col-sm-1  " for="titulo">
+					  <span class="label label-info " style="font-size: 14px; margin-top: 2px;"> Tag </span>
+				  </label>
+				  <div class="col-sm-6 col-md-">
+					<input type="text" class="form-control" id="titulo" placeholder="Crea tu propio tag o usa los mas buscados" name="tag">
+				  </div>
+		</div>	
+	</div>
+
 
 </body>
 </html>

@@ -62,7 +62,7 @@
   <hr>
 </div>
 
-<div class="container">
+<div class="container-fluid">
 <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a href="#">Ultimas Respuestas</a></li>
     

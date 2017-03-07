@@ -136,11 +136,11 @@ public class Conexion {
 	 * Metodo para insertar datos en la tabla preguntas, recogeremos del formulario el titulo y la pregunta en si 
 	 * y pondremos el usuario que lo ha realizado 
 	 */
-	public int InsertarPregunta(String titulo,String descripcion,String usuario) throws SQLException {
+	public int InsertarPregunta(int idpregunta,String titulo,String descripcion,String usuario) throws SQLException {
 		String sql="Insert into dbdamproject.preguntas values (?,?,?,?)";
 		System.out.println(ultimoid("idpreguntas", "preguntas")+titulo+descripcion+usuario);
 		PreparedStatement insertar = conexion.prepareStatement(sql);
-		insertar.setInt(1,ultimoid("idpreguntas", "preguntas") );
+		insertar.setInt(1,idpregunta );
 		insertar.setString(2, titulo);
 		insertar.setString(3, descripcion);
 		insertar.setString(4, usuario);
@@ -179,6 +179,27 @@ public class Conexion {
 
 		Statement consulta = conexion.createStatement();
 		ResultSet res = consulta.executeQuery("select * from dbdamproject.preguntas");
+
+		int i = 0;
+		while (res.next()) {
+			x[i] = res.getString(3);
+			i++;
+
+		}
+
+		return x;
+	}
+	
+	/*
+	 * Metodo que devuelve todas la pregunta segun la id que le enviemos
+	 */
+	
+	public String[] sacarpreguntaporid(int id) throws SQLException {
+
+		String x[] = new String[4];
+
+		Statement consulta = conexion.createStatement();
+		ResultSet res = consulta.executeQuery("select * from dbdamproject.preguntas where idpregunta="+id+"");
 
 		int i = 0;
 		while (res.next()) {

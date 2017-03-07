@@ -57,4 +57,15 @@
 		<servlet-name>RecuperarPass</servlet-name>
 		<url-pattern>/recuperarpass</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Respuesta</servlet-name>
+		<jsp-file>/ContenidoPrincipal/Respuesta.jsp</jsp-file>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Respuesta</servlet-name>
+		<url-pattern>/respuesta</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
