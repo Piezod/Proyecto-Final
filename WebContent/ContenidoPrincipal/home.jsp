@@ -88,10 +88,10 @@
    	        Aqui estoy recargando los nombres del usuario de momento , habra que validar que si esta pulsado las mas visitas recargar
    	        las preguntas segun el boton del tab pulsado.
    	        */
-   		 	Conexion c=new Conexion();
-    		c.conectar();
-    			String[]x=c.sacartodaslaspreguntas();
-    		for (int i=0;i<c.sacartodaslaspreguntas().length;i++)
+   		 	Conexion co=new Conexion();
+   	     co.conectar();
+    			String[]x=co.sacartodaslaspreguntas();
+    		for (int i=0;i<co.sacartodaslaspreguntas().length;i++)
     		{
     			int j=new Random(300).nextInt();
     		 %>

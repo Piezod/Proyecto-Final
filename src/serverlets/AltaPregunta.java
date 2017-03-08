@@ -64,9 +64,12 @@ public class AltaPregunta extends HttpServlet {
 			/*
 			 * Asignamos a la variable de sesion la id de pregunta para saber cual es la que tenemos que recargar
 			 */
-			sesion.setAttribute("idpregunta", idpregunta);
+			
 			c.InsertarPregunta(idpregunta,titulo, mensaje, (String)sesion.getAttribute("usuario"));
+			sesion.setAttribute("idpregunta", idpregunta);
+			sesion.setAttribute("contenido", "Respuesta");
 			response.sendRedirect("Inicio");
+			//System.out.println("Envio desde altapregunta a inicio con el contenido "+sesion.getAttribute("contenido"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

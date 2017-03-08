@@ -198,7 +198,7 @@ public class Conexion {
 	}
 	
 	/*
-	 * Metodo que devuelve todas la pregunta segun la id que le enviemos
+	 * Metodo que devuelve  la pregunta segun la id que le enviemos
 	 */
 	
 	public String[] sacarpreguntaporid(int id) throws SQLException {
@@ -206,12 +206,14 @@ public class Conexion {
 		String x[] = new String[4];
 
 		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery("select * from dbdamproject.preguntas where idpregunta="+id+"");
+		ResultSet res = consulta.executeQuery("select * from dbdamproject.preguntas where idpreguntas="+id+"");
 
 		int i = 0;
-		while (res.next()) {
-			x[i] = res.getString(3);
-			i++;
+		if (res.next()) {
+			x[0] = res.getString(1);
+			x[1] = res.getString(2);
+			x[2] = res.getString(3);
+			x[3] = res.getString(4);
 
 		}
 
