@@ -5,12 +5,17 @@
 <head>
 
 <script>
+//Comprobar la contraseña básica (El primer campo)
 function comprobarpass(){
+	//Compruebo que tenga mas de seis caracteres
 	if(document.getElementById("pass").value.length<6){
+		//Si tiene menos de seis caracteres lleno el div "errorpass" y le cambio la clase
 		document.getElementById("errorpass").className="error"
 		document.getElementById("errorpass").innerHTML='<p style="font-size:90%">La contraseña es demasiado corta<br>(6 caracteres mínimo)'
+		//y deshabilito el boton
 		document.getElementById("recu").disabled=true
-		}else{
+	}else{
+		//Si no habilito el botón por si modifica este despues del de comprobar
 		document.getElementById("recu").disabled=false
 		document.getElementById("errorpass").className=""
 		document.getElementById("errorpass").innerHTML=""
@@ -18,6 +23,8 @@ function comprobarpass(){
 
 }
 function comprobarcpass(){
+	//Compruebo que las contraseñas coincidan y la longitud no hace falta comprobarla
+	//porque la compruebo en el campo anterior
 	if(document.getElementById("cpass").value!=document.getElementById("pass").value){
 		document.getElementById("errorcpass").className="error"
 		document.getElementById("errorcpass").innerHTML='<p style="font-size:90%">Las contraseñas no coinciden'
@@ -26,6 +33,14 @@ function comprobarcpass(){
 		document.getElementById("recu").disabled=false
 		document.getElementById("errorcpass").className=""
 		document.getElementById("errorcpass").innerHTML=""
+	}
+}
+//Funcion a la que llamo cada vez que pulsen una tecla que habilita o deshabilita el boton
+function boton(){
+	if(document.getElementById("cpass").value!=document.getElementById("pass").value||(document.getElementById("cpass").value.length<6||document.getElementById("pass").value.length<6)){
+		document.getElementById("recu").disabled=true
+		}else{
+		document.getElementById("recu").disabled=false
 	}
 }
 
@@ -99,13 +114,13 @@ window.onload=function validacionincorrecta(){
 					
 				<div class="group">
 					<label for="user" class="label">Nueva contraseña</label>
-					<input type="password" class="input" name="pass" id="pass" value="" onchange="return comprobarpass();"/>
+					<input type="password" class="input" name="pass" id="pass" value="" onchange="return comprobarpass();" onkeyup="return boton();"/>
 				</div>
 				<div id="errorpass"></div>
 				
 				<div class="group">
 					<label for="user" class="label">Confirme la contraseña</label>
-					<input type="password" class="input" name="cpass" id="cpass" value="" onchange="return comprobarcpass();"/>
+					<input type="password" class="input" name="cpass" id="cpass" value="" onchange="return comprobarcpass();" onkeyup="return boton();"/>
 				</div>
 				<div id="errorcpass"></div>
 				

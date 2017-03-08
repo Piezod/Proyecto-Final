@@ -126,16 +126,28 @@
 				//Iniciopre="0,5"
 				//finalpre="3,5"
 			}
+		  	//Les quito la ultima coma
 		  	iniciopre=iniciopre.substring(0,iniciopre.length-1)
 		  	finalpre=finalpre.substring(0,finalpre.length-1)
-
+		  	//Si estan vacios los pongo a null para que no de problema en los siguientes if
+		  	if(lineasconpre==""){
+		  		lineasconpre="null"
+			}
+		  	if(iniciopre==""){
+				iniciopre="null"
+			}
+		  	if(finalpre==""){
+		  		finalpre="null"
+			}
 			//Cojo las posiciones del array
 			posicionlineasconpre=0
 		  	posicioninicios=0
 		  	posicionfinales=0
+		  	
 		  	for(var i=0;i<lineas.length;i++){
 		  		//Compruebo que la linea tenga pre
 		  		if(i==lineasconpre[posicionlineasconpre]){
+		  			
 		  			//Si tiene pre le quito los 4 espacios iniciales
 		  			lineas[i]=lineas[i].substring(4,lineas[i].length)
 		  			//Y sumo uno a la posicion
@@ -148,6 +160,7 @@
 					//Y sumo uno a la variable
 					posicioninicios++
 				}
+
 		  		//Compruebo que sea posicion final
 				if(i==finalpre.split(",")[posicionfinales]){
 					//Si es posicion final le añado pre al final
@@ -155,7 +168,7 @@
 					posicionfinales++
 				}
 				//Junto las lineas separadas por BR en el mensaje final
-		  		mensfinal+=lineas[i]+"<br>"
+				mensfinal+=lineas[i]+"<br>"
 		  	}
 		  	//Aplico el mensaje final al div que queremos
 		  	document.getElementById("mensajecopia").innerHTML=mensfinal;

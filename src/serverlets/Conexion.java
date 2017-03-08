@@ -69,6 +69,15 @@ public class Conexion {
 		return enc;
 	}
 
+	public void actualizarpass(String pass,String codigo) throws SQLException{
+		String sql="update dbdamproject.usuarios set pass=?,validacion=?,validado=? where validacion like ?";
+		PreparedStatement consulta=conexion.prepareStatement(sql);
+		consulta.setString(1, pass.replaceAll("\'\"\\@\\$\\%", ""));
+		consulta.setString(2, "0");
+		consulta.setString(3, "1");
+		consulta.setString(4, codigo.replaceAll("\'\"\\@\\$\\%", ""));
+		consulta.executeUpdate();
+	}
 	private int contar(String query) throws SQLException {
 		Statement consulta = conexion.createStatement();
 		ResultSet res = consulta.executeQuery(query);
