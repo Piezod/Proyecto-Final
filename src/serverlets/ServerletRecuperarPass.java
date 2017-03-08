@@ -69,7 +69,8 @@ public class ServerletRecuperarPass extends HttpServlet {
 			try {
 				c.conectar();
 				if(c.comprobar("select * from dbdamproject.usuarios where validacion like '"+request.getParameter("cod").replaceAll("\'\"\\@\\$\\%", "")+"'")){
-					
+					c.actualizarpass(request.getParameter("pass"),request.getParameter("cod"));
+					response.sendRedirect("login");
 				}
 				else{
 					HttpSession sesion=request.getSession(true);
