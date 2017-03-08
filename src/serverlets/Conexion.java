@@ -24,13 +24,20 @@ public class Conexion {
 		}
 
 	}
+	
+	public void nuevacomprobacion(String codigo,String email) throws SQLException{
+		PreparedStatement consulta=conexion.prepareStatement("update dbdamproject.usuarios set validacion=? where email like ?");
+		consulta.setString(1, codigo);
+		consulta.setString(2, email);
+		consulta.executeUpdate();
+	}
 
 	public boolean comprobarlogin(String user, String pass,String codvalid) throws SQLException {
 		boolean enc=false;
 		String sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validado like ?";
 		PreparedStatement consulta = conexion.prepareStatement(sql);
-		user=user.replaceAll("\'\"\\@\\$", "");
-		pass=pass.replaceAll("\'\"\\@\\$", "");
+		user=user.replaceAll("\'\"\\@\\$\\%", "");
+		pass=pass.replaceAll("\'\"\\@\\$\\%", "");
 		consulta.setString(1, user);
 		consulta.setString(2, pass);
 		consulta.setInt(3, 1);
@@ -203,15 +210,37 @@ public class Conexion {
 
 		int i = 0;
 		if (res.next()) {
-			x[0] = res.getString(1);
-			x[1] = res.getString(2);
-			x[2] = res.getString(3);
-			x[3] = res.getString(4);
+			x[0] = res.getString(1); //idpregunta
+			x[1] = res.getString(2); //titulo
+			x[2] = res.getString(3); //descripcion
+			x[3] = res.getString(4); //idusuario
 
 		}
 
 		return x;
 	}
+	
+	/*
+	 * Metodo que devuelve  los datos de las  ultimas preguntas introducidas en la bd
+	 */
+	
+	public int[] idultimas10preguntas() throws SQLException {
+
+		int x[] = new int[10];
+
+		Statement consulta = conexion.createStatement();
+		ResultSet res = consulta.executeQuery("select idpreguntas from dbdamproject.preguntas order by idpreguntas desc limit 10");
+
+		int i = 0;
+		while (res.next()) {
+			x[i] = res.getInt(1); //idpregunta
+			i++;
+
+		}
+
+		return x;
+	}
+	
 
 	public boolean comprobar(String query) throws SQLException {
 		Statement consulta = conexion.createStatement();
