@@ -53,6 +53,17 @@
 			   	        */
 			   		 	Conexion c=new Conexion();
 			    		c.conectar();
+			    		if (session.getAttribute("idpregunta")==null)
+							{
+								%>
+									<h3>Cargar jsp de pagina no encontrada</h3>
+								
+								<%
+							}
+			    		else
+			    		{
+			    			
+			    		
 			    		String []xo=c.sacarpreguntaporid((int)session.getAttribute("idpregunta"));
 			    		
 			    		 %>
@@ -66,6 +77,9 @@
 			    			</div>
 			    		
 			    	 </div>
+			    	 <%
+			    	 }
+			    	 %>
 			</div>
 
 		  </div>
