@@ -1,71 +1,55 @@
-
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	id="WebApp_ID" version="3.1">
-	<display-name>Proyectoprueba</display-name>
-	<welcome-file-list>
-		<welcome-file>GestionUsuarios/Login/Login.jsp</welcome-file>
-
-	</welcome-file-list>
-
-	<servlet>
-		<servlet-name>Registro</servlet-name>
-		<jsp-file>/GestionUsuarios/Registro/Registro.jsp</jsp-file>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>Registro</servlet-name>
-		<url-pattern>/registro</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>PostRegistro</servlet-name>
-		<jsp-file>/GestionUsuarios/Registro/PostRegistro.jsp</jsp-file>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>PostRegistro</servlet-name>
-		<url-pattern>/postregistro</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Inicio</servlet-name>
-		<jsp-file>/ContenidoPrincipal/Inicio.jsp</jsp-file>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>Inicio</servlet-name>
-		<url-pattern>/Inicio</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Login</servlet-name>
-		<jsp-file>/GestionUsuarios/Login/Login.jsp</jsp-file>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>Login</servlet-name>
-		<url-pattern>/login</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>RecuperarPass</servlet-name>
-		<jsp-file>/GestionUsuarios/Login/RecuperarPass.jsp</jsp-file>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>RecuperarPass</servlet-name>
-		<url-pattern>/recuperarpass</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Respuesta</servlet-name>
-		<jsp-file>/ContenidoPrincipal/Respuesta.jsp</jsp-file>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>Respuesta</servlet-name>
-		<url-pattern>/respuesta</url-pattern>
-	</servlet-mapping>
-	
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Proyectoprueba</display-name>
+  <welcome-file-list>
+    <welcome-file>GestionUsuarios/Login/Login.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>Registro</servlet-name>
+    <jsp-file>/GestionUsuarios/Registro/Registro.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Registro</servlet-name>
+    <url-pattern>/registro</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PostRegistro</servlet-name>
+    <jsp-file>/GestionUsuarios/Registro/PostRegistro.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostRegistro</servlet-name>
+    <url-pattern>/postregistro</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Inicio</servlet-name>
+    <jsp-file>/ContenidoPrincipal/Inicio.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Inicio</servlet-name>
+    <url-pattern>/Inicio</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <jsp-file>/GestionUsuarios/Login/Login.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RecuperarPass</servlet-name>
+    <jsp-file>/GestionUsuarios/Login/RecuperarPass.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecuperarPass</servlet-name>
+    <url-pattern>/recuperarpass</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Respuesta</servlet-name>
+    <jsp-file>/ContenidoPrincipal/Respuesta.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Respuesta</servlet-name>
+    <url-pattern>/respuesta</url-pattern>
+  </servlet-mapping>
 </web-app>

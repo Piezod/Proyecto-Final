@@ -24,13 +24,20 @@ public class Conexion {
 		}
 
 	}
+	
+	public void nuevacomprobacion(String codigo,String email) throws SQLException{
+		PreparedStatement consulta=conexion.prepareStatement("update dbdamproject.usuarios set validacion=? where email like ?");
+		consulta.setString(1, codigo);
+		consulta.setString(2, email);
+		consulta.executeUpdate();
+	}
 
 	public boolean comprobarlogin(String user, String pass,String codvalid) throws SQLException {
 		boolean enc=false;
 		String sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validado like ?";
 		PreparedStatement consulta = conexion.prepareStatement(sql);
-		user=user.replaceAll("\'\"\\@\\$", "");
-		pass=pass.replaceAll("\'\"\\@\\$", "");
+		user=user.replaceAll("\'\"\\@\\$\\%", "");
+		pass=pass.replaceAll("\'\"\\@\\$\\%", "");
 		consulta.setString(1, user);
 		consulta.setString(2, pass);
 		consulta.setInt(3, 1);
