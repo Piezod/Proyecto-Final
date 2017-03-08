@@ -5,6 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<style type="text/css">
+
+p {
+   position:relative;
+   bottom:0;
+   margin-top:1.5%;
+   width:100%;
+   height:60px;   /* Height of the footer */
+   background:white;
+}
+</style>
 </head>
 <body>
 <hr>

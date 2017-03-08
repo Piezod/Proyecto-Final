@@ -26,7 +26,7 @@ a {
 
 .login-wrap {
 	margin: auto;
-	width: 400px;
+	width: 420px;
 	min-height: 670px;
 	position: relative;
 	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
@@ -74,7 +74,7 @@ a {
 }
 
 .login-html .tab {
-	font-size: 22px;
+	font-size: 15px;
 	margin-right: 15px;
 	padding-bottom: 5px;
 	margin: 0 15px 10px 0;

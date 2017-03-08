@@ -2,12 +2,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
    <%@ page import="serverlets.*" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
-
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documento sin título</title>
+<link href="file:///C|/Users/Juankar/AppData/Roaming/Adobe/Dreamweaver CC 2017/es_ES/Configuration/Temp/Assets/eamC1CF.tmp/css/bootstrap.css" rel="stylesheet" type="text/css">
+<head>
+<!-- Css para cambiar el formatode los botones para que parezcan hrefs -->
 
-
+<link href="css/botonhref.css" rel="stylesheet" type="text/css">
 
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../Bootstrap/js/jquery-1.11.3.min.js"></script>
@@ -26,83 +33,112 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <title>Estudiantes Conectados Main</title>
 </head>
-
+</head>
 <body>
-
-
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center">Bienvenido a nuestra aplicacion, Home</h1>
-    </div>
-  </div>
-  <hr>
-</div>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-    <!-- Envio al serverlet mediante un formulario por el methot post el valor altapregunta.jsp que sera el que recoja y luego sera el que
-    recargue -->
-    
-    <!-- ** IMPORTANTE ** -->
-    	 <!-- ** Crearemos unos botones con el type submit y el name contenido, importante siempre se llamara contenido. Este boton
-    	 sera el encargado de mandarnos el valor del jsp a cargar. En el value pondremos el nombre del jsp sin la extension, todos los 
-    	 botones estaran incluiddos en un formulario que iran redirigidos a un serverlet que se llamara ***serverletcontenido***
-    	  ** -->
+	<div class="container-fluid">
+	
+	<div class="panel panel-info">
+  		<div class="panel-heading">
+		  <h1 align="center" >Bienvenido a estudiantes conecta2</h1>
+		  <h4 align="center">Puedes realizar una pregunta a nuestro asistente para que te resuelva la duda , en caso de que no la encuentres no dudes en realizar una pregunta</h4>
+		  <br>
+	
+	  </div>
+	  		  <!-- Envio al serverlet mediante un formulario por el methot post el valor altapregunta.jsp que sera el que recoja y luego sera el que
+   			 recargue -->
+     <div class="panel-body">
+    		<!-- ** IMPORTANTE ** -->
+    		 <!-- ** Crearemos unos botones con el type submit y el name contenido, importante siempre se llamara contenido. Este boton
+    		 sera el encargado de mandarnos el valor del jsp a cargar. En el value pondremos el nombre del jsp sin la extension, todos los 
+    		 botones estaran incluiddos en un formulario que iran redirigidos a un serverlet que se llamara ***serverletcontenido***
+    		  ** -->
     
 			<form action="ServerletContenido" method="POST">
-			<input type="hidden" name="pagina" value="Altapregunta.jsp"></input>
-			<button class="btn btn-primary btn-lg active"  type="submit" name="contenido" value="AltaPregunta">Nueva pregunta</button>			
-			</form>
-			
-	 <!-- ** IMPORTANTE ** -->
+					<input type="hidden" name="pagina" value="Altapregunta.jsp"></input>
+					 <!-- ** IMPORTANTE ** -->
+			  		 <h4 align="center">
+			  		 	<button class="btn btn-primary btn-lg"  type="submit" name="contenido" value="AltaPregunta">Realizar nueva pregunta </button>
+			  		 </h4>	   
+			    </form>
+	    </div>
+	  </div>
     </div>
-  </div>
-  <hr>
-</div>
-
-<div class="container">
-<ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#">Ultimas Respuestas</a></li>
+    <hr>
     
+    <div class="container-fluid">
+    	
+   	 
+    	<div class="row">
+    	  <div class="col-md-2"> <!-- Izquierda -->
+    	  	
+    	  	 
+    	  </div>
+    	  
+    	  <div class="col-md-8"> <!-- Centro -->
+    	  	<ul class="nav nav-tabs" >
+				<li role="presentation"><a href="#">Mas Contestadas</a></li>
+				<li role="presentation"><a href="#">Semana</a></li>
+				<li role="presentation"><a href="#">Mes</a></li>
+			</ul>
+    	  </div>
+    	  <div class="col-md-2"> <!-- Derecha -->
+    	  	
+    	  	
+    	  </div>
+  	  </div>
     
-    <li role="presentation"><a href="#">Mas Contestadas</a></li>
-    
-    
-    <li role="presentation"><a href="#">Semana</a></li>
-    
-    
-    <li role="presentation"><a href="#">Mes</a></li>
-    
-    
-    <li class="disabled"><a href="#">Disabled tab</a></li>
-    
-    
-  </ul>
-<hr>
-  <div class="row">
-    <div class="text-justify col-sm-4">  </div>
-   	        <% 
-   	        /*
-   	        Aqui estoy recargando los nombres del usuario de momento , habra que validar que si esta pulsado las mas visitas recargar
-   	        las preguntas segun el boton del tab pulsado.
-   	        */
-   		 	Conexion c=new Conexion();
-    		c.conectar();
-    			String[]x=c.sacarusuarios();
-    		for (int i=0;i<c.sacarusuarios().length;i++)
-    		{
-    			int j=new Random(300).nextInt();
-    		 %>
-    			<hr><h1></h1>
-    			<a href="#">La pregunta de este usuario <%=x[i] %> <span class="badge"><%=j %></span></a><br>
-    			<code><%=x[i] %></code><code>Etiqueta2</code>
-    		<%
-    		}
-    		
-    		%>
-</div>
+	</div>
+	
+	<!-- En aqui recargamos el titulo de las preguntas-->
+		<div class="col-md-8 col-md-offset-2">
+			
+					  <% 
+			   	        /*
+			   	        Sacaremos las ids de las ultimas 10 preguntas, en un array, este array despues lo recorreremos y pondremos el id de la pregunta en el valor
+			   	        del input que enviamos para lamar al jsp de respuesta y mostraremos el titulo de esa pregunta.
+			   	        */
+						   		 	Conexion co=new Conexion();
+						   	     	co.conectar();
+			    			int[]x=co.idultimas10preguntas();
+			    			
+			    			
+			    		for (int i=0;i<x.length;i++)
+			    		{
+			    			
+			    			String titu[]=co.sacarpreguntaporid(x[i]);
+			    			
+			    		 %>
+			    		 <!-- Pintamos el cuerpo donde iran los titulos ancho 10, despues la fecha informacion de usuario con ancho 2 y debajo ponemos los tags de la pregunta -->
+			    		<form action="DetallePregunta" method="POST">
+			    		 <div class="row">
+						     <div class="col-md-10">
+						    		 	<input type="hidden" name="idpregunta" value="<%=x[i]%>"></input>
+										  <button type="submit" name="submit_param" value="submit_value"class="list-group-item list-group-item-info">
+										  					  <%=titu[1] %>
+										 	 </button>
+							</div>
+							<div class="col-md-2">
+										<table>
+											<tr>
+												<td><span class="label label-success">
+													<abbr  class="initialism" title="AQUI DESPLIEGO YO LO QUE QUIERO PORQUE SE PUEDE Y MOLA"><%=titu[3] %></abbr>
+											</td></span></tr>
+											<tr><td><span class="label label-default"><abbr title="gg"><%=titu[4] %></abbr></td></span></tr>
+										</table>
+							</div>
+							<div class="col-md-8"><code>  tag1  </code> , <code>  tag2  </code>  ,  <code>  tag3  </code>             ,    <code>  tag4  </code></div>
+						</div>
+							  <hr>
+							  </form>
+			    		<%
+			    		}
+			    		
+			    		%>
+			  
+		</div>
+	
+	
 </div>
 </body>
 </html>

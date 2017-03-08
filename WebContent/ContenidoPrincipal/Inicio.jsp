@@ -7,11 +7,6 @@
 
 
 <head>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<script src="file:///C|/Users/Juankar/Desktop/DreamWeaver/js/jquery-1.11.3.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
-<script src="file:///C|/Users/Juankar/Desktop/DreamWeaver/js/bootstrap.js"></script>
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../Bootstrap/js/jquery-1.11.3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -19,6 +14,7 @@
 <link href="../Bootstrap/css/bootstrap.css" rel="stylesheet">
 <script type="text/javascript" src="../Bootstrap/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -91,7 +87,7 @@
 
 <body>
 <hr>
-
+<div class="row"></div>
 <div class="container-fluid">
 								<%
 								
@@ -103,18 +99,27 @@
     						 De igualmanera, la opcion con el valor home, no sera puesta ni añadida con lo cual nos dirigira automaticamnte al default
     						 que sera home.
     						*/
-    						String opcion=""+session.getAttribute("contenido");
-    		
+    						String opcion=(String)session.getAttribute("contenido");
+    					//System.out.println("estoy en inicio, valor de sesion contenido "+session.getAttribute("contenido"));
+							    		if (opcion==null)
+							    		{
+							    			opcion="voyaldefault";
+							    		}
 									switch (opcion)
 									{
 									case  "AltaPregunta" :
-										out.print("dentrodelsegunsea ponemos el jspdealtapregunta");
+										//out.print("dentrodelsegunsea ponemos el jspdealtapregunta");
 										%>
 										<%@include file="Altapregunta.jsp"%>
 										<%break;
+									case  "Respuesta" :
+										//out.print("dentrodelsegunsea ponemos el jspdealtapregunta");
+										%>
+										<%@include file="Respuesta.jsp"%>
+										<%break;
 
 									default:
-										out.print("dentrodelsegunsea ponemos el home");
+										//out.print("dentrodelsegunsea ponemos el home");
 										%>
 									<%@include file="home.jsp"%> 
 										
