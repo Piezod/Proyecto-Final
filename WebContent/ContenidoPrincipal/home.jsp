@@ -57,7 +57,9 @@
 			<form action="ServerletContenido" method="POST">
 					<input type="hidden" name="pagina" value="Altapregunta.jsp"></input>
 					 <!-- ** IMPORTANTE ** -->
-			  		 <h4 alialign="center"></h6><button class="btn btn-primary btn-sm"  type="submit" name="contenido" value="AltaPregunta">Realizar nueva pregunta </button></h4>	   
+			  		 <h4 align="center">
+			  		 	<button class="btn btn-primary btn-lg"  type="submit" name="contenido" value="AltaPregunta">Realizar nueva pregunta </button>
+			  		 </h4>	   
 			    </form>
 	    </div>
 	  </div>
@@ -90,7 +92,8 @@
 	
 	<!-- En aqui recargamos el titulo de las preguntas-->
 		<div class="col-md-8 col-md-offset-2">
-			 <% 
+			
+					  <% 
 			   	        /*
 			   	        Sacaremos las ids de las ultimas 10 preguntas, en un array, este array despues lo recorreremos y pondremos el id de la pregunta en el valor
 			   	        del input que enviamos para lamar al jsp de respuesta y mostraremos el titulo de esa pregunta.
@@ -102,21 +105,37 @@
 			    			
 			    		for (int i=0;i<x.length;i++)
 			    		{
-			    			System.out.println("la id es "+x[i]);
+			    			
 			    			String titu[]=co.sacarpreguntaporid(x[i]);
-			    			System.out.println("El titulo sera "+titu[1]);
 			    			
 			    		 %>
-			    		 	<input type="hidden" name="idpregunta" value="<%=x[i]%>">
-							 	 <button type="submit" name="submit_param" value="submit_value"class="btn btn-default">
-							  					  <%=titu[1] %>
-							 	 </button>
-							 
-							  <br>
+			    		 <!-- Pintamos el cuerpo donde iran los titulos ancho 10, despues la fecha informacion de usuario con ancho 2 y debajo ponemos los tags de la pregunta -->
+			    		<form action="DetallePregunta" method="POST">
+			    		 <div class="row">
+						     <div class="col-md-10">
+						    		 	<input type="hidden" name="idpregunta" value="<%=x[i]%>"></input>
+										  <button type="submit" name="submit_param" value="submit_value"class="list-group-item list-group-item-info">
+										  					  <%=titu[1] %>
+										 	 </button>
+							</div>
+							<div class="col-md-2">
+										<table>
+											<tr>
+												<td><span class="label label-success">
+													<abbr  class="initialism" title="AQUI DESPLIEGO YO LO QUE QUIERO PORQUE SE PUEDE Y MOLA"><%=titu[3] %></abbr>
+											</td></span></tr>
+											<tr><td><span class="label label-default"><abbr title="gg"><%=titu[4] %></abbr></td></span></tr>
+										</table>
+							</div>
+							<div class="col-md-8"><code>  tag1  </code> , <code>  tag2  </code>  ,  <code>  tag3  </code>             ,    <code>  tag4  </code></div>
+						</div>
+							  <hr>
+							  </form>
 			    		<%
 			    		}
 			    		
 			    		%>
+			  
 		</div>
 	
 	

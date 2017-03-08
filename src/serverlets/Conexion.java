@@ -1,12 +1,17 @@
 package serverlets;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.Normalizer;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
 public class Conexion {
@@ -144,13 +149,20 @@ public class Conexion {
 	 * y pondremos el usuario que lo ha realizado 
 	 */
 	public int InsertarPregunta(int idpregunta,String titulo,String descripcion,String usuario) throws SQLException {
-		String sql="Insert into dbdamproject.preguntas values (?,?,?,?)";
+		
+		String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+		System.out.println(fecha);
+		//0000-00-00 00:00:00
+		
+		
+		String sql="Insert into dbdamproject.preguntas values (?,?,?,?,?)";
 		System.out.println(ultimoid("idpreguntas", "preguntas")+titulo+descripcion+usuario);
 		PreparedStatement insertar = conexion.prepareStatement(sql);
 		insertar.setInt(1,idpregunta );
 		insertar.setString(2, titulo);
 		insertar.setString(3, descripcion);
 		insertar.setString(4, usuario);
+		insertar.setString(5, fecha);
 		
 		
 		
@@ -203,7 +215,7 @@ public class Conexion {
 	
 	public String[] sacarpreguntaporid(int id) throws SQLException {
 
-		String x[] = new String[4];
+		String x[] = new String[5];
 
 		Statement consulta = conexion.createStatement();
 		ResultSet res = consulta.executeQuery("select * from dbdamproject.preguntas where idpreguntas="+id+"");
@@ -214,7 +226,7 @@ public class Conexion {
 			x[1] = res.getString(2); //titulo
 			x[2] = res.getString(3); //descripcion
 			x[3] = res.getString(4); //idusuario
-
+			x[4] = res.getString(5); //fechayhora
 		}
 
 		return x;
