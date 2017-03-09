@@ -282,16 +282,12 @@ public class Conexion {
 	 */
 	public int [] busquedaheader(String valor) throws SQLException {
 		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery("SELECT count(*) FROM dbdamproject.preguntas where descripcion like '%"+valor+"%'");
-		
-		System.out.println("SELECT count(*) FROM dbdamproject.preguntas where descripcion like '%"+valor+"%'");
-		
+		ResultSet res = consulta.executeQuery("SELECT count(*) FROM dbdamproject.preguntas where descripcion like '%"+valor+"%'");		
 		int cantidad=0;
 		System.out.println("metodo busquedaheader");
 		if (res.next())
 		{
 			cantidad=res.getInt(1);
-			System.out.println(res.getInt(1));
 		}
 		else
 		{
