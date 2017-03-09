@@ -1,3 +1,4 @@
+package serverlets;
 
 
 import java.io.IOException;
@@ -10,19 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import serverlets.Conexion;
-
 /**
  * Servlet implementation class DetallePregunta
  */
 @WebServlet(description = "Serverlet que sera llamado cuando queramos ir al detalle de una pregunta redirigida desde otro jsp", urlPatterns = { "/DetallePregunta" })
-public class DetallePregunta extends HttpServlet {
+public class ServerletDetallePregunta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetallePregunta() {
+    public ServerletDetallePregunta() {
         super();
         // TODO Auto-generated constructor stub
     }

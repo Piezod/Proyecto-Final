@@ -1,4 +1,4 @@
-package serverlets;
+package Utilidades;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -19,6 +19,14 @@ public class Conexion {
 	 * Cabezón
 	 */
 	private Connection conexion;
+	public Connection getConexion() {
+		return conexion;
+	}
+
+	public void setConexion(Connection conexion) {
+		this.conexion = conexion;
+	}
+
 
 	public void conectar() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
@@ -305,5 +313,18 @@ public class Conexion {
 			}
 
 			return valores;	
+	}
+	
+	/*
+	 * Metodo que devuelve un resulset para que luego sea recorrido por un for en el jsp de mostrar las respuestas y en cada
+	 * interaccion que nos dibuje las respuestas con los datos del resulset 
+	 * 
+	 */
+	
+	public ResultSet resulsetpregunta(String  valorpregunta) throws SQLException {
+		Statement consulta = conexion.createStatement();
+		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'");
+		
+		return res;
 	}
 }
