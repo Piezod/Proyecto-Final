@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Utilidades.Conexion;
+
 /**
  * Servlet implementation class BusquedaBarra
  */
@@ -51,7 +53,8 @@ public class ServeletBusqueda extends HttpServlet {
 			c.conectar();
 			c.busquedaheader(vb);
 			request.setAttribute("valor", (String)request.getParameter("valorbusqueda"));
-			response.sendRedirect("busqueda1");
+			//request.getRequestDispatcher("busqueda1").forward(request, response);
+			response.sendRedirect("search1?search="+(String)request.getParameter("valorbusqueda"));
 			
 			
 		} catch (SQLException e) {

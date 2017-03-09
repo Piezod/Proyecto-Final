@@ -66,6 +66,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Busqueda1</servlet-name>
-    <url-pattern>/busqueda1</url-pattern>
+    <url-pattern>/search1</url-pattern>
   </servlet-mapping>
 </web-app>

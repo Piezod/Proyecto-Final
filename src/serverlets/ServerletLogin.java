@@ -1,5 +1,6 @@
 package serverlets;
 
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import Utilidades.Conexion;
 
 
 
@@ -89,7 +92,7 @@ public class ServerletLogin extends HttpServlet {
 				System.out.println("login correcto me caguen la leche merche");
 				//request.setAttribute("usuariologueado", usuarios+" "+pass); // le enviamos a nuestro jsp por atributo los datos recogidos en este servlet				
 				sesion.setAttribute("usuario", usuarios);
-				System.out.println("ruta del serverlet"+getServletContext().getRealPath("/"));
+				//System.out.println("ruta del serverlet"+getServletContext().getRealPath("/"));
 				sesion.setAttribute("ruta", getServletContext().getRealPath("/"));
 				//request.setAttribute("usuario", vo); // le paso un objeto con todos sus datos
 				response.sendRedirect("Inicio");			
