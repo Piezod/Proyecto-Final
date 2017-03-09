@@ -276,4 +276,38 @@ public class Conexion {
 		res.next();
 		return res.getString(1);
 	}
+	
+	/*
+	 * Metodo que nos devuelve el array con las ids de las preguntas que cumplen con lo que estamos buscando
+	 */
+	public int [] busquedaheader(String valor) throws SQLException {
+		Statement consulta = conexion.createStatement();
+		ResultSet res = consulta.executeQuery("SELECT count(*) FROM dbdamproject.preguntas where descripcion like '%"+valor+"%'");
+		
+		System.out.println("SELECT count(*) FROM dbdamproject.preguntas where descripcion like '%"+valor+"%'");
+		
+		int cantidad=0;
+		System.out.println("metodo busquedaheader");
+		if (res.next())
+		{
+			cantidad=res.getInt(1);
+			System.out.println(res.getInt(1));
+		}
+		else
+		{
+			cantidad=0;
+		}
+		
+		int valores[]=new int[cantidad];
+		res = consulta.executeQuery("SELECT idpreguntas FROM dbdamproject.preguntas where descripcion like '%"+valor+"%'");
+		int i=0;
+			while (res.next())
+			{
+				valores[i]=res.getInt(1);
+				System.out.println(res.getInt(1));
+				i++;
+			}
+
+			return valores;	
+	}
 }
