@@ -8,6 +8,7 @@
 
 <head>
 <script>
+//window.unload
 //window.localStorage.removeItem(key);
 </script>
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
