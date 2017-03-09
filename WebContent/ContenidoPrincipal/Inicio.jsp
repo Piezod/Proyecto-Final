@@ -2,17 +2,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
    <%@ page import="serverlets.*" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
-
-
 <head>
- <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../Bootstrap/js/jquery-1.11.3.min.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="Bootstrap/js/jquery-1.11.3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../Bootstrap/js/bootstrap.min.js"></script>
-<link href="../Bootstrap/css/bootstrap.css" rel="stylesheet">
-<script type="text/javascript" src="../Bootstrap/js/bootstrap.min.js"></script>
+    <script src="Bootstrap/js/bootstrap.min.js"></script>
+<link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
+<script type="text/javascript" src="Bootstrap/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,112 +26,119 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<title>Estudiantes Conectados Main</title>
 
-<!-- **INFORMACION** -->
 
-<!-- Este jsp en un primer momento esta pensado para que sea el cuerpo principal de la aplicacion
 
-	 En el se iran recargando diferentes jsp en la parte central dependiendo de la opcion que nos solicite el usuario.
-	 
-	 Siempre mantendremos la barra de navegacion superior con sus diferentes opciones y en la parte inferior añadiremos siempre un jsp estatico que sera
-	 
-	 el pie de la aplicación. Cargar contenido en esta pagina estara gobernado a través de un switch explicado mas adelante. -->
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid"> 
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-      <a class="navbar-brand" href="#">Logotipo</a></div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    
-    <div class="collapse navbar-collapse" id="defaultNavbar1">
-      <ul class="nav navbar-nav">
-      
-      <!-- ** Boton del home ** -->
-        <li class="active">
-        	<form action="ServerletContenido" method="POST">
-			<input type="hidden" name="pagina" value="home"></input>
-			<button class="btn btn-primary btn-lg active"  type="submit" name="contenido" value="home"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span> </button>			
-			</form>
-        </li>
-        
-        
-        <li><a href="#">Usuarios</a></li>
-		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informacion <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span><span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#" align="center">Accion1</a></li>
-             <li class="divider"></li>
-            <li><a href="#" align="center">Accion2</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Busqueda Rapida">
-        </div>
-        <button type="submit" class="btn btn-default">Enviar</button>
-      </form>
-      
-      
-       <div  class="nav navbar-nav navbar-right">
-       <a class="navbar-brand" align="right">Bienvenido alumno <span class="label label-success"><%=session.getAttribute("usuario") %></span></a></div>
-       
-       </div>
-    <!-- /.navbar-collapse --> 
-  </div>
-  <!-- /.container-fluid --> 
- 
-</nav>
-
+<title>Estudiantes Conectados</title>
+<%@include file="Cabecera.jsp"%>
 </head>
-
 <body>
-<hr>
-<div class="row"></div>
 <div class="container-fluid">
-								<%
-								
-    							
-    						/*
-    						 Este switch recojera el valor de la variable contenido y segun lo que contenga dentro nos pondra
-    						 un include diferente en l aparte central del main.
-    						 La primera vez que cargue la pagina el atributo estara null, por eso se le pondra que sea por defecto el home.
-    						 De igualmanera, la opcion con el valor home, no sera puesta ni añadida con lo cual nos dirigira automaticamnte al default
-    						 que sera home.
-    						*/
-    						String opcion=(String)session.getAttribute("contenido");
-    					//System.out.println("estoy en inicio, valor de sesion contenido "+session.getAttribute("contenido"));
-							    		if (opcion==null)
-							    		{
-							    			opcion="voyaldefault";
-							    		}
-									switch (opcion)
-									{
-									case  "AltaPregunta" :
-										//out.print("dentrodelsegunsea ponemos el jspdealtapregunta");
-										%>
-										<%@include file="Altapregunta.jsp"%>
-										<%break;
-									case  "Respuesta" :
-										//out.print("dentrodelsegunsea ponemos el jspdealtapregunta");
-										%>
-										<%@include file="Respuesta.jsp"%>
-										<%break;
+	<div class="container-fluid">
+	
+	<div class="panel panel-info">
+  		<div class="panel-heading">
+		  <h1 align="center" >Bienvenido a estudiantes conecta2</h1>
+		  <h4 align="center">Puedes realizar una pregunta a nuestro asistente para que te resuelva la duda , en caso de que no la encuentres no dudes en realizar una pregunta</h4>
+		  <br>
+	
+	  </div>
+	  		  <!-- Envio al serverlet mediante un formulario por el methot post el valor altapregunta.jsp que sera el que recoja y luego sera el que
+   			 recargue -->
+     <div class="panel-body">
+    		<!-- ** IMPORTANTE ** -->
+    		 <!-- ** Crearemos unos botones con el type submit y el name contenido, importante siempre se llamara contenido. Este boton
+    		 sera el encargado de mandarnos el valor del jsp a cargar. En el value pondremos el nombre del jsp sin la extension, todos los 
+    		 botones estaran incluiddos en un formulario que iran redirigidos a un serverlet que se llamara ***serverletcontenido***
+    		  ** -->
+    
+			<form action="Pregunta" method="POST">
+					<input type="hidden" name="pagina" value="Altapregunta.jsp"></input>
+					 <!-- ** IMPORTANTE ** -->
+			  		 <h4 align="center">
+			  		 	<button class="btn btn-primary btn-lg"  type="submit" name="contenido" value="AltaPregunta">Realizar nueva pregunta </button>
+			  		 </h4>	   
+			    </form>
+	    </div>
+	  </div>
+    </div>
+    <hr>
+    
+    <div class="container-fluid">
+    	
+   	 
+    	<div class="row">
+    	  <div class="col-md-2"> <!-- Izquierda -->
+    	  	
+    	  	 
+    	  </div>
+    	  
+    	  <div class="col-md-8"> <!-- Centro -->
+    	  	<ul class="nav nav-tabs" >
+				<li role="presentation"><a href="#">Mas Contestadas</a></li>
+				<li role="presentation"><a href="#">Semana</a></li>
+				<li role="presentation"><a href="#">Mes</a></li>
+			</ul>
+    	  </div>
+    	  <div class="col-md-2"> <!-- Derecha -->
+    	  	
+    	  	
+    	  </div>
+  	  </div>
+    
+	</div>
+	
+	<!-- En aqui recargamos el titulo de las preguntas-->
+		<div class="col-md-8 col-md-offset-2">
+			
+					  <% 
+			   	        /*
+			   	        Sacaremos las ids de las ultimas 10 preguntas, en un array, este array despues lo recorreremos y pondremos el id de la pregunta en el valor
+			   	        del input que enviamos para lamar al jsp de respuesta y mostraremos el titulo de esa pregunta.
+			   	        */
+						   		 	Conexion co=new Conexion();
+						   	     	co.conectar();
+			    			int[]x=co.idultimas10preguntas();
+			    			
+			    			
+			    		for (int i=0;i<x.length;i++)
+			    		{
+			    			
+			    			String titu[]=co.sacarpreguntaporid(x[i]);
+			    			
+			    		 %>
+			    		 <!-- Pintamos el cuerpo donde iran los titulos ancho 10, despues la fecha informacion de usuario con ancho 2 y debajo ponemos los tags de la pregunta -->
+			    		<form action="DetallePregunta" method="POST">
+			    		 <div class="row">
+						     <div class="col-md-10">
+						    		 	<input type="hidden" name="idpregunta" value="<%=x[i]%>"></input>
+										  <button type="submit" name="submit_param" value="submit_value"class="list-group-item list-group-item-info">
+										  					  <%=titu[1] %>
+										 	 </button>
+							</div>
+							<div class="col-md-2">
+										<table>
+											<tr>
+												<td><span class="label label-success">
+													<abbr  class="initialism" title="AQUI DESPLIEGO YO LO QUE QUIERO PORQUE SE PUEDE Y MOLA"><%=titu[3] %></abbr>
+											</td></span></tr>
+											<tr><td><span class="label label-default"><abbr title="gg"><%=titu[4] %></abbr></td></span></tr>
+										</table>
+							</div>
+							<div class="col-md-8"><code>  tag1  </code> , <code>  tag2  </code>  ,  <code>  tag3  </code>             ,    <code>  tag4  </code></div>
+						</div>
+							  <hr>
+							  </form>
+			    		<%
+			    		}
+			    		
+			    		%>
+			  
+		</div>
+	
+	
+</div>
+<%@include file="pie.jsp"%>
 
-									default:
-										//out.print("dentrodelsegunsea ponemos el home");
-										%>
-									<%@include file="home.jsp"%> 
-										
-										<% break;
-									}
-								
-								%>
-</div>
-<div class="container-fluid">
-	<%@include file="pie.jsp"%> 
-</div>
 </body>
 </html>
