@@ -41,22 +41,26 @@ public class ServeletBusqueda extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
-		System.out.println("serverletbusquedabarra  valor de busqueda "+(String)request.getParameter("valorbusqueda"));
+		String vb=(String)request.getParameter("valorbusqueda");
+		System.out.println("serverletbusquedabarra  valor de busqueda "+vb);
 		
 		HttpSession sesion= request.getSession(true);
-		Conexion c=(Conexion) sesion.getAttribute("conexion");
+		Conexion c=new Conexion();
 		
 		try {
-			
-			c.busquedaheader((String)request.getAttribute("valorbusqueda"));
-			response.sendRedirect("resultadosbusqueda");
+			c.conectar();
+			c.busquedaheader(vb);
+			request.setAttribute("valor", (String)request.getParameter("valorbusqueda"));
+			response.sendRedirect("busqueda1");
 			
 			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 			System.out.println(" se hace el catch");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		

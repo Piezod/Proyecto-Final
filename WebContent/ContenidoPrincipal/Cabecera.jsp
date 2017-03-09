@@ -46,9 +46,9 @@
           </ul>
         </li>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
+      <form class="navbar-form navbar-left" role="search" action="ServeletBusqueda" method="POST" >
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Busqueda Rapida">
+          <input type="text" class="form-control" name="valorbusqueda" placeholder="Busqueda Rapida">
         </div>
         <button type="submit" class="btn btn-default">Enviar</button>
       </form>
