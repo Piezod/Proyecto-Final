@@ -192,6 +192,7 @@
 }
   
   </script>
+  <%@include file="Cabecera.jsp"%>
   
 </head>
 <body>
@@ -290,5 +291,7 @@
 		  </div>
 	</div>
 </div>
+
+<%@include file="pie.jsp"%>
 </body>
 </html>

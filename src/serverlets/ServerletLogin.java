@@ -92,8 +92,7 @@ public class ServerletLogin extends HttpServlet {
 				System.out.println("ruta del serverlet"+getServletContext().getRealPath("/"));
 				sesion.setAttribute("ruta", getServletContext().getRealPath("/"));
 				//request.setAttribute("usuario", vo); // le paso un objeto con todos sus datos
-				request.getRequestDispatcher("ContenidoPrincipal/Inicio.jsp").forward(request, response); //aqui llamamos a un jsp desde el servlet
-			
+				response.sendRedirect("Inicio");			
 				
 			}else {
 				

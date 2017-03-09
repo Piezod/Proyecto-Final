@@ -5,18 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
 </head>
 <body>
-<!doctype html>
-<html>
 <head>
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../Bootstrap/js/jquery-1.11.3.min.js"></script>
+    <script src="Bootstrap/js/jquery-1.11.3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../Bootstrap/js/bootstrap.min.js"></script>
-<link href="../Bootstrap/css/bootstrap.css" rel="stylesheet">
-<script type="text/javascript" src="../Bootstrap/js/bootstrap.min.js"></script>
+    <script src="Bootstrap/js/bootstrap.min.js"></script>
+<link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
+<script type="text/javascript" src="Bootstrap/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <!-- Latest compiled and minified CSS -->
@@ -27,7 +24,8 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<title>Respuesta</title>
+<%@include file="Cabecera.jsp"%>
+
 </head>
 
 	
@@ -57,7 +55,7 @@
 							{
 								%>
 									<h3>Cargar jsp de pagina no encontrada</h3>
-								
+								<title>Pregunta no encontrada</title>
 								<%
 							}
 			    		else
@@ -67,6 +65,8 @@
 			    		String []xo=c.sacarpreguntaporid((int)session.getAttribute("idpregunta"));
 			    		
 			    		 %>
+			    		<title><%=xo[1]%></title>
+			    		
 						<h3 class="panel-title" align="center"><%=xo[1]%></h3>
 					  </div>
 					  
@@ -85,9 +85,7 @@
 		  </div>
 	</div>
 </div>
-
-</body>
-</html>
+<%@include file="pie.jsp"%>
 
 </body>
 </html>

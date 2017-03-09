@@ -5,30 +5,6 @@
     <welcome-file>GestionUsuarios/Login/Login.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>Registro</servlet-name>
-    <jsp-file>/GestionUsuarios/Registro/Registro.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Registro</servlet-name>
-    <url-pattern>/registro</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>PostRegistro</servlet-name>
-    <jsp-file>/GestionUsuarios/Registro/PostRegistro.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>PostRegistro</servlet-name>
-    <url-pattern>/postregistro</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Inicio</servlet-name>
-    <jsp-file>/ContenidoPrincipal/Inicio.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Inicio</servlet-name>
-    <url-pattern>/Inicio</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>Login</servlet-name>
     <jsp-file>/GestionUsuarios/Login/Login.jsp</jsp-file>
   </servlet>
@@ -45,11 +21,44 @@
     <url-pattern>/recuperarpass</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>Registro</servlet-name>
+    <jsp-file>/GestionUsuarios/Registro/Registro.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Registro</servlet-name>
+    <url-pattern>/registro</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PostRegistro</servlet-name>
+    <jsp-file>/GestionUsuarios/Registro/PostRegistro.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostRegistro</servlet-name>
+    <url-pattern>/postregistro</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Inicio</servlet-name>
+    <jsp-file>/ContenidoPrincipal/Inicio.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Inicio</servlet-name>
+    <url-pattern>/Inicio</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>Pregunta</servlet-name>
+    <jsp-file>/ContenidoPrincipal/Altapregunta.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Pregunta</servlet-name>
+    <url-pattern>/Pregunta</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Respuesta</servlet-name>
     <jsp-file>/ContenidoPrincipal/Respuesta.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Respuesta</servlet-name>
-    <url-pattern>/respuesta</url-pattern>
+    <url-pattern>/Respuesta</url-pattern>
   </servlet-mapping>
-</web-app>
+  </web-app>
