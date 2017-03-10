@@ -15,7 +15,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="Bootstrap/js/bootstrap.min.js"></script>
 <link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
-<script type="text/javascript" src="Bootstrap/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 

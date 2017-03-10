@@ -5,7 +5,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+<head>
 
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="Bootstrap/js/jquery-1.11.3.min.js"></script>
+<script src="Bootstrap/js/bootstrap.min.js"></script>
+<link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
+</head>
 
 <body >
 <!-- **INFORMACION** -->
@@ -53,9 +61,16 @@
         <button type="submit" class="btn btn-default">Enviar</button>
       </form>
       
-      
-       <div  class="nav navbar-nav navbar-right">
-       <a class="navbar-brand" align="right">Bienvenido alumno <span class="label label-success"><%=session.getAttribute("usuario") %></span></a></div>
+       <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("usuario") %><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+
+            <li><a href="#">Datos de usuario</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Cerrar sesion</a></li>
+          </ul>
+        </li>
+      </ul>
        
        </div>
     <!-- /.navbar-collapse --> 
