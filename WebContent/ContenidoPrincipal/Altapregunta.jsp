@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript">
-  
+ 
  
   
   function comprobarregistro() {
@@ -193,7 +193,13 @@
   
   </script>
   <%@include file="Cabecera.jsp"%>
-  
+  <style type="text/css">
+		 .romper {
+		color: maroon;
+		background-color:transparent;
+		overflow-wrap:inherit;
+		}
+  </style>
 </head>
 <body>
 
@@ -215,7 +221,7 @@
 		
 			<div class="container-fluid" style="margin-top: 3%">
 	  <br>
-	  <form class="form-horizontal" action="AltaPregunta" method="POST" onsubmit="return comprobarregistro();">
+	  <form class="form-horizontal" action="ServerletAltaPregunta" method="POST" onsubmit="return comprobarregistro();">
 	  
 	    <div id="titulaso">
 		  	 <div class="form-group">
@@ -274,15 +280,13 @@
 			   	        las preguntas segun el boton del tab pulsado.
 			   	        */
 			   		 	
-			    		
 			    		 %>
 						<h3 class="panel-title" align="center" id="titulocopia"></h3>
-						<pre>esto es la etiqueta code</pre>
 					  </div>
 					  
-					  <div class="panel-footer" align="left" style="min-height: 200px;"  id="mensajecopia">
-					  
-			    			<div class="container-fluid">
+					  <div class="panel-footer" align="left" style="min-height: 200px;" >
+					  		<p id="mensajecopia" class="romper"></p>
+			    	<div class="container-fluid">
 			    			</div>
 			    		
 			    	 </div>

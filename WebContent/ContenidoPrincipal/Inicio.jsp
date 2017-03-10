@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
    <%@ page import="serverlets.*" %>
+   <%@ page import="Utilidades.*" %>
 <!doctype html>
 <html>
 <head>
@@ -53,7 +54,7 @@
     		  ** -->
     
 			<form action="Pregunta" method="POST">
-					<input type="hidden" name="pagina" value="Altapregunta.jsp"></input>
+					<input type="hidden" name="pagina" value="ServerletAltapregunta.jsp"></input>
 					 <!-- ** IMPORTANTE ** -->
 			  		 <h4 align="center">
 			  		 	<button class="btn btn-primary btn-lg"  type="submit" name="contenido" value="AltaPregunta">Realizar nueva pregunta </button>
@@ -138,6 +139,8 @@
 	
 	
 </div>
+
+
 <%@include file="pie.jsp"%>
 
 </body>
