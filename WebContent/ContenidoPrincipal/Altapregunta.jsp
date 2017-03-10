@@ -195,9 +195,11 @@
   <%@include file="Cabecera.jsp"%>
   <style type="text/css">
 		 .romper {
-		color: maroon;
-		background-color:transparent;
-		overflow-wrap:inherit;
+		color: black;
+		background-color:#E6E6E6;
+		overflow-wrap: break-word;
+		min-height: 200px;
+		height: auto;
 		}
   </style>
 </head>
@@ -283,11 +285,13 @@
 			    		 %>
 						<h3 class="panel-title" align="center" id="titulocopia"></h3>
 					  </div>
-					  
-					  <div class="panel-footer" align="left" style="min-height: 200px;" >
-					  		<p id="mensajecopia" class="romper"></p>
-			    	<div class="container-fluid">
-			    			</div>
+					  		<div class="panel-footer">  
+						    	<div class="container-fluid">
+						    		 <div class="col-md-12 col-md-offset-0">
+						    			<p id="mensajecopia" class="romper"></p>
+						    		</div>
+						    </div>
+			    	</div>
 			    		
 			    	 </div>
 			</div>
