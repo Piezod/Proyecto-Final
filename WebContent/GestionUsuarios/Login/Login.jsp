@@ -47,7 +47,11 @@ function valideDatos() {
 </head>
 
 <body class="fondo">
-
+<%if(session.getAttribute("usuario")!="null")
+{
+	response.sendRedirect("Inicio");
+}
+%>
 <form action="ServeletLogin" method="POST" onsubmit="return valideDatos();">
 		<!-- Creo un campo oculto con el valor del get con el código de la validación
 		para poder validar el usuario y que solo pueda acceder a la cuenta a través
