@@ -43,15 +43,19 @@ function valideDatos() {
 
       <link rel="stylesheet" href="GestionUsuarios/Login/css/style.css" type="text/css">
 
+  <link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
   
 </head>
 
 <body class="fondo">
-<%if(session.getAttribute("usuario")!="null")
+<%
+System.out.println(session.getAttribute("usuario"));
+if(session.getAttribute("usuario")!=null)
 {
 	response.sendRedirect("Inicio");
 }
 %>
+<div class="container-fluid">
 <form action="ServeletLogin" method="POST" onsubmit="return valideDatos();">
 		<!-- Creo un campo oculto con el valor del get con el código de la validación
 		para poder validar el usuario y que solo pueda acceder a la cuenta a través
@@ -125,6 +129,7 @@ function valideDatos() {
 	</div>
 </div>
 </form>
+</div>
   
 </body>
 </html>

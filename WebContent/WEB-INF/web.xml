@@ -60,6 +60,15 @@
     <servlet-name>Respuesta</servlet-name>
     <url-pattern>/respuesta</url-pattern>
   </servlet-mapping>
+
+    <servlet>
+    <servlet-name>Cabecera</servlet-name>
+    <jsp-file>/ContenidoPrincipal/Cabecera.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Cabecera</servlet-name>
+    <url-pattern>/Cabecera</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>Busqueda1</servlet-name>
     <jsp-file>/ContenidoPrincipal/ResultadosBusquedaBarra.jsp</jsp-file>
