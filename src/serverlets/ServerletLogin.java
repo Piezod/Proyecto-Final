@@ -89,7 +89,6 @@ public class ServerletLogin extends HttpServlet {
 			if (c.comprobarlogin(usuarios, pass,request.getParameter("validacion")))
 			{ // variable de sesion donde metemos datos para todos los jsp
 				
-				System.out.println("login correcto me caguen la leche merche");
 				//request.setAttribute("usuariologueado", usuarios+" "+pass); // le enviamos a nuestro jsp por atributo los datos recogidos en este servlet				
 				sesion.setAttribute("usuario", usuarios);
 				//System.out.println("ruta del serverlet"+getServletContext().getRealPath("/"));

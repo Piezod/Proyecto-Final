@@ -57,14 +57,14 @@ public class Conexion {
 		ResultSet res = consulta.executeQuery();
 		
 		enc= res.next();
-
 		if(!enc){
+
 			sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validacion like ? and validado like ?";
 			PreparedStatement consulta2=conexion.prepareStatement(sql);
 			consulta2.setString(1, user);
 			consulta2.setString(2, pass);
 			consulta2.setString(3, codvalid);
-			consulta2.setInt(4, 1);
+			consulta2.setInt(4, 0);
 			ResultSet res2=consulta2.executeQuery();
 			if(res2.next()){
 				Statement consulta3=conexion.createStatement();
