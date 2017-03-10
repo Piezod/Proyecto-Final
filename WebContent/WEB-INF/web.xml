@@ -58,7 +58,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Respuesta</servlet-name>
-    <url-pattern>/Respuesta</url-pattern>
+    <url-pattern>/respuesta</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Busqueda1</servlet-name>
