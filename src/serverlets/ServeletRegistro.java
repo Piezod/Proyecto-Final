@@ -57,7 +57,9 @@ public class ServeletRegistro extends HttpServlet {
 				String validacion=Long.toHexString(Double.doubleToLongBits(Math.random()));
 				int res=c.InsertarRegistro(usuario,contraseña,validacion, request.getParameter("nombre"), request.getParameter("apellido1"), request.getParameter("apellido2"), request.getParameter("email"), request.getParameter("curso"), request.getParameter("ciclo"));
 				if(res>0){
-					String ruta="http://localhost:8080/Proyectoprueba/login";
+					String ruta="estudiantesconecta2.tk";
+					
+
 					Correo correo=new Correo("Enhorabuena por acceder a estudiantas conectados<br>A continuación le otorgamos los datos del registro<br><strong>Usuario: </strong>"+usuario+"<br><strong>Contraseña: </strong>"+contraseña+"<br>Para acceder al login y validar tu usuario accede desde <a href="+'"'+ruta+"?validacion="+validacion+'"'+">este link</a>", request.getParameter("email"), "Registro en Estudiantes Conectados");
 					correo.SendMail();
 					sesion.setAttribute("Insercion", "correcta");
