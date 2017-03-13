@@ -87,11 +87,6 @@
 			</div>
 
 		  </div>
-<<<<<<< HEAD
-		
-=======
-		  
->>>>>>> refs/remotes/origin/master
 	</div>
 </div>
 <%@include file="pie.jsp"%>
