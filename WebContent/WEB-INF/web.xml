@@ -92,4 +92,6 @@
     <servlet-name>Busqueda1</servlet-name>
     <url-pattern>/search1</url-pattern>
   </servlet-mapping>
+ 
+
 </web-app>

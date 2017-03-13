@@ -1,3 +1,6 @@
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="Utilidades.Conexion"%>
 <%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -31,17 +34,19 @@
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-      <a class="navbar-brand" href="#">Logotipo</a></div>
+      </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     
     <div class="collapse navbar-collapse" id="defaultNavbar1">
       <ul class="nav navbar-nav">
       
+      
       <!-- ** Boton del home ** -->
+    	
         <li class="active">
         	<form action="ServerletContenido" method="POST">
 			<input type="hidden" name="pagina" value="home"></input>
-			<button class="btn btn-primary btn-lg active"  type="submit" name="contenido" value="home"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span> </button>			
+			<input type="image" src="ServeletImagenes?id=2" name="contenido" style="height: 30%; width: 20%;"></input>	
 			</form>
         </li>
         
