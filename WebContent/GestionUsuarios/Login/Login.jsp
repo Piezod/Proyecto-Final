@@ -49,7 +49,6 @@ function valideDatos() {
 
 <body class="fondo">
 <%
-System.out.println(session.getAttribute("usuario"));
 if(session.getAttribute("usuario")!=null)
 {
 	response.sendRedirect("Inicio");

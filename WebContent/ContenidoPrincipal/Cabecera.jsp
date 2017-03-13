@@ -26,7 +26,7 @@
 	 
 	 el pie de la aplicación. Cargar contenido en esta pagina estara gobernado a través de un switch explicado mas adelante. -->
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid"> 
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -67,7 +67,11 @@
 
             <li><a href="#">Datos de usuario</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Cerrar sesion</a></li>
+            <li>
+            
+            <a href="CerrarSesion?logout=1">Cerrar sesion</a>
+            
+            </li>
           </ul>
         </li>
       </ul>
