@@ -46,7 +46,7 @@
         <li class="active">
         	<form action="ServerletContenido" method="POST">
 			<input type="hidden" name="pagina" value="home"></input>
-			<input type="image" src="ServeletImagenes?id=2" name="contenido" style="height: 30%; width: 20%;"></input>	
+			<input type="image" src="ServeletImagenes?id=2" name="contenido" style="height: 50px"></input>	
 			</form>
         </li>
         
