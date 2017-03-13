@@ -187,7 +187,9 @@ public class Conexion {
 		
 		return res;
 	}
-
+/*
+ *  Metodo para sacar todos los usuarios de la base de datos y entregarlos en un array para trabajar con el
+ */
 	public String[] sacarusuarios() throws SQLException {
 
 		String x[] = new String[contar("select count(*) from dbdamproject.usuarios")];
@@ -203,6 +205,19 @@ public class Conexion {
 		}
 
 		return x;
+	}
+	
+	/*
+	 * Metodo para hacer una consulta a la bse de datos y obtener un dato segun la query que le enviemos, nos devolvera el resulset porque no sabemos
+	 * de que tipo de dato estamos hablando, file,string,int
+	 */
+	
+	public ResultSet sacarundato(String query) throws SQLException
+	{
+		Statement consulta=conexion.createStatement();
+		ResultSet res=consulta.executeQuery(query);
+		
+		return res;
 	}
 	
 	/*

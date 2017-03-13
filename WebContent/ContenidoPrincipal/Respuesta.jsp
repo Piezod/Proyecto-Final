@@ -216,10 +216,10 @@ function previsualizacion() {
 			</div>
 
 		  </div>
-		  <p onclick="previsualizacion();">PULSAR PARA CARGAR PREVISUALIZACION</p>
+		
 	</div>
 </div>
 <%@include file="pie.jsp"%>
-
+  <p onclick="previsualizacion();">PULSAR PARA CARGAR PREVISUALIZACION</p>
 </body>
 </html>
