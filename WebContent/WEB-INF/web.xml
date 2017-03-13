@@ -60,14 +60,29 @@
     <servlet-name>Respuesta</servlet-name>
     <url-pattern>/respuesta</url-pattern>
   </servlet-mapping>
-
-    <servlet>
+  <servlet>
     <servlet-name>Cabecera</servlet-name>
     <jsp-file>/ContenidoPrincipal/Cabecera.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Cabecera</servlet-name>
     <url-pattern>/Cabecera</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AreaUsuario</servlet-name>
+    <jsp-file>/ContenidoPrincipal/AreaUsuario.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AreaUsuario</servlet-name>
+    <url-pattern>/AreaUsuario</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DatosUsuario</servlet-name>
+    <jsp-file>/ContenidoPrincipal/DatosUsuario.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DatosUsuario</servlet-name>
+    <url-pattern>/DatosUsuario</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Busqueda1</servlet-name>

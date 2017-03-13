@@ -4,7 +4,6 @@
     pageEncoding="ISO-8859-1"%>
      <%@ page import="serverlets.*" %>
    <%@ page import="Utilidades.*" %>
-  	 <%@include file="Cabecera.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,6 +16,8 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="Bootstrap/js/bootstrap.min.js"></script>
 <link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="Bootstrap/css/Estilospropios.css" rel="stylesheet">
+
 <script type="text/javascript" src="Bootstrap/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,6 +35,8 @@
 <title>Resultados Busqueda</title>
 </head>
 <body>
+  	 <%@include file="Cabecera.jsp"%>
+
 <h1>resultadosbusuedabarra</h1>
 
 

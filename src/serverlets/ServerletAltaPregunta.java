@@ -55,7 +55,7 @@ public class ServerletAltaPregunta extends HttpServlet {
 		 * Recogemos el valor del textarea y hacemos un replace \n por el <br> para guardar el salto de linea y el formato que nos ha introducido el 
 		 * usuario
 		 */
-		String mensaje=request.getParameter("mensaje").toString().replaceAll("\n"," <br> ");
+		String mensaje=request.getParameter("mensajeoculto");
 		
 		Conexion c=new Conexion();
 		
