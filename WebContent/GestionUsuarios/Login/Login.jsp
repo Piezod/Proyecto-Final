@@ -56,8 +56,8 @@ if(session.getAttribute("usuario")!=null)
 %>
 <div class="container-fluid">
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
+  <div class="col-md-1 col-sm-1 col-xs-1"></div>
+  <div class="col-md-10 col-sm-10 col-xs-10">
   <form action="ServeletLogin" method="POST" onsubmit="return valideDatos();">
 		<!-- Creo un campo oculto con el valor del get con el código de la validación
 		para poder validar el usuario y que solo pueda acceder a la cuenta a través
@@ -133,7 +133,7 @@ if(session.getAttribute("usuario")!=null)
 </form>
   
   </div>
-  <div class="col-md-1"></div>
+  <div class="col-md-1 col-sm-1 col-xs-1"></div>
 </div>
 </div>
   
