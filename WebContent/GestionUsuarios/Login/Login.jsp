@@ -55,7 +55,10 @@ if(session.getAttribute("usuario")!=null)
 }
 %>
 <div class="container-fluid">
-<form action="ServeletLogin" method="POST" onsubmit="return valideDatos();">
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+  <form action="ServeletLogin" method="POST" onsubmit="return valideDatos();">
 		<!-- Creo un campo oculto con el valor del get con el código de la validación
 		para poder validar el usuario y que solo pueda acceder a la cuenta a través
 		del link que enviamos por correo -->
@@ -128,6 +131,10 @@ if(session.getAttribute("usuario")!=null)
 	</div>
 </div>
 </form>
+  
+  </div>
+  <div class="col-md-1"></div>
+</div>
 </div>
   
 </body>
