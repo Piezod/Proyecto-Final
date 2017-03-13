@@ -87,10 +87,9 @@
 			</div>
 
 		  </div>
-		  
 	</div>
 </div>
 <%@include file="pie.jsp"%>
-
+  <p onclick="previsualizacion();">PULSAR PARA CARGAR PREVISUALIZACION</p>
 </body>
 </html>
