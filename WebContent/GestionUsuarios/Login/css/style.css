@@ -109,7 +109,7 @@ a {
 
 .login-form .group .input, .login-form .group .button {
 	border: none;
-	padding: 15px 20px;
+	padding: 15px 15px;
 	border-radius: 25px;
 	background: rgba(255, 255, 255, .1);
 }
@@ -149,7 +149,7 @@ a {
 }
 
 .login-form .group label .icon:before {
-	left: 3px;
+	left: 15px;
 	width: 5px;
 	bottom: 6px;
 	-webkit-transform: scale(0) rotate(0);

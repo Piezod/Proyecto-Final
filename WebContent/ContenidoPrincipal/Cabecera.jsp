@@ -11,7 +11,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,height=device-height, initial-scale=1">
 
 <script src="Bootstrap/js/jquery-1.11.3.min.js"></script>
 <script src="Bootstrap/js/bootstrap.min.js"></script>
