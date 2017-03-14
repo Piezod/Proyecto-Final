@@ -35,12 +35,14 @@ public class ServeletImagenes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		/*
+		 * Recojo el valor de la id de la imagen que quiero buscar 
+		 */
 		String id = request.getParameter("id");
-		System.out.println("se ejecuta el doget");
 	
-		/*ca.co
+		/*
 			Sacamos la imagen de la base de datos y la dibujamos donde tiene que ir el logotipo, en la parte izuierda de la cabecera, en caso de 
 			que no exista la imagen o no se encuentre se pondra por defecto el nombre de la aplicación.
 		*/
@@ -50,33 +52,19 @@ public class ServeletImagenes extends HttpServlet {
 			ca.conectar();
 			String imgLen="";
 			rs1 = ca.sacarundato("select imagen from Imagenes where idimagen="+id+"");
-			/*if (r1.next())
-			{ 
-				
-				
-				System.out.println("saco imagen");
-				OutputStream img;
-				byte barray[]=r1.getBytes(1);
-				response.setContentType("image/png");
-				img=response.getOutputStream();
-				img.write(barray);
-				img.flush();
-				img.close();*/
+		
 				
 			if(rs1.next()){
 				  imgLen = rs1.getString(1);
-				  System.out.println(imgLen.length());
 				
 				  int len = imgLen.length();
 				  byte [] rb = new byte[len];
 				  InputStream readImg = rs1.getBinaryStream(1);
 				  int index=readImg.read(rb, 0, len);  
-				  System.out.println("index"+index);
 				  response.reset();
 				  response.setContentType("image/jpg");
 				  response.getOutputStream().write(rb,0,len);
 				  response.getOutputStream().flush();  
-				  System.out.println("response"+response.getOutputStream());
 				  }
 			
 		

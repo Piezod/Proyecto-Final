@@ -38,6 +38,11 @@ public class Conexion {
 
 	}
 	
+	public void cerrarconexion() throws SQLException
+	{
+		conexion.close();
+	}
+	
 	public void nuevacomprobacion(String codigo,String email) throws SQLException{
 		PreparedStatement consulta=conexion.prepareStatement("update dbdamproject.usuarios set validacion=? where email like ?");
 		consulta.setString(1, codigo);
@@ -168,7 +173,7 @@ public class Conexion {
 	public int InsertarPregunta(int idpregunta,String titulo,String descripcion,String usuario) throws SQLException {
 		
 		String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-		System.out.println(fecha);
+		//System.out.println(fecha);
 		//0000-00-00 00:00:00
 		
 		
@@ -218,6 +223,23 @@ public class Conexion {
 		ResultSet res=consulta.executeQuery(query);
 		
 		return res;
+	}
+	
+	/*
+	 * Metodo para hacer una consulta a la bse de datos y obtener un dato segun la query que le enviemos, nos devolvera el resulset porque no sabemos
+	 * de que tipo de dato estamos hablando, file,string,int
+	 */
+	
+	public String sacarundatostring(String query) throws SQLException
+	{
+		Statement consulta=conexion.createStatement();
+		ResultSet res=consulta.executeQuery(query);
+		String x=null;
+		if (res.next())
+		{
+			 x=res.getString(1);
+		}
+		return x;
 	}
 	
 	/*
@@ -307,7 +329,7 @@ public class Conexion {
 		Statement consulta = conexion.createStatement();
 		ResultSet res = consulta.executeQuery("SELECT count(*) FROM dbdamproject.preguntas where descripcion like '%"+valor+"%'");		
 		int cantidad=0;
-		System.out.println("metodo busquedaheader");
+		//System.out.println("metodo busquedaheader");
 		if (res.next())
 		{
 			cantidad=res.getInt(1);
@@ -323,11 +345,23 @@ public class Conexion {
 			while (res.next())
 			{
 				valores[i]=res.getInt(1);
-				System.out.println(res.getInt(1));
+				//System.out.println(res.getInt(1));
 				i++;
 			}
 
 			return valores;	
+	}
+	
+	/*
+	 * Metodo que devuelve un resulset para que luego sea recorrido por un for en el jsp de mostrar las preguntas que tengan que ver algo con lo preguntado  y en cada
+	 * interaccion que nos dibuje las respuestas con los datos del resulset 
+	 * 
+	 */
+	
+	public ResultSet resulsetpregunta(String  valorpregunta) throws SQLException {
+		Statement consulta = conexion.createStatement();
+		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'");		
+		return res;
 	}
 	
 	/*
@@ -336,10 +370,53 @@ public class Conexion {
 	 * 
 	 */
 	
-	public ResultSet resulsetpregunta(String  valorpregunta) throws SQLException {
+	public ResultSet sacarrespuestasporid(int  idpregunta) throws SQLException {
 		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'");
+		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.respuestas where idpregunta="+idpregunta+"");		
+		return res;
+	}
+	
+	/*
+	 *  Metodo para insertar las respuestas, preparamos los statements por seguridad
+	 *  
+	 */
+	
+	public int InsertarRespuestas( String respuesta,int idpregunta,String usuario) throws SQLException {
+		
+		//idrespuesta,respuesta,votospositivos,votosnegativos,mejorrespuesta,idpregunta
+		String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+		String sql="Insert into dbdamproject.respuestas values (?,?,?,?,?,?,?,?)";
+		PreparedStatement insertar = conexion.prepareStatement(sql);
+		insertar.setInt(1,ultimoid("idrespuesta", "dbdamproject.respuestas"));
+		System.out.println(ultimoid("idrespuesta", "dbdamproject.respuestas"));
+		insertar.setString(2, respuesta);
+		insertar.setInt(3, 100);
+		insertar.setInt(4, 2);
+		insertar.setInt(5, 0);
+		insertar.setInt(6, idpregunta);
+		insertar.setString(7, usuario);
+		insertar.setString(8, fecha);
+		int res=insertar.executeUpdate();
 		
 		return res;
 	}
+	
+	//update dbdamproject.respuestas set votospositivos=2 where idrespuesta=1;
+	
+public int SumarVotoPositivo( int idrespuesta) throws SQLException {
+	
+	
+		String sql="update dbdamproject.respuestas set votospositivos=? where idrespuesta=?";
+		PreparedStatement insertar = conexion.prepareStatement(sql);
+		System.out.println();
+		int numerootos=Integer.parseInt(sacarundatostring("select votospositivos from dbdamproject.respuestas where idrespuesta="+idrespuesta+""));
+		System.out.println("numero d votos"+numerootos);
+		insertar.setInt(1,numerootos+1);
+		insertar.setInt(2, idrespuesta);
+		int res=insertar.executeUpdate();
+		
+		return res;
+	}
+	
+	
 }
