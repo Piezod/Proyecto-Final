@@ -46,6 +46,8 @@
         <li class="active">
         	<form action="ServerletContenido" method="POST">
 			<input type="hidden" name="pagina" value="home"></input>
+			<!-- En el src estams recargando el serverlet de imagenes, para forzar que se ejecute el metodo doget automaticmanete enviamos el parametro id
+			con la id que queremos que se recarguen, en nuestro caso la 2 sera el logotipo sin imagen de fondo. Le ponemos 50px de alto para que no nos descoloque la barra -->
 			<input type="image" src="ServeletImagenes?id=2" name="contenido" style="height: 50px"></input>	
 			</form>
         </li>
