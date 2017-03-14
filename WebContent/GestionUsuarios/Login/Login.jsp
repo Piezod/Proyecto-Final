@@ -44,7 +44,7 @@ function valideDatos() {
       <link rel="stylesheet" href="GestionUsuarios/Login/css/style.css" type="text/css">
 
   <link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8">
   
 </head>
 
@@ -109,7 +109,7 @@ if(session.getAttribute("usuario")!=null)
 						   if (titulo.equals("loginerroneo")) {
 							   %>
 							   <div class="error">
-							<label for="user" class="label">Usuario o contraseña Incorrectas</label>
+							<label for="user" class="error">Usuario o contraseña Incorrectas</label>
 							</div>
 							   <%
 						   }

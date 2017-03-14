@@ -5,20 +5,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
    <%@ page import="serverlets.*" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 
-<head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width,height=device-height, initial-scale=1">
 
 <script src="Bootstrap/js/jquery-1.11.3.min.js"></script>
 <script src="Bootstrap/js/bootstrap.min.js"></script>
 <link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
-</head>
+<link href="Bootstrap/css/Estilospropios.css" rel="stylesheet">
 
-<body >
+
+</head>
+<body>
 <!-- **INFORMACION** -->
 
 <!-- Este jsp en un primer momento esta pensado para que sea el cuerpo principal de la aplicacion
@@ -28,12 +24,13 @@
 	 Siempre mantendremos la barra de navegacion superior con sus diferentes opciones y en la parte inferior añadiremos siempre un jsp estatico que sera
 	 
 	 el pie de la aplicación. Cargar contenido en esta pagina estara gobernado a través de un switch explicado mas adelante. -->
-
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid"> 
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <input type="image" src="ServeletImagenes?id=2" name="contenido" style="height: 50px"></input>	
+          <!-- ** Boton del home ** -->
+    
+			<a href="Inicio"><input type="image" src="ServeletImagenes?id=2" name="contenido" style="height: 50px"></input></a>
       
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       </div>
@@ -44,12 +41,9 @@
       <ul class="nav navbar-nav">
       
       
-      <!-- ** Boton del home ** -->
     	
         <li class="active">
-        	<form action="ServerletContenido" method="POST">
-			<input type="hidden" name="pagina" value="home"></input>
-			</form>
+        	
         </li>
         
         <li><a href="#">Usuarios</a></li>
@@ -89,5 +83,5 @@
   <!-- /.container-fluid --> 
  
 </nav>
+
 </body>
-</html>

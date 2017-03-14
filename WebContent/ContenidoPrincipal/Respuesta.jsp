@@ -8,16 +8,15 @@
 </head>
 <body>
 <head>
- <link href="Bootstrap/css/Estilospropios.css" rel="stylesheet">
+ 
 
 
-</head>
 
+<%@include file="Cabecera.jsp"%>
 	
 	
 
 <body>
-<%@include file="Cabecera.jsp"%>
 
 <div class="container-fluid">
 <div class="row">

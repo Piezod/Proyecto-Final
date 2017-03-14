@@ -12,15 +12,15 @@
 
 
 
-<link href="Bootstrap/css/Estilospropios.css" rel="stylesheet">
 
 
 
 <title>Estudiantes Conectados</title>
-</head>
-<body style="padding-top: 5%">
 	<%@include file="Cabecera.jsp"%>
 
+
+<body>
+	
 	<div class="container-fluid">
 		<div class="container-fluid">
 

@@ -15,9 +15,7 @@ import java.util.GregorianCalendar;
 import java.util.UUID;
 
 public class Conexion {
-	/*
-	 * Cabezón
-	 */
+
 	private Connection conexion;
 	public Connection getConexion() {
 		return conexion;

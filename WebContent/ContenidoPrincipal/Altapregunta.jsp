@@ -183,7 +183,7 @@
 	}
 </script>
 
-<link href="Bootstrap/css/Estilospropios.css" rel="stylesheet">
+
 
 <style type="text/css">
 .romper {

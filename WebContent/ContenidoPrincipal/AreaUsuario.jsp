@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<link href="Bootstrap/css/Estilospropios.css" rel="stylesheet">
+
 
 <title>Area de usuario</title>
-</head>
-<body>
 	<%@include file="Cabecera.jsp"%>
+
+<body>
 <div class="container-fluid" style="margin-top:5%;margin-right: 7%; margin-left: 7%;">
 		<div class="row container-fluid">
 		  <div class="col-md-3 col-sm-3" align="center">
