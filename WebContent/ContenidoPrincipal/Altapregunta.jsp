@@ -218,13 +218,12 @@
 
 				<div class="container-fluid" style="margin-top: 3%">
 					<br>
-					<form class="form-horizontal" action="ServerletAltaPregunta"
-						method="POST" onsubmit="return comprobarregistro();">
+					<form class="form-horizontal" action="ServerletAltaPregunta" method="POST" onsubmit="return comprobarregistro();">
 
 						<div id="titulaso">
 							<div class="form-group">
 								<label class="control-label col-sm-2" for="titulo">Titulo:</label>
-								<div class="col-sm-6 col-md-8">
+								<div class="col-sm-8 col-md-8">
 									<input type="text" class="form-control" id="titulo"
 										placeholder="Titulo Pregunta" name="titulo"
 										onkeyup="previsualizacion();">
@@ -234,7 +233,7 @@
 
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="pwd">Descripcion</label>
-							<div class="col-sm-4 col-md-8">
+							<div class="col-sm-8 col-md-8">
 								<textarea style="overflow-y: scroll; height: 50%; resize: none"
 									class="form-control" rows="10" id="comment" name="mensaje"
 									onkeyup="previsualizacion();"></textarea>

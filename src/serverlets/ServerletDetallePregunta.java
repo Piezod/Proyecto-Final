@@ -42,8 +42,6 @@ public class ServerletDetallePregunta extends HttpServlet {
 		doGet(request, response);
 		
 		HttpSession sesion= request.getSession(true);
-			System.out.println("Estoy en detallepregnta java");
-			System.out.println("la id que recojo es "+request.getParameter("idpregunta"));
 			/*
 			 * Sacamos el usuario que ha realizado la pregunta 
 			 */
