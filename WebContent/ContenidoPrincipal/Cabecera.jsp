@@ -5,20 +5,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
    <%@ page import="serverlets.*" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 
-<head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script src="Bootstrap/js/jquery-1.11.3.min.js"></script>
 <script src="Bootstrap/js/bootstrap.min.js"></script>
 <link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
-</head>
+<link href="Bootstrap/css/Estilospropios.css" rel="stylesheet">
 
-<body >
+
+</head>
+<body>
 <!-- **INFORMACION** -->
 
 <!-- Este jsp en un primer momento esta pensado para que sea el cuerpo principal de la aplicacion
@@ -28,29 +24,24 @@
 	 Siempre mantendremos la barra de navegacion superior con sus diferentes opciones y en la parte inferior añadiremos siempre un jsp estatico que sera
 	 
 	 el pie de la aplicación. Cargar contenido en esta pagina estara gobernado a través de un switch explicado mas adelante. -->
-
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid"> 
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
+          <!-- ** Boton del home ** -->
+    
+			<a href="Inicio"><input type="image" src="ServeletImagenes?id=2" name="contenido" style="height: 50px"></input></a>
+      
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     
     <div class="collapse navbar-collapse" id="defaultNavbar1">
+    
       <ul class="nav navbar-nav">
       
       
-      <!-- ** Boton del home ** -->
     	
-        <li class="active">
-        	<form action="ServerletContenido" method="POST">
-			<input type="hidden" name="pagina" value="home"></input>
-			<!-- En el src estams recargando el serverlet de imagenes, para forzar que se ejecute el metodo doget automaticmanete enviamos el parametro id
-			con la id que queremos que se recarguen, en nuestro caso la 2 sera el logotipo sin imagen de fondo. Le ponemos 50px de alto para que no nos descoloque la barra -->
-			<input type="image" src="ServeletImagenes?id=2" name="contenido" style="height: 50px"></input>	
-			</form>
-        </li>
         
         <li><a href="#">Usuarios</a></li>
 		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informacion <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span><span class="caret"></span></a>
@@ -72,7 +63,7 @@
         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("usuario") %><span class="caret"></span></a>
           <ul class="dropdown-menu">
 
-            <li><a href="#">Datos de usuario</a></li>
+            <li><a href="AreaUsuario">Datos de usuario</a></li>
             <li role="separator" class="divider"></li>
             <li>
             
@@ -89,5 +80,5 @@
   <!-- /.container-fluid --> 
  
 </nav>
+
 </body>
-</html>
