@@ -13,37 +13,11 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-</head>
-<body>
-<head>
-<<<<<<< HEAD
- 
-=======
- <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!-- <script src="Bootstrap/js/jquery-1.11.3.min.js"></script> -->
-<script src="file:///C|/Users/Juankar/AppData/Roaming/Adobe/Dreamweaver CC 2017/es_ES/Configuration/Temp/Assets/eamBEED.tmp/js/bootstrap-3.3.7.js" type="text/javascript"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="Bootstrap/js/bootstrap.min.js"></script>
-<!-- <link href="Bootstrap/css/bootstrap.css" rel="stylesheet"> -->
-    <link href="file:///C|/Users/Juankar/AppData/Roaming/Adobe/Dreamweaver CC 2017/es_ES/Configuration/Temp/Assets/eamBEED.tmp/css/bootstrap-3.3.7.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="Bootstrap/js/bootstrap.min.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
->>>>>>> refs/remotes/origin/master
-
-
-<<<<<<< HEAD
 
 <%@include file="Cabecera.jsp"%>
 	
 	
-=======
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<link href="Bootstrap/css/Estilospropios.css" rel="stylesheet">
-
 <script type="text/javascript">
 function previsualizacion() {
 
@@ -181,7 +155,6 @@ function previsualizacion() {
 
 </head>
 
->>>>>>> refs/remotes/origin/master
 
 <body>
 
