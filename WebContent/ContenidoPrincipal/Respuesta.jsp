@@ -1,3 +1,4 @@
+<%@page import="sun.security.krb5.internal.crypto.crc32"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="Utilidades.Conexion" %>
@@ -19,6 +20,9 @@
 	
 	
 <script type="text/javascript">
+
+
+
 function previsualizacion() {
 
 	if (document.getElementById("titulo").value.length > 0
@@ -153,6 +157,22 @@ function previsualizacion() {
 }
 </script>
 
+<style type="text/css">
+a {
+margin: 2%;
+}
+td{
+	font: italic;
+	color: gray;	
+}
+.resalto
+{
+
+	font: bolder;
+	text-decoration: underline;
+	color: black;
+}
+</style>
 </head>
 
 
@@ -197,7 +217,7 @@ function previsualizacion() {
 			    		 %>
 			    		<title><%=xo[1]%></title>
 			    		
-						<h3 class="panel-title" align="center"><%=xo[1]%></h3>
+						<h1 class="panel-title" style="font-size: 30px" align="center"><%=xo[1]%></h1>
 					  </div>
 					  
 					  <div class="panel-footer" align="left" style="min-height: 200px;">
@@ -210,6 +230,8 @@ function previsualizacion() {
 			    	 </div>
 			    	 <%
 			    	 }
+			    		c.cerrarconexion();
+			    		
 			    	 %>
 			</div>
 
@@ -239,11 +261,17 @@ function previsualizacion() {
     			cr.conectar();
     			
     			 rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"));
-    			
+    			/*
+    			Sacamos los votos de la pregunta, en caso de que los positivos sean mayores que los negativos dibujamos la parte de arriba que es un panel en azul
+    			si los negativos son iguales mayores a los positivos se pone en rojo
+    			*/
     			
     			if (rs.next())
     			{ 
     				do{
+    					
+    					if (Integer.parseInt(rs.getString(3)) > Integer.parseInt(rs.getString(4)))
+    							{
     				%>
     				<div class="=container-fluid">
 				   	  <div class="row">
@@ -263,9 +291,9 @@ function previsualizacion() {
 				         	  			
 				         	  		</tr>
 				         	  		<tr>
-				         	  			<td align="right">Votos positivos <%= rs.getString(3) %><a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
+				         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
 				         	  		 
-				         	  			<td align="right">Votos Negativos <%= rs.getString(4) %><a  href="ServerletRespuesta?resto=1" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
+				         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span><a  href="ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
 				         	  		 </tr>
 				         	  	</table>
 				         	  </div>
@@ -279,8 +307,50 @@ function previsualizacion() {
 				  	  </div>
     				
     				<%
+    							}
+    					else
+    					{%>
+    						<div class="=container-fluid">
+    					   	  <div class="row">
+    					    	  <div class="col-md-8 col-md-offset-2">
+    					         	<div class="panel panel-danger">
+    					         	  <div class="panel-heading">
+    					         	    <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %> </h3>
+    					       	    </div>
+    					         	  <div class="panel-body"> <%= rs.getString(2) %> </div>
+    					         	  <div class="panel-footer">
+    					         	  	
+    					         	  	<table border="0" width="100%">
+    					         	  		<tr>
+    					         	  		
+    					         	  		
+    					         	  			<td colspan="2" align="right">Fecha Respuesta : <%= rs.getString(8) %> </td>
+    					         	  			
+    					         	  		</tr>
+    					         	  		<tr>
+    					         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
+    					         	  		 
+    					         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span><a  href="ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
+    					         	  		 </tr>
+    					         	  	</table>
+    					         	  </div>
+    					       	  </div>
+    					          </div>
+    					  	  </div>
+    					  	  <br>
+    					  	  <hr>
+    					  	  <br>
+    					    </div>
+    					  	  </div>
+    					  	  
+    					  	  <%
+    						
+    					}
+    					
+    					
     				}while(rs.next());
     			}
+    			
     			else
     			{/*
     				Si no hemos obtenido ningun resultado ya que no hay respuestas, mostraremos un mensaje de alerta para informar al usuario de que no hay respuestas para esta prgunta

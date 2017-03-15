@@ -11,6 +11,23 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+
+<style type="text/css">
+a {
+margin: 2%;
+}
+td{
+	font: italic;
+	color: gray;	
+}
+.resalto
+{
+
+	font: bolder;
+	text-decoration: underline;
+	color: black;
+}
+</style>
 </head>
 <body>
 <%@include file="Cabecera.jsp"%>
@@ -49,9 +66,9 @@
 				         	  			
 				         	  		</tr>
 				         	  		<tr>
-				         	  			<td align="right">Votos positivos <%= rs.getString(3) %><a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
+				         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
 				         	  		 
-				         	  			<td align="right">Votos Negativos <%= rs.getString(4) %><a  href="ServerletRespuesta?resto=1" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
+				         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span><a  href="ServerletRespuesta?resto=1" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
 				         	  		 </tr>
 				         	  	</table>
 				         	  </div>
@@ -63,7 +80,7 @@
 				  	  <br>
 				    </div>
 				    <%} 
-    			else
+    			else if (cr.sacarundato("SELECT * FROM dbdamproject.respuestas where idpregunta="+(int)session.getAttribute("idpregunta")).next())
     			{
     				%>
     				<div class="=container-fluid">
@@ -80,6 +97,7 @@
 			  	  </div>
 			  <%
 			}
+    			cr.cerrarconexion();
 				    %>
 </body>
 </html>
