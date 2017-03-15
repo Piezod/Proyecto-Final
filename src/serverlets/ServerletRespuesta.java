@@ -31,7 +31,11 @@ public class ServerletRespuesta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		response.getWriter().append("Served at: de respuesta").append(request.getContextPath());
+=======
+		response.getWriter().append("Pepito grillo");
+>>>>>>> refs/remotes/origin/master
 		
 		if (request.getParameter("sumo")!=null ||request.getParameter("resto")!=null)
 			{

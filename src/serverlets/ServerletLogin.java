@@ -45,7 +45,7 @@ public class ServerletLogin extends HttpServlet {
 		 * Recogemos los valores del formulario por nombre usuario y password, importante recordar que se recogen por el nombre y no por la id.
 		 * El formulario nos envia el action a este serverlet y el serverlet para poder ser llamado desde un jsp le ponemos el alias del webserverlet de arriba
 		 */
-		
+		response.getWriter().append("Login en proceso");
 		String usuarios= request.getParameter("usuario");
 		String pass=request.getParameter("password");
 		Conexion c=new Conexion();

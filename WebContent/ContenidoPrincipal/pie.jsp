@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 
-p {
+piedepagina {
    position:relative;
    bottom:0;
    margin-top:1.5%;
@@ -19,11 +19,7 @@ p {
 </head>
 <body>
 <hr>
-  <div class="row">
-    <div class="text-center col-md-offset-0 col-md-12">
-      <p>Copyright &copy; 2017 &middot; Todos los derechos reservados &middot; <a href="http://localhost:8080/Proyectoprueba/GestionUsuarios/Login/Login.jsp.com/" >Estudiantes Conecta2</a></p>
-    </div>
-  </div>
-  <hr>
+      <p class="piedepagina" align="center">Copyright &copy; 2017 &middot; Todos los derechos reservados &middot; <a href="http://localhost:8080/Proyectoprueba/GestionUsuarios/Login/Login.jsp.com/" >Estudiantes Conecta2</a></p>
+<hr>
 </body>
 </html>
