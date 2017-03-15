@@ -200,6 +200,13 @@
 <body>
 	<%@include file="Cabecera.jsp"%>
 
+<div class="row">
+<div class="col-md-offset-0 col-md-12">
+  	<ol class="breadcrumb">
+  		<li><a href="ServerletContenido">Inicio</a></li>
+  		<li class="active">Alta pregunta</li>
+	</ol>
+</div>
 	<div class="container-fluid"
 		style="margin-top: 5%; margin-right: 10%; margin-left: 10%;">
 		<div class="panel panel-primary">
