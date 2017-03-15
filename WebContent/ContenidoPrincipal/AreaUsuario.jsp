@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<script src="Bootstrap/js/ajax.js"></script>
 
 
 <title>Area de usuario</title>
@@ -16,14 +16,14 @@
 <div class="container-fluid" style="margin-top:5%;">
 		<div class="row container-fluid">
 		<div class="col-sm-12 col-xs-12 col-md-0 hidden-md hidden-lg" align="left">
-		      <button type="button" class="btn btn-default" style="margin-left: 0" onclick="from('<%=session.getAttribute("usuario") %>','contenido','DatosUsuario')">Visualizar</button>
+		      <button type="button" class="btn btn-default"  onclick="from('<%=session.getAttribute("usuario") %>','contenido','DatosUsuario')">Visualizar</button>
 		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','EditarUsuario')">Editar</button>
 		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','MostrarActividad')">Actividad</button>
 		      
 		  </div>
 		  <div class="col-md-3 col-sm-0 col-xs-0 hidden-sm hidden-xs"  align="right">
 		  	  <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-		      <button type="button" class="btn btn-default" style="margin-left: 0" onclick="from('<%=session.getAttribute("usuario") %>','contenido','DatosUsuario')">Visualizar Datos</button>
+		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','DatosUsuario')">Visualizar Datos</button>
 		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','EditarUsuario')">Editar Datos</button>
 		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','MostrarActividad')">Actividad de usuario</button>
 		      
