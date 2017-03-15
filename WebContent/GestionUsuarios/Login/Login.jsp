@@ -12,17 +12,22 @@ function carga() {
 	
 }
 
+
 function valideDatos() {
 	
 	var usuario = document.getElementById("usuario");
 	var password = document.getElementById("pass");
-	
 	if (usuario.value == "" || usuario.value=='')
 		{
 			alert("Ingresa tu usuario");
 			usuario.focus();
 			return false;
-		}else if (password.value == "" || password.value=='')
+		}
+		else if(document.activeElement.id==usuario.id && (password.value==""||password.value=='')){
+			password.focus();
+			return false;
+		} 
+		else if (document.activeElement.id==password.id&&(password.value == "" || password.value==''))
 		{
 			alert("Ingresa tu password");
 			password.focus();
