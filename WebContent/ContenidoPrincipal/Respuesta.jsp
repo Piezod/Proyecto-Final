@@ -160,9 +160,9 @@ function previsualizacion() {
 
 <div class="container-fluid">
 <div class="row">
-  <div class="col-md-offset-0 col-md-12">
+<div class="col-md-offset-0 col-md-12">
   	<ol class="breadcrumb">
-  		<li><a href="#">Inicio</a></li>
+  		<li><a href="ServerletContenido">Inicio</a></li>
   		<li class="active">Detalle pregunta</li>
 	</ol>
 </div>
@@ -171,6 +171,8 @@ function previsualizacion() {
 	    <div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-primary ">
 					  <div class="panel-heading">
+					
+					  
 					   <% 
 			   		 	Conexion c=new Conexion();
 			    		c.conectar();
@@ -219,11 +221,24 @@ function previsualizacion() {
 	
     <br><hr>
     
+      
+					  <br>
+					  
+					  <%@include file="MejorRespuesta.jsp"%>
+					  
+					  <hr>
+    
     <%
-    		Conexion cr=new Conexion();
+    /*
+     Recargaremos de base de datos todas las respuestas que tenga esta pregunta.
+ 	 Para ello recogemos un objeto resulset con los datos y lo iremos recorriendo con un bucle dowhile despues de la comprobación de que exista o no exista
+ 	 Cada posicion del array resulset contendra diferentes datos
+    	1)idrespuesta,2)respuesta,3)votospositivos,4)votosnegativos,5)mejorrespuesta,6)idpregunta,7)idusuario,8)fecha
+ 	 */
+    		 cr=new Conexion();
     			cr.conectar();
     			
-    			ResultSet rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"));
+    			 rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"));
     			
     			
     			if (rs.next())
@@ -267,14 +282,20 @@ function previsualizacion() {
     				}while(rs.next());
     			}
     			else
-    			{
+    			{/*
+    				Si no hemos obtenido ningun resultado ya que no hay respuestas, mostraremos un mensaje de alerta para informar al usuario de que no hay respuestas para esta prgunta
+    				e incentivar a que se conteste.
+    				*/
     			  %>
     				<div class="=container-fluid">
 				   	  <div class="row">
 				    	  <div class="col-md-8 col-md-offset-2">
 				         	<div class="panel panel-warning">
 				         	  <div class="panel-heading">
-				         	    <h3 class="panel-title">No hay respuestas todavia , se el primero en participar</h3>
+				         	  <div class="alert alert-warning alert-dismissable">
+				         	  	   <h3 align="center">No hay respuestas todavia , sé el primero en participar y si la respuesta es buenabuena conseguiras extrapoints</h3>
+				         	  </div>
+				         	 
 				       	    </div>
 				       	  </div>
 				          </div>
@@ -284,12 +305,11 @@ function previsualizacion() {
     			
     %>
     
-    
   	  
   	  <div class="container-fluid">
   	  	<div class="col-md-8 col-md-offset-2 ">
 		  	 <div class="row" style="margin-top: 2%; margin-right: 5%; margin-left: 5%;">
-				<div class="panel panel-success">
+				<div class="panel panel-info">
 					<div class="panel-heading">
 						<div class="container-fluid">
 							<div class="col-sm-2 col-md-offset-0 col-md-12">
