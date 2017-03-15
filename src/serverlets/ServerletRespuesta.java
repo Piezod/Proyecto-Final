@@ -31,11 +31,9 @@ public class ServerletRespuesta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
+
 		response.getWriter().append("Served at: de respuesta").append(request.getContextPath());
-=======
-		response.getWriter().append("Pepito grillo");
->>>>>>> refs/remotes/origin/master
+
 		
 		if (request.getParameter("sumo")!=null ||request.getParameter("resto")!=null)
 			{
@@ -61,7 +59,6 @@ public class ServerletRespuesta extends HttpServlet {
 			}
 			else if (request.getParameter("resto")!=null && Integer.parseInt(request.getParameter("resto"))==1)
 			{
-				System.out.println("Resto un voto a la respuesta "+request.getParameter("idpregunta"));
 				
 				try {
 					c1.SumarVoto(Integer.parseInt(request.getParameter("idrespuesta")),"votosnegativos");
@@ -71,6 +68,12 @@ public class ServerletRespuesta extends HttpServlet {
 				}
 			}
 		
+			try {
+				c1.cerrarconexion();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 				response.sendRedirect("respuesta");
 			}
 		

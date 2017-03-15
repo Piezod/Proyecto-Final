@@ -383,11 +383,10 @@ public class Conexion {
 	
 	public int InsertarRespuestas( String respuesta,int idpregunta,String usuario) throws SQLException {
 		
-		//idrespuesta,respuesta,votospositivos,votosnegativos,mejorrespuesta,idpregunta
+		//Valores en la base de datos idrespuesta,respuesta,votospositivos,votosnegativos,mejorrespuesta,idpregunta
 		String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 		String sql="Insert into dbdamproject.respuestas values (?,?,?,?,?,?,?,?)";
 		PreparedStatement insertar = conexion.prepareStatement(sql);
-		//System.out.println("la ultima id es "+ultimoid("idrespuesta", "dbdamproject.respuestas"));
 		insertar.setInt(1,(ultimoid("idrespuesta", "dbdamproject.respuestas")+1));
 		
 		insertar.setString(2, respuesta);
@@ -402,16 +401,13 @@ public class Conexion {
 		return res;
 	}
 	
-	//update dbdamproject.respuestas set votospositivos=2 where idrespuesta=1;
 	
 public int SumarVoto( int idrespuesta, String tipovoto) throws SQLException {
 	
 	
-		String sql="update dbdamproject.respuestas set votospositivos=? where idrespuesta=?";
+		String sql="update dbdamproject.respuestas set "+tipovoto+"=? where idrespuesta=?";
 		PreparedStatement insertar = conexion.prepareStatement(sql);
-		System.out.println();
 		int numerootos=Integer.parseInt(sacarundatostring("select "+tipovoto+" from dbdamproject.respuestas where idrespuesta="+idrespuesta+""));
-		System.out.println("numero d votos"+numerootos);
 		insertar.setInt(1,numerootos+1);
 		insertar.setInt(2, idrespuesta);
 		int res=insertar.executeUpdate();
