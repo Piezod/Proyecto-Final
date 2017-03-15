@@ -84,6 +84,14 @@
     <servlet-name>DatosUsuario</servlet-name>
     <url-pattern>/DatosUsuario</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>EditarUsuario</servlet-name>
+    <jsp-file>/ContenidoPrincipal/EditarUsuario.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditarUsuario</servlet-name>
+    <url-pattern>/EditarUsuario</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>Busqueda1</servlet-name>
     <jsp-file>/ContenidoPrincipal/ResultadosBusquedaBarra.jsp</jsp-file>
