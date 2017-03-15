@@ -31,7 +31,7 @@ public class ServerletRespuesta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Pepito grillo");
 		
 		System.out.println("prueba del doget, sumo1 o resto en manita");
 		System.out.println("sumo es "+request.getParameter("sumo"));
