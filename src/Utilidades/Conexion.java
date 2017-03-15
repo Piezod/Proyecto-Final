@@ -154,6 +154,7 @@ public class Conexion {
 	public int ultimoid(String primarykey,String tabla) throws SQLException
 	{
 		Statement consulta = conexion.createStatement();
+		System.out.println("select max("+primarykey+") from "+tabla);
 		ResultSet res = consulta.executeQuery("select "+primarykey+" from "+tabla);
 		int dev=0;
 		
@@ -161,7 +162,8 @@ public class Conexion {
 			{
 			dev = res.getInt(primarykey);
 			}
-		return dev+1;
+		System.out.println("metodo ultimoid devuelvo "+(dev+1));
+		return (dev+1);
 	}
 	
 	/*
@@ -381,12 +383,12 @@ public class Conexion {
 	
 	public int InsertarRespuestas( String respuesta,int idpregunta,String usuario) throws SQLException {
 		
-		//idrespuesta,respuesta,votospositivos,votosnegativos,mejorrespuesta,idpregunta
+		//Valores en la base de datos idrespuesta,respuesta,votospositivos,votosnegativos,mejorrespuesta,idpregunta
 		String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 		String sql="Insert into dbdamproject.respuestas values (?,?,?,?,?,?,?,?)";
 		PreparedStatement insertar = conexion.prepareStatement(sql);
-		insertar.setInt(1,ultimoid("idrespuesta", "dbdamproject.respuestas"));
-		System.out.println(ultimoid("idrespuesta", "dbdamproject.respuestas"));
+		insertar.setInt(1,(ultimoid("idrespuesta", "dbdamproject.respuestas")+1));
+		
 		insertar.setString(2, respuesta);
 		insertar.setInt(3, 100);
 		insertar.setInt(4, 2);
@@ -399,16 +401,13 @@ public class Conexion {
 		return res;
 	}
 	
-	//update dbdamproject.respuestas set votospositivos=2 where idrespuesta=1;
 	
-public int SumarVotoPositivo( int idrespuesta) throws SQLException {
+public int SumarVoto( int idrespuesta, String tipovoto) throws SQLException {
 	
 	
-		String sql="update dbdamproject.respuestas set votospositivos=? where idrespuesta=?";
+		String sql="update dbdamproject.respuestas set "+tipovoto+"=? where idrespuesta=?";
 		PreparedStatement insertar = conexion.prepareStatement(sql);
-		System.out.println();
-		int numerootos=Integer.parseInt(sacarundatostring("select votospositivos from dbdamproject.respuestas where idrespuesta="+idrespuesta+""));
-		System.out.println("numero d votos"+numerootos);
+		int numerootos=Integer.parseInt(sacarundatostring("select "+tipovoto+" from dbdamproject.respuestas where idrespuesta="+idrespuesta+""));
 		insertar.setInt(1,numerootos+1);
 		insertar.setInt(2, idrespuesta);
 		int res=insertar.executeUpdate();

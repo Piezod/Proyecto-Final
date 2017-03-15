@@ -31,31 +31,51 @@ public class ServerletRespuesta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Pepito grillo");
+
+		response.getWriter().append("Served at: de respuesta").append(request.getContextPath());
+
 		
-		System.out.println("prueba del doget, sumo1 o resto en manita");
-		System.out.println("sumo es "+request.getParameter("sumo"));
-		System.out.println("resto es "+request.getParameter("resto"));
-		
-		if (Integer.parseInt(request.getParameter("sumo"))==1)
-		{
-			System.out.println("Añado un voto a la respuesta "+request.getParameter("idrespuesta"));
+		if (request.getParameter("sumo")!=null ||request.getParameter("resto")!=null)
+			{
 			Conexion c1=new Conexion();
 			try {
 				c1.conectar();
-				c1.SumarVotoPositivo(Integer.parseInt(request.getParameter("idrespuesta")));
 				
-			} catch (NumberFormatException | SQLException | ClassNotFoundException e) {
+				
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			if (request.getParameter("sumo")!=null && Integer.parseInt(request.getParameter("sumo"))==1)
+			{
+				
+					try {
+						c1.SumarVoto(Integer.parseInt(request.getParameter("idrespuesta")),"votospositivos");
+					} catch (NumberFormatException | SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+			}
+			else if (request.getParameter("resto")!=null && Integer.parseInt(request.getParameter("resto"))==1)
+			{
+				
+				try {
+					c1.SumarVoto(Integer.parseInt(request.getParameter("idrespuesta")),"votosnegativos");
+				} catch (NumberFormatException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		
+			try {
+				c1.cerrarconexion();
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		else if (Integer.parseInt(request.getParameter("resto"))==1)
-		{
-			System.out.println("Resto un voto a la respuesta "+request.getParameter("idpregunta"));
-		}
-		
-		response.sendRedirect("respuesta");
+				response.sendRedirect("respuesta");
+			}
 		
 	}
 

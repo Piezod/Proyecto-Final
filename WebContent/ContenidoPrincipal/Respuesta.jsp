@@ -1,3 +1,4 @@
+<%@page import="sun.security.krb5.internal.crypto.crc32"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="Utilidades.Conexion" %>
@@ -19,6 +20,9 @@
 	
 	
 <script type="text/javascript">
+
+
+
 function previsualizacion() {
 
 	if (document.getElementById("titulo").value.length > 0
@@ -153,6 +157,22 @@ function previsualizacion() {
 }
 </script>
 
+<style type="text/css">
+a {
+margin: 2%;
+}
+td{
+	font: italic;
+	color: gray;	
+}
+.resalto
+{
+
+	font: bolder;
+	text-decoration: underline;
+	color: black;
+}
+</style>
 </head>
 
 
@@ -160,9 +180,9 @@ function previsualizacion() {
 
 <div class="container-fluid">
 <div class="row">
-  <div class="col-md-offset-0 col-md-12">
+<div class="col-md-offset-0 col-md-12">
   	<ol class="breadcrumb">
-  		<li><a href="#">Inicio</a></li>
+  		<li><a href="ServerletContenido">Inicio</a></li>
   		<li class="active">Detalle pregunta</li>
 	</ol>
 </div>
@@ -171,6 +191,8 @@ function previsualizacion() {
 	    <div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-primary ">
 					  <div class="panel-heading">
+					
+					  
 					   <% 
 			   		 	Conexion c=new Conexion();
 			    		c.conectar();
@@ -195,7 +217,7 @@ function previsualizacion() {
 			    		 %>
 			    		<title><%=xo[1]%></title>
 			    		
-						<h3 class="panel-title" align="center"><%=xo[1]%></h3>
+						<h1 class="panel-title" style="font-size: 30px" align="center"><%=xo[1]%></h1>
 					  </div>
 					  
 					  <div class="panel-footer" align="left" style="min-height: 200px;">
@@ -208,6 +230,8 @@ function previsualizacion() {
 			    	 </div>
 			    	 <%
 			    	 }
+			    		c.cerrarconexion();
+			    		
 			    	 %>
 			</div>
 
@@ -219,16 +243,35 @@ function previsualizacion() {
 	
     <br><hr>
     
+      
+					  <br>
+					  
+					  <%@include file="MejorRespuesta.jsp"%>
+					  
+					  <hr>
+    
     <%
-    		Conexion cr=new Conexion();
+    /*
+     Recargaremos de base de datos todas las respuestas que tenga esta pregunta.
+ 	 Para ello recogemos un objeto resulset con los datos y lo iremos recorriendo con un bucle dowhile despues de la comprobación de que exista o no exista
+ 	 Cada posicion del array resulset contendra diferentes datos
+    	1)idrespuesta,2)respuesta,3)votospositivos,4)votosnegativos,5)mejorrespuesta,6)idpregunta,7)idusuario,8)fecha
+ 	 */
+    		 cr=new Conexion();
     			cr.conectar();
     			
-    			ResultSet rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"));
-    			
+    			 rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"));
+    			/*
+    			Sacamos los votos de la pregunta, en caso de que los positivos sean mayores que los negativos dibujamos la parte de arriba que es un panel en azul
+    			si los negativos son iguales mayores a los positivos se pone en rojo
+    			*/
     			
     			if (rs.next())
     			{ 
     				do{
+    					
+    					if (Integer.parseInt(rs.getString(3)) > Integer.parseInt(rs.getString(4)))
+    							{
     				%>
     				<div class="=container-fluid">
 				   	  <div class="row">
@@ -248,9 +291,9 @@ function previsualizacion() {
 				         	  			
 				         	  		</tr>
 				         	  		<tr>
-				         	  			<td align="right">Votos positivos <%= rs.getString(3) %><a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
+				         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
 				         	  		 
-				         	  			<td align="right">Votos Negativos <%= rs.getString(4) %><a  href="ServerletRespuesta?resto=1" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
+				         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span><a  href="ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
 				         	  		 </tr>
 				         	  	</table>
 				         	  </div>
@@ -264,17 +307,65 @@ function previsualizacion() {
 				  	  </div>
     				
     				<%
+    							}
+    					else
+    					{%>
+    						<div class="=container-fluid">
+    					   	  <div class="row">
+    					    	  <div class="col-md-8 col-md-offset-2">
+    					         	<div class="panel panel-danger">
+    					         	  <div class="panel-heading">
+    					         	    <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %> </h3>
+    					       	    </div>
+    					         	  <div class="panel-body"> <%= rs.getString(2) %> </div>
+    					         	  <div class="panel-footer">
+    					         	  	
+    					         	  	<table border="0" width="100%">
+    					         	  		<tr>
+    					         	  		
+    					         	  		
+    					         	  			<td colspan="2" align="right">Fecha Respuesta : <%= rs.getString(8) %> </td>
+    					         	  			
+    					         	  		</tr>
+    					         	  		<tr>
+    					         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
+    					         	  		 
+    					         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span><a  href="ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
+    					         	  		 </tr>
+    					         	  	</table>
+    					         	  </div>
+    					       	  </div>
+    					          </div>
+    					  	  </div>
+    					  	  <br>
+    					  	  <hr>
+    					  	  <br>
+    					    </div>
+    					  	  </div>
+    					  	  
+    					  	  <%
+    						
+    					}
+    					
+    					
     				}while(rs.next());
     			}
+    			
     			else
-    			{
+    			{/*
+    				Si no hemos obtenido ningun resultado ya que no hay respuestas, mostraremos un mensaje de alerta para informar al usuario de que no hay respuestas para esta prgunta
+    				e incentivar a que se conteste.
+    				*/
     			  %>
     				<div class="=container-fluid">
 				   	  <div class="row">
 				    	  <div class="col-md-8 col-md-offset-2">
 				         	<div class="panel panel-warning">
 				         	  <div class="panel-heading">
-				         	    <h3 class="panel-title">No hay respuestas todavia , se el primero en participar</h3>
+				         	  <div class="alert alert-warning alert-dismissable">
+				         	  	   <h3 align="center">No hay respuestas todavia , sé el primero en participar y si la respuesta es buenabuena conseguiras extrapoints</h3>
+				         	  </div>
+				         	 
 				       	    </div>
 				       	  </div>
 				          </div>
@@ -284,12 +375,11 @@ function previsualizacion() {
     			
     %>
     
-    
   	  
   	  <div class="container-fluid">
   	  	<div class="col-md-8 col-md-offset-2 ">
 		  	 <div class="row" style="margin-top: 2%; margin-right: 5%; margin-left: 5%;">
-				<div class="panel panel-success">
+				<div class="panel panel-info">
 					<div class="panel-heading">
 						<div class="container-fluid">
 							<div class="col-sm-2 col-md-offset-0 col-md-12">

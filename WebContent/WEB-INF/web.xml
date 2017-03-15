@@ -100,4 +100,13 @@
     <servlet-name>Busqueda1</servlet-name>
     <url-pattern>/search1</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MejorRespuesta</servlet-name>
+    <jsp-file>/ContenidoPrincipal/MejorRespuesta.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MejorRespuesta</servlet-name>
+    <url-pattern>/mejorrespuesta</url-pattern>
+  </servlet-mapping>
 </web-app>
