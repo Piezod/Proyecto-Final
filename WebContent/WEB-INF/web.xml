@@ -84,7 +84,7 @@
     <servlet-name>DatosUsuario</servlet-name>
     <url-pattern>/DatosUsuario</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>EditarUsuario</servlet-name>
     <jsp-file>/ContenidoPrincipal/EditarUsuario.jsp</jsp-file>
   </servlet>
@@ -100,7 +100,6 @@
     <servlet-name>Busqueda1</servlet-name>
     <url-pattern>/search1</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>MejorRespuesta</servlet-name>
     <jsp-file>/ContenidoPrincipal/MejorRespuesta.jsp</jsp-file>
@@ -108,5 +107,14 @@
   <servlet-mapping>
     <servlet-name>MejorRespuesta</servlet-name>
     <url-pattern>/mejorrespuesta</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>PagiRespu</servlet-name>
+    <jsp-file>/ContenidoPrincipal/ServerletRespuestaPaginacion.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PagiRespu</servlet-name>
+    <url-pattern>/pagirespu</url-pattern>
   </servlet-mapping>
 </web-app>

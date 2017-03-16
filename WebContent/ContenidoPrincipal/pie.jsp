@@ -18,7 +18,7 @@ piedepagina {
 </head>
 <body>
 <hr>
-      <p class="piedepagina" align="center">Copyright &copy; 2017 &middot; Todos los derechos reservados &middot; <a href="http://localhost:8080/Proyectoprueba/GestionUsuarios/Login/Login.jsp.com/" >Estudiantes Conecta2</a></p>
+      <p class="piedepagina" align="center">Copyright &copy; 2017 &middot; Todos los derechos reservados &middot; <a href="Inicio" >Estudiantes Conecta2</a></p>
 <hr>
 </body>
 </html>

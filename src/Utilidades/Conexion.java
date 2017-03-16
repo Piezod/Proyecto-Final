@@ -390,8 +390,8 @@ public class Conexion {
 		insertar.setInt(1,(ultimoid("idrespuesta", "dbdamproject.respuestas")));
 		
 		insertar.setString(2, respuesta);
-		insertar.setInt(3, 100);
-		insertar.setInt(4, 2);
+		insertar.setInt(3, 0);
+		insertar.setInt(4, 0);
 		insertar.setInt(5, 0);
 		insertar.setInt(6, idpregunta);
 		insertar.setString(7, usuario);
