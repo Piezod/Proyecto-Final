@@ -224,7 +224,7 @@ td{
     		 cr=new Conexion();
     			cr.conectar();
     			
-    			 rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"),(int)session.getAttribute("iniciores"),10);
+    			 rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"),(int)session.getAttribute("iniciores"),(int)session.getAttribute("finres"));
     			/*
     			Sacamos los votos de la pregunta, en caso de que los positivos sean mayores que los negativos dibujamos la parte de arriba que es un panel en azul
     			si los negativos son iguales mayores a los positivos se pone en rojo
@@ -305,10 +305,7 @@ td{
     					  	  </div>
     					  	  
     					  	  <%
-    						
     					}
-    					
-    					
     				}while(rs.next());
     			}
     			
@@ -391,31 +388,33 @@ td{
 <div class="row">
 			<div class="col-sm-2">
 			</div>
-				<div class="col-sm-8" align="center" style="background-color: red">
+				<div class="col-sm-8" align="center">
 					<ul class="pagination" >
 						 <li><a href="#">&laquo;</a>
 						 
 						 </li>
 							<% 
-								ResultSet r=c.sacarundato("select idrespuesta from dbdamproject.respuestas");
+								ResultSet r=c.sacarundato("select idrespuesta from dbdamproject.respuestas where idpregunta="+session.getAttribute("idpregunta"));
 							
 								int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;
 									while (r.next())
 									{
 										nuevapaginaion++;
+										System.out.println(nuevapaginaion);
 										if (nuevapaginaion==10)
-										{
+										{ 
+											System.out.println("creonuevalinea");
 											numeropagina++;
 											if ((int)session.getAttribute("pagpulsada")==numeropagina)
 											{
 												%>
-												<li class="active" ><a " href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+												<li class="active" ><a " href="ServerletRespuestaPaginacion?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 											}
 											else
 											{
 												
 											%>
-											<li><a href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											<li><a href="ServerletRespuestaPaginacion?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 											
 											}
 											nuevapaginaion=0;
@@ -424,6 +423,28 @@ td{
 										}
 										
 									}
+									
+									if (nuevapaginaion>0)
+									{ 
+										System.out.println("creonuevalinea");
+										numeropagina++;
+										if ((int)session.getAttribute("pagpulsada")==numeropagina)
+										{
+											%>
+											<li class="active" ><a " href="ServerletRespuestaPaginacion?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+										}
+										else
+										{
+											
+										%>
+										<li><a href="ServerletRespuestaPaginacion?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+										
+										}
+										nuevapaginaion=0;
+										inicio+=10;
+										fin=10;
+									}
+									
 							%>
 						 
 						  

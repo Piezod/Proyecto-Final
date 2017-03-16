@@ -1,9 +1,6 @@
 package serverlets;
 
-
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class DetallePregunta
+ * Servlet implementation class ServerletRespuestaPaginacion
  */
-@WebServlet(description = "Serverlet que sera llamado cuando queramos ir al detalle de una pregunta redirigida desde otro jsp", urlPatterns = { "/DetallePregunta" })
-public class ServerletDetallePregunta extends HttpServlet {
+@WebServlet("/ServerletRespuestaPaginacion")
+public class ServerletRespuestaPaginacion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServerletDetallePregunta() {
+    public ServerletRespuestaPaginacion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +28,16 @@ public class ServerletDetallePregunta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: serverletdetallepregunta ").append(request.getContextPath());
+		response.getWriter().append("Served at: dogetdelserverlet respuesta paginacion ").append(request.getContextPath());
 		
-		/*
-		 * Ponemos el valor del href en la sesion de inicopag y finpag para que nos recargue la query en funcion de lo que hemos pulsado. 
-		 * 
-		 */
+		HttpSession sesion= request.getSession(true);
+		
+		System.out.println("Serverletrespuestapaginacion valores pagpulsada,inicio,fin"+Integer.parseInt(request.getParameter("pagpulsada"))+Integer.parseInt(request.getParameter("inicio"))+Integer.parseInt(request.getParameter("fin")));
+		
+		sesion.setAttribute("pagpulsada", Integer.parseInt(request.getParameter("pagpulsada")));
+		sesion.setAttribute("iniciores", Integer.parseInt(request.getParameter("inicio")));
+		sesion.setAttribute("finres", Integer.parseInt(request.getParameter("fin")));
+		response.sendRedirect("respuesta");
 		
 	}
 
@@ -46,18 +47,6 @@ public class ServerletDetallePregunta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
-		HttpSession sesion= request.getSession(true);
-			/*
-			 * Sacamos el usuario que ha realizado la pregunta 
-			 */
-			request.getAttribute("titulo");
-			int idpregunta= Integer.parseInt(request.getParameter("idpregunta"));
-				sesion.setAttribute("idpregunta", idpregunta);
-				sesion.setAttribute("iniciores",1);
-				sesion.setAttribute("finres",10);
-				response.sendRedirect("respuesta");
-		
 	}
 
 }
