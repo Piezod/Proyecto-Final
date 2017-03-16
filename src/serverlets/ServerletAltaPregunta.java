@@ -33,6 +33,19 @@ public class ServerletAltaPregunta extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//System.out.println("Se ejecuta el doget valor de inicio"+request.getParameter("inicio")+request.getParameter("fin")+request.getParameter("pagpulsada"));
+		
+		/*
+		 * Ponemos el valor del href en la sesion de inicopag y finpag para que nos recargue la query en funcion de lo que hemos pulsado. 
+		 * 
+		 */
+		HttpSession sesion= request.getSession(true);
+		
+		sesion.setAttribute("pagpulsada", Integer.parseInt(request.getParameter("pagpulsada")));
+		sesion.setAttribute("inipag", Integer.parseInt(request.getParameter("inicio")));
+		sesion.setAttribute("finpag", Integer.parseInt(request.getParameter("fin")));
+		response.sendRedirect("Inicio");
+		
 	}
 
 	/**

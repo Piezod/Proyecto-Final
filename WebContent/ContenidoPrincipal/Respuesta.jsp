@@ -195,7 +195,6 @@ td{
 			    	 </div>
 			    	 <%
 			    	 }
-			    		c.cerrarconexion();
 			    		
 			    	 %>
 			</div>
@@ -225,7 +224,7 @@ td{
     		 cr=new Conexion();
     			cr.conectar();
     			
-    			 rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"));
+    			 rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"),(int)session.getAttribute("iniciores"),10);
     			/*
     			Sacamos los votos de la pregunta, en caso de que los positivos sean mayores que los negativos dibujamos la parte de arriba que es un panel en azul
     			si los negativos son iguales mayores a los positivos se pone en rojo
@@ -250,10 +249,7 @@ td{
 				         	  	
 				         	  	<table border="0" width="100%">
 				         	  		<tr>
-				         	  		
-				         	  		
-				         	  			<td colspan="2" align="right">Fecha Respuesta : <%= rs.getString(8) %> </td>
-				         	  			
+				         	  			<td colspan="2" align="right">Fecha Respuesta : <%= rs.getString(8) %> </td>				         	  			
 				         	  		</tr>
 				         	  		<tr>
 				         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
@@ -336,11 +332,9 @@ td{
 				          </div>
 				  	  </div>
 				  <%
-    			}
-    			
+    			}			
     %>
-    
-  	  
+ 	  
   	  <div class="container-fluid">
   	  	<div class="col-md-8 col-md-offset-2 ">
 		  	 <div class="row" style="margin-top: 2%; margin-right: 5%; margin-left: 5%;">
@@ -392,6 +386,52 @@ td{
    		</div>
    	 </div>
     </div>
+    
+    
+<div class="row">
+			<div class="col-sm-2">
+			</div>
+				<div class="col-sm-8" align="center" style="background-color: red">
+					<ul class="pagination" >
+						 <li><a href="#">&laquo;</a>
+						 
+						 </li>
+							<% 
+								ResultSet r=c.sacarundato("select idrespuesta from dbdamproject.respuestas");
+							
+								int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;
+									while (r.next())
+									{
+										nuevapaginaion++;
+										if (nuevapaginaion==10)
+										{
+											numeropagina++;
+											if ((int)session.getAttribute("pagpulsada")==numeropagina)
+											{
+												%>
+												<li class="active" ><a " href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											}
+											else
+											{
+												
+											%>
+											<li><a href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											
+											}
+											nuevapaginaion=0;
+											inicio+=10;
+											fin=10;
+										}
+										
+									}
+							%>
+						 
+						  
+						  <li><a href="#">&raquo;</a></li>
+	 				  </ul>
+	   			 </div>
+</div>
+    
     
 <%@include file="pie.jsp"%>
 </body>

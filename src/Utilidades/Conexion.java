@@ -155,15 +155,15 @@ public class Conexion {
 	{
 		Statement consulta = conexion.createStatement();
 		System.out.println("select max("+primarykey+") from "+tabla);
-		ResultSet res = consulta.executeQuery("select "+primarykey+" from "+tabla);
+		ResultSet res = consulta.executeQuery("select max("+primarykey+") from "+tabla);
 		int dev=0;
 		
-		while(res.next())
+		if(res.next())
 			{
-			dev = res.getInt(primarykey);
+			dev = res.getInt(1);
 			}
-		System.out.println("metodo ultimoid devuelvo "+(dev+1));
-		return (dev+1);
+		dev=dev+1;
+		return (dev);
 	}
 	
 	/*
@@ -290,12 +290,12 @@ public class Conexion {
 	 * Metodo que devuelve  los datos de las  ultimas preguntas introducidas en la bd
 	 */
 	
-	public int[] idultimas10preguntas() throws SQLException {
+	public int[] idultimas10preguntas(int inicio,int fin) throws SQLException {
 
 		int x[] = new int[10];
 
 		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery("select idpreguntas from dbdamproject.preguntas order by idpreguntas desc limit 10");
+		ResultSet res = consulta.executeQuery("select idpreguntas from dbdamproject.preguntas order by idpreguntas desc limit "+inicio+","+fin+"");
 
 		int i = 0;
 		while (res.next()) {
@@ -370,9 +370,9 @@ public class Conexion {
 	 * 
 	 */
 	
-	public ResultSet sacarrespuestasporid(int  idpregunta) throws SQLException {
+	public ResultSet sacarrespuestasporid(int  idpregunta, int inicio, int fin) throws SQLException {
 		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.respuestas where idpregunta="+idpregunta+"");		
+		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.respuestas where idpregunta="+idpregunta+" limit "+inicio+","+fin+"" );		
 		return res;
 	}
 	
@@ -387,7 +387,7 @@ public class Conexion {
 		String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 		String sql="Insert into dbdamproject.respuestas values (?,?,?,?,?,?,?,?)";
 		PreparedStatement insertar = conexion.prepareStatement(sql);
-		insertar.setInt(1,(ultimoid("idrespuesta", "dbdamproject.respuestas")+1));
+		insertar.setInt(1,(ultimoid("idrespuesta", "dbdamproject.respuestas")));
 		
 		insertar.setString(2, respuesta);
 		insertar.setInt(3, 100);
