@@ -122,7 +122,7 @@
 					<div class="col-md-2">
 						<table>
 							<tr>
-								<td><span class="label label-success"> <abbr
+								<td> Usuario: <span class="label label-success"> <abbr
 										class="initialism"
 										title="AQUI DESPLIEGO YO LO QUE QUIERO PORQUE SE PUEDE Y MOLA"><%=titu[3]%></abbr></td>
 								</span>
