@@ -3,6 +3,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="serverlets.*"%>
 <%@ page import="Utilidades.*"%>
+ <%@page import="java.sql.ResultSet"%>
 <!doctype html>
 <html>
 <head>
@@ -94,8 +95,8 @@
 				*/
 				Conexion co = new Conexion();
 				co.conectar();
-				int[] x = co.idultimas10preguntas();
-
+				int[] x = co.idultimas10preguntas((int)session.getAttribute("inipag"),(int)session.getAttribute("finpag"));
+				
 				for (int i = 0; i < x.length; i++) {
 
 					String titu[] = co.sacarpreguntaporid(x[i]);
@@ -146,6 +147,48 @@
 
 	</div>
 
+<div class="row">
+			<div class="col-sm-2">
+			</div>
+				<div class="col-sm-8" align="center">
+					<ul class="pagination" >
+						 <li><a href="#">&laquo;</a></li>
+							<% 
+								ResultSet r=co.sacarundato("select idpreguntas from dbdamproject.preguntas");
+							
+								int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;
+									while (r.next())
+									{
+										nuevapaginaion++;
+										if (nuevapaginaion==10)
+										{
+											numeropagina++;
+											if ((int)session.getAttribute("pagpulsada")==numeropagina)
+											{
+												%>
+												<li class="active" ><a " href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											}
+											else
+											{
+												
+											%>
+											<li><a href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											
+											}
+											nuevapaginaion=0;
+											inicio+=10;
+											fin=10;
+										}
+										
+									}
+								co.cerrarconexion();
+							%>
+						 
+						  
+						  <li><a href="#">&raquo;</a></li>
+	 				  </ul>
+	   			 </div>
+</div>
 
 	<%@include file="pie.jsp"%>
 

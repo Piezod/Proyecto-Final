@@ -34,6 +34,7 @@ public class ServerletLogin extends HttpServlet {
     public ServerletLogin() {
         super();
         // TODO Auto-generated constructor stub
+        
     }
 
 	/**
@@ -91,8 +92,12 @@ public class ServerletLogin extends HttpServlet {
 				
 				//request.setAttribute("usuariologueado", usuarios+" "+pass); // le enviamos a nuestro jsp por atributo los datos recogidos en este servlet				
 				sesion.setAttribute("usuario", usuarios);
-				//System.out.println("ruta del serverlet"+getServletContext().getRealPath("/"));
-				sesion.setAttribute("ruta", getServletContext().getRealPath("/"));
+				/*
+				 * Inicio y fin son dos variables para la paginacion en el jsp principal , para realizar querys iniciales del 0 al 10
+				 */
+				sesion.setAttribute("pagpulsada", 1); // la pagina pulsada por defecto sera la 1 , y se remarcara en gris en la part de abajo para saber que sera esta
+				sesion.setAttribute("inipag", 0);
+				sesion.setAttribute("finpag", 10);
 				//request.setAttribute("usuario", vo); // le paso un objeto con todos sus datos
 				response.sendRedirect("Inicio");			
 				
