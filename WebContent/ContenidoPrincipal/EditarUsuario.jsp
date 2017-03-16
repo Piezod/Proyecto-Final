@@ -9,61 +9,53 @@
 <body>
 <div class="panel panel-default">
 		<div class="panel-heading" align="center">
-			<h3 align="center">Datos de usuario</h3>
+			<h3 align="center">Solicitar Cambio de datos</h3>
 		</div>
 		<div class="panel-body" align="center">
 			<!-- Este es el estilo para la tabla de los móviles pequeños y medianos -->
 			<div class="hidden-md hidden-lg">
 			<table class="table">
-
-				<tr>
-					<td>Usuario:</td>
-					<td><input type="text" class="form-control"
-						value="" readonly></td>
-				</tr>
-				<tr>
+			<tr>
+			<th width="33%" style="text-align:center;"><input type="checkbox" id="cnombrep" name="cnombre" onclick="mostrarocultar('nombre',this)"><br>Nombre</th>
+			<th width="33%" style="text-align:center;"><input type="checkbox" id="capellido1p" name="capellido1" onclick="mostrarocultar('apellido1',this)"><br>Primer Apellido</th>
+			<th width="33%" style="text-align:center;"><input type="checkbox" id="capellido2p" name="capellido2" onclick="mostrarocultar('apellido2',this)"><br>Segundo Apellido</th>
+			</tr>
+				<tr id="trnombrep" style="display:none">
 					<td>Nombre:</td>
-					<td><input type="text" class="form-control" value="" readonly></td>
+					<td colspan="2"><input type="text" id="pnombre" name="pnombre" class="form-control" value="" onkeyup="actualizar(this)"></td>
 				</tr>
-				<tr>
+				<tr id="trapellido1p" style="display:none">
 					<td>Primer Apellido:</td>
-					<td><input type="text" class="form-control" value=" " readonly></td>
+					<td colspan="2"><input type="text" id="papellido1" name="papellido1" class="form-control" value="" onkeyup="actualizar(this)"></td>
 				</tr>
-				<tr>
+				<tr id="trapellido2p" style="display:none">
 					<td>Segundo Apellido:</td>
-					<td><input type="text" class="form-control" value="" readonly></td>
-				</tr>
-				<tr>
-					<td>Email:</td>
-					<td><input type="text" class="form-control" value="" readonly></td>
+					<td colspan="2"><input type="text" id="papellido2" name="papellido2" class="form-control" value="" onkeyup="actualizar(this)"></td>
 				</tr>
 
 			</table>
 			</div>
 			<div class="hidden-sm hidden-xs">
 			<table class="table" style="width: 70%">
-
-				<tr>
-					<td>Usuario:</td>
-					<td><input type="text" class="form-control" value="" readonly></td>
-				</tr>
-				<tr>
+			<tr  align="center">
+			<th width="33%" style="text-align:center;"><input type="checkbox" id="cnombreg" name="cnombre" onclick="mostrarocultar('nombre',this)"> Nombre</th>
+			<th width="33%" style="text-align:center;"><input type="checkbox" id="capellido1g" name="capellido1" onclick="mostrarocultar('apellido1'),this"> Primer Apellido</th>
+			<th width="33%" style="text-align:center;"><input type="checkbox" id="capellido2g" name="capellido2" onclick="mostrarocultar('apellido2'),this"> Segundo Apellido</th>
+			</tr>
+				<tr id="trnombreg" style="display:none">
 					<td>Nombre:</td>
-					<td><input type="text" class="form-control" value="" readonly></td>
+					<td colspan="2"><input type="text" class="form-control" value="" id="gnombre" name="gnombre" onkeyup="actualizar(this)"></td>
 				</tr>
-				<tr>
+				<tr id="trapellido1g" style="display:none">
 					<td>Primer Apellido:</td>
-					<td><input type="text" class="form-control" value="" readonly></td>
+					<td colspan="2"><input type="text" class="form-control" value="" id="gapellido1" name="gapellido1" onkeyup="actualizar(this)"></td>
 				</tr>
-				<tr>
+				<tr id="trapellido2g" style="display:none">
 					<td>Segundo Apellido:</td>
-					<td><input type="text" class="form-control" value="" readonly></td>
+					<td colspan="2"><input type="text" class="form-control" value="" id="gapellido2" name="gapellido2" onkeyup="actualizar(this)"></td>
+					
 				</tr>
-				<tr>
-					<td>Email:</td>
-					<td><input type="text" class="form-control" value="" readonly></td>
-				</tr>
-
+				
 			</table>
 			</div>
 		</div>
