@@ -152,7 +152,7 @@ function previsualizacion() {
 		//Aplico el mensaje final al div que queremos
 		document.getElementById("mensajecopia").innerHTML = mensfinal;
 		document.getElementById("mensajeoculto").value = mensfinal;
-
+		alert(document.getElementById("mensajeoculto").value)
 	}
 }
 </script>
