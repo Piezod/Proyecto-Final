@@ -98,8 +98,16 @@
 				int[] x = co.idultimas10preguntas((int)session.getAttribute("inipag"),(int)session.getAttribute("finpag"));
 				
 				for (int i = 0; i < x.length; i++) {
+					
+					
 
 					String titu[] = co.sacarpreguntaporid(x[i]);
+					/*
+					Como en este jsp ponemos las preguntas recargadas en arrays fijos de una longitud, lo que realizo es comprobaciones de que no este null
+					si esta null no lo escribo, y si esta con valores los muestro y los pinto por pantalla
+					*/
+					if (titu[1]!=null)
+					{
 			%>
 			<!-- Pintamos el cuerpo donde iran los titulos ancho 10, despues la fecha informacion de usuario con ancho 2 y debajo ponemos los tags de la pregunta -->
 			<form action="DetallePregunta" method="POST">
@@ -139,7 +147,7 @@
 				<hr>
 			</form>
 			<%
-				}
+				}}
 			%>
 
 		</div>
@@ -181,6 +189,27 @@
 										}
 										
 									}
+									
+									if (nuevapaginaion>0)
+									{
+										numeropagina++;
+										if ((int)session.getAttribute("pagpulsada")==numeropagina)
+										{
+											%>
+											<li class="active" ><a " href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+										}
+										else
+										{
+											
+										%>
+										<li><a href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+										
+										}
+										nuevapaginaion=0;
+										inicio+=10;
+										fin=10;
+									}
+									
 								co.cerrarconexion();
 							%>
 						 
