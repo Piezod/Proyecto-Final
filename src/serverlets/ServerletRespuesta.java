@@ -91,7 +91,7 @@ public class ServerletRespuesta extends HttpServlet {
 			
 			Conexion ce=new Conexion();
 			ce.conectar();
-			ce.InsertarRespuestas(request.getParameter("respuesta"),Integer.parseInt(request.getParameter("idpregunta")), request.getParameter("idusuario"));
+			ce.InsertarRespuestas(request.getParameter("mensajeoculto"),Integer.parseInt(request.getParameter("idpregunta")), request.getParameter("idusuario"));
 			ce.cerrarconexion();
 			response.sendRedirect("respuesta");
 			

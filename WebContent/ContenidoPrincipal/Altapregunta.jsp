@@ -185,15 +185,7 @@
 
 
 
-<style type="text/css">
-.romper {
-	color: black;
-	background-color: #E6E6E6;
-	overflow-wrap: break-word;
-	min-height: 200px;
-	height: auto;
-}
-</style>
+
 
 <title>Alta pregunta</title>
 </head>

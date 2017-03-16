@@ -8,15 +8,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
 
 
-<%@include file="Cabecera.jsp"%>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	
 <script type="text/javascript">
@@ -25,15 +20,13 @@
 
 function previsualizacion() {
 
-	if (document.getElementById("titulo").value.length > 0
-			|| document.getElementById("comment").value.length > 0) {
-		document.getElementById("titulocopia").innerHTML = document
-				.getElementById("titulo").value;
+	if (document.getElementById("respuesta").value.length > 0) {
+		
 
 		//Defino las variables que vamos a necesitar
 		//El mensaje inicial al cual tenemos que modificar en el cual cambiamos los saltos
 		//de lina por BR para que nos lo reconozca html
-		var mensaje = document.getElementById("comment").value.split("\n")
+		var mensaje = document.getElementById("respuesta").value.split("\n")
 				.join("<br>");
 		//La variable para almacenar el mensaje final
 		var mensfinal = ""
@@ -65,34 +58,7 @@ function previsualizacion() {
 			while (j < lineasconpre.length && encadenado) {
 				//Comprobamos que no sea la ultima para que no nos de problemas al sumarle 1
 				if (j != lineasconpre.length) {
-					/*
-					Pongamos de ejemplo que tenemos esta cadena
-					    x=0
-					    if(x==0){							    
-					    alert(hola)
-					    }
-					Entonces mostraria
-					    hola
-					el objetivo es que se genere
-					<pre>x=0
-					if(x==0){
-					alert(hola)
-					}</pre>
-					Entonces mostraria
-					<pre>hola</pre>
-					el array generado sería
-					[0]=0
-					[1]=1
-					[2]=2
-					[3]=3
-					[4]=5
-					en este if comprobariamos que 
-					1!=1
-					2!=2
-					3!=3
 					
-					4!=5
-					 */
 					if (parseInt(lineasconpre[j]) + 1 != lineasconpre[j + 1]) {
 						encadenado = false
 					}
@@ -150,17 +116,16 @@ function previsualizacion() {
 			mensfinal += lineas[i] + "<br>"
 		}
 		//Aplico el mensaje final al div que queremos
-		document.getElementById("mensajecopia").innerHTML = mensfinal;
+		//document.getElementById("mensajecopia").innerHTML = mensfinal;
 		document.getElementById("mensajeoculto").value = mensfinal;
-
+		document.getElementById("mensajecopia").innerHTML = mensfinal;
+		
 	}
 }
 </script>
 
 <style type="text/css">
-a {
-margin: 2%;
-}
+
 td{
 	font: italic;
 	color: gray;	
@@ -171,9 +136,11 @@ td{
 	font: bolder;
 	text-decoration: underline;
 	color: black;
+	margin-right: 2%;
+	
 }
 </style>
-</head>
+<%@include file="Cabecera.jsp"%>
 
 
 <body>
@@ -200,8 +167,6 @@ td{
 							{
 								%>
 						<h3>Cargar jsp de pagina no encontrada</h3>
-                                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
                                     <title>Pregunta no encontrada</title>
                                 <%
 							}
@@ -324,9 +289,9 @@ td{
     					         	  			
     					         	  		</tr>
     					         	  		<tr>
-    					         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
+    					         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span> <a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit" style="margin:2%"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
     					         	  		 
-    					         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span><a  href="ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
+    					         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span> <a  href="ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-danger" type="submit" style="margin:2%"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
     					         	  		 </tr>
     					         	  	</table>
     					         	  </div>
@@ -392,21 +357,30 @@ td{
 									<label class="control-label col-sm-2" for="pwd">Descripcion</label>
 									<div class="col-sm-8 col-md-8">
 										<textarea style="overflow-y: scroll; height: 50%; resize: none"
-											class="form-control" rows="10" id="comment" name="respuesta"></textarea>
+											class="form-control" rows="10" id="respuesta" name="respuesta" onkeyup="return previsualizacion();"></textarea>
 										<input type="hidden" id="mensajeoculto" name="mensajeoculto">
 									</div>
 								</div>
-		  	  
+		  	  			
 			  
 			    <div class="col-md-2 col-md-offset-7" >
 			    <!-- Enviamos los datos para el insert a traves de inputs hidden, como es el id a la pregunta que pertenece y el usuario que realiza la respuesta -->
 				    		<input type="hidden" id="idpregunta" name="idpregunta" value="<%=session.getAttribute("idpregunta")%>">
 				    		<input type="hidden" id="idusuario" name="idusuario" value="<%=session.getAttribute("usuario")%>">
-						    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 10%">Nueva respuesta</button>
+						    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 10%">Publicar Respuesta</button>
+					    </div>
 					    </form>
+					   
 					  </div>
+					  
 		    </div>
-		  	  
+		  	   <div class="panel-body">
+							<div class="container-fluid">
+								<div class="col-md-12 col-md-offset-0">
+									<p id="mensajecopia" class="romper"></p>
+								</div>
+							</div>
+						</div>
 		    </div>
    		 </div>
    		</div>
