@@ -30,14 +30,35 @@ public class ServerletRespuestaPaginacion extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: dogetdelserverlet respuesta paginacion ").append(request.getContextPath());
 		
+		/*
+		 * Serverlet de metodo get, recogera los parametros de los pie de pagina
+		 * 
+		 */
 		HttpSession sesion= request.getSession(true);
 		
 		System.out.println("Serverletrespuestapaginacion valores pagpulsada,inicio,fin"+Integer.parseInt(request.getParameter("pagpulsada"))+Integer.parseInt(request.getParameter("inicio"))+Integer.parseInt(request.getParameter("fin")));
-		
-		sesion.setAttribute("pagpulsada", Integer.parseInt(request.getParameter("pagpulsada")));
-		sesion.setAttribute("iniciores", Integer.parseInt(request.getParameter("inicio")));
-		sesion.setAttribute("finres", Integer.parseInt(request.getParameter("fin")));
-		response.sendRedirect("respuesta");
+		if (request.getParameter("pagpulsada")!=null)
+		{
+				sesion.setAttribute("pagpulsada", Integer.parseInt(request.getParameter("pagpulsada"))); // Nos dice la pagina que ha sido pulsada para que esa sea pulsada y cambie el formato
+				sesion.setAttribute("iniciores", Integer.parseInt(request.getParameter("inicio"))); // Nos dice el valor inicial de la busqueda en la query
+				sesion.setAttribute("finres", Integer.parseInt(request.getParameter("fin"))); //este dato suele ser 10, es el que nos dice cuantos mostraremos en pantalla
+				
+				
+				/*
+				 * Recogemos en la url una variable nombre pag que contendra un valor que sera la redireccion de la pagina
+				 */
+				
+				switch (request.getParameter("pag")) {
+				case "respuesta":
+					response.sendRedirect("respuesta");
+					break;
+				case "busqueda":
+					response.sendRedirect("search1");
+					break;
+				default:
+					break;
+				}
+		}
 		
 	}
 

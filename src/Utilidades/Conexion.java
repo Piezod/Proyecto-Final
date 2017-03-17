@@ -149,7 +149,7 @@ public class Conexion {
 	}
 	
 	/*
-	 * Metodo que nos devuelve el ultimo id de lo que queramos y la tabla, le pasamos la pk y la tabla
+	 * Metodo que nos devuelve el ultimo id mas 1 para que podamos realizar nuevos inserts.
 	 */
 	
 	public int ultimoid(String primarykey,String tabla) throws SQLException
@@ -359,9 +359,9 @@ public class Conexion {
 	 * 
 	 */
 	
-	public ResultSet resulsetpregunta(String  valorpregunta) throws SQLException {
+	public ResultSet resulsetpregunta(String  valorpregunta, int inicio, int fin) throws SQLException {
 		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'");		
+		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit "+inicio+","+fin+"");		
 		return res;
 	}
 	
@@ -402,6 +402,10 @@ public class Conexion {
 		return res;
 	}
 	
+	/*
+	 * Metodo que nos sirve para sumar un voto, se le pasa como parametro la respuesta y el tipo de voto si sera positivo o negativo.
+	 * 
+	 */
 	
 public int SumarVoto( int idrespuesta, String tipovoto) throws SQLException {
 	
