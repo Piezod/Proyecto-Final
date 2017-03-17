@@ -41,10 +41,13 @@ public class ServerletAltaPregunta extends HttpServlet {
 		 */
 		HttpSession sesion= request.getSession(true);
 		
+		if (request.getParameter("pagpulsada")!=null)
+		{
 		sesion.setAttribute("pagpulsada", Integer.parseInt(request.getParameter("pagpulsada")));
 		sesion.setAttribute("inipag", Integer.parseInt(request.getParameter("inicio")));
 		sesion.setAttribute("finpag", Integer.parseInt(request.getParameter("fin")));
 		response.sendRedirect("Inicio");
+		}
 		
 	}
 

@@ -43,28 +43,23 @@ public class ServeletBusqueda extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
+		/*
+		 * Se recoge el valor de lo introducido en la busqueda en la barra de la cabecera y se realiza la query al metodo buscar header pasandole el valo ruq 
+		 * queremos buscar, 
+		 */
 		String vb=(String)request.getParameter("valorbusqueda");
 		System.out.println("serverletbusquedabarra  valor de busqueda "+vb);
 		
 		HttpSession sesion= request.getSession(true);
-		Conexion c=new Conexion();
 		
-		try {
-			c.conectar();
-			c.busquedaheader(vb);
-			request.setAttribute("valor", (String)request.getParameter("valorbusqueda"));
-			//request.getRequestDispatcher("busqueda1").forward(request, response);
+			/*
+			 * Enviamos al jsp el valor de la busqueda por parametro get y la variable search
+			 * usaremos este valor para realizar una consulta  a la bd y que nos recargue los resultados en un objeto resulset,
+			 * en funcion de las vueltas que de el resulset ira imprimiendo posibles soluciones a la pregunta.
+			 */
 			response.sendRedirect("search1?search="+(String)request.getParameter("valorbusqueda"));
 			
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			System.out.println(" se hace el catch");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		
 	}
