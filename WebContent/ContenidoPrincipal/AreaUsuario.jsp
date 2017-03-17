@@ -8,6 +8,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="Bootstrap/js/ajax.js"></script>
 <script type="text/javascript">
+function Comprobarcampos(){
+
+	if(document.getElementById("gnombre").value==""&&document.getElementById("gapellido2").value==""&&document.getElementById("gapellido1").value==""){
+		alert("No se puede enviar una solicitud vacía")
+		return false;
+	}else{
+		return true;
+	}
+}
 function actualizar(elemento){
 	if(elemento.id[0]=="p"){
 		document.getElementById("g"+elemento.id.substring(1)).value=elemento.value

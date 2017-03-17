@@ -85,6 +85,7 @@ public class ServerletAltaPregunta extends HttpServlet {
 			
 			c.InsertarPregunta(idpregunta,titulo, mensaje, (String)sesion.getAttribute("usuario"));
 			sesion.setAttribute("idpregunta", idpregunta);
+			c.cerrarconexion();
 			response.sendRedirect("respuesta");
 			/*
 			 *  Pongo por defecto los valores al pie de pagina, y luego se iran actualizando en funcion de lo que pulsemos

@@ -52,7 +52,6 @@ public class ServeletImagenes extends HttpServlet {
 			ca.conectar();
 			String imgLen="";
 			rs1 = ca.sacarundato("select imagen from Imagenes where idimagen="+id+"");
-		
 				
 			if(rs1.next()){
 				  imgLen = rs1.getString(1);
