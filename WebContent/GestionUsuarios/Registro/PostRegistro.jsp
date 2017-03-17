@@ -17,7 +17,7 @@
   <br>
 	  <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>
 	  <br>
-	  <strong>Enhorabuena se ha registrado correctamente</strong><br></strong>Hemos enviado los datos de acceso al correo: <strong>Introducir aqui el correo </strong><br>
+	  <strong>Enhorabuena se ha registrado correctamente</strong><br></strong>Hemos enviado los datos de acceso al correo: <strong><%= session.getAttribute("email") %> </strong><br>
 	  <hr>
 	  <a href="registro">Pulsa aqui para registrar a otro usuario</a><br><div> </div></div>
 	  <%}else{ %>

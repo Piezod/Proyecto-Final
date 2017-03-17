@@ -58,6 +58,7 @@ public class ServerletRecuperarPass extends HttpServlet {
 				}else{
 					sesion.setAttribute("error", "incorrecto");
 				}
+				c.cerrarconexion();
 				response.sendRedirect("recuperarpass");
 
 			} catch (ClassNotFoundException | SQLException e) {
@@ -71,11 +72,13 @@ public class ServerletRecuperarPass extends HttpServlet {
 				c.conectar();
 				if(c.comprobar("select * from dbdamproject.usuarios where validacion like '"+request.getParameter("cod").replaceAll("\'\"\\@\\$\\%", "")+"'")){
 					c.actualizarpass(request.getParameter("pass"),request.getParameter("cod"));
+					c.cerrarconexion();
 					response.sendRedirect("login");
 				}
 				else{
 					HttpSession sesion=request.getSession(true);
 					sesion.setAttribute("codigoinvalido", "si");
+					c.cerrarconexion();
 					response.sendRedirect("recuperarpass?cod="+request.getParameter("cod"));
 				}
 			} catch (SQLException e) {

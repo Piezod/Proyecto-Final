@@ -1,6 +1,5 @@
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="Utilidades.Conexion"%>
 <%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -44,13 +43,7 @@
     	
         
         <li><a href="#">Usuarios</a></li>
-		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informacion <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span><span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#" align="center">Accion1</a></li>
-             <li class="divider"></li>
-            <li><a href="#" align="center">Accion2</a></li>
-          </ul>
-        </li>
+		
       </ul>
       <form class="navbar-form navbar-left" role="search" action="ServeletBusqueda" method="POST" >
         <div class="form-group">
@@ -60,11 +53,14 @@
       </form>
       
        <ul class="nav navbar-nav navbar-right">
-       
+        <li><a href="#">Novedades</a></li>
         <li class="dropdown" style="margin-right:10px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("usuario") %><span class="caret"></span></a>
           <ul class="dropdown-menu">
 
-            <li><a href="AreaUsuario">Datos de usuario</a></li>
+            <li><a  class="list-group-item active" href="AreaUsuario">Datos de usuario</a></li>
+            <%if(session.getAttribute("admin").equals("1")){ %>
+            <li class="list-group-item-success"><a href="ZonaAdmin">Zona Administrador</a></li>
+            <%} %>
             <li role="separator" class="divider"></li>
             <li>
             

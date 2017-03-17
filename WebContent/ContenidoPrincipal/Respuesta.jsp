@@ -454,4 +454,6 @@ td{
     
 <%@include file="pie.jsp"%>
 </body>
+<%c.cerrarconexion();
+cr.cerrarconexion();%>
 </html>

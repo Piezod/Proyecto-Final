@@ -108,4 +108,5 @@
 
 	</div>
 </body>
+<%c.cerrarconexion(); %>
 </html>

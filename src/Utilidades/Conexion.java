@@ -127,7 +127,7 @@ public class Conexion {
 
 	public int InsertarRegistro(String usuario,String pass,String validacion,String nombre, String apellido1, String apellido2, String email, String curso,
 			String ciclo) throws SQLException {
-		String sql="Insert into dbdamproject.usuarios values (?,?,?,?,?,?,?,?,?,?)";
+		String sql="Insert into dbdamproject.usuarios values (?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement insertar = conexion.prepareStatement(sql);
 		insertar.setString(1, usuario);
 		insertar.setString(2, pass);
@@ -139,6 +139,7 @@ public class Conexion {
 		insertar.setString(8, curso);
 		insertar.setString(9,ciclo);
 		insertar.setInt(10, 0);
+		insertar.setInt(11, 0);
 		
 		
 		
@@ -419,5 +420,15 @@ public int SumarVoto( int idrespuesta, String tipovoto) throws SQLException {
 		return res;
 	}
 	
-	
+	public void insertarsolicitud(String usuario,String nombre,String apellido1,String apellido2) throws SQLException{
+		String sql="insert into dbdamproject.solicitudes values(?,?,?,?,?,?)";
+		PreparedStatement insertar=conexion.prepareStatement(sql);
+		insertar.setInt(1, ultimoid("idsolicitud", "solicitudes"));
+		insertar.setString(2, usuario);
+		insertar.setString(3, nombre);
+		insertar.setString(4, apellido1);
+		insertar.setString(5, apellido2);
+		insertar.setInt(6, 1);
+		insertar.executeUpdate();
+	}
 }

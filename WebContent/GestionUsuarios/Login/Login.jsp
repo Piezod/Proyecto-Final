@@ -130,7 +130,7 @@ if(session.getAttribute("usuario")!=null)
 				</div>
 				<div class="hr"></div>
 				<div class="foot-lnk">
-					<a href="#forgot">Recuperar Contraseña</a>
+					<a href="RecuperarPass">Recuperar Contraseña</a>
 				</div>
 			</div>
 		</div>
