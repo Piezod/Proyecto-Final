@@ -7,7 +7,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="Bootstrap/js/ajax.js"></script>
-
+<script type="text/javascript">
+function actualizar(elemento){
+	if(elemento.id[0]=="p"){
+		document.getElementById("g"+elemento.id.substring(1)).value=elemento.value
+	}else{
+		document.getElementById("p"+elemento.id.substring(1)).value=elemento.value	
+	}
+}
+function mostrarocultar(campo){	
+	var actual=document.getElementById("tr"+campo+"p").style.display;
+	if(actual=="none"){
+		var cambiar=""
+		var checkbox=true
+	}else{
+		var cambiar="none"
+		var checkbox=false
+	}
+	document.getElementById("tr"+campo+"p").style.display=cambiar
+	document.getElementById("tr"+campo+"g").style.display=cambiar
+	
+	document.getElementById("c"+campo+"p").checked=checkbox
+	document.getElementById("c"+campo+"g").checked=checkbox
+	
+	document.getElementById("g"+campo).value=""
+	document.getElementById("p"+campo).value=""
+		
+}
+</script>
 
 <title>Area de usuario</title>
 	<%@include file="Cabecera.jsp"%>
