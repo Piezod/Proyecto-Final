@@ -186,6 +186,13 @@
 								
 							}
 							
+<<<<<<< HEAD
+=======
+							/*
+							 reviso que el numero de paginas sea mayor de 0, es decir que para 14, me quedarian 4, al ser mayor de 0 creo la pagina extra
+							 siguiendo lo mismo de antes.
+							*/
+>>>>>>> refs/remotes/origin/master
 							if (nuevapaginaion>0)
 							{ 
 								numeropagina++;

@@ -86,6 +86,12 @@ public class ServerletAltaPregunta extends HttpServlet {
 			c.InsertarPregunta(idpregunta,titulo, mensaje, (String)sesion.getAttribute("usuario"));
 			sesion.setAttribute("idpregunta", idpregunta);
 			response.sendRedirect("respuesta");
+			/*
+			 *  Pongo por defecto los valores al pie de pagina, y luego se iran actualizando en funcion de lo que pulsemos
+			 */
+			sesion.setAttribute("pagpulsada",1); // la pagina que saldra indicada por defecto marcada
+			sesion.setAttribute("inipag", 0); // el numero desde el que se buscara es decir desde el 0 hasta el ..
+			sesion.setAttribute("finpag", 10); // el numero de resultados que mostrara por pagina
 			//System.out.println("Envio desde altapregunta a inicio con el contenido "+sesion.getAttribute("contenido"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
