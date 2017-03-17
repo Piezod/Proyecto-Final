@@ -203,11 +203,7 @@ td{
 	</div>
 	</div>
 </div>
-
-	
     <br><hr>
-    
-      
 					  <br>
 					  
 					  <%@include file="MejorRespuesta.jsp"%>
