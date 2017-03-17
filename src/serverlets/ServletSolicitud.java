@@ -1,11 +1,10 @@
 package serverlets;
 
-
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.mail.Session;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,16 +14,16 @@ import javax.servlet.http.HttpSession;
 import Utilidades.Conexion;
 
 /**
- * Servlet implementation class BusquedaBarra
+ * Servlet implementation class ServletSolicitud
  */
-@WebServlet("/ServeletBusqueda")
-public class ServeletBusqueda extends HttpServlet {
+@WebServlet("/ServletSolicitud")
+public class ServletSolicitud extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServeletBusqueda() {
+    public ServletSolicitud() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,40 +33,30 @@ public class ServeletBusqueda extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
-		String vb=(String)request.getParameter("valorbusqueda");
-		System.out.println("serverletbusquedabarra  valor de busqueda "+vb);
-		
-		HttpSession sesion= request.getSession(true);
+		response.getWriter().append("Estamos procesando tu solicitud por favor espere...");
 		Conexion c=new Conexion();
-		
+		HttpSession sesion= request.getSession(true);
+
 		try {
 			c.conectar();
-			c.busquedaheader(vb);
-			request.setAttribute("valor", (String)request.getParameter("valorbusqueda"));
-			//request.getRequestDispatcher("busqueda1").forward(request, response);
+			String usuario=(String) sesion.getAttribute("usuario");
+			if(!c.comprobar("select * from dbdamproject.solicitudes where usuario like '"+usuario+"' and pendiente like '1'"))
+			c.insertarsolicitud(usuario,request.getParameter("gnombre"),request.getParameter("gapellido1"),request.getParameter("gapellido2"));
+			
 			c.cerrarconexion();
-			response.sendRedirect("search1?search="+(String)request.getParameter("valorbusqueda"));
-			
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			System.out.println(" se hace el catch");
-		} catch (ClassNotFoundException e) {
+
+		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+		response.sendRedirect("AreaUsuario");
 	}
 
 }

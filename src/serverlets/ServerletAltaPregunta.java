@@ -82,6 +82,7 @@ public class ServerletAltaPregunta extends HttpServlet {
 			
 			c.InsertarPregunta(idpregunta,titulo, mensaje, (String)sesion.getAttribute("usuario"));
 			sesion.setAttribute("idpregunta", idpregunta);
+			c.cerrarconexion();
 			response.sendRedirect("respuesta");
 			//System.out.println("Envio desde altapregunta a inicio con el contenido "+sesion.getAttribute("contenido"));
 		} catch (SQLException e) {

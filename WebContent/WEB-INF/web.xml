@@ -108,7 +108,6 @@
     <servlet-name>MejorRespuesta</servlet-name>
     <url-pattern>/mejorrespuesta</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>PagiRespu</servlet-name>
     <jsp-file>/ContenidoPrincipal/ServerletRespuestaPaginacion.jsp</jsp-file>

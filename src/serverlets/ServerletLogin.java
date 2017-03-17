@@ -92,6 +92,7 @@ public class ServerletLogin extends HttpServlet {
 				
 				//request.setAttribute("usuariologueado", usuarios+" "+pass); // le enviamos a nuestro jsp por atributo los datos recogidos en este servlet				
 				sesion.setAttribute("usuario", usuarios);
+				sesion.setAttribute("admin", c.recibirdato("select admin from dbdamproject.usuarios where usuario like '"+usuarios+"'"));
 				/*
 				 * Inicio y fin son dos variables para la paginacion en el jsp principal , para realizar querys iniciales del 0 al 10
 				 */
@@ -99,6 +100,7 @@ public class ServerletLogin extends HttpServlet {
 				sesion.setAttribute("inipag", 0);
 				sesion.setAttribute("finpag", 10);
 				//request.setAttribute("usuario", vo); // le paso un objeto con todos sus datos
+				c.cerrarconexion();
 				response.sendRedirect("Inicio");			
 				
 			}else {
@@ -106,7 +108,7 @@ public class ServerletLogin extends HttpServlet {
 				sesion.setAttribute("fallo", "loginerroneo");
 				
 				//request.setAttribute("usuariologueado","mal");
-				
+				c.cerrarconexion();
 				response.sendRedirect("login"); //si se confunde le redireccionamos a otro sitio  si ponemos / nos envia al raiz, pero si enviar datos
 				//request.getRequestDispatcher("welcome.jsp").forward(request, response); //aqui llamamos a un jsp desde el servlet, pero mostrando otros datos erroneos
 				

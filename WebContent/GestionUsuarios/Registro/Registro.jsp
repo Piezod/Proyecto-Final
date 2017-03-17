@@ -271,7 +271,7 @@
 							
 
 					<div class="form-group ">
-						<input type="submit" value="Registrate" id="button"
+						<input type="submit" value="Registrar" id="button"
 							class="btn btn-primary btn-lg btn-block login-button">
 					</div>
 
