@@ -53,20 +53,12 @@ public class ServeletBusqueda extends HttpServlet {
 		
 		HttpSession sesion= request.getSession(true);
 		
-<<<<<<< HEAD
-		try {
-			c.conectar();
-			c.busquedaheader(vb);
-			request.setAttribute("valor", (String)request.getParameter("valorbusqueda"));
-			//request.getRequestDispatcher("busqueda1").forward(request, response);
-			c.cerrarconexion();
-=======
+
 			/*
 			 * Enviamos al jsp el valor de la busqueda por parametro get y la variable search
 			 * usaremos este valor para realizar una consulta  a la bd y que nos recargue los resultados en un objeto resulset,
 			 * en funcion de las vueltas que de el resulset ira imprimiendo posibles soluciones a la pregunta.
 			 */
->>>>>>> refs/remotes/origin/master
 			response.sendRedirect("search1?search="+(String)request.getParameter("valorbusqueda"));
 			
 		
