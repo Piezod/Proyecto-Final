@@ -193,6 +193,10 @@ td{
 			    			</div>
 			    		
 			    	 </div>
+			    	 <div class="panel-body" align="right">
+			    	 	<span class="label label-success" style="font-size:15px;" ><%=xo[3] %></span>
+			    	 	<span class="label label-default" style="font-size:15px;"><%=xo[4] %></span>
+			    	 </div>
 			    	 <%
 			    	 }
 			    		
@@ -230,7 +234,7 @@ td{
     			{ 
     				do{
     					
-    					if (Integer.parseInt(rs.getString(3)) > Integer.parseInt(rs.getString(4)))
+    					if (Integer.parseInt(rs.getString(3))/2 > Integer.parseInt(rs.getString(4)))
     							{
     				%>
     				<div class="=container-fluid">
@@ -399,18 +403,17 @@ td{
 										System.out.println(nuevapaginaion);
 										if (nuevapaginaion==10)
 										{ 
-											System.out.println("creonuevalinea");
 											numeropagina++;
 											if ((int)session.getAttribute("pagpulsada")==numeropagina)
 											{
 												%>
-												<li class="active" ><a " href="ServerletRespuestaPaginacion?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+												<li class="active" ><a " href="ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 											}
 											else
 											{
 												
 											%>
-											<li><a href="ServerletRespuestaPaginacion?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											<li><a href="ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 											
 											}
 											nuevapaginaion=0;
@@ -422,18 +425,17 @@ td{
 									
 									if (nuevapaginaion>0)
 									{ 
-										System.out.println("creonuevalinea");
 										numeropagina++;
 										if ((int)session.getAttribute("pagpulsada")==numeropagina)
 										{
 											%>
-											<li class="active" ><a " href="ServerletRespuestaPaginacion?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											<li class="active" ><a " href="ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 										}
 										else
 										{
 											
 										%>
-										<li><a href="ServerletRespuestaPaginacion?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+										<li><a href="ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 										
 										}
 										nuevapaginaion=0;

@@ -113,6 +113,7 @@
 			<form action="DetallePregunta" method="POST">
 				<div class="row">
 					<div class="col-md-10">
+					 
 						<input type="hidden" name="idpregunta" value="<%=x[i]%>"></input>
 						<button type="submit" name="submit_param" value="submit_value"
 							class="list-group-item list-group-item-info">
