@@ -15,9 +15,11 @@
     			cr.conectar();
     			
     			//ResultSet rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"));
+    			/*
+    			 Buscamos la respuesta que este verificada para esta pregunta
+    			*/
     			String query="SELECT * FROM dbdamproject.respuestas where idpregunta="+(int)session.getAttribute("idpregunta")+" and mejorrespuesta=1";
     			ResultSet rs=cr.sacarundato(query);
-    			
     			if (rs.next())
     			{ 
     				%>

@@ -18,9 +18,43 @@
 
 <title>Estudiantes Conectados</title>
 	<%@include file="Cabecera.jsp"%>
+<head>
+<script type="text/javascript">
+window.onload = function(){
+    $('#myModal').modal('show');
+};
+</script>
 
+</head>
 
 <body>
+	
+	<!-- Modal para notificaciones  -->
+<div class="container">
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" > <!--  el bakcgorun modifica el marco -->
+    
+      <!-- Modal content-->
+      <div class="modal-content"> <!--  este es el backgroun blanco -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Bienvenido</h4>
+        </div>
+        <div class="modal-body">
+          <p>Te damos la bienvenida al proyecto de fin de ciclo de Desarrollo de Aplicaciones Multiplataformas. Este proyecto esta elaborado integramente por Juan Carlos Gonzalez y Mario Gomez. Queremos que sea
+          una aplicacion para compartir conocimientos con una base de datos que nos respondera a preguntas o realizar nuevas preguntas para que otros usuarios o profesores nos las resuelvan</p>
+        </div>
+        <div class="modal-footer" >
+          <button type="button" class="btn btn-info" data-dismiss="modal" >Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
 	
 	<div class="container-fluid">
 		<div class="container-fluid">

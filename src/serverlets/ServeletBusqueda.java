@@ -52,8 +52,6 @@ public class ServeletBusqueda extends HttpServlet {
 		System.out.println("serverletbusquedabarra  valor de busqueda "+vb);
 		
 		HttpSession sesion= request.getSession(true);
-		
-
 			/*
 			 * Enviamos al jsp el valor de la busqueda por parametro get y la variable search
 			 * usaremos este valor para realizar una consulta  a la bd y que nos recargue los resultados en un objeto resulset,
