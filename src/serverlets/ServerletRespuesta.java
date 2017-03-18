@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Utilidades.Conexion;
 
@@ -87,12 +88,15 @@ public class ServerletRespuesta extends HttpServlet {
 		doGet(request, response);
 		//System.out.println(request.getParameter("respuesta"));
 		try {
-			
+			HttpSession sesion= request.getSession(true);
 			
 			Conexion ce=new Conexion();
 			ce.conectar();
 			ce.InsertarRespuestas(request.getParameter("mensajeoculto"),Integer.parseInt(request.getParameter("idpregunta")), request.getParameter("idusuario"));
 			ce.cerrarconexion();
+			sesion.setAttribute("pagpulsada",1); // la pagina que saldra indicada por defecto marcada
+			sesion.setAttribute("iniciores", 0); // el numero desde el que se buscara es decir desde el 0 hasta el ..
+			sesion.setAttribute("finres", 10); // el numero de resultados que mostrara por pagina
 			response.sendRedirect("respuesta");
 			
 		} catch (ClassNotFoundException | SQLException e) {

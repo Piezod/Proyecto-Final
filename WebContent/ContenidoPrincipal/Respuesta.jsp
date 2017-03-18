@@ -3,6 +3,7 @@
     pageEncoding="ISO-8859-1"%>
     <%@ page import="Utilidades.Conexion" %>
     <%@page import="java.sql.ResultSet"%>
+    
 <%@page import="java.sql.Statement"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -178,6 +179,10 @@ td{
 			    		 Lo almacenamos en un array de string en los cuales tenemos la informacion referente a esa pregunta
 			    		*/
 			    		String []xo=c.sacarpreguntaporid((int)session.getAttribute("idpregunta"));
+			    		/*for (int i=0;i<xo.length;i++)
+			    		{
+			    			out.println(xo[i]);
+			    		}*/
 			    		
 			    		 %>
 			    		<title><%=xo[1]%></title>
@@ -194,8 +199,8 @@ td{
 			    		
 			    	 </div>
 			    	 <div class="panel-body" align="right">
-			    	 	<span class="label label-success" style="font-size:15px;" ><%=xo[3] %></span>
-			    	 	<span class="label label-default" style="font-size:15px;"><%=xo[4] %></span>
+			    	 	<span class="label label-success"  ><%=xo[3] %></span>
+			    	 	<span class="label label-default" ><%=xo[4] %></span>
 			    	 </div>
 			    	 <%
 			    	 }
@@ -210,7 +215,7 @@ td{
     <br><hr>
 					  <br>
 					  
-					  <%@include file="MejorRespuesta.jsp"%>
+					  <%@include file="MejorRespuesta.jsp"%>  
 					  
 					  <hr>
     
@@ -224,7 +229,9 @@ td{
     		 cr=new Conexion();
     			cr.conectar();
     			
-    			 rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"),(int)session.getAttribute("iniciores"),(int)session.getAttribute("finres"));
+    			
+    			int iniciores=(int)session.getAttribute("iniciores");
+    			  rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"),(int)session.getAttribute("iniciores"),(int)session.getAttribute("finres"));
     			/*
     			Sacamos los votos de la pregunta, en caso de que los positivos sean mayores que los negativos dibujamos la parte de arriba que es un panel en azul
     			si los negativos son iguales mayores a los positivos se pone en rojo
@@ -234,7 +241,7 @@ td{
     			{ 
     				do{
     					
-    					if (Integer.parseInt(rs.getString(3))/2 > Integer.parseInt(rs.getString(4)))
+    					if (Integer.parseInt(rs.getString(3))/2 > Integer.parseInt(rs.getString(4)) || Integer.parseInt(rs.getString(3))==0 || Integer.parseInt(rs.getString(3))==1)
     							{
     				%>
     				<div class="=container-fluid">
@@ -394,13 +401,12 @@ td{
 						 
 						 </li>
 							<% 
-								ResultSet r=c.sacarundato("select idrespuesta from dbdamproject.respuestas where idpregunta="+session.getAttribute("idpregunta"));
+								ResultSet r=c.sacarundato("select idrespuesta from dbdamproject.respuestas where idpregunta="+(int)session.getAttribute("idpregunta"));
 							
 								int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;
 									while (r.next())
 									{
 										nuevapaginaion++;
-										System.out.println(nuevapaginaion);
 										if (nuevapaginaion==10)
 										{ 
 											numeropagina++;

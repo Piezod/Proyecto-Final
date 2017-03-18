@@ -11,7 +11,9 @@
 function Comprobarcampos(){
 
 	if(document.getElementById("gnombre").value==""&&document.getElementById("gapellido2").value==""&&document.getElementById("gapellido1").value==""){
-		alert("No se puede enviar una solicitud vacía")
+		//alert("No se puede enviar una solicitud vacía")
+		$('#myModal').modal('show');
+		
 		return false;
 	}else{
 		return true;
@@ -49,6 +51,35 @@ function mostrarocultar(campo){
 	<%@include file="Cabecera.jsp"%>
 
 <body>
+
+<div class="container">
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" > <!--  el bakcgorun modifica el marco -->
+    
+      <!-- Modal content-->
+      <div class="modal-content"> <!--  este es el backgroun blanco -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Se ha producido un error</h4>
+        </div>
+        <div class="modal-body">
+          <p>No se puede enviar una solicitud con los campos vacios, por favor revisa los campos y vuelve a intentarlo</p>
+        </div>
+        <div class="modal-footer" >
+          <button type="button" class="btn btn-info" data-dismiss="modal" >Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+
+
+
 <div class="container-fluid" style="margin-top:5%;">
 		<div class="row container-fluid">
 		<div class="col-sm-12 col-xs-12 col-md-0 hidden-md hidden-lg" align="left">

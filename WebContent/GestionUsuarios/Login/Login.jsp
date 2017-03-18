@@ -5,6 +5,9 @@
 
 <script type="text/javascript">
 
+window.onload = function(){
+    $('#myModal').modal('show');
+};
 
 function carga() {
 	
@@ -60,6 +63,32 @@ if(session.getAttribute("usuario")!=null)
 	response.sendRedirect("Inicio");
 }
 %>
+
+	<!-- Modal para notificaciones  -->
+<div class="container">
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" > <!--  el bakcgorun modifica el marco -->
+    
+      <!-- Modal content-->
+      <div class="modal-content"> <!--  este es el backgroun blanco -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Bienvenido</h4>
+        </div>
+        <div class="modal-body">
+         <p> Campos vacios </p> </div>
+        <div class="modal-footer" >
+          <button type="button" class="btn btn-info" data-dismiss="modal" >Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
 <div class="container-fluid">
 <div class="row">
   <div class="col-md-1 col-sm-1 col-xs-0"></div>
@@ -130,7 +159,7 @@ if(session.getAttribute("usuario")!=null)
 				</div>
 				<div class="hr"></div>
 				<div class="foot-lnk">
-					<a href="RecuperarPass">Recuperar Contraseña</a>
+					<a href="recuperarpass">Recuperar Contraseña</a>
 				</div>
 			</div>
 		</div>
