@@ -54,7 +54,7 @@ public class ServerletDetallePregunta extends HttpServlet {
 			request.getAttribute("titulo");
 			int idpregunta= Integer.parseInt(request.getParameter("idpregunta"));
 				sesion.setAttribute("idpregunta", idpregunta);
-				sesion.setAttribute("iniciores",1);
+				sesion.setAttribute("iniciores",0);
 				sesion.setAttribute("finres",10);
 				response.sendRedirect("respuesta");
 		

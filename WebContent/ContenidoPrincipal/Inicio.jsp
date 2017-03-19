@@ -20,7 +20,7 @@
 	<%@include file="Cabecera.jsp"%>
 <head>
 <script type="text/javascript">
-window.onload = function(){
+ function bienvenida(){
     $('#myModal').modal('show');
 };
 </script>
@@ -28,7 +28,8 @@ window.onload = function(){
 </head>
 
 <body>
-	
+	 
+	 
 	<!-- Modal para notificaciones  -->
 <div class="container">
  
@@ -55,6 +56,23 @@ window.onload = function(){
   </div>
   
 </div>
+
+<%
+/*
+ ejecutamos la funcion de javascript de bienvenida cuando sea la primera vez que recargamos el login
+ acto seguido ponemos el booleano a false para que no se vuelva a repetir.
+ El booleano se pone a true en el serverlet de login al redirigir a esta pagina, lo hacmeos de esta manera
+ para que no se este todo el rato mostrando y sea incomodo.
+*/
+	if ((boolean)session.getAttribute("bienvenida"))
+	{
+		%><script type="text/javascript">
+		bienvenida();
+		</script>
+		<%
+		session.setAttribute("bienvenida", false);
+	}
+%>
 	
 	<div class="container-fluid">
 		<div class="container-fluid">
