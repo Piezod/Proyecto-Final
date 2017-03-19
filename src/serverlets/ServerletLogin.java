@@ -99,6 +99,7 @@ public class ServerletLogin extends HttpServlet {
 				sesion.setAttribute("pagpulsada", 1); // la pagina pulsada por defecto sera la 1 , y se remarcara en gris en la part de abajo para saber que sera esta
 				sesion.setAttribute("inipag", 0);
 				sesion.setAttribute("finpag", 10);
+				sesion.setAttribute("bienvenida", true);
 				//request.setAttribute("usuario", vo); // le paso un objeto con todos sus datos
 				c.cerrarconexion();
 				response.sendRedirect("Inicio");			

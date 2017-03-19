@@ -48,7 +48,7 @@ function mostrarocultar(campo){
 </script>
 
 <title>Area de usuario</title>
-	<%@include file="Cabecera.jsp"%>
+	<%@include file="../ContenidoPrincipal/Cabecera.jsp"%>
 
 <body>
 
@@ -105,7 +105,7 @@ function mostrarocultar(campo){
 
 		
 	</div>
-		<%@include file="pie.jsp"%>
+		<%@include file="../ContenidoPrincipal/pie.jsp"%>
 	
 </body>
 </html>

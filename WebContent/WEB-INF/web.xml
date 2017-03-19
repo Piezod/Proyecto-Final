@@ -70,7 +70,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AreaUsuario</servlet-name>
-    <jsp-file>/ContenidoPrincipal/AreaUsuario.jsp</jsp-file>
+    <jsp-file>/GestionUsuarios/AreaUsuario.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>AreaUsuario</servlet-name>
@@ -78,7 +78,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DatosUsuario</servlet-name>
-    <jsp-file>/ContenidoPrincipal/DatosUsuario.jsp</jsp-file>
+    <jsp-file>/GestionUsuarios/DatosUsuario.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>DatosUsuario</servlet-name>
@@ -86,7 +86,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>EditarUsuario</servlet-name>
-    <jsp-file>/ContenidoPrincipal/EditarUsuario.jsp</jsp-file>
+    <jsp-file>/GestionUsuarios/EditarUsuario.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>EditarUsuario</servlet-name>
@@ -116,4 +116,14 @@
     <servlet-name>PagiRespu</servlet-name>
     <url-pattern>/pagirespu</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>PagiUsuarios</servlet-name>
+    <jsp-file>/ContenidoPrincipal/ListaUsuarios.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PagiUsuarios</servlet-name>
+    <url-pattern>/pagiusuarios</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
