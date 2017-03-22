@@ -40,7 +40,7 @@ public class ServeletRegistro extends HttpServlet {
 		Conexion c=new Conexion();
 		try {
 			
-			c.conectar();
+			//c.conectar();
 			if(c.comprobar("select * from dbdamproject.usuarios where email like '"+request.getParameter("email")+"'")){
 				sesion.setAttribute("Emailduplicado", "si");
 				sesion.setAttribute("nombre", request.getParameter("nombre"));
@@ -49,7 +49,7 @@ public class ServeletRegistro extends HttpServlet {
 				sesion.setAttribute("apellido2", request.getParameter("apellido2"));
 				sesion.setAttribute("ciclo", request.getParameter("ciclo"));
 				sesion.setAttribute("curso", request.getParameter("curso"));
-				c.cerrarconexion();
+				//c.cerrarconexion();
 				response.sendRedirect("registro");
 				
 			}else{
@@ -68,11 +68,11 @@ public class ServeletRegistro extends HttpServlet {
 					sesion.setAttribute("Insercion", "erronea");
 
 				}
-				c.cerrarconexion();
+				//c.cerrarconexion();
 				response.sendRedirect("postregistro");
 
 			}
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

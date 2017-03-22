@@ -38,15 +38,7 @@ public class ServerletRespuesta extends HttpServlet {
 		
 		if (request.getParameter("sumo")!=null ||request.getParameter("resto")!=null)
 			{
-			Conexion c1=new Conexion();
-			try {
-				c1.conectar();
-				
-				
-			} catch (ClassNotFoundException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			Conexion c1=(Conexion)(request.getSession(false).getAttribute("session"));
 			if (request.getParameter("sumo")!=null && Integer.parseInt(request.getParameter("sumo"))==1)
 			{
 				
@@ -69,13 +61,7 @@ public class ServerletRespuesta extends HttpServlet {
 				}
 			}
 		
-			try {
-				c1.cerrarconexion();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-				response.sendRedirect("respuesta");
+			response.sendRedirect("respuesta");
 			}
 		
 	}
@@ -90,16 +76,16 @@ public class ServerletRespuesta extends HttpServlet {
 		try {
 			HttpSession sesion= request.getSession(true);
 			
-			Conexion ce=new Conexion();
-			ce.conectar();
+			Conexion ce=(Conexion)sesion.getAttribute("conexion");
+			//ce.conectar();
 			ce.InsertarRespuestas(request.getParameter("mensajeoculto"),Integer.parseInt(request.getParameter("idpregunta")), request.getParameter("idusuario"));
-			ce.cerrarconexion();
+			//ce.cerrarconexion();
 			sesion.setAttribute("pagpulsada",1); // la pagina que saldra indicada por defecto marcada
 			sesion.setAttribute("iniciores", 0); // el numero desde el que se buscara es decir desde el 0 hasta el ..
 			sesion.setAttribute("finres", 10); // el numero de resultados que mostrara por pagina
 			response.sendRedirect("respuesta");
 			
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

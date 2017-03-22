@@ -15,7 +15,6 @@
 
 
 
-
 <title>Estudiantes Conectados</title>
 	<%@include file="Cabecera.jsp"%>
 <head>
@@ -145,8 +144,8 @@
 				Sacaremos las ids de las ultimas 10 preguntas, en un array, este array despues lo recorreremos y pondremos el id de la pregunta en el valor
 				del input que enviamos para lamar al jsp de respuesta y mostraremos el titulo de esa pregunta.
 				*/
-				Conexion co = new Conexion();
-				co.conectar();
+				Conexion co = (Conexion)session.getAttribute("conexion");
+				//co.conectar();
 				int[] x = co.idultimas10preguntas((int)session.getAttribute("inipag"),(int)session.getAttribute("finpag"));
 				
 				for (int i = 0; i < x.length; i++) {
@@ -263,7 +262,7 @@
 										fin=10;
 									}
 									
-								co.cerrarconexion();
+								//co.cerrarconexion();
 							%>
 						 
 						  

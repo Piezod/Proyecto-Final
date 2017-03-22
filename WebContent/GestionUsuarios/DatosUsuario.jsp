@@ -10,7 +10,7 @@
 </head>
 <body>
 	<%
-		Conexion c = null;
+		Conexion c = (Conexion)session.getAttribute("conexion");
 		if (c == null) {
 			c = new Conexion();
 			c.conectar();
@@ -108,5 +108,5 @@
 
 	</div>
 </body>
-<%c.cerrarconexion(); %>
+<%//c.cerrarconexion(); %>
 </html>

@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Utilidades.Conexion;
 
@@ -47,9 +48,10 @@ public class ServeletImagenes extends HttpServlet {
 			que no exista la imagen o no se encuentre se pondra por defecto el nombre de la aplicación.
 		*/
 		ResultSet rs1;
+		HttpSession sesion=request.getSession(false);
 		try {
-			Conexion ca=new Conexion();
-			ca.conectar();
+			Conexion ca=(Conexion)sesion.getAttribute("conexion");
+			//ca.conectar();
 			String imgLen="";
 			rs1 = ca.sacarundato("select imagen from Imagenes where idimagen="+id+"");
 				
