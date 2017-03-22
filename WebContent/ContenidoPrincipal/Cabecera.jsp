@@ -3,14 +3,13 @@
 <%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-   <%@ page import="serverlets.*" %>
+   <%@ page import="Utilidades.*" %>
 
 
 <script src="Bootstrap/js/jquery-1.11.3.min.js"></script>
 <script src="Bootstrap/js/bootstrap.min.js"></script>
 <link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="Bootstrap/css/Estilospropios.css" rel="stylesheet">
-
 <style>
 	body{
 		background-image: url("Fondos/20.jpg"); <!-- probar el 10,20,y-->
@@ -19,6 +18,14 @@
 
 </head>
 <body>
+<%if(session.getAttribute("conexion")!=null){
+	Conexion c=(Conexion)session.getAttribute("conexion");
+}else{
+	Conexion c=new Conexion();
+	c.conectar();
+	session.setAttribute("conexion", c);
+}
+%>
 <!-- **INFORMACION** -->
 
 <!-- Este jsp en un primer momento esta pensado para que sea el cuerpo principal de la aplicacion
@@ -62,7 +69,7 @@
         <li class="dropdown" style="margin-right:10px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("usuario") %><span class="caret"></span></a>
           <ul class="dropdown-menu">
 
-            <li><a  class="list-group-item active" href="AreaUsuario">Datos de usuario</a></li>
+            <li><a  class="list-group-item" href="AreaUsuario">Datos de usuario</a></li>
             <%if(session.getAttribute("admin").equals("1")){ %>
             <li class="list-group-item-success"><a href="ZonaAdmin">Zona Administrador</a></li>
             <%} %>

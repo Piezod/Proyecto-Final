@@ -162,8 +162,8 @@ td{
 					
 					  
 					   <% 
-			   		 	Conexion c=new Conexion();
-			    		c.conectar();
+			   		 	Conexion c=(Conexion)session.getAttribute("conexion");
+			    		//c.conectar();
 			    		if (session.getAttribute("idpregunta")==null)
 							{
 								%>
@@ -226,8 +226,8 @@ td{
  	 Cada posicion del array resulset contendra diferentes datos
     	1)idrespuesta,2)respuesta,3)votospositivos,4)votosnegativos,5)mejorrespuesta,6)idpregunta,7)idusuario,8)fecha
  	 */
-    		 cr=new Conexion();
-    			cr.conectar();
+    		 cr=(Conexion)session.getAttribute("conexion");
+    			//cr.conectar();
     			
     			
     			int iniciores=(int)session.getAttribute("iniciores");
@@ -460,6 +460,6 @@ td{
     
 <%@include file="pie.jsp"%>
 </body>
-<%c.cerrarconexion();
-cr.cerrarconexion();%>
+<%//c.cerrarconexion();
+//cr.cerrarconexion();%>
 </html>

@@ -73,11 +73,11 @@ public class ServerletAltaPregunta extends HttpServlet {
 		 */
 		String mensaje=request.getParameter("mensajeoculto");
 		
-		Conexion c=new Conexion();
+		Conexion c=(Conexion)sesion.getAttribute("conexion");
 		
 		
 		try {
-			c.conectar();
+			//c.conectar();
 			
 			int idpregunta=c.ultimoid("idpreguntas", "preguntas");
 			/*
@@ -88,7 +88,7 @@ public class ServerletAltaPregunta extends HttpServlet {
 			
 			c.InsertarPregunta(idpregunta,titulo, mensaje, (String)sesion.getAttribute("usuario"));
 			sesion.setAttribute("idpregunta", idpregunta);
-			c.cerrarconexion();
+			//c.cerrarconexion();
 			/*
 			 *  Pongo por defecto los valores al pie de pagina, y luego se iran actualizando en funcion de lo que pulsemos
 			 */
@@ -100,9 +100,6 @@ public class ServerletAltaPregunta extends HttpServlet {
 			
 			//System.out.println("Envio desde altapregunta a inicio con el contenido "+sesion.getAttribute("contenido"));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

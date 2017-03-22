@@ -11,8 +11,8 @@
  	 Cada posicion del array resulset contendra diferentes datos
     	1)idrespuesta,2)respuesta,3)votospositivos,4)votosnegativos,5)mejorrespuesta,6)idpregunta,7)idusuario,8)fecha
  	 */
-    		Conexion cr=new Conexion();
-    			cr.conectar();
+    		Conexion cr=(Conexion)session.getAttribute("conexion");
+    			//cr.conectar();
     			
     			//ResultSet rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"));
     			/*
@@ -72,6 +72,6 @@
 			  	  </div>
 			  <%
 			}
-    			cr.cerrarconexion();
+    			//cr.cerrarconexion();
 				    %>
 </body>

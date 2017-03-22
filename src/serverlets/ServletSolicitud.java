@@ -50,7 +50,7 @@ public class ServletSolicitud extends HttpServlet {
 			if(!c.comprobar("select * from dbdamproject.solicitudes where usuario like '"+usuario+"' and pendiente like '1'"))
 			c.insertarsolicitud(usuario,request.getParameter("gnombre"),request.getParameter("gapellido1"),request.getParameter("gapellido2"));
 			
-			c.cerrarconexion();
+			//c.cerrarconexion();
 
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

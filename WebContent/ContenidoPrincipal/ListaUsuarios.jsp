@@ -37,8 +37,8 @@
 				    </thead>
 				    <tbody>
 	  		<%
-	  			Conexion c=new Conexion();
-	  		c.conectar();
+	  			Conexion c=(Conexion)session.getAttribute("conexion");
+	  		//c.conectar();
 	  		//out.print("select * from usuarios where ciclo in (select ciclo from usuarios where usuario like '"+(String)session.getAttribute("usuario")+"')");
 	  		ResultSet ru=c.sacarundato("select * from usuarios where ciclo in (select ciclo from usuarios where usuario like '"+(String)session.getAttribute("usuario")+"') order by curso limit "+(int)session.getAttribute("iniciores")+","+(int)session.getAttribute("finres")+"" );
 	  		while (ru.next())
@@ -129,7 +129,7 @@
 										fin=10;
 									}
 
-							  		c.cerrarconexion();
+							  		//c.cerrarconexion();
 							%>
 						  <li><a href="#">&raquo;</a></li>
 	 				  </ul>
