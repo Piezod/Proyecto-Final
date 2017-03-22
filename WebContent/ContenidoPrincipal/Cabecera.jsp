@@ -11,6 +11,11 @@
 <link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="Bootstrap/css/Estilospropios.css" rel="stylesheet">
 
+<style>
+	body{
+		background-image: url("Fondos/20.jpg"); <!-- probar el 10,20,y-->
+	}
+</style>
 
 </head>
 <body>
@@ -42,7 +47,7 @@
       
     	
         
-        <li><a href="#">Usuarios</a></li>
+        <li><a href="ServerletRespuestaPaginacion?pag=usuarios&inicio=0&fin=10&pagpulsada=1&iniciopagina=1">Usuarios</a></li>
 		
       </ul>
       <form class="navbar-form navbar-left" role="search" action="ServeletBusqueda" method="POST" >

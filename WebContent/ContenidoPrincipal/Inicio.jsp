@@ -18,9 +18,61 @@
 
 <title>Estudiantes Conectados</title>
 	<%@include file="Cabecera.jsp"%>
+<head>
+<script type="text/javascript">
+ function bienvenida(){
+    $('#myModal').modal('show');
+};
+</script>
 
+</head>
 
 <body>
+	 
+	 
+	<!-- Modal para notificaciones  -->
+<div class="container">
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" > <!--  el bakcgorun modifica el marco -->
+    
+      <!-- Modal content-->
+      <div class="modal-content"> <!--  este es el backgroun blanco -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Bienvenido</h4>
+        </div>
+        <div class="modal-body">
+          <p>Te damos la bienvenida al proyecto de fin de ciclo de Desarrollo de Aplicaciones Multiplataformas. Este proyecto esta elaborado integramente por Juan Carlos Gonzalez y Mario Gomez. Queremos que sea
+          una aplicacion para compartir conocimientos con una base de datos que nos respondera a preguntas o realizar nuevas preguntas para que otros usuarios o profesores nos las resuelvan</p>
+        </div>
+        <div class="modal-footer" >
+          <button type="button" class="btn btn-info" data-dismiss="modal" >Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<%
+/*
+ ejecutamos la funcion de javascript de bienvenida cuando sea la primera vez que recargamos el login
+ acto seguido ponemos el booleano a false para que no se vuelva a repetir.
+ El booleano se pone a true en el serverlet de login al redirigir a esta pagina, lo hacmeos de esta manera
+ para que no se este todo el rato mostrando y sea incomodo.
+*/
+	if ((boolean)session.getAttribute("bienvenida"))
+	{
+		%><script type="text/javascript">
+		bienvenida();
+		</script>
+		<%
+		session.setAttribute("bienvenida", false);
+	}
+%>
 	
 	<div class="container-fluid">
 		<div class="container-fluid">
