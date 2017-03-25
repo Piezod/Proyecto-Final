@@ -73,10 +73,10 @@ public class Conexion {
 
 	public boolean comprobarlogin(String user, String pass,String codvalid) throws SQLException {
 		boolean enc=false;
+		System.out.println(enc);
+
 		String sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validado like ?";
 		PreparedStatement consulta;
-		ResultSet res2 = null;
-		try {
 			consulta = conexion.prepareStatement(sql);
 			user=user.replaceAll("\'\"\\@\\$\\%", "");
 			pass=pass.replaceAll("\'\"\\@\\$\\%", "");
@@ -84,7 +84,6 @@ public class Conexion {
 			consulta.setString(2, pass);
 			consulta.setInt(3, 1);
 			ResultSet res = consulta.executeQuery();
-			
 			enc= res.next();
 			if(!enc){
 
@@ -94,33 +93,20 @@ public class Conexion {
 				consulta2.setString(2, pass);
 				consulta2.setString(3, codvalid);
 				consulta2.setInt(4, 0);
-				res2=consulta2.executeQuery();
-			}
-			} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+				ResultSet res2=consulta2.executeQuery();
+			
+			
 		
-		Savepoint seguro = null;
-			try {
-				seguro=conexion.setSavepoint();
 				if(res2.next()){
-					conexion.setAutoCommit(false);
 					Statement consulta3=conexion.createStatement();
 					consulta3.executeUpdate("update dbdamproject.usuarios set validacion='0', validado='1' where usuario like '"+user+"'");
 					enc=true;
-					conexion.commit();
 				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				conexion.rollback(seguro);
 			}
-			
-		conexion.setAutoCommit(true);
-		
+
 		
 		return enc;
+			
 	}
 
 	public void actualizarpass(String pass,String codigo) throws SQLException{
