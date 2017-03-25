@@ -81,7 +81,7 @@ public class Conexion {
 			user=user.replaceAll("\'\"\\@\\$\\%", "");
 			pass=pass.replaceAll("\'\"\\@\\$\\%", "");
 			consulta.setString(1, user);
-			consulta.setString(2, pass);
+			consulta.setString(2,pass.hashCode()+"");
 			consulta.setInt(3, 1);
 			ResultSet res = consulta.executeQuery();
 			enc= res.next();
@@ -90,7 +90,7 @@ public class Conexion {
 				sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validacion like ? and validado like ?";
 				PreparedStatement consulta2=conexion.prepareStatement(sql);
 				consulta2.setString(1, user);
-				consulta2.setString(2, pass);
+				consulta2.setString(2, pass.hashCode()+"");
 				consulta2.setString(3, codvalid);
 				consulta2.setInt(4, 0);
 				ResultSet res2=consulta2.executeQuery();
@@ -113,7 +113,7 @@ public class Conexion {
 		
 		String sql="update dbdamproject.usuarios set pass=?,validacion=?,validado=? where validacion like ?";
 		PreparedStatement consulta=conexion.prepareStatement(sql);
-		consulta.setString(1, pass.replaceAll("\'\"\\@\\$\\%", ""));
+		consulta.setString(1, pass.replaceAll("\'\"\\@\\$\\%", "").hashCode()+"");
 		consulta.setString(2, "0");
 		consulta.setString(3, "1");
 		consulta.setString(4, codigo.replaceAll("\'\"\\@\\$\\%", ""));
@@ -160,7 +160,7 @@ public class Conexion {
 		String sql="Insert into dbdamproject.usuarios values (?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement insertar = conexion.prepareStatement(sql);
 		insertar.setString(1, usuario);
-		insertar.setString(2, pass);
+		insertar.setString(2, pass.hashCode()+"");
 		insertar.setString(3, nombre);
 		insertar.setString(4, apellido1);
 		insertar.setString(5, apellido2);
