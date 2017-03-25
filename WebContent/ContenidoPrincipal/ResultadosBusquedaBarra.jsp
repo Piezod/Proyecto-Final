@@ -43,8 +43,8 @@
 			   	        del input que enviamos para lamar al jsp de respuesta y mostraremos el titulo de esa pregunta.
 			   	        */
 
-			   		 	Conexion c=new Conexion();
-			   	     	c.conectar();
+			   		 	Conexion c=(Conexion)session.getAttribute("conexion");
+			   	     	//c.conectar();
 			   	     	int idpre=0;
 			   	     	/*
 			   	     	Recargo un resulset en el cual le paso el parametro de busqueda
@@ -209,7 +209,7 @@
 								inicio+=10;
 								fin=10;
 							}
-							%>
+							c.cerrarconexion();%>
 						 
 						  
 						  <li><a href="#">&raquo;</a></li>

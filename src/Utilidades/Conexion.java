@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Savepoint;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.Normalizer;
@@ -41,46 +42,75 @@ public class Conexion {
 		conexion.close();
 	}
 	
-	public void nuevacomprobacion(String codigo,String email) throws SQLException{
-		PreparedStatement consulta=conexion.prepareStatement("update dbdamproject.usuarios set validacion=? where email like ?");
-		consulta.setString(1, codigo);
-		consulta.setString(2, email);
-		consulta.executeUpdate();
+	public void nuevacomprobacion(String codigo,String email){
+		
+			try {
+				conexion.setAutoCommit(false);
+				PreparedStatement consulta=conexion.prepareStatement("update dbdamproject.usuarios set validacion=? where email like ?");
+				consulta.setString(1, codigo);
+				consulta.setString(2, email);
+				consulta.executeUpdate();
+				conexion.commit();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				try {
+					conexion.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		
+		
+		try {
+			conexion.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public boolean comprobarlogin(String user, String pass,String codvalid) throws SQLException {
 		boolean enc=false;
-		String sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validado like ?";
-		PreparedStatement consulta = conexion.prepareStatement(sql);
-		user=user.replaceAll("\'\"\\@\\$\\%", "");
-		pass=pass.replaceAll("\'\"\\@\\$\\%", "");
-		consulta.setString(1, user);
-		consulta.setString(2, pass);
-		consulta.setInt(3, 1);
-		ResultSet res = consulta.executeQuery();
-		
-		enc= res.next();
-		if(!enc){
+		System.out.println(enc);
 
-			sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validacion like ? and validado like ?";
-			PreparedStatement consulta2=conexion.prepareStatement(sql);
-			consulta2.setString(1, user);
-			consulta2.setString(2, pass);
-			consulta2.setString(3, codvalid);
-			consulta2.setInt(4, 0);
-			ResultSet res2=consulta2.executeQuery();
-			if(res2.next()){
-				Statement consulta3=conexion.createStatement();
-				consulta3.executeUpdate("update dbdamproject.usuarios set validacion='0', validado='1' where usuario like '"+user+"'");
-				enc=true;
-			}
-		}
+		String sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validado like ?";
+		PreparedStatement consulta;
+			consulta = conexion.prepareStatement(sql);
+			user=user.replaceAll("\'\"\\@\\$\\%", "");
+			pass=pass.replaceAll("\'\"\\@\\$\\%", "");
+			consulta.setString(1, user);
+			consulta.setString(2, pass);
+			consulta.setInt(3, 1);
+			ResultSet res = consulta.executeQuery();
+			enc= res.next();
+			if(!enc){
+
+				sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validacion like ? and validado like ?";
+				PreparedStatement consulta2=conexion.prepareStatement(sql);
+				consulta2.setString(1, user);
+				consulta2.setString(2, pass);
+				consulta2.setString(3, codvalid);
+				consulta2.setInt(4, 0);
+				ResultSet res2=consulta2.executeQuery();
+			
+			
 		
+				if(res2.next()){
+					Statement consulta3=conexion.createStatement();
+					consulta3.executeUpdate("update dbdamproject.usuarios set validacion='0', validado='1' where usuario like '"+user+"'");
+					enc=true;
+				}
+			}
+
 		
 		return enc;
+			
 	}
 
 	public void actualizarpass(String pass,String codigo) throws SQLException{
+		
 		String sql="update dbdamproject.usuarios set pass=?,validacion=?,validado=? where validacion like ?";
 		PreparedStatement consulta=conexion.prepareStatement(sql);
 		consulta.setString(1, pass.replaceAll("\'\"\\@\\$\\%", ""));

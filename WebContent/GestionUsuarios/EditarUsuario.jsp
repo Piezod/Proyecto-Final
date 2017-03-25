@@ -64,8 +64,8 @@
 		</div>
 		<div class="panel-footer">
 		<button type="submit" 
-		<%Conexion c=new Conexion(); 
-		c.conectar();
+		<%Conexion c=(Conexion) session.getAttribute("conexion");
+		//c.conectar();
 		if(c.comprobar("select * from dbdamproject.solicitudes where usuario like '"+session.getAttribute("usuario")+"' and pendiente like '1'")){
 			%>
 			class="btn btn-danger" disabled>Solicitud pendiente
@@ -80,7 +80,7 @@
 		class="btn btn-primary">Enviar Solicitud
 		<%
 		}
-		c.cerrarconexion(); %>
+		//c.cerrarconexion(); %>
 		
 		</button>
 		</div>
