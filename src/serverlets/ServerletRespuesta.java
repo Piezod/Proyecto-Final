@@ -44,7 +44,7 @@ public class ServerletRespuesta extends HttpServlet {
 				
 					try {
 						c1.SumarVoto(Integer.parseInt(request.getParameter("idrespuesta")),"votospositivos");
-					} catch (NumberFormatException | SQLException e) {
+					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -55,7 +55,7 @@ public class ServerletRespuesta extends HttpServlet {
 				
 				try {
 					c1.SumarVoto(Integer.parseInt(request.getParameter("idrespuesta")),"votosnegativos");
-				} catch (NumberFormatException | SQLException e) {
+				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -72,23 +72,16 @@ public class ServerletRespuesta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		//System.out.println(request.getParameter("respuesta"));
-		try {
-			HttpSession sesion= request.getSession(true);
-			
-			Conexion ce=(Conexion)sesion.getAttribute("conexion");
-			//ce.conectar();
-			ce.InsertarRespuestas(request.getParameter("mensajeoculto"),Integer.parseInt(request.getParameter("idpregunta")), request.getParameter("idusuario"));
-			//ce.cerrarconexion();
-			sesion.setAttribute("pagpulsada",1); // la pagina que saldra indicada por defecto marcada
-			sesion.setAttribute("iniciores", 0); // el numero desde el que se buscara es decir desde el 0 hasta el ..
-			sesion.setAttribute("finres", 10); // el numero de resultados que mostrara por pagina
-			response.sendRedirect("respuesta");
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		HttpSession sesion= request.getSession(true);
+		
+		Conexion ce=(Conexion)sesion.getAttribute("conexion");
+		//ce.conectar();
+		ce.InsertarRespuestas(request.getParameter("mensajeoculto"),Integer.parseInt(request.getParameter("idpregunta")), request.getParameter("idusuario"));
+		//ce.cerrarconexion();
+		sesion.setAttribute("pagpulsada",1); // la pagina que saldra indicada por defecto marcada
+		sesion.setAttribute("iniciores", 0); // el numero desde el que se buscara es decir desde el 0 hasta el ..
+		sesion.setAttribute("finres", 10); // el numero de resultados que mostrara por pagina
+		response.sendRedirect("respuesta");
 		
 		
 		
