@@ -42,33 +42,34 @@ public class Conexion {
 		conexion.close();
 	}
 	
-	public void nuevacomprobacion(String codigo,String email){
-		
-			try {
-				conexion.setAutoCommit(false);
-				PreparedStatement consulta=conexion.prepareStatement("update dbdamproject.usuarios set validacion=? where email like ?");
-				consulta.setString(1, codigo);
-				consulta.setString(2, email);
-				consulta.executeUpdate();
-				conexion.commit();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				try {
-					conexion.rollback();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		
-		
+	public boolean nuevacomprobacion(String codigo,String email){
+		boolean err=false;
 		try {
-			conexion.setAutoCommit(true);
+			conexion.setAutoCommit(false);
+			PreparedStatement consulta=conexion.prepareStatement("update dbdamproject.usuarios set validacion=? where email like ?");
+			consulta.setString(1, codigo);
+			consulta.setString(2, email);
+			consulta.executeUpdate();
+			conexion.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			err=true;
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}finally{
+			try {
+				conexion.setAutoCommit(true);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		return err;
 	}
 
 	public boolean comprobarlogin(String user, String pass,String codvalid) throws SQLException {
@@ -109,15 +110,37 @@ public class Conexion {
 			
 	}
 
-	public void actualizarpass(String pass,String codigo) throws SQLException{
-		
-		String sql="update dbdamproject.usuarios set pass=?,validacion=?,validado=? where validacion like ?";
-		PreparedStatement consulta=conexion.prepareStatement(sql);
-		consulta.setString(1, pass.replaceAll("\'\"\\@\\$\\%", "").hashCode()+"");
-		consulta.setString(2, "0");
-		consulta.setString(3, "1");
-		consulta.setString(4, codigo.replaceAll("\'\"\\@\\$\\%", ""));
-		consulta.executeUpdate();
+	public void actualizarpass(String pass,String codigo){
+		try{
+			conexion.setAutoCommit(false);
+			//Preparo el update
+			String sql="update dbdamproject.usuarios set pass=?,validacion=?,validado=? where validacion like ?";
+			PreparedStatement consulta=conexion.prepareStatement(sql);
+			//Quito los caracteres extraños y paso la contraseña a hash
+			consulta.setString(1, pass.replaceAll("\'\"\\@\\$\\%", "").hashCode()+"");
+			consulta.setString(2, "0");
+			consulta.setString(3, "1");
+			consulta.setString(4, codigo.replaceAll("\'\"\\@\\$\\%", ""));
+			//Hago el update
+			consulta.executeUpdate();
+			conexion.commit();
+		}catch (SQLException e){
+			//Si hay algun error en el update volvemos a un estado anterior
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				// Si hay algun error en el rollback
+				e1.printStackTrace();
+			}
+		}finally {
+			try {
+				conexion.setAutoCommit(true);
+			} catch (SQLException e) {
+				//Si hay algun error en el autocommit
+				e.printStackTrace();
+			}
+		}
 	}
 	private int contar(String query) throws SQLException {
 		Statement consulta = conexion.createStatement();
@@ -156,10 +179,17 @@ public class Conexion {
 	}
 
 	public int InsertarRegistro(String usuario,String pass,String validacion,String nombre, String apellido1, String apellido2, String email, String curso,
-			String ciclo) throws SQLException {
+			String ciclo) {
+		int res=0;
+		try {
+			//Bloqueo a la conexion para que no se actualice sola
+			conexion.setAutoCommit(false);
+		//Preparo la insercion
 		String sql="Insert into dbdamproject.usuarios values (?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement insertar = conexion.prepareStatement(sql);
+		//Pongo los parametros en el Statement
 		insertar.setString(1, usuario);
+		//Encripto la contraseña en hash
 		insertar.setString(2, pass.hashCode()+"");
 		insertar.setString(3, nombre);
 		insertar.setString(4, apellido1);
@@ -172,10 +202,36 @@ public class Conexion {
 		insertar.setInt(11, 0);
 		
 		
+		//Si todo esta correcto ejecuto el update
+		res=insertar.executeUpdate();
+		//Mando un commit a la base de datos
+		conexion.commit();
 		
-		int res=insertar.executeUpdate();
+		} catch (SQLException e) {
+			//Si ha dado algún error devuelvo la bd a un estado anterior
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				//Si da algún error en el rollback
+				e1.printStackTrace();
+			}
+
+			e.printStackTrace();
+			res= -1;
+			//El resultado del insert lo pongo a -1
+		}
+		finally {
+			//Pase lo que pase vuelvo a poner el autocommit a true
+			try {
+				conexion.setAutoCommit(true);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		return res;
+
 	}
 	
 	/*
