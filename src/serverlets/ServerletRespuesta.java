@@ -38,10 +38,15 @@ public class ServerletRespuesta extends HttpServlet {
 		
 		if (request.getParameter("sumo")!=null ||request.getParameter("resto")!=null)
 			{
-			Conexion c1=(Conexion)(request.getSession(false).getAttribute("session"));
+			Conexion c1=new Conexion();
+			try {
+				c1.conectar();
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			if (request.getParameter("sumo")!=null && Integer.parseInt(request.getParameter("sumo"))==1)
 			{
-				
 					try {
 						c1.SumarVoto(Integer.parseInt(request.getParameter("idrespuesta")),"votospositivos");
 					} catch (NumberFormatException e) {
@@ -60,7 +65,12 @@ public class ServerletRespuesta extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-		
+		try {
+			c1.cerrarconexion();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 			response.sendRedirect("respuesta");
 			}
 		

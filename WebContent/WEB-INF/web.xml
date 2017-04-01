@@ -116,7 +116,6 @@
     <servlet-name>PagiRespu</servlet-name>
     <url-pattern>/pagirespu</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>PagiUsuarios</servlet-name>
     <jsp-file>/ContenidoPrincipal/ListaUsuarios.jsp</jsp-file>
@@ -125,5 +124,12 @@
     <servlet-name>PagiUsuarios</servlet-name>
     <url-pattern>/pagiusuarios</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>Detalleusuarios</servlet-name>
+    <jsp-file>/ContenidoPrincipal/DetalleUsuario.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Detalleusuarios</servlet-name>
+    <url-pattern>/detalleusuario</url-pattern>
+  </servlet-mapping>
 </web-app>

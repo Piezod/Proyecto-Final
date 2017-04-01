@@ -37,22 +37,34 @@
 				    </thead>
 				    <tbody>
 	  		<%
+	  		/*
+	  			Dibujamos una tabla con hover, en la que recargaremos algunos datos de los usuarios
+	  		*/
 	  			Conexion c=(Conexion)session.getAttribute("conexion");
-	  		//c.conectar();
 	  		//out.print("select * from usuarios where ciclo in (select ciclo from usuarios where usuario like '"+(String)session.getAttribute("usuario")+"')");
-	  		ResultSet ru=c.sacarundato("select * from usuarios where ciclo in (select ciclo from usuarios where usuario like '"+(String)session.getAttribute("usuario")+"') order by curso limit "+(int)session.getAttribute("iniciores")+","+(int)session.getAttribute("finres")+"" );
+	  		ResultSet ru=c.sacarresultset("select * from usuarios where ciclo in (select ciclo from usuarios where usuario like '"+(String)session.getAttribute("usuario")+"') order by curso limit "+(int)session.getAttribute("iniciores")+","+(int)session.getAttribute("finres")+"" );
 	  		while (ru.next())
 	  		{
 	  			%>
 	  			<tr>
 					<%
+					/*
+					 Se resalta si el usuario es admin / profesor o es un usuario normal.
+					 
+					 Habra que poner en los nombes un enlace a un nuevo jsp que nos muestre los detalles del usuario, esos detalles incluiran las respuestas
+					 y preguntas donde han participado.
+					*/
+					
+					/*
+					  Segunsea el valor (11) de la tabla usuarios dira si es admin o no, en caso de que sea admin se le pondra otro color
+					*/
 						if (ru.getInt(11)==1)
 						{%>
-							<td><span class="label label-primary"><%=ru.getString(1) %></span></td>
+							<td><a href="ServerletDetalleUsuario?usuario=<%=ru.getString(1) %>"><span class="label label-primary"><%=ru.getString(1) %></span></a></td>
 						<%}
 						else
 						{%>
-							<td><span class="label label-default"><%=ru.getString(1) %></span></td>
+							<td><a href="ServerletDetalleUsuario?usuario=<%=ru.getString(1) %>"><span class="label label-default"><%=ru.getString(1) %></span></a></td>
 						<%}
 					%>      
 				        <td><%=ru.getString(3) %></td>
@@ -81,7 +93,11 @@
 						 <li><a href="#">&laquo;</a>
 						 </li>
 							<% 
-								ResultSet r=c.sacarundato("Select * from usuarios where ciclo in (select ciclo from usuarios where usuario like '"+(String)session.getAttribute("usuario")+"') order by curso" );
+							/*
+							 resulset que dibujaran los pie de pagina en funcion de los resultados similares que existan, la variable nueva paginación es la que
+							 nos marcara los numeros de resultados a mostrar por pagina. Idea para meterlo en un <select> y que el usuario pueda decir cuantos resultados poner
+							*/
+								ResultSet r=c.sacarresultset("Select * from usuarios where ciclo in (select ciclo from usuarios where usuario like '"+(String)session.getAttribute("usuario")+"') order by curso" );
 							
 								int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;
 									while (r.next())
