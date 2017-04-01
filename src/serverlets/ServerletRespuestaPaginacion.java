@@ -35,33 +35,47 @@ public class ServerletRespuestaPaginacion extends HttpServlet {
 		 */
 		HttpSession sesion= request.getSession(true);
 
-		
+		/*
+		 * 
+		 *  Enviamos a traves de get los parametros correspondientes para poder rellenar los pies de pagina, la pagina pulsada para que se actualice y se remarque la nueva
+		 *  el inicio de la consulta es decir desde la que tenemos que buscar, fin es el parametro de la cantidad que suele ser 10 , se modifican en los jsp correspondientes
+		 *  y luego el parametro pag es a traves del cual nos redireccionara la pagina.
+		 */
 		if (request.getParameter("pagpulsada")!=null)
 		{
 				sesion.setAttribute("pagpulsada", Integer.parseInt(request.getParameter("pagpulsada"))); // Nos dice la pagina que ha sido pulsada para que esa sea pulsada y cambie el formato
 				sesion.setAttribute("iniciores", Integer.parseInt(request.getParameter("inicio"))); // Nos dice el valor inicial de la busqueda en la query
 				sesion.setAttribute("finres", Integer.parseInt(request.getParameter("fin"))); //este dato suele ser 10, es el que nos dice cuantos mostraremos en pantalla
-				System.out.println("Pagina pulsada es diferente a null"+request.getParameter("pagpulsada"));
-				System.out.println("Pagina"+request.getParameter("pag"));
+				//System.out.println("Pagina pulsada es diferente a null"+request.getParameter("pagpulsada"));
+				//System.out.println("Pagina"+request.getParameter("pag"));
 				/*
 				 * Recogemos en la url una variable nombre pag que contendra un valor que sera la redireccion de la pagina
 				 */
 				
 				switch (request.getParameter("pag")) {
+				
 				case "respuesta":
-					response.sendRedirect("respuesta");
+					
+					response.sendRedirect("respuesta?pagpulsada="+Integer.parseInt(request.getParameter("pagpulsada")));
 					break;
 				case "busqueda":
-					response.sendRedirect("search1");
+					response.sendRedirect("search1?pagpulsada="+Integer.parseInt(request.getParameter("pagpulsada")));
 					break;
 				case "usuarios":
-					System.out.println("Envio a paginausuarios");
-					response.sendRedirect("pagiusuarios");
+					//System.out.println("Envio a paginausuarios");
+					response.sendRedirect("pagiusuarios?pag="+Integer.parseInt(request.getParameter("pagpulsada")));
 					break;
 				default:
 					break;
 				}
 		}
+		
+		/*
+		 * 
+		 * Valido que no este null y si no esta null que compruebe el valor, son valores iniciales para empezar las paginaciones, 
+		 * tengo la duda y hay que verificar, que aunque se realice el redirect, se ejecuta entero el metodo doget antes de realizar el redirect, y una vez
+		 * termine todo el doget se hace el redirect.
+		 */
 		if (request.getParameter("iniciopagina")!=null && Integer.parseInt(request.getParameter("iniciopagina"))==1)
 		{
 			sesion.setAttribute("pagpulsada", 1); // Nos dice la pagina que ha sido pulsada para que esa sea pulsada y cambie el formato

@@ -46,7 +46,8 @@ public class ServerletAltaPregunta extends HttpServlet {
 		sesion.setAttribute("pagpulsada", Integer.parseInt(request.getParameter("pagpulsada")));
 		sesion.setAttribute("inipag", Integer.parseInt(request.getParameter("inicio")));
 		sesion.setAttribute("finpag", Integer.parseInt(request.getParameter("fin")));
-		response.sendRedirect("Inicio");
+		
+		response.sendRedirect("Inicio?pagpulsada="+Integer.parseInt(request.getParameter("pagpulsada")));
 		}
 		
 	}
@@ -76,25 +77,33 @@ public class ServerletAltaPregunta extends HttpServlet {
 		Conexion c=(Conexion)sesion.getAttribute("conexion");
 		
 		
-		int idpregunta=c.ultimoid("idpreguntas", "preguntas");
-		/*
-		 * Asignamos a la variable de sesion la id de pregunta para saber cual es la que tenemos que recargar
-		 */
-		
-		System.out.println(idpregunta+titulo+mensaje+(String)sesion.getAttribute("usuario"));
-		
-		c.InsertarPregunta(idpregunta,titulo, mensaje, (String)sesion.getAttribute("usuario"));
-		sesion.setAttribute("idpregunta", idpregunta);
-		//c.cerrarconexion();
-		/*
-		 *  Pongo por defecto los valores al pie de pagina, y luego se iran actualizando en funcion de lo que pulsemos
-		 */
-		sesion.setAttribute("pagpulsada",1); // la pagina que saldra indicada por defecto marcada
-		sesion.setAttribute("iniciores", 0); // el numero desde el que se buscara es decir desde el 0 hasta el ..
-		sesion.setAttribute("finres", 10); // el numero de resultados que mostrara por pagina
-		response.sendRedirect("respuesta");
-		
-		
+		try {
+			//c.conectar();
+			
+			int idpregunta=c.ultimoid("idpreguntas", "preguntas");
+			/*
+			 * Asignamos a la variable de sesion la id de pregunta para saber cual es la que tenemos que recargar
+			 */
+			
+			//System.out.println(idpregunta+titulo+mensaje+(String)sesion.getAttribute("usuario"));
+			
+			c.InsertarPregunta(idpregunta,titulo, mensaje, (String)sesion.getAttribute("usuario"));
+			sesion.setAttribute("idpregunta", idpregunta);
+			//c.cerrarconexion();
+			/*
+			 *  Pongo por defecto los valores al pie de pagina, y luego se iran actualizando en funcion de lo que pulsemos
+			 */
+			sesion.setAttribute("pagpulsada",1); // la pagina que saldra indicada por defecto marcada
+			sesion.setAttribute("iniciores", 0); // el numero desde el que se buscara es decir desde el 0 hasta el ..
+			sesion.setAttribute("finres", 10); // el numero de resultados que mostrara por pagina
+			response.sendRedirect("respuesta");
+			
+			
+			//System.out.println("Envio desde altapregunta a inicio con el contenido "+sesion.getAttribute("contenido"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

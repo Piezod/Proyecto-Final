@@ -50,13 +50,26 @@
 			   	     	Recargo un resulset en el cual le paso el parametro de busqueda
 			   	     	*/
 			   	     	ResultSet r;
+			   	     int inipag,pagpulsada;
+						if (request.getParameter("pagpulsada")==null)
+						{
+							inipag=0;
+							pagpulsada=1;
+						}
+						
+						else
+						{
+							inipag=Integer.parseInt(request.getParameter("pagpulsada"))*10-10;
+							pagpulsada=Integer.parseInt(request.getParameter("pagpulsada"));
+						}
+						
 			   	     	if (request.getParameter("search")!=null)
 			   	     	{
 			   	     		/*
 			   	     		 Si es la primera vez que entramos en la busqueda, tendremos el parametro search lleno, para guardarlo lo almacenaremos en una
 			   	     		 variable de sesion y pondremos que la busqueda de las preguntas nos saque desde la 0  y 10 visiones
 			   	     		*/
-			    			 r=c.resulsetpregunta(request.getParameter("search"),0,10);
+			    			 r=c.resulsetpregunta(request.getParameter("search"),inipag,10);
 				   	     	session.setAttribute("search", request.getParameter("search"));
 			   	     	}
 			   	     	else
@@ -65,7 +78,7 @@
 			   	     		 Si recargamos la pagina pulsando el pie de pagina, le pasamos ya los parametros de la posicion pulsada asi como el valor  para buscar
 			   	     		 almacenado en la sesion atribute.
 			   	     		*/
-			   	     	 r=c.resulsetpregunta((String)session.getAttribute("search"),(int)session.getAttribute("iniciores"),(int)session.getAttribute("finres"));
+			   	     	 r=c.resulsetpregunta((String)session.getAttribute("search"),inipag,10);
 			   	     	}
 			   	     		
     			
@@ -152,14 +165,13 @@
 							 saco el numero maximo de respuestas para generar tantas etiquetas de numero como numero existan entre 10, es decir
 							 para 14 saco 2.
 							*/
-								ResultSet rp=c.sacarundato("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+(String)session.getAttribute("search")+"%' or titulo like '%"+(String)session.getAttribute("search")+"%'");
+								ResultSet rp=c.sacarresultset("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+(String)session.getAttribute("search")+"%' or titulo like '%"+(String)session.getAttribute("search")+"%'");
 							
 							
 							int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;
 							while (rp.next())
 							{
 								nuevapaginaion++;
-								System.out.println(nuevapaginaion);
 								if (nuevapaginaion==10)
 								{ 
 									/*
@@ -167,7 +179,7 @@
 									 pagpulsada, que sera la que mediante css me cambie el estilo del pie de pagina poniendo un color u otro
 									*/
 									numeropagina++;
-									if ((int)session.getAttribute("pagpulsada")==numeropagina)
+									if (pagpulsada==numeropagina)
 									{
 										%>
 										<li class="active" ><a " href="ServerletRespuestaPaginacion?pag=busqueda&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
@@ -193,7 +205,7 @@
 							if (nuevapaginaion>0)
 							{ 
 								numeropagina++;
-								if ((int)session.getAttribute("pagpulsada")==numeropagina)
+								if (pagpulsada==numeropagina)
 								{
 									%>
 									<li class="active" ><a " href="ServerletRespuestaPaginacion?pag=busqueda&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
@@ -209,7 +221,7 @@
 								inicio+=10;
 								fin=10;
 							}
-							c.cerrarconexion();%>
+							//c.cerrarconexion();%>
 						 
 						  
 						  <li><a href="#">&raquo;</a></li>

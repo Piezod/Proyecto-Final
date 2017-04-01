@@ -19,7 +19,7 @@
     			 Buscamos la respuesta que este verificada para esta pregunta
     			*/
     			String query="SELECT * FROM dbdamproject.respuestas where idpregunta="+(int)session.getAttribute("idpregunta")+" and mejorrespuesta=1";
-    			ResultSet rs=cr.sacarundato(query);
+    			ResultSet rs=cr.sacarresultset(query);
     			if (rs.next())
     			{ 
     				%>
@@ -55,7 +55,7 @@
 				  	  <br>
 				    </div>
 				    <%} 
-    			else if (cr.sacarundato("SELECT * FROM dbdamproject.respuestas where idpregunta="+(int)session.getAttribute("idpregunta")).next())
+    			else if (cr.sacarresultset("SELECT * FROM dbdamproject.respuestas where idpregunta="+(int)session.getAttribute("idpregunta")).next())
     			{
     				%>
     				<div class="=container-fluid">

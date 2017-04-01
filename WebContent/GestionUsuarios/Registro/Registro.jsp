@@ -2,21 +2,13 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
-
 <head>
-
 <script>
-		
-
-
 	function cambiarhidden(id,valor){
 		
 		document.getElementById("bt"+id).innerHTML=valor+'<span class="caret"></span>'
-		document.getElementById(id).value=valor
-		
+		document.getElementById(id).value=valor	
 	}
-
 	function comprobarregistro() {
 		//Validaciones del formulario
 		
