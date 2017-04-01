@@ -146,7 +146,21 @@
 				*/
 				Conexion co = (Conexion)session.getAttribute("conexion");
 				//co.conectar();
-				int[] x = co.idultimas10preguntas((int)session.getAttribute("inipag"),(int)session.getAttribute("finpag"));
+				
+				int inipag,pagpulsada;
+				if (request.getParameter("pagpulsada")==null)
+				{
+					inipag=0;
+					pagpulsada=1;
+				}
+				
+				else
+				{
+					inipag=Integer.parseInt(request.getParameter("pagpulsada"))*10-10;
+					pagpulsada=Integer.parseInt(request.getParameter("pagpulsada"));
+				}
+				
+				int[] x = co.idultimas10preguntas(inipag,10);
 				
 				for (int i = 0; i < x.length; i++) {
 					
@@ -223,7 +237,7 @@
 										if (nuevapaginaion==10)
 										{
 											numeropagina++;
-											if ((int)session.getAttribute("pagpulsada")==numeropagina)
+											if (pagpulsada==numeropagina)
 											{
 												%>
 												<li class="active" ><a " href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
@@ -245,7 +259,7 @@
 									if (nuevapaginaion>0)
 									{
 										numeropagina++;
-										if ((int)session.getAttribute("pagpulsada")==numeropagina)
+										if (pagpulsada==numeropagina)
 										{
 											%>
 											<li class="active" ><a " href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%

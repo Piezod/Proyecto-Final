@@ -46,22 +46,24 @@ public class ServerletRespuestaPaginacion extends HttpServlet {
 				sesion.setAttribute("pagpulsada", Integer.parseInt(request.getParameter("pagpulsada"))); // Nos dice la pagina que ha sido pulsada para que esa sea pulsada y cambie el formato
 				sesion.setAttribute("iniciores", Integer.parseInt(request.getParameter("inicio"))); // Nos dice el valor inicial de la busqueda en la query
 				sesion.setAttribute("finres", Integer.parseInt(request.getParameter("fin"))); //este dato suele ser 10, es el que nos dice cuantos mostraremos en pantalla
-				System.out.println("Pagina pulsada es diferente a null"+request.getParameter("pagpulsada"));
-				System.out.println("Pagina"+request.getParameter("pag"));
+				//System.out.println("Pagina pulsada es diferente a null"+request.getParameter("pagpulsada"));
+				//System.out.println("Pagina"+request.getParameter("pag"));
 				/*
 				 * Recogemos en la url una variable nombre pag que contendra un valor que sera la redireccion de la pagina
 				 */
 				
 				switch (request.getParameter("pag")) {
+				
 				case "respuesta":
-					response.sendRedirect("respuesta");
+					
+					response.sendRedirect("respuesta?pagpulsada="+Integer.parseInt(request.getParameter("pagpulsada")));
 					break;
 				case "busqueda":
-					response.sendRedirect("search1");
+					response.sendRedirect("search1?pagpulsada="+Integer.parseInt(request.getParameter("pagpulsada")));
 					break;
 				case "usuarios":
-					System.out.println("Envio a paginausuarios");
-					response.sendRedirect("pagiusuarios");
+					//System.out.println("Envio a paginausuarios");
+					response.sendRedirect("pagiusuarios?pag="+Integer.parseInt(request.getParameter("pagpulsada")));
 					break;
 				default:
 					break;

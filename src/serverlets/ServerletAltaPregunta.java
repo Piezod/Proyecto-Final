@@ -46,7 +46,8 @@ public class ServerletAltaPregunta extends HttpServlet {
 		sesion.setAttribute("pagpulsada", Integer.parseInt(request.getParameter("pagpulsada")));
 		sesion.setAttribute("inipag", Integer.parseInt(request.getParameter("inicio")));
 		sesion.setAttribute("finpag", Integer.parseInt(request.getParameter("fin")));
-		response.sendRedirect("Inicio");
+		
+		response.sendRedirect("Inicio?pagpulsada="+Integer.parseInt(request.getParameter("pagpulsada")));
 		}
 		
 	}
@@ -84,7 +85,7 @@ public class ServerletAltaPregunta extends HttpServlet {
 			 * Asignamos a la variable de sesion la id de pregunta para saber cual es la que tenemos que recargar
 			 */
 			
-			System.out.println(idpregunta+titulo+mensaje+(String)sesion.getAttribute("usuario"));
+			//System.out.println(idpregunta+titulo+mensaje+(String)sesion.getAttribute("usuario"));
 			
 			c.InsertarPregunta(idpregunta,titulo, mensaje, (String)sesion.getAttribute("usuario"));
 			sesion.setAttribute("idpregunta", idpregunta);

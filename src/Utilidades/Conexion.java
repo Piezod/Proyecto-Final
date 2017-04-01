@@ -209,9 +209,9 @@ public class Conexion {
 		
 		
 		String sql="Insert into dbdamproject.preguntas values (?,?,?,?,?)";
-		System.out.println(ultimoid("idpreguntas", "preguntas")+titulo+descripcion+usuario);
+		//System.out.println(ultimoid("idpreguntas", "preguntas")+titulo+descripcion+usuario);
 		PreparedStatement insertar = conexion.prepareStatement(sql);
-		insertar.setInt(1,idpregunta );
+		insertar.setString(1,null );
 		insertar.setString(2, titulo);
 		insertar.setString(3, descripcion);
 		insertar.setString(4, usuario);
@@ -403,6 +403,7 @@ public class Conexion {
 	
 	public ResultSet sacarrespuestasporid(int  idpregunta, int inicio, int fin) throws SQLException {
 		Statement consulta = conexion.createStatement();
+		//System.out.println("SELECT * FROM dbdamproject.respuestas where idpregunta="+idpregunta+" limit "+inicio+","+fin+"");
 		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.respuestas where idpregunta="+idpregunta+" limit "+inicio+","+fin+"" );		
 		return res;
 	}
@@ -418,7 +419,7 @@ public class Conexion {
 		String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 		String sql="Insert into dbdamproject.respuestas values (?,?,?,?,?,?,?,?)";
 		PreparedStatement insertar = conexion.prepareStatement(sql);
-		insertar.setInt(1,(ultimoid("idrespuesta", "dbdamproject.respuestas")));
+		insertar.setString(1,null);
 		
 		insertar.setString(2, respuesta);
 		insertar.setInt(3, 0);
