@@ -54,13 +54,17 @@
 					 Habra que poner en los nombes un enlace a un nuevo jsp que nos muestre los detalles del usuario, esos detalles incluiran las respuestas
 					 y preguntas donde han participado.
 					*/
+					
+					/*
+					  Segunsea el valor (11) de la tabla usuarios dira si es admin o no, en caso de que sea admin se le pondra otro color
+					*/
 						if (ru.getInt(11)==1)
 						{%>
-							<td><a href="#"><span class="label label-primary"><%=ru.getString(1) %></span></a></td>
+							<td><a href="ServerletDetalleUsuario?usuario=<%=ru.getString(1) %>"><span class="label label-primary"><%=ru.getString(1) %></span></a></td>
 						<%}
 						else
 						{%>
-							<td><a href="#"><span class="label label-default"><%=ru.getString(1) %></span></a></td>
+							<td><a href="ServerletDetalleUsuario?usuario=<%=ru.getString(1) %>"><span class="label label-default"><%=ru.getString(1) %></span></a></td>
 						<%}
 					%>      
 				        <td><%=ru.getString(3) %></td>

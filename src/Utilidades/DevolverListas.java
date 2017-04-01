@@ -6,16 +6,24 @@ import java.util.ArrayList;
 
 public class DevolverListas {
 	
-	public ArrayList<String> infousuario() throws SQLException
+	private String usuario;
+	public DevolverListas(String parameter) {
+		// TODO Auto-generated constructor stub
+		usuario=parameter;
+	}
+
+	public ArrayList<String> infousuario() throws SQLException, ClassNotFoundException
 	{
 		Conexion c=new Conexion();
-		
-		ResultSet r=c.sacarundato("select * from usuarios");
+		c.conectar();
+		ResultSet r=c.sacarundato("select * from usuarios where usuario like '"+usuario+"'");
 		ArrayList<String> l=new ArrayList<>();
 		while (r.next())
 		{
+			System.out.println("recojo"+r.getString(1));
 			l.add(r.getString(1));
 		}
+		c.cerrarconexion();
 		return l;
 	}
 	

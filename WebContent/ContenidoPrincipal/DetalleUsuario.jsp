@@ -21,11 +21,6 @@ USERNAME: usrdamproject
 PASSWORD: GgQXVfYTCu3eBsXY
 */
 %>
-<sql:setDataSource dataSource="dbdamproject" driver="com.mysql.jdbc.Driver" url="31.200.243.193:51987" user="usrdamproject" password="GgQXVfYTCu3eBsXY"/>
-<sql:query var="usuario">
-	select * from usuarios
-</sql:query>
-
 <h1> Primera prueba de stl recogiendo datos por sql</h1>
 	<table>
 		<c:forEach var="usuarios" begin="0" items="${profesores.rows}">

@@ -1,5 +1,7 @@
 package Utilidades;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -41,83 +43,133 @@ public class Conexion {
 	{
 		conexion.close();
 	}
-	
-	public void nuevacomprobacion(String codigo,String email){
-		
-			try {
-				conexion.setAutoCommit(false);
-				PreparedStatement consulta=conexion.prepareStatement("update dbdamproject.usuarios set validacion=? where email like ?");
-				consulta.setString(1, codigo);
-				consulta.setString(2, email);
-				consulta.executeUpdate();
-				conexion.commit();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				try {
-					conexion.rollback();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		
-		
-		try {
-			conexion.setAutoCommit(true);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void insertarerror(Exception ex){
+		StringWriter writer = new StringWriter();
+		PrintWriter printWriter = new PrintWriter( writer );
+		ex.printStackTrace( printWriter );
+		printWriter.flush();
+
+		String error = writer.toString();
+		try{
+			conexion.createStatement().executeUpdate("Insert into dbdamproject.logs values('"+error+"')");
+		}catch (SQLException e){
+			
 		}
 	}
+	public boolean nuevacomprobacion(String codigo,String email){
+		boolean err=false;
+		try {
+			conexion.setAutoCommit(false);
+			PreparedStatement consulta=conexion.prepareStatement("update dbdamproject.usuarios set validacion=? where email like ?");
+			consulta.setString(1, codigo);
+			consulta.setString(2, email);
+			consulta.executeUpdate();
+			conexion.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			insertarerror(e);
+			
+			err=true;
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}finally{
+			try {
+				conexion.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return err;
+	}
 
-	public boolean comprobarlogin(String user, String pass,String codvalid) throws SQLException {
+	public boolean comprobarlogin(String user, String pass,String codvalid){
 		boolean enc=false;
-		System.out.println(enc);
-
-		String sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validado like ?";
-		PreparedStatement consulta;
-			consulta = conexion.prepareStatement(sql);
+		try{
+			//Preparo la consulta
+			String sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validado like ?";
+			PreparedStatement consulta = conexion.prepareStatement(sql);
+			//Limpio el usuario y la contraseña de caracteres no deseados
 			user=user.replaceAll("\'\"\\@\\$\\%", "");
 			pass=pass.replaceAll("\'\"\\@\\$\\%", "");
 			consulta.setString(1, user);
-			consulta.setString(2, pass);
+			consulta.setString(2,pass.hashCode()+"");
 			consulta.setInt(3, 1);
 			ResultSet res = consulta.executeQuery();
 			enc= res.next();
+			//Si no encuentra al usuario por login normal
 			if(!enc){
-
+				//Compruebo si no esta validado y coincide el código de validacion
 				sql="select * from dbdamproject.usuarios where usuario like ? and pass like ? and validacion like ? and validado like ?";
 				PreparedStatement consulta2=conexion.prepareStatement(sql);
 				consulta2.setString(1, user);
-				consulta2.setString(2, pass);
+				consulta2.setString(2, pass.hashCode()+"");
 				consulta2.setString(3, codvalid);
 				consulta2.setInt(4, 0);
 				ResultSet res2=consulta2.executeQuery();
-			
-			
-		
+				//Si es correcta la consulta lo que significa que todavia no estaba validado el usuario
 				if(res2.next()){
+					//Realizo un update en el usuario en el que borro el codigo de validacion y lo pongo validado
+					//De este modo podrá directamente acceder sin entrar en el if
+					conexion.setAutoCommit(false);
 					Statement consulta3=conexion.createStatement();
 					consulta3.executeUpdate("update dbdamproject.usuarios set validacion='0', validado='1' where usuario like '"+user+"'");
 					enc=true;
 				}
 			}
-
-		
+		}
+		catch(SQLException e){
+			insertarerror(e);
+			enc=true;
+		}
+		finally{
+			try {
+				//Si el autocommit esta desactivado lo activo porque no puedo comprobar en que parte del try me ha fallado
+				if(!conexion.getAutoCommit()){
+					conexion.setAutoCommit(true);
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				insertarerror(e1);
+			}
+		}
 		return enc;
 			
 	}
 
-	public void actualizarpass(String pass,String codigo) throws SQLException{
-		
-		String sql="update dbdamproject.usuarios set pass=?,validacion=?,validado=? where validacion like ?";
-		PreparedStatement consulta=conexion.prepareStatement(sql);
-		consulta.setString(1, pass.replaceAll("\'\"\\@\\$\\%", ""));
-		consulta.setString(2, "0");
-		consulta.setString(3, "1");
-		consulta.setString(4, codigo.replaceAll("\'\"\\@\\$\\%", ""));
-		consulta.executeUpdate();
+	public void actualizarpass(String pass,String codigo){
+		try{
+			conexion.setAutoCommit(false);
+			//Preparo el update
+			String sql="update dbdamproject.usuarios set pass=?,validacion=?,validado=? where validacion like ?";
+			PreparedStatement consulta=conexion.prepareStatement(sql);
+			//Quito los caracteres extraños y paso la contraseña a hash
+			consulta.setString(1, pass.replaceAll("\'\"\\@\\$\\%", "").hashCode()+"");
+			consulta.setString(2, "0");
+			consulta.setString(3, "1");
+			consulta.setString(4, codigo.replaceAll("\'\"\\@\\$\\%", ""));
+			//Hago el update
+			consulta.executeUpdate();
+			conexion.commit();
+		}catch (SQLException e){
+			//Si hay algun error en el update volvemos a un estado anterior
+			insertarerror(e);
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				// Si hay algun error en el rollback
+				insertarerror(e);			
+				}
+		}finally {
+			try {
+				conexion.setAutoCommit(true);
+			} catch (SQLException e) {
+				//Si hay algun error en el autocommit
+				insertarerror(e);			
+			}
+		}
 	}
 	private int contar(String query) throws SQLException {
 		Statement consulta = conexion.createStatement();
@@ -156,11 +208,18 @@ public class Conexion {
 	}
 
 	public int InsertarRegistro(String usuario,String pass,String validacion,String nombre, String apellido1, String apellido2, String email, String curso,
-			String ciclo) throws SQLException {
+			String ciclo) {
+		int res=0;
+		try {
+			//Bloqueo a la conexion para que no se actualice sola
+			conexion.setAutoCommit(false);
+		//Preparo la insercion
 		String sql="Insert into dbdamproject.usuarios values (?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement insertar = conexion.prepareStatement(sql);
+		//Pongo los parametros en el Statement
 		insertar.setString(1, usuario);
-		insertar.setString(2, pass);
+		//Encripto la contraseña en hash
+		insertar.setString(2, pass.hashCode()+"");
 		insertar.setString(3, nombre);
 		insertar.setString(4, apellido1);
 		insertar.setString(5, apellido2);
@@ -172,35 +231,69 @@ public class Conexion {
 		insertar.setInt(11, 0);
 		
 		
+		//Si todo esta correcto ejecuto el update
+		res=insertar.executeUpdate();
+		//Mando un commit a la base de datos
+		conexion.commit();
 		
-		int res=insertar.executeUpdate();
+		} catch (SQLException e) {
+			//Si ha dado algún error devuelvo la bd a un estado anterior
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				//Si da algún error en el rollback
+				insertarerror(e1);
+			}
+
+			insertarerror(e);
+			res= -1;
+			//El resultado del insert lo pongo a -1
+		}
+		finally {
+			//Pase lo que pase vuelvo a poner el autocommit a true
+			try {
+				conexion.setAutoCommit(true);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				insertarerror(e);
+			}
+		}
 		
 		return res;
+
 	}
 	
 	/*
 	 * Metodo que nos devuelve el ultimo id mas 1 para que podamos realizar nuevos inserts.
 	 */
 	
-	public int ultimoid(String primarykey,String tabla) throws SQLException
-	{
+	public int ultimoid(String primarykey,String tabla){
+		int dev=0;
+
+		try{
 		Statement consulta = conexion.createStatement();
 		System.out.println("select max("+primarykey+") from "+tabla);
 		ResultSet res = consulta.executeQuery("select max("+primarykey+") from "+tabla);
-		int dev=0;
 		
 		if(res.next())
 			{
 			dev = res.getInt(1);
 			}
 		dev=dev+1;
+		}
+		catch (SQLException e)
+		{
+			insertarerror(e);
+		}
 		return (dev);
+		
 	}
 	
 	/*
 	 * Metodo para insertar datos en la tabla preguntas, recogeremos del formulario el titulo y la pregunta en si 
 	 * y pondremos el usuario que lo ha realizado 
 	 */
+<<<<<<< HEAD
 	public int InsertarPregunta(int idpregunta,String titulo,String descripcion,String usuario) throws SQLException {
 		
 		String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
@@ -221,108 +314,168 @@ public class Conexion {
 		
 		int res=insertar.executeUpdate();
 		
+=======
+	public int InsertarPregunta(int idpregunta,String titulo,String descripcion,String usuario){
+		int res=0;
+		try{
+			String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+			//System.out.println(fecha);
+			//0000-00-00 00:00:00
+			
+			
+			String sql="Insert into dbdamproject.preguntas values (?,?,?,?,?)";
+			System.out.println(ultimoid("idpreguntas", "preguntas")+titulo+descripcion+usuario);
+			PreparedStatement insertar = conexion.prepareStatement(sql);
+			insertar.setInt(1,idpregunta );
+			insertar.setString(2, titulo);
+			insertar.setString(3, descripcion);
+			insertar.setString(4, usuario);
+			insertar.setString(5, fecha);
+			
+			
+			
+			res=insertar.executeUpdate();
+		}
+		catch (SQLException e)
+		{
+			insertarerror(e);
+		}
+>>>>>>> refs/remotes/origin/master
 		return res;
+		
 	}
 /*
  *  Metodo para sacar todos los usuarios de la base de datos y entregarlos en un array para trabajar con el
  */
-	public String[] sacarusuarios() throws SQLException {
+	public String[] sacarusuarios(){
+		String[] x=new String[0];
 
-		String x[] = new String[contar("select count(*) from dbdamproject.usuarios")];
-
-		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery("select * from dbdamproject.usuarios");
-
-		int i = 0;
-		while (res.next()) {
-			x[i] = res.getString(1);
-			i++;
-
+		try{
+			x= new String[contar("select count(*) from dbdamproject.usuarios")];
+			Statement consulta = conexion.createStatement();
+			ResultSet res = consulta.executeQuery("select * from dbdamproject.usuarios");
+	
+			int i = 0;
+			while (res.next()) {
+				x[i] = res.getString(1);
+				i++;
+	
+			}
+			
 		}
-
-		return x;
-	}
-	
-	/*
-	 * Metodo para hacer una consulta a la bse de datos y obtener un dato segun la query que le enviemos, nos devolvera el resulset porque no sabemos
-	 * de que tipo de dato estamos hablando, file,string,int
-	 */
-	
-	public ResultSet sacarundato(String query) throws SQLException
-	{
-		Statement consulta=conexion.createStatement();
-		ResultSet res=consulta.executeQuery(query);
-		
-		return res;
-	}
-	
-	/*
-	 * Metodo para hacer una consulta a la bse de datos y obtener un dato segun la query que le enviemos, nos devolvera el resulset porque no sabemos
-	 * de que tipo de dato estamos hablando, file,string,int
-	 */
-	
-	public String sacarundatostring(String query) throws SQLException
-	{
-		Statement consulta=conexion.createStatement();
-		ResultSet res=consulta.executeQuery(query);
-		String x=null;
-		if (res.next())
+		catch(SQLException e)
 		{
-			 x=res.getString(1);
+			insertarerror(e);
 		}
 		return x;
+
+	}
+	
+	/*
+	 * Metodo para hacer una consulta a la bse de datos y obtener un dato segun la query que le enviemos, nos devolvera el resulset porque no sabemos
+	 * de que tipo de dato estamos hablando, file,string,int
+	 */
+	
+	public ResultSet sacarresultset(String query)
+	{
+		try{
+			Statement consulta=conexion.createStatement();
+			ResultSet res=consulta.executeQuery(query);
+			
+			return res;
+		}
+		catch (SQLException e)
+		{
+			insertarerror(e);
+			return null;
+		}
+	}
+	
+	/*
+	 * Metodo para hacer una consulta a la bse de datos y obtener un dato segun la query que le enviemos, nos devolvera el resulset porque no sabemos
+	 * de que tipo de dato estamos hablando, file,string,int
+	 */
+	
+	public String sacarundatostring(String query)
+	{
+		try{
+			Statement consulta=conexion.createStatement();
+			ResultSet res=consulta.executeQuery(query);
+			String x=null;
+			if (res.next())
+			{
+				 x=res.getString(1);
+			}
+			return x;
+		}
+		catch(SQLException e){
+			return "-1";
+		}
+		
 	}
 	
 	/*
 	 * Metodo que devuelve todas las preguntas
 	 */
 	
-	public String[] sacartodaslaspreguntas() throws SQLException {
-
-		String x[] = new String[contar("select count(*) from dbdamproject.preguntas")];
-
-		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery("select * from dbdamproject.preguntas");
-
-		int i = 0;
-		while (res.next()) {
-			x[i] = res.getString(3);
-			i++;
+	public String[] sacartodaslaspreguntas() {
+		try{
+			String[] x = new String[contar("select count(*) from dbdamproject.preguntas")];
+	
+			Statement consulta = conexion.createStatement();
+			ResultSet res = consulta.executeQuery("select * from dbdamproject.preguntas");
+	
+			int i = 0;
+			while (res.next()) {
+				x[i] = res.getString(3);
+				i++;
+	
+			}
+			return x;
+		}catch(SQLException e){
+			insertarerror(e);
+			String[] x=new String[0];
+			return x;
 
 		}
-
-		return x;
 	}
 	
 	/*
 	 * Metodo que devuelve  la pregunta segun la id que le enviemos
 	 */
 	
-	public String[] sacarpreguntaporid(int id) throws SQLException {
+	public String[] sacarpreguntaporid(int id) {
+		try{
+			String x[] = new String[5];
 
-		String x[] = new String[5];
+			Statement consulta = conexion.createStatement();
+			ResultSet res = consulta.executeQuery("select * from dbdamproject.preguntas where idpreguntas="+id+"");
 
-		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery("select * from dbdamproject.preguntas where idpreguntas="+id+"");
+			int i = 0;
+			if (res.next()) {
+				x[0] = res.getString(1); //idpregunta
+				x[1] = res.getString(2); //titulo
+				x[2] = res.getString(3); //descripcion
+				x[3] = res.getString(4); //idusuario
+				x[4] = res.getString(5); //fechayhora
+			}
 
-		int i = 0;
-		if (res.next()) {
-			x[0] = res.getString(1); //idpregunta
-			x[1] = res.getString(2); //titulo
-			x[2] = res.getString(3); //descripcion
-			x[3] = res.getString(4); //idusuario
-			x[4] = res.getString(5); //fechayhora
+			return x;
 		}
-
-		return x;
+		catch (SQLException e){
+			insertarerror(e);
+			return new String[0];
+		}
+		
 	}
 	
 	/*
 	 * Metodo que devuelve  los datos de las  ultimas preguntas introducidas en la bd
 	 */
 	
-	public int[] idultimas10preguntas(int inicio,int fin) throws SQLException {
-
+	public int[] idultimas10preguntas(int inicio,int fin) {
+		try
+		{
 		int x[] = new int[10];
 
 		Statement consulta = conexion.createStatement();
@@ -336,27 +489,47 @@ public class Conexion {
 		}
 
 		return x;
+		}
+		catch (SQLException e)
+		{
+			insertarerror(e);
+			return new int[0];
+		}
 	}
 	
 
-	public boolean comprobar(String query) throws SQLException {
-		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery(query);
-
-		return res.next();
+	public boolean comprobar(String query){
+		try{
+			Statement consulta = conexion.createStatement();
+			ResultSet res = consulta.executeQuery(query);
+			return res.next();
+		}
+		catch(SQLException e)
+		{
+			insertarerror(e);
+			return false;
+		}
+		
+		
 	}
 
-	public String recibirdato(String query) throws SQLException {
-		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery(query);
-		res.next();
-		return res.getString(1);
+	public String recibirdato(String query){
+		try{
+			Statement consulta = conexion.createStatement();
+			ResultSet res = consulta.executeQuery(query);
+			res.next();
+			return res.getString(1);
+		}
+		catch(SQLException e){
+			return "-1";
+		}
 	}
 	
 	/*
 	 * Metodo que nos devuelve el array con las ids de las preguntas que cumplen con lo que estamos buscando
 	 */
-	public int [] busquedaheader(String valor) throws SQLException {
+	public int [] busquedaheader(String valor) {
+		try{
 		Statement consulta = conexion.createStatement();
 		ResultSet res = consulta.executeQuery("SELECT count(*) FROM dbdamproject.preguntas where descripcion like '%"+valor+"%'");		
 		int cantidad=0;
@@ -381,6 +554,10 @@ public class Conexion {
 			}
 
 			return valores;	
+		}catch(SQLException e){
+			insertarerror(e);
+			return new int[0];
+		}
 	}
 	
 	/*
@@ -389,10 +566,16 @@ public class Conexion {
 	 * 
 	 */
 	
-	public ResultSet resulsetpregunta(String  valorpregunta, int inicio, int fin) throws SQLException {
-		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit "+inicio+","+fin+"");		
-		return res;
+	public ResultSet resulsetpregunta(String  valorpregunta, int inicio, int fin) {
+		try{
+			Statement consulta = conexion.createStatement();
+			ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit "+inicio+","+fin+"");		
+			return res;
+		}catch(SQLException e){
+			insertarerror(e);
+			return null;
+		}
+		
 	}
 	
 	/*
@@ -401,11 +584,24 @@ public class Conexion {
 	 * 
 	 */
 	
+<<<<<<< HEAD
 	public ResultSet sacarrespuestasporid(int  idpregunta, int inicio, int fin) throws SQLException {
 		Statement consulta = conexion.createStatement();
 		//System.out.println("SELECT * FROM dbdamproject.respuestas where idpregunta="+idpregunta+" limit "+inicio+","+fin+"");
 		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.respuestas where idpregunta="+idpregunta+" limit "+inicio+","+fin+"" );		
 		return res;
+=======
+	public ResultSet sacarrespuestasporid(int  idpregunta, int inicio, int fin) {
+		try{
+			Statement consulta = conexion.createStatement();
+			ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.respuestas where idpregunta="+idpregunta+" limit "+inicio+","+fin+"" );		
+			return res;
+		}catch(SQLException e){
+			insertarerror(e);
+			return null;
+		}
+		
+>>>>>>> refs/remotes/origin/master
 	}
 	
 	/*
@@ -413,6 +609,7 @@ public class Conexion {
 	 *  
 	 */
 	
+<<<<<<< HEAD
 	public int InsertarRespuestas( String respuesta,int idpregunta,String usuario) throws SQLException {
 		
 		//Valores en la base de datos idrespuesta,respuesta,votospositivos,votosnegativos,mejorrespuesta,idpregunta
@@ -430,36 +627,101 @@ public class Conexion {
 		insertar.setString(8, fecha);
 		int res=insertar.executeUpdate();
 		
+=======
+	public int InsertarRespuestas( String respuesta,int idpregunta,String usuario) {
+		int res=-1;
+		try{
+			conexion.setAutoCommit(false);
+			//Valores en la base de datos idrespuesta,respuesta,votospositivos,votosnegativos,mejorrespuesta,idpregunta
+			String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+			String sql="Insert into dbdamproject.respuestas values (?,?,?,?,?,?,?,?)";
+			PreparedStatement insertar = conexion.prepareStatement(sql);
+			insertar.setInt(1,(ultimoid("idrespuesta", "dbdamproject.respuestas")));
+			
+			insertar.setString(2, respuesta);
+			insertar.setInt(3, 0);
+			insertar.setInt(4, 0);
+			insertar.setInt(5, 0);
+			insertar.setInt(6, idpregunta);
+			insertar.setString(7, usuario);
+			insertar.setString(8, fecha);
+			res=insertar.executeUpdate();
+			
+		}catch(SQLException e){
+			insertarerror(e);
+			return -1;
+		}
+		finally{
+			
+				try {
+					if(!conexion.getAutoCommit()){
+					conexion.setAutoCommit(true);
+					}
+					return res;
+
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					insertarerror(e);
+				}
+			}
+>>>>>>> refs/remotes/origin/master
 		return res;
-	}
+		}
+		
+	
 	
 	/*
 	 * Metodo que nos sirve para sumar un voto, se le pasa como parametro la respuesta y el tipo de voto si sera positivo o negativo.
 	 * 
 	 */
 	
-public int SumarVoto( int idrespuesta, String tipovoto) throws SQLException {
+public int SumarVoto( int idrespuesta, String tipovoto){
+		try{
+			String sql="update dbdamproject.respuestas set "+tipovoto+"=? where idrespuesta=?";
+			PreparedStatement insertar = conexion.prepareStatement(sql);
+			int numerootos=Integer.parseInt(sacarundatostring("select "+tipovoto+" from dbdamproject.respuestas where idrespuesta="+idrespuesta+""));
+			insertar.setInt(1,numerootos+1);
+			insertar.setInt(2, idrespuesta);
+			int res=insertar.executeUpdate();
+			
+			return res;
+		}catch(SQLException e){
+			insertarerror(e);
+			return -1;
+		}
 	
-	
-		String sql="update dbdamproject.respuestas set "+tipovoto+"=? where idrespuesta=?";
-		PreparedStatement insertar = conexion.prepareStatement(sql);
-		int numerootos=Integer.parseInt(sacarundatostring("select "+tipovoto+" from dbdamproject.respuestas where idrespuesta="+idrespuesta+""));
-		insertar.setInt(1,numerootos+1);
-		insertar.setInt(2, idrespuesta);
-		int res=insertar.executeUpdate();
 		
-		return res;
 	}
 	
-	public void insertarsolicitud(String usuario,String nombre,String apellido1,String apellido2) throws SQLException{
-		String sql="insert into dbdamproject.solicitudes values(?,?,?,?,?,?)";
-		PreparedStatement insertar=conexion.prepareStatement(sql);
-		insertar.setInt(1, ultimoid("idsolicitud", "solicitudes"));
-		insertar.setString(2, usuario);
-		insertar.setString(3, nombre);
-		insertar.setString(4, apellido1);
-		insertar.setString(5, apellido2);
-		insertar.setInt(6, 1);
-		insertar.executeUpdate();
+	public void insertarsolicitud(String usuario,String nombre,String apellido1,String apellido2){
+		try{
+			conexion.setAutoCommit(false);
+			String sql="insert into dbdamproject.solicitudes values(?,?,?,?,?,?)";
+			PreparedStatement insertar=conexion.prepareStatement(sql);
+			insertar.setInt(1, ultimoid("idsolicitud", "solicitudes"));
+			insertar.setString(2, usuario);
+			insertar.setString(3, nombre);
+			insertar.setString(4, apellido1);
+			insertar.setString(5, apellido2);
+			insertar.setInt(6, 1);
+			insertar.executeUpdate();
+			conexion.commit();
+		}catch(SQLException e){
+			insertarerror(e);
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				insertarerror(e);
+			}
+		}
+		finally{
+			try {
+				conexion.setAutoCommit(true);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				insertarerror(e);
+			}
+		}
+		
 	}
 }
