@@ -53,7 +53,7 @@ public class ServeletImagenes extends HttpServlet {
 			Conexion ca=(Conexion)sesion.getAttribute("conexion");
 			//ca.conectar();
 			String imgLen="";
-			rs1 = ca.sacarundato("select imagen from Imagenes where idimagen="+id+"");
+			rs1 = ca.sacarresultset("select imagen from Imagenes where idimagen="+id+"");
 				
 			if(rs1.next()){
 				  imgLen = rs1.getString(1);
