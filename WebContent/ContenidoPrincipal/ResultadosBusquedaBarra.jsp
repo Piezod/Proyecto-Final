@@ -165,7 +165,7 @@
 							 saco el numero maximo de respuestas para generar tantas etiquetas de numero como numero existan entre 10, es decir
 							 para 14 saco 2.
 							*/
-								ResultSet rp=c.sacarundato("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+(String)session.getAttribute("search")+"%' or titulo like '%"+(String)session.getAttribute("search")+"%'");
+								ResultSet rp=c.sacarresultset("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+(String)session.getAttribute("search")+"%' or titulo like '%"+(String)session.getAttribute("search")+"%'");
 							
 							
 							int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;

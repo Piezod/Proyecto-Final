@@ -228,7 +228,7 @@
 					<ul class="pagination" >
 						 <li><a href="#">&laquo;</a></li>
 							<% 
-								ResultSet r=co.sacarundato("select idpreguntas from dbdamproject.preguntas");
+								ResultSet r=co.sacarresultset("select idpreguntas from dbdamproject.preguntas");
 							
 								int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;
 									while (r.next())

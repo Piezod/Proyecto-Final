@@ -253,7 +253,7 @@ td{
     			{ 
     				do{
     					
-    					if (Integer.parseInt(rs.getString(3))/2 > Integer.parseInt(rs.getString(4)) || Integer.parseInt(rs.getString(3))==0 || Integer.parseInt(rs.getString(3))==1)
+    					if (Integer.parseInt(rs.getString(3))/2 > Integer.parseInt(rs.getString(4)) || Integer.parseInt(rs.getString(3))==0 )
     							{
     				%>
     				<div class="=container-fluid">
@@ -413,7 +413,7 @@ td{
 						 
 						 </li>
 							<% 
-								ResultSet r=c.sacarundato("select idrespuesta from dbdamproject.respuestas where idpregunta="+(int)session.getAttribute("idpregunta"));
+								ResultSet r=c.sacarresultset("select idrespuesta from dbdamproject.respuestas where idpregunta="+(int)session.getAttribute("idpregunta"));
 							
 								int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;
 									while (r.next())

@@ -77,7 +77,6 @@ public class ServerletAltaPregunta extends HttpServlet {
 		Conexion c=(Conexion)sesion.getAttribute("conexion");
 		
 		
-<<<<<<< HEAD
 		try {
 			//c.conectar();
 			
@@ -105,27 +104,6 @@ public class ServerletAltaPregunta extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-=======
-		int idpregunta=c.ultimoid("idpreguntas", "preguntas");
-		/*
-		 * Asignamos a la variable de sesion la id de pregunta para saber cual es la que tenemos que recargar
-		 */
-		
-		System.out.println(idpregunta+titulo+mensaje+(String)sesion.getAttribute("usuario"));
-		
-		c.InsertarPregunta(idpregunta,titulo, mensaje, (String)sesion.getAttribute("usuario"));
-		sesion.setAttribute("idpregunta", idpregunta);
-		//c.cerrarconexion();
-		/*
-		 *  Pongo por defecto los valores al pie de pagina, y luego se iran actualizando en funcion de lo que pulsemos
-		 */
-		sesion.setAttribute("pagpulsada",1); // la pagina que saldra indicada por defecto marcada
-		sesion.setAttribute("iniciores", 0); // el numero desde el que se buscara es decir desde el 0 hasta el ..
-		sesion.setAttribute("finres", 10); // el numero de resultados que mostrara por pagina
-		response.sendRedirect("respuesta");
->>>>>>> refs/remotes/origin/master
-		
-		
 	}
 
 }

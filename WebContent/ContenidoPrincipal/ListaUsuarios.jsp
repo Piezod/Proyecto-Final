@@ -42,7 +42,7 @@
 	  		*/
 	  			Conexion c=(Conexion)session.getAttribute("conexion");
 	  		//out.print("select * from usuarios where ciclo in (select ciclo from usuarios where usuario like '"+(String)session.getAttribute("usuario")+"')");
-	  		ResultSet ru=c.sacarundato("select * from usuarios where ciclo in (select ciclo from usuarios where usuario like '"+(String)session.getAttribute("usuario")+"') order by curso limit "+(int)session.getAttribute("iniciores")+","+(int)session.getAttribute("finres")+"" );
+	  		ResultSet ru=c.sacarresultset("select * from usuarios where ciclo in (select ciclo from usuarios where usuario like '"+(String)session.getAttribute("usuario")+"') order by curso limit "+(int)session.getAttribute("iniciores")+","+(int)session.getAttribute("finres")+"" );
 	  		while (ru.next())
 	  		{
 	  			%>
@@ -97,7 +97,7 @@
 							 resulset que dibujaran los pie de pagina en funcion de los resultados similares que existan, la variable nueva paginación es la que
 							 nos marcara los numeros de resultados a mostrar por pagina. Idea para meterlo en un <select> y que el usuario pueda decir cuantos resultados poner
 							*/
-								ResultSet r=c.sacarundato("Select * from usuarios where ciclo in (select ciclo from usuarios where usuario like '"+(String)session.getAttribute("usuario")+"') order by curso" );
+								ResultSet r=c.sacarresultset("Select * from usuarios where ciclo in (select ciclo from usuarios where usuario like '"+(String)session.getAttribute("usuario")+"') order by curso" );
 							
 								int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;
 									while (r.next())

@@ -293,8 +293,8 @@ public class Conexion {
 	 * Metodo para insertar datos en la tabla preguntas, recogeremos del formulario el titulo y la pregunta en si 
 	 * y pondremos el usuario que lo ha realizado 
 	 */
-<<<<<<< HEAD
-	public int InsertarPregunta(int idpregunta,String titulo,String descripcion,String usuario) throws SQLException {
+
+	public void InsertarPregunta(int idpregunta,String titulo,String descripcion,String usuario) throws SQLException {
 		
 		String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 		//System.out.println(fecha);
@@ -310,40 +310,9 @@ public class Conexion {
 		insertar.setString(4, usuario);
 		insertar.setString(5, fecha);
 		
-		
-		
 		int res=insertar.executeUpdate();
-		
-=======
-	public int InsertarPregunta(int idpregunta,String titulo,String descripcion,String usuario){
-		int res=0;
-		try{
-			String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-			//System.out.println(fecha);
-			//0000-00-00 00:00:00
-			
-			
-			String sql="Insert into dbdamproject.preguntas values (?,?,?,?,?)";
-			System.out.println(ultimoid("idpreguntas", "preguntas")+titulo+descripcion+usuario);
-			PreparedStatement insertar = conexion.prepareStatement(sql);
-			insertar.setInt(1,idpregunta );
-			insertar.setString(2, titulo);
-			insertar.setString(3, descripcion);
-			insertar.setString(4, usuario);
-			insertar.setString(5, fecha);
-			
-			
-			
-			res=insertar.executeUpdate();
-		}
-		catch (SQLException e)
-		{
-			insertarerror(e);
-		}
->>>>>>> refs/remotes/origin/master
-		return res;
-		
 	}
+		
 /*
  *  Metodo para sacar todos los usuarios de la base de datos y entregarlos en un array para trabajar con el
  */
@@ -400,6 +369,7 @@ public class Conexion {
 	{
 		try{
 			Statement consulta=conexion.createStatement();
+			//System.out.println("sacardato"+query);
 			ResultSet res=consulta.executeQuery(query);
 			String x=null;
 			if (res.next())
@@ -584,13 +554,7 @@ public class Conexion {
 	 * 
 	 */
 	
-<<<<<<< HEAD
-	public ResultSet sacarrespuestasporid(int  idpregunta, int inicio, int fin) throws SQLException {
-		Statement consulta = conexion.createStatement();
-		//System.out.println("SELECT * FROM dbdamproject.respuestas where idpregunta="+idpregunta+" limit "+inicio+","+fin+"");
-		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.respuestas where idpregunta="+idpregunta+" limit "+inicio+","+fin+"" );		
-		return res;
-=======
+
 	public ResultSet sacarrespuestasporid(int  idpregunta, int inicio, int fin) {
 		try{
 			Statement consulta = conexion.createStatement();
@@ -601,7 +565,6 @@ public class Conexion {
 			return null;
 		}
 		
->>>>>>> refs/remotes/origin/master
 	}
 	
 	/*
@@ -609,25 +572,8 @@ public class Conexion {
 	 *  
 	 */
 	
-<<<<<<< HEAD
-	public int InsertarRespuestas( String respuesta,int idpregunta,String usuario) throws SQLException {
+
 		
-		//Valores en la base de datos idrespuesta,respuesta,votospositivos,votosnegativos,mejorrespuesta,idpregunta
-		String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-		String sql="Insert into dbdamproject.respuestas values (?,?,?,?,?,?,?,?)";
-		PreparedStatement insertar = conexion.prepareStatement(sql);
-		insertar.setString(1,null);
-		
-		insertar.setString(2, respuesta);
-		insertar.setInt(3, 0);
-		insertar.setInt(4, 0);
-		insertar.setInt(5, 0);
-		insertar.setInt(6, idpregunta);
-		insertar.setString(7, usuario);
-		insertar.setString(8, fecha);
-		int res=insertar.executeUpdate();
-		
-=======
 	public int InsertarRespuestas( String respuesta,int idpregunta,String usuario) {
 		int res=-1;
 		try{
@@ -664,7 +610,6 @@ public class Conexion {
 					insertarerror(e);
 				}
 			}
->>>>>>> refs/remotes/origin/master
 		return res;
 		}
 		
@@ -676,6 +621,8 @@ public class Conexion {
 	 */
 	
 public int SumarVoto( int idrespuesta, String tipovoto){
+	
+	//System.out.println("update dbdamproject.respuestas set "+tipovoto+"=? where idrespuesta="+idrespuesta+"");
 		try{
 			String sql="update dbdamproject.respuestas set "+tipovoto+"=? where idrespuesta=?";
 			PreparedStatement insertar = conexion.prepareStatement(sql);
