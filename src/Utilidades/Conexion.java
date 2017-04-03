@@ -388,9 +388,10 @@ public class Conexion {
 
 	}
 		
-/*
- *  Metodo para sacar todos los usuarios de la base de datos y entregarlos en un array para trabajar con el
- */
+
+	/** Metodo para sacar todos los usuarios de la base de datos y entregarlos en un array para trabajar con el
+	 * @return Array de usuarios
+	 */
 	public String[] sacarusuarios(){
 		String[] x=new String[0];
 
