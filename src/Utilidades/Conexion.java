@@ -28,7 +28,11 @@ public class Conexion {
 		this.conexion = conexion;
 	}
 
-
+	
+	/** Conectamos a base de datos e instanciamos la conexion si es null
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public void conectar() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		String url = "jdbc:mysql://31.200.243.193:51987/dbdamproject";
@@ -43,6 +47,9 @@ public class Conexion {
 	{
 		conexion.close();
 	}
+	/** Método para insertar en la bd un error generado en los try catch e insertamos el error y la stack trace
+	 * @param ex
+	 */
 	public void insertarerror(Exception ex){
 		StringWriter writer = new StringWriter();
 		PrintWriter printWriter = new PrintWriter( writer );
@@ -56,6 +63,11 @@ public class Conexion {
 			
 		}
 	}
+	/** Generamos una comprovacion nueva para los usuarios para poder recuperar la contraseña
+	 * @param codigo Código para insertar en la base de datos y actualizarlo
+	 * @param email E-mail al que poner el código nuevo
+	 * @return Devuelve true si todo ha salido correcto o falso si ha dado alguna excepcion
+	 */
 	public boolean nuevacomprobacion(String codigo,String email){
 		boolean err=false;
 		try {
@@ -85,6 +97,12 @@ public class Conexion {
 		return err;
 	}
 
+	/** Comprobación del login 
+	 * @param user Cadena de usuario de login
+	 * @param pass Cadena de contraseña para el login
+	 * @param codvalid Codigo de validacion opcional para validar el usuario en caso de que no esté activo
+	 * @return Devuelve true si Todo ha salido correcto o estaba inactivo y el código era correcto o falso si ha habido algun error
+	 */
 	public boolean comprobarlogin(String user, String pass,String codvalid){
 		boolean enc=false;
 		try{
@@ -139,6 +157,10 @@ public class Conexion {
 			
 	}
 
+	/** Método para actualizar la contraseña a traves de la opcion de recordar la contraseña
+	 * @param pass Nueva contraseña
+	 * @param codigo codigo de validacion
+	 */
 	public void actualizarpass(String pass,String codigo){
 		try{
 			conexion.setAutoCommit(false);
@@ -171,7 +193,13 @@ public class Conexion {
 			}
 		}
 	}
-	private int contar(String query) throws SQLException {
+	/**
+	 * @param query
+	 * @return
+	 * @throws SQLException
+	 */
+	private int contar(String query) {
+		try{
 		Statement consulta = conexion.createStatement();
 		ResultSet res = consulta.executeQuery(query);
 		int dev;
@@ -179,6 +207,10 @@ public class Conexion {
 		dev = res.getInt(1);
 
 		return dev;
+		}catch(SQLException e){
+			insertarerror(e);
+			return -1;
+		}
 	}
 
 	public String generarusuario(String nombre, String apellido1, String apellido2) throws SQLException {
@@ -207,6 +239,18 @@ public class Conexion {
 		return usuario;
 	}
 
+	/** Método para registrar usuarios a partir del registro
+	 * @param usuario Nombre de Usuario generado por un método anterior
+	 * @param pass Contraseña generada automaticamente
+	 * @param validacion Código de validacion aleatorio para validar el primer login
+	 * @param nombre Nombre del usuario
+	 * @param apellido1 Primer apellido del usuario
+	 * @param apellido2 Segundo apellido del usuario
+	 * @param email email del usuario al que se le enviara un correo con los datos del login
+	 * @param curso Curso del usuario
+	 * @param ciclo Ciclo del usuario
+	 * @return Devuelve el codigo del usuario creado o -1 si ha dado algun error
+	 */
 	public int InsertarRegistro(String usuario,String pass,String validacion,String nombre, String apellido1, String apellido2, String email, String curso,
 			String ciclo) {
 		int res=0;
@@ -263,10 +307,13 @@ public class Conexion {
 
 	}
 	
-	/*
-	 * Metodo que nos devuelve el ultimo id mas 1 para que podamos realizar nuevos inserts.
-	 */
+
 	
+	/** Metodo que nos devuelve el ultimo id mas 1 para que podamos realizar nuevos inserts.
+	 * @param primarykey La clave primaria de la tabla a buscar
+	 * @param tabla La tabla sobre la que se hará la consulta
+	 * @return Devuelve El ultimo código +1 o 0 en caso de algun error.
+	 */
 	public int ultimoid(String primarykey,String tabla){
 		int dev=0;
 
@@ -289,13 +336,20 @@ public class Conexion {
 		
 	}
 	
-	/*
-	 * Metodo para insertar datos en la tabla preguntas, recogeremos del formulario el titulo y la pregunta en si 
-	 * y pondremos el usuario que lo ha realizado 
-	 */
 
-	public void InsertarPregunta(int idpregunta,String titulo,String descripcion,String usuario) throws SQLException {
-		
+
+
+	/**
+	 * @param idpregunta
+	 * @param titulo
+	 * @param descripcion
+	 * @param usuario
+	 * @return
+	 */
+	public int InsertarPregunta(String titulo,String descripcion,String usuario){
+		int res=0;
+		try{
+			conexion.setAutoCommit(false);
 		String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 		//System.out.println(fecha);
 		//0000-00-00 00:00:00
@@ -309,8 +363,29 @@ public class Conexion {
 		insertar.setString(3, descripcion);
 		insertar.setString(4, usuario);
 		insertar.setString(5, fecha);
-		
-		int res=insertar.executeUpdate();
+		insertar.executeUpdate();
+		res=ultimoid("idpregunta", "preguntas");
+		conexion.commit();
+		}catch(SQLException e){
+			res=-1;
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				insertarerror(e);
+			}
+		}
+		finally{
+			try {
+				conexion.setAutoCommit(true);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				insertarerror(e);
+			}
+
+		}
+		return res;
+
 	}
 		
 /*
