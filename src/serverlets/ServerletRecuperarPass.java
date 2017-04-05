@@ -50,7 +50,7 @@ public class ServerletRecuperarPass extends HttpServlet {
 				if(c.comprobar("select * from dbdamproject.usuarios where email like '"+request.getParameter("email").replaceAll("\'\"\\@\\$\\%", "")+"'")){
 				String validacion=Long.toHexString(Double.doubleToLongBits(Math.random()));
 				c.nuevacomprobacion(validacion, request.getParameter("email").toString());
-				String ruta="http://localhost:8080/Proyectoprueba/recuperarpass";
+				String ruta="http://90.162.66.76/EstudiantesConecta2/recuperarpass";
 				Correo correo=new Correo("<h1>Parece que ha perdido su contraseña</h1>Acceda a <a href="+'"'+ruta+"?cod="+validacion+'"'+">este link</a> para reestablecer su contraseña<br><strong>Si usted no ha solicitado este cambio ignore este correo</strong>", request.getParameter("email"), "Recuperacion de contraseña estudiantes conectados");
 				correo.SendMail();
 				

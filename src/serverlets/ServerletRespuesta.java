@@ -71,7 +71,7 @@ public class ServerletRespuesta extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			response.sendRedirect("respuesta");
+			response.sendRedirect("Respuesta");
 			}
 		
 	}
@@ -91,7 +91,7 @@ public class ServerletRespuesta extends HttpServlet {
 		sesion.setAttribute("pagpulsada",1); // la pagina que saldra indicada por defecto marcada
 		sesion.setAttribute("iniciores", 0); // el numero desde el que se buscara es decir desde el 0 hasta el ..
 		sesion.setAttribute("finres", 10); // el numero de resultados que mostrara por pagina
-		response.sendRedirect("respuesta");
+		response.sendRedirect("Respuesta");
 		
 		
 		

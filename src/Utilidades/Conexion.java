@@ -747,4 +747,5 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 		}
 		
 	}
+	
 }

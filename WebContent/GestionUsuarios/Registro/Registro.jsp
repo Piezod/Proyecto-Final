@@ -81,13 +81,13 @@
 
 <!-- Website CSS style -->
 <!-- <link href="../../Bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Website Font style -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 <!-- <link rel="stylesheet" href="registro.css"> -->
-<link rel="stylesheet" href="GestionUsuarios/Registro/registro.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/GestionUsuarios/Registro/registro.css">
 <!-- Google Fonts -->
 <link href='https://fonts.googleapis.com/css?family=Passion+One'
 	rel='stylesheet' type='text/css'>

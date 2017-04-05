@@ -58,7 +58,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Respuesta</servlet-name>
-    <url-pattern>/respuesta</url-pattern>
+    <url-pattern>/Respuesta</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Cabecera</servlet-name>
@@ -132,4 +132,40 @@
     <servlet-name>Detalleusuarios</servlet-name>
     <url-pattern>/detalleusuario</url-pattern>
   </servlet-mapping>
+    <!-- 
+  
+  <servlet>
+    <servlet-name>Boostrapcss</servlet-name>
+    <jsp-file>/Bootstrap/css/bootstrap.min.css</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Boostrapcss</servlet-name>
+    <url-pattern>/bootstrap.css</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Bootstrapjs</servlet-name>
+    <jsp-file>/Bootstrap/js/bootstrap.min.js</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Boostrapjs</servlet-name>
+    <url-pattern>/bootstrap.js</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>JQuery</servlet-name>
+    <jsp-file>/Bootstrap/js/jquery-1.11.3.min.js</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JQuery</servlet-name>
+    <url-pattern>/jquery.min.js</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Ajax</servlet-name>
+    <jsp-file>/Bootstrap/js/ajax.js</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Ajax</servlet-name>
+    <url-pattern>/ajax.js</url-pattern>
+  </servlet-mapping>
+   -->
 </web-app>
+

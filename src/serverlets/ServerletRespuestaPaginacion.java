@@ -56,7 +56,7 @@ public class ServerletRespuestaPaginacion extends HttpServlet {
 				
 				case "respuesta":
 					
-					response.sendRedirect("respuesta?pagpulsada="+Integer.parseInt(request.getParameter("pagpulsada")));
+					response.sendRedirect("Respuesta?pagpulsada="+Integer.parseInt(request.getParameter("pagpulsada")));
 					break;
 				case "busqueda":
 					response.sendRedirect("search1?pagpulsada="+Integer.parseInt(request.getParameter("pagpulsada")));
