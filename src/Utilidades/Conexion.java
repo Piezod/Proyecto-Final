@@ -470,6 +470,8 @@ public class Conexion {
 
 	public boolean comprobar(String query){
 		try{
+			conectar();
+
 			Statement consulta = conexion.createStatement();
 			ResultSet res = consulta.executeQuery(query);
 			return res.next();
@@ -478,6 +480,11 @@ public class Conexion {
 		{
 			insertarerror(e);
 			return false;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+
 		}
 		
 		

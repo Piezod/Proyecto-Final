@@ -3,6 +3,7 @@ package serverlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -46,7 +47,11 @@ public class ServerletDetalleUsuario extends HttpServlet {
 		try {
 			
 			ArrayList<String> l=list.infousuario();
+			HashMap<String, String> hm=list.preguntasusuariohm1();
+			HashMap<String, ArrayList> hml=list.preguntasusuariohm2();
 			request.setAttribute("listausuario",l);
+			request.setAttribute("hm", hm);
+			request.setAttribute("hml", hml);
 			String nextJSP = "/detalleusuario";
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
 			dispatcher.forward(request,response);
