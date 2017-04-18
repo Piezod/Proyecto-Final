@@ -19,7 +19,7 @@ Conexion ca=new Conexion();
     			Sacamos la imagen de la base de datos y la dibujamos donde tiene que ir el logotipo, en la parte izuierda de la cabecera, en caso de 
     			que no exista la imagen o no se encuentre se pondra por defecto el nombre de la aplicación.
     		*/
-    		ResultSet r1=ca.sacarundato("select imagen from Imagenes where idimagen=1");	
+    		ResultSet r1=ca.sacarresultset("select imagen from Imagenes where idimagen=1");	
     		
     		if (r1.next())
     		{
