@@ -43,9 +43,14 @@ public class Conexion {
 
 	}
 	
-	public void cerrarconexion() throws SQLException
+	public void cerrarconexion()
 	{
-		conexion.close();
+		try {
+			conexion.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			insertarerror(e);
+		}
 	}
 	/** Método para insertar en la bd un error generado en los try catch e insertamos el error y la stack trace
 	 * @param ex
@@ -57,10 +62,14 @@ public class Conexion {
 		printWriter.flush();
 
 		String error = writer.toString();
+		
 		try{
-			conexion.createStatement().executeUpdate("Insert into dbdamproject.logs values('"+error+"')");
-		}catch (SQLException e){
-			
+			conectar();
+			Statement insertar=conexion.createStatement();
+			insertar.executeUpdate("Insert into logs values(null,'"+ex.getMessage()+"')");
+		}catch (SQLException | ClassNotFoundException e){
+			//System.out.println("Error ");
+			e.printStackTrace();
 		}
 	}
 	/** Generamos una comprovacion nueva para los usuarios para poder recuperar la contraseña
@@ -337,9 +346,22 @@ public class Conexion {
 	}
 	
 
+	private void insertaractividad(int idpreg,int idres,String texto,String usuario,String fecha){
+		try {
+			PreparedStatement insertar=conexion.prepareStatement("insert into dbdamproject.actividad values (?,?,?,?,?)");
+			insertar.setInt(1, idpreg);
+			insertar.setInt(2, idres);
+			insertar.setString(3, texto);
+			insertar.setString(4, texto);
+			insertar.setString(5, usuario);
+			insertar.executeQuery();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			insertarerror(e);
+		}
+	}
 
-
-	/**
+	/** Método para insertar preguntas en la base de datos
 	 * @param idpregunta
 	 * @param titulo
 	 * @param descripcion
@@ -356,15 +378,15 @@ public class Conexion {
 		
 		
 		String sql="Insert into dbdamproject.preguntas values (?,?,?,?,?)";
-		//System.out.println(ultimoid("idpreguntas", "preguntas")+titulo+descripcion+usuario);
 		PreparedStatement insertar = conexion.prepareStatement(sql);
 		insertar.setString(1,null );
 		insertar.setString(2, titulo);
 		insertar.setString(3, descripcion);
 		insertar.setString(4, usuario);
 		insertar.setString(5, fecha);
-		insertar.executeUpdate();
 		res=ultimoid("idpregunta", "preguntas");
+		insertar.executeUpdate();
+		insertaractividad(res, 0, titulo, usuario, fecha);
 		conexion.commit();
 		}catch(SQLException e){
 			res=-1;
@@ -658,7 +680,8 @@ public class Conexion {
 			String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 			String sql="Insert into dbdamproject.respuestas values (?,?,?,?,?,?,?,?)";
 			PreparedStatement insertar = conexion.prepareStatement(sql);
-			insertar.setInt(1,(ultimoid("idrespuesta", "dbdamproject.respuestas")));
+			int ultimoid=ultimoid("idrespuesta", "dbdamproject.respuestas");
+			insertar.setInt(1,ultimoid);
 			
 			insertar.setString(2, respuesta);
 			insertar.setInt(3, 0);
@@ -668,7 +691,7 @@ public class Conexion {
 			insertar.setString(7, usuario);
 			insertar.setString(8, fecha);
 			res=insertar.executeUpdate();
-			
+			insertaractividad(0, ultimoid, respuesta, usuario, fecha);
 		}catch(SQLException e){
 			insertarerror(e);
 			return -1;
@@ -747,5 +770,27 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 		}
 		
 	}
+	
+	public int[] idstag(String busqueda, int inicio){
+		try {
+			PreparedStatement consulta=conexion.prepareStatement("select * from tags where nombre like '%"+busqueda+"%' or descripcion like '%"+busqueda+"%' limit "+inicio*9+",9");
+			
+			ResultSet res=consulta.executeQuery();
+			int[] ids=new int[contar("select count(*) from tags where nombre like '%"+busqueda+"%' or descripcion like '%"+busqueda+"%' limit "+inicio*9+",9")];
+			for(int i=0;i<ids.length;i++){
+				res.next();
+				ids[i]=res.getInt(1);
+			}
+			return ids;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			insertarerror(e);
+			return new int[0];
+		}
+		
+		
+		
+	}
+	
 	
 }

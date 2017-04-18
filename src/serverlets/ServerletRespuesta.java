@@ -65,12 +65,7 @@ public class ServerletRespuesta extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-		try {
-			c1.cerrarconexion();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		c1.cerrarconexion();
 			response.sendRedirect("Respuesta");
 			}
 		

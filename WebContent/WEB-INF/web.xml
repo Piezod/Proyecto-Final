@@ -52,6 +52,14 @@
     <servlet-name>Pregunta</servlet-name>
     <url-pattern>/Pregunta</url-pattern>
   </servlet-mapping>
+ <servlet>
+    <servlet-name>SugerenciasTag</servlet-name>
+    <jsp-file>/ContenidoPrincipal/SugerenciasTag.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SugerenciasTag</servlet-name>
+    <url-pattern>/SugerenciasTag</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>Respuesta</servlet-name>
     <jsp-file>/ContenidoPrincipal/Respuesta.jsp</jsp-file>
@@ -83,6 +91,14 @@
   <servlet-mapping>
     <servlet-name>DatosUsuario</servlet-name>
     <url-pattern>/DatosUsuario</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ActividadUsuario</servlet-name>
+    <jsp-file>/GestionUsuarios/ActividadUsuario.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActividadUsuario</servlet-name>
+    <url-pattern>/ActividadUsuario</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>EditarUsuario</servlet-name>

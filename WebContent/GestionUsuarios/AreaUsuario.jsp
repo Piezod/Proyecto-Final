@@ -85,14 +85,14 @@ function mostrarocultar(campo){
 		<div class="col-sm-12 col-xs-12 col-md-0 hidden-md hidden-lg" align="left">
 		      <button type="button" class="btn btn-default"  onclick="from('<%=session.getAttribute("usuario") %>','contenido','DatosUsuario')">Visualizar</button>
 		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','EditarUsuario')">Editar</button>
-		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','MostrarActividad')">Actividad</button>
+		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','ActividadUsuario')">Actividad</button>
 		      
 		  </div>
 		  <div class="col-md-3 col-sm-0 col-xs-0 hidden-sm hidden-xs"  align="right">
 		  	  <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
 		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','DatosUsuario')">Visualizar Datos</button>
 		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','EditarUsuario')">Editar Datos</button>
-		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','MostrarActividad')">Actividad de usuario</button>
+		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','ActividadUsuario')">Actividad de usuario</button>
 		      
 	        </div>
 		  </div>
