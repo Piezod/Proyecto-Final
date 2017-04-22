@@ -328,7 +328,7 @@ public class Conexion {
 
 		try{
 		Statement consulta = conexion.createStatement();
-		System.out.println("select max("+primarykey+") from "+tabla);
+	//	System.out.println("select max("+primarykey+") from "+tabla);
 		ResultSet res = consulta.executeQuery("select max("+primarykey+") from "+tabla);
 		
 		if(res.next())
@@ -568,6 +568,8 @@ public class Conexion {
 
 	public boolean comprobar(String query){
 		try{
+			conectar();
+
 			Statement consulta = conexion.createStatement();
 			ResultSet res = consulta.executeQuery(query);
 			return res.next();
@@ -576,6 +578,11 @@ public class Conexion {
 		{
 			insertarerror(e);
 			return false;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+
 		}
 		
 		
@@ -771,6 +778,14 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 		
 	}
 	
+	/**
+	 * @param query La query para realizar el insert para actualizar el dato
+	 */
+	public void actualizardato(String query)
+	{
+		
+	}
+
 	public int[] idstag(String busqueda, int inicio){
 		try {
 			PreparedStatement consulta=conexion.prepareStatement("select * from tags where nombre like '%"+busqueda+"%' or descripcion like '%"+busqueda+"%' limit "+inicio*9+",9");
@@ -791,6 +806,5 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 		
 		
 	}
-	
-	
 }
+	

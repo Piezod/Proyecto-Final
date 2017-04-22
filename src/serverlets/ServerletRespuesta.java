@@ -34,42 +34,70 @@ public class ServerletRespuesta extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		response.getWriter().append("Served at: de respuesta").append(request.getContextPath());
-
 		
-		if (request.getParameter("sumo")!=null ||request.getParameter("resto")!=null)
-			{
-			Conexion c1=new Conexion();
-			try {
-				c1.conectar();
-			} catch (ClassNotFoundException | SQLException e1) {
+		/*
+		 * Se ha creado una tabla auxiliar donde almacenar si la respuesta ha recibido ya un voto, si existe en esa tabla no se podra realizar la suma 
+		 * del voto, por el contrario, si aun no ha existido una votacion, se realizara la suma del voto y el insert en la tabla auxiliar para que
+		 * quede constancia y en futuras votaciones a la misma pregunta no se le sume.
+		 */
+		Conexion c1=(Conexion)request.getSession().getAttribute("conexion");
+		try {
+
+			c1.conectar();
+		}
+		 catch (ClassNotFoundException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-			if (request.getParameter("sumo")!=null && Integer.parseInt(request.getParameter("sumo"))==1)
-			{
-					try {
-						c1.SumarVoto(Integer.parseInt(request.getParameter("idrespuesta")),"votospositivos");
-					} catch (NumberFormatException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+		 }
+		String usuario=(String)request.getSession().getAttribute("usuario");
+		
+		int idpregunta=Integer.parseInt(request.getParameter("idrespuesta"));
+		System.out.println(usuario);
+		System.out.println(idpregunta);
+		
+		if (!c1.comprobar("select * from votopregunta where idpregunta="+idpregunta+" and idusuario like '"+usuario+"'"))
+		{
+		      System.out.println("no existe, se haria el insert");
+				/*
+				 * Recogo los valores que me envian desde respuesta por variable, tengo si sumo o resto, en funcion de lo que recoja realizo una u otra operacion
+				 * en la id de pregunta que se recoge por el get.
+				 */
+				if (request.getParameter("sumo")!=null ||request.getParameter("resto")!=null)
+					{
+				
+					}
+					if (request.getParameter("sumo")!=null && Integer.parseInt(request.getParameter("sumo"))==1)
+					{
+							try {
+								c1.SumarVoto(Integer.parseInt(request.getParameter("idrespuesta")),"votospositivos");
+							} catch (NumberFormatException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+					}
+					else if (request.getParameter("resto")!=null && Integer.parseInt(request.getParameter("resto"))==1)
+					{
+						
+						try {
+							c1.SumarVoto(Integer.parseInt(request.getParameter("idrespuesta")),"votosnegativos");
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 					
-			}
-			else if (request.getParameter("resto")!=null && Integer.parseInt(request.getParameter("resto"))==1)
-			{
-				
-				try {
-					c1.SumarVoto(Integer.parseInt(request.getParameter("idrespuesta")),"votosnegativos");
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					
 				}
-			}
-		c1.cerrarconexion();
-			response.sendRedirect("Respuesta");
-			}
+		else
+		{
+			System.out.println("Existe, no se puede hacer el insert");
+		}
 		
-	}
+			response.sendRedirect("respuesta");
+		}
+		
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
