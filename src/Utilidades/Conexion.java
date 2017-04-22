@@ -778,8 +778,6 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 		
 	}
 	
-<<<<<<< HEAD
-	
 	/**
 	 * @param query La query para realizar el insert para actualizar el dato
 	 */
@@ -787,7 +785,7 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 	{
 		
 	}
-=======
+
 	public int[] idstag(String busqueda, int inicio){
 		try {
 			PreparedStatement consulta=conexion.prepareStatement("select * from tags where nombre like '%"+busqueda+"%' or descripcion like '%"+busqueda+"%' limit "+inicio*9+",9");
@@ -808,7 +806,5 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 		
 		
 	}
-	
-	
->>>>>>> refs/remotes/origin/master
 }
+	

@@ -89,19 +89,13 @@ public class ServerletRespuesta extends HttpServlet {
 					
 					
 				}
-<<<<<<< HEAD
 		else
 		{
 			System.out.println("Existe, no se puede hacer el insert");
 		}
 		
 			response.sendRedirect("respuesta");
-=======
-			}
-		c1.cerrarconexion();
-			response.sendRedirect("Respuesta");
->>>>>>> refs/remotes/origin/master
-			}
+		}
 		
 
 
