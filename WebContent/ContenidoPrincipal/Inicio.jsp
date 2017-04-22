@@ -240,13 +240,13 @@
 											if (pagpulsada==numeropagina)
 											{
 												%>
-												<li class="active" ><a " href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+												<li class="active" ><a href="${pageContext.request.contextPath}/ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 											}
 											else
 											{
 												
 											%>
-											<li><a href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											<li><a href="${pageContext.request.contextPath}/ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 											
 											}
 											nuevapaginaion=0;
@@ -262,13 +262,13 @@
 										if (pagpulsada==numeropagina)
 										{
 											%>
-											<li class="active" ><a " href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											<li class="active" ><a href="${pageContext.request.contextPath}/ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 										}
 										else
 										{
 											
 										%>
-										<li><a href="ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+										<li><a href="${pageContext.request.contextPath}/ServerletAltaPregunta?inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 										
 										}
 										nuevapaginaion=0;

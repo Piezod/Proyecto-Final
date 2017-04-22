@@ -150,7 +150,7 @@ td{
 <div class="row">
 <div class="col-md-offset-0 col-md-12">
   	<ol class="breadcrumb">
-  		<li><a href="ServerletContenido">Inicio</a></li>
+  		<li><a href="${pageContext.request.contextPath}/ServerletContenido">Inicio</a></li>
   		<li class="active">Detalle pregunta</li>
 	</ol>
 </div>
@@ -271,9 +271,9 @@ td{
 				         	  			<td colspan="2" align="right">Fecha Respuesta : <%= rs.getString(8) %> </td>				         	  			
 				         	  		</tr>
 				         	  		<tr>
-				         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
+				         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="${pageContext.request.contextPath}/ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
 				         	  		 
-				         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span><a  href="ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
+				         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span><a  href="${pageContext.request.contextPath}/ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
 				         	  		 </tr>
 				         	  	</table>
 				         	  </div>
@@ -308,9 +308,9 @@ td{
     					         	  			
     					         	  		</tr>
     					         	  		<tr>
-    					         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span> <a href="ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit" style="margin:2%"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
+    					         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span> <a href="${pageContext.request.contextPath}/ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit" style="margin:2%"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
     					         	  		 
-    					         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span> <a  href="ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-danger" type="submit" style="margin:2%"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
+    					         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span> <a  href="${pageContext.request.contextPath}/ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-danger" type="submit" style="margin:2%"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
     					         	  		 </tr>
     					         	  	</table>
     					         	  </div>
@@ -425,13 +425,13 @@ td{
 											if (pagpulsada==numeropagina)
 											{
 												%>
-												<li class="active" ><a " href="ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+												<li class="active" ><a  href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 											}
 											else
 											{
 												
 											%>
-											<li><a href="ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											<li><a href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 											
 											}
 											nuevapaginaion=0;
@@ -447,13 +447,13 @@ td{
 										if (pagpulsada==numeropagina)
 										{
 											%>
-											<li class="active" ><a " href="ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											<li class="active" ><a  href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 										}
 										else
 										{
 											
 										%>
-										<li><a href="ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+										<li><a href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
 										
 										}
 										nuevapaginaion=0;

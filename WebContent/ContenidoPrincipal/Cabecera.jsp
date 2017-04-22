@@ -6,10 +6,11 @@
    <%@ page import="Utilidades.*" %>
 
 
-<script src="Bootstrap/js/jquery-1.11.3.min.js"></script>
-<script src="Bootstrap/js/bootstrap.min.js"></script>
-<link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="Bootstrap/css/Estilospropios.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/Bootstrap/js/jquery-1.11.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/Bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/Bootstrap/js/ajax.js"></script>
+<link href="${pageContext.request.contextPath}/Bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/Bootstrap/css/Estilospropios.css" rel="stylesheet">
 <style>
 	body{
 		background-image: url("Fondos/20.jpg"); <!-- probar el 10,20,y-->
@@ -41,7 +42,7 @@
     <div class="navbar-header">
           <!-- ** Boton del home ** -->
     
-			<a href="Inicio"><input type="image" src="ServeletImagenes?id=2" name="contenido" style="height: 50px"></input></a>
+			<a href="${pageContext.request.contextPath}/Inicio"><input type="image" src="ServeletImagenes?id=2" name="contenido" style="height: 50px"></input></a>
       
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       </div>
@@ -54,7 +55,7 @@
       
     	
         
-        <li><a href="ServerletRespuestaPaginacion?pag=usuarios&inicio=0&fin=10&pagpulsada=1&iniciopagina=1">Usuarios</a></li>
+        <li><a href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=usuarios&inicio=0&fin=10&pagpulsada=1&iniciopagina=1">Usuarios</a></li>
 		
       </ul>
       <form class="navbar-form navbar-left" role="search" action="ServeletBusqueda" method="POST" >
@@ -69,14 +70,14 @@
         <li class="dropdown" style="margin-right:10px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("usuario") %><span class="caret"></span></a>
           <ul class="dropdown-menu">
 
-            <li><a  class="list-group-item" href="AreaUsuario">Datos de usuario</a></li>
+            <li><a  class="list-group-item" href="${pageContext.request.contextPath}/AreaUsuario">Datos de usuario</a></li>
             <%if(session.getAttribute("admin").equals("1")){ %>
-            <li class="list-group-item-success"><a href="ZonaAdmin">Zona Administrador</a></li>
+            <li class="list-group-item-success"><a href="${pageContext.request.contextPath}/ZonaAdmin">Zona Administrador</a></li>
             <%} %>
             <li role="separator" class="divider"></li>
             <li>
             
-            <a href="CerrarSesion?logout=1">Cerrar sesion</a>
+            <a href="${pageContext.request.contextPath}/CerrarSesion?logout=1">Cerrar sesion</a>
             
             </li>
           </ul>

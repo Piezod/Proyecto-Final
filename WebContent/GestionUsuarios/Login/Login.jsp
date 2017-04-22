@@ -49,9 +49,9 @@ function valideDatos() {
   <title>Estudiantes Conecta2</title>
  	 <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'>
 
-      <link rel="stylesheet" href="GestionUsuarios/Login/css/style.css" type="text/css">
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/GestionUsuarios/Login/css/style.css" type="text/css">
 
-  <link href="Bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/Bootstrap/css/bootstrap.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=0.8">
   
 </head>
@@ -159,7 +159,7 @@ if(session.getAttribute("usuario")!=null)
 				</div>
 				<div class="hr"></div>
 				<div class="foot-lnk">
-					<a href="recuperarpass">Recuperar Contraseña</a>
+					<a href="${pageContext.request.contextPath}/recuperarpass">Recuperar Contraseña</a>
 				</div>
 			</div>
 		</div>

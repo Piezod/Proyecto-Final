@@ -195,7 +195,7 @@
 <div class="row">
 <div class="col-md-offset-0 col-md-12">
   	<ol class="breadcrumb">
-  		<li><a href="ServerletContenido">Inicio</a></li>
+  		<li><a href="${pageContext.request.contextPath}/ServerletContenido">Inicio</a></li>
   		<li class="active">Alta pregunta</li>
 	</ol>
 </div>
@@ -217,7 +217,7 @@
 
 				<div class="container-fluid" style="margin-top: 3%">
 					<br>
-					<form class="form-horizontal" action="ServerletAltaPregunta" method="POST" onsubmit="return comprobarregistro();">
+					<form class="form-horizontal" id="altapregunta" name="altapregunta" action="ServerletAltaPregunta" method="POST" onsubmit="return comprobarregistro();">
 
 						<div id="titulaso">
 							<div class="form-group">
@@ -257,11 +257,12 @@
 			<div class="form-group">
 				<label class="col-md-offset-2 control-label col-sm-1  " for="titulo">
 					<span class="label label-info "
-					style="font-size: 14px; margin-top: 2px;"> Tag </span>
+					style="font-size: 14px; margin-top: 2px;"> Tags </span>
 				</label>
 				<div class="col-sm-6 col-md-">
-					<input type="text" class="form-control" id="titulo"
-						placeholder="Crea tu propio tag o usa los mas buscados" name="tag">
+					<input type="text" class="form-control" id="tag"
+						placeholder="Crea tu propio tag o usa los mas buscados" name="tag" onkeyup="from(document.getElementById('tag').value,'tagsugeridos','SugerenciasTag')" >
+					<div class="alert alert-info" id="tagsugeridos"></div>
 				</div>
 			</div>
 		</div>

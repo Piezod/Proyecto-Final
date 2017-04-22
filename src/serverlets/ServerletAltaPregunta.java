@@ -66,14 +66,14 @@ public class ServerletAltaPregunta extends HttpServlet {
 		/*
 		 * Sacamos el usuario que ha realizado la pregunta para ingresarlo en la base de datos
 		 */
-		request.getAttribute("titulo");
+		//request.getAttribute("titulo");
 		String titulo= request.getParameter("titulo");
 		/*
 		 * Recogemos el valor del textarea y hacemos un replace \n por el <br> para guardar el salto de linea y el formato que nos ha introducido el 
 		 * usuario
 		 */
 		String mensaje=request.getParameter("mensajeoculto");
-		
+
 		Conexion c=(Conexion)sesion.getAttribute("conexion");
 		
 		
@@ -87,7 +87,7 @@ public class ServerletAltaPregunta extends HttpServlet {
 		sesion.setAttribute("pagpulsada",1); // la pagina que saldra indicada por defecto marcada
 		sesion.setAttribute("iniciores", 0); // el numero desde el que se buscara es decir desde el 0 hasta el ..
 		sesion.setAttribute("finres", 10); // el numero de resultados que mostrara por pagina
-		response.sendRedirect("respuesta?idpregunta="+idpregunta);
+		response.sendRedirect(request.getContextPath()+"/Respuesta?idpregunta="+idpregunta);
 		}
 		else{
 			

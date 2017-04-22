@@ -18,7 +18,7 @@ piedepagina {
 </head>
 <body>
 <hr>
-      <p class="piedepagina" align="center">Copyright &copy; 2017 &middot; Todos los derechos reservados &middot; <a href="Inicio" >Estudiantes Conecta2</a></p>
+      <p class="piedepagina" align="center">Copyright &copy; 2017 &middot; Todos los derechos reservados &middot; <a href="${pageContext.request.contextPath}/Inicio" >Estudiantes Conecta2</a></p>
 <hr>
 </body>
 </html>
