@@ -89,12 +89,18 @@ public class ServerletRespuesta extends HttpServlet {
 					
 					
 				}
+<<<<<<< HEAD
 		else
 		{
 			System.out.println("Existe, no se puede hacer el insert");
 		}
 		
 			response.sendRedirect("respuesta");
+=======
+			}
+		c1.cerrarconexion();
+			response.sendRedirect("Respuesta");
+>>>>>>> refs/remotes/origin/master
 			}
 		
 
@@ -114,7 +120,7 @@ public class ServerletRespuesta extends HttpServlet {
 		sesion.setAttribute("pagpulsada",1); // la pagina que saldra indicada por defecto marcada
 		sesion.setAttribute("iniciores", 0); // el numero desde el que se buscara es decir desde el 0 hasta el ..
 		sesion.setAttribute("finres", 10); // el numero de resultados que mostrara por pagina
-		response.sendRedirect("respuesta");
+		response.sendRedirect("Respuesta");
 		
 		
 		

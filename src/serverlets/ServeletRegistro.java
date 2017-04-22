@@ -40,7 +40,7 @@ public class ServeletRegistro extends HttpServlet {
 		Conexion c=new Conexion();
 		try {
 			
-			//c.conectar();
+			c.conectar();
 			if(c.comprobar("select * from dbdamproject.usuarios where email like '"+request.getParameter("email")+"'")){
 				sesion.setAttribute("Emailduplicado", "si");
 				sesion.setAttribute("nombre", request.getParameter("nombre"));
@@ -58,7 +58,7 @@ public class ServeletRegistro extends HttpServlet {
 				String validacion=Long.toHexString(Double.doubleToLongBits(Math.random()));
 				int res=c.InsertarRegistro(usuario,contraseña,validacion, request.getParameter("nombre"), request.getParameter("apellido1"), request.getParameter("apellido2"), request.getParameter("email"), request.getParameter("curso"), request.getParameter("ciclo"));
 				if(res>0){
-					String ruta="http://90.162.66.76:8080/EstudiantesConecta2/login";
+					String ruta="http://90.162.66.76/EstudiantesConecta2/";
 					
 					Correo correo=new Correo("Enhorabuena por acceder a estudiantas conectados<br>A continuación le otorgamos los datos del registro<br><strong>Usuario: </strong>"+usuario+"<br><strong>Contraseña: </strong>"+contraseña+"<br>Para acceder al login y validar tu usuario accede desde <a href="+'"'+ruta+"?validacion="+validacion+'"'+">este link</a>", request.getParameter("email"), "Registro en Estudiantes Conectados");
 					correo.SendMail();
@@ -73,6 +73,9 @@ public class ServeletRegistro extends HttpServlet {
 
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -66,7 +66,7 @@ window.onload=function validacionincorrecta(){
 
 <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'>
 
-      <link rel="stylesheet" href="GestionUsuarios/Login/css/stylerecup.css" type="text/css">
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/GestionUsuarios/Login/css/stylerecup.css" type="text/css">
 
   
 </head>
