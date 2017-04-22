@@ -319,7 +319,7 @@ public class Conexion {
 
 		try{
 		Statement consulta = conexion.createStatement();
-		System.out.println("select max("+primarykey+") from "+tabla);
+	//	System.out.println("select max("+primarykey+") from "+tabla);
 		ResultSet res = consulta.executeQuery("select max("+primarykey+") from "+tabla);
 		
 		if(res.next())
@@ -752,6 +752,15 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 				insertarerror(e);
 			}
 		}
+		
+	}
+	
+	
+	/**
+	 * @param query La query para realizar el insert para actualizar el dato
+	 */
+	public void actualizardato(String query)
+	{
 		
 	}
 }
