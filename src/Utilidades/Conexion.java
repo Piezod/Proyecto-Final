@@ -49,7 +49,7 @@ public class Conexion {
 			conexion.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			insertarerror(e);
+			
 		}
 	}
 	/** Método para insertar en la bd un error generado en los try catch e insertamos el error y la stack trace
@@ -88,7 +88,7 @@ public class Conexion {
 			conexion.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			insertarerror(e);
+			
 			
 			err=true;
 			try {
@@ -148,7 +148,7 @@ public class Conexion {
 			}
 		}
 		catch(SQLException e){
-			insertarerror(e);
+			
 			enc=true;
 		}
 		finally{
@@ -159,7 +159,6 @@ public class Conexion {
 				}
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
-				insertarerror(e1);
 			}
 		}
 		return enc;
@@ -186,19 +185,19 @@ public class Conexion {
 			conexion.commit();
 		}catch (SQLException e){
 			//Si hay algun error en el update volvemos a un estado anterior
-			insertarerror(e);
+			
 			try {
 				conexion.rollback();
 			} catch (SQLException e1) {
 				// Si hay algun error en el rollback
-				insertarerror(e);			
+							
 				}
 		}finally {
 			try {
 				conexion.setAutoCommit(true);
 			} catch (SQLException e) {
 				//Si hay algun error en el autocommit
-				insertarerror(e);			
+							
 			}
 		}
 	}
@@ -217,7 +216,7 @@ public class Conexion {
 
 		return dev;
 		}catch(SQLException e){
-			insertarerror(e);
+			
 			return -1;
 		}
 	}
@@ -295,10 +294,9 @@ public class Conexion {
 				conexion.rollback();
 			} catch (SQLException e1) {
 				//Si da algún error en el rollback
-				insertarerror(e1);
 			}
 
-			insertarerror(e);
+			
 			res= -1;
 			//El resultado del insert lo pongo a -1
 		}
@@ -308,7 +306,7 @@ public class Conexion {
 				conexion.setAutoCommit(true);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				insertarerror(e);
+				
 			}
 		}
 		
@@ -339,7 +337,7 @@ public class Conexion {
 		}
 		catch (SQLException e)
 		{
-			insertarerror(e);
+			
 		}
 		return (dev);
 		
@@ -357,7 +355,7 @@ public class Conexion {
 			insertar.executeQuery();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			insertarerror(e);
+			
 		}
 	}
 
@@ -394,7 +392,7 @@ public class Conexion {
 				conexion.rollback();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
-				insertarerror(e);
+				
 			}
 		}
 		finally{
@@ -402,7 +400,7 @@ public class Conexion {
 				conexion.setAutoCommit(true);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				insertarerror(e);
+				
 			}
 
 		}
@@ -432,7 +430,7 @@ public class Conexion {
 		}
 		catch(SQLException e)
 		{
-			insertarerror(e);
+			
 		}
 		return x;
 
@@ -453,7 +451,7 @@ public class Conexion {
 		}
 		catch (SQLException e)
 		{
-			insertarerror(e);
+			
 			return null;
 		}
 	}
@@ -501,7 +499,7 @@ public class Conexion {
 			}
 			return x;
 		}catch(SQLException e){
-			insertarerror(e);
+			
 			String[] x=new String[0];
 			return x;
 
@@ -531,7 +529,7 @@ public class Conexion {
 			return x;
 		}
 		catch (SQLException e){
-			insertarerror(e);
+			
 			return new String[0];
 		}
 		
@@ -560,7 +558,7 @@ public class Conexion {
 		}
 		catch (SQLException e)
 		{
-			insertarerror(e);
+			
 			return new int[0];
 		}
 	}
@@ -576,7 +574,7 @@ public class Conexion {
 		}
 		catch(SQLException e)
 		{
-			insertarerror(e);
+			
 			return false;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -630,7 +628,7 @@ public class Conexion {
 
 			return valores;	
 		}catch(SQLException e){
-			insertarerror(e);
+			
 			return new int[0];
 		}
 	}
@@ -647,7 +645,7 @@ public class Conexion {
 			ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit "+inicio+","+fin+"");		
 			return res;
 		}catch(SQLException e){
-			insertarerror(e);
+			
 			return null;
 		}
 		
@@ -666,7 +664,7 @@ public class Conexion {
 			ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.respuestas where idpregunta="+idpregunta+" limit "+inicio+","+fin+"" );		
 			return res;
 		}catch(SQLException e){
-			insertarerror(e);
+			
 			return null;
 		}
 		
@@ -700,7 +698,7 @@ public class Conexion {
 			res=insertar.executeUpdate();
 			insertaractividad(0, ultimoid, respuesta, usuario, fecha);
 		}catch(SQLException e){
-			insertarerror(e);
+			
 			return -1;
 		}
 		finally{
@@ -713,7 +711,7 @@ public class Conexion {
 
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					insertarerror(e);
+					
 				}
 			}
 		return res;
@@ -739,7 +737,7 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 			
 			return res;
 		}catch(SQLException e){
-			insertarerror(e);
+			
 			return -1;
 		}
 	
@@ -760,11 +758,11 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 			insertar.executeUpdate();
 			conexion.commit();
 		}catch(SQLException e){
-			insertarerror(e);
+			
 			try {
 				conexion.rollback();
 			} catch (SQLException e1) {
-				insertarerror(e);
+				
 			}
 		}
 		finally{
@@ -772,7 +770,7 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 				conexion.setAutoCommit(true);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				insertarerror(e);
+				
 			}
 		}
 		
@@ -799,7 +797,7 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 			return ids;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			insertarerror(e);
+			
 			return new int[0];
 		}
 		
