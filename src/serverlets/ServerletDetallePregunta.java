@@ -56,7 +56,7 @@ public class ServerletDetallePregunta extends HttpServlet {
 				sesion.setAttribute("idpregunta", idpregunta);
 				sesion.setAttribute("iniciores",0);
 				sesion.setAttribute("finres",10);
-				response.sendRedirect("Respuesta");
+				response.sendRedirect("Respuesta?idpregunta="+idpregunta);
 		
 	}
 
