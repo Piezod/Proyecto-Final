@@ -339,6 +339,7 @@ public class Conexion {
 		{
 			
 		}
+		System.out.println(dev);
 		return (dev);
 		
 	}
@@ -382,7 +383,7 @@ public class Conexion {
 		insertar.setString(3, descripcion);
 		insertar.setString(4, usuario);
 		insertar.setString(5, fecha);
-		res=ultimoid("idpregunta", "preguntas");
+		res=ultimoid("idpreguntas", "preguntas");
 		insertar.executeUpdate();
 		insertaractividad(res, 0, titulo, usuario, fecha);
 		conexion.commit();
@@ -570,6 +571,8 @@ public class Conexion {
 
 			Statement consulta = conexion.createStatement();
 			ResultSet res = consulta.executeQuery(query);
+			System.out.println(query);
+			
 			return res.next();
 		}
 		catch(SQLException e)
@@ -778,10 +781,13 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 	
 	/**
 	 * @param query La query para realizar el insert para actualizar el dato
+	 * @throws SQLException 
 	 */
-	public void actualizardato(String query)
+	public void actualizardato(String query) throws SQLException
 	{
-		
+		Statement insertar=conexion.createStatement();
+		System.out.println(query+"actualizardato");
+		insertar.executeUpdate(query);
 	}
 
 	public int[] idstag(String busqueda, int inicio){

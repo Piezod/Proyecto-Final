@@ -164,21 +164,40 @@ td{
 					   <% 
 			   		 	Conexion c=(Conexion)session.getAttribute("conexion");
 			    		//c.conectar();
-			    		if (session.getAttribute("idpregunta")==null)
+			    		int paginas=Integer.parseInt(c.recibirdato("select count(*) from respuestas where idpregunta like '"+request.getParameter("idpregunta")+"'"))/10;
+			    		if (request.getParameter("idpregunta")==null)
 							{
 								%>
 						<h3>Cargar jsp de pagina no encontrada</h3>
-                                    <title>Pregunta no encontrada</title>
+						</div>
+						</div>
+						</div>
+						</div>
                                 <%
 							}
-			    		else
-			    		{
+			    		else if(!c.comprobar("select * from preguntas where idpreguntas like'"+request.getParameter("idpregunta")+"'")){
+			    			%>
+							<h3>Cargar jsp de pagina no encontrada</h3>
+							</div>
+							</div>
+							</div>
+							</div>
+	                                <%
+			    		
+			    		}/*
+			    		else if(request.getParameter("pagpulsada")==null){
+			    				//if (paginas<Integer.parseInt((String)request.getParameter("pagpulsada")))
+			    				{
+			    			response.sendRedirect("Respuesta?idpregunta="+request.getParameter("idpregunta"));
+			    				}
+			    		}*/
+			    		else{
 			    			
 			    		/*
 			    		 Realizo una busqueda en la base de datos para sacar la pregunta en funcion del id que se ha pulsado en el enlace anterior
 			    		 Lo almacenamos en un array de string en los cuales tenemos la informacion referente a esa pregunta
 			    		*/
-			    		String []xo=c.sacarpreguntaporid((int)session.getAttribute("idpregunta"));
+			    		String []xo=c.sacarpreguntaporid(Integer.parseInt((String)request.getParameter("idpregunta")));
 			    		/*for (int i=0;i<xo.length;i++)
 			    		{
 			    			out.println(xo[i]);
@@ -202,10 +221,7 @@ td{
 			    	 	<span class="label label-success"  ><%=xo[3] %></span>
 			    	 	<span class="label label-default" ><%=xo[4] %></span>
 			    	 </div>
-			    	 <%
-			    	 }
-			    		
-			    	 %>
+			    	 
 			</div>
 
 	  </div>
@@ -230,7 +246,7 @@ td{
     			//cr.conectar();
     			
     			int inipag,pagpulsada;
-				if (request.getParameter("pagpulsada")==null)
+				if (request.getParameter("pagpulsada")==null || request.getParameter("pagpulsada").equals(""))
 				{
 					inipag=0;
 					pagpulsada=1;
@@ -243,7 +259,7 @@ td{
 				}
 				
     			int iniciores=(int)session.getAttribute("iniciores");
-    			  rs=cr.sacarrespuestasporid((int)session.getAttribute("idpregunta"),inipag,(int)session.getAttribute("finres"));
+    			  rs=cr.sacarrespuestasporid(Integer.parseInt((String)request.getParameter("idpregunta")),inipag,(int)session.getAttribute("finres"));
     			/*
     			Sacamos los votos de la pregunta, en caso de que los positivos sean mayores que los negativos dibujamos la parte de arriba que es un panel en azul
     			si los negativos son iguales mayores a los positivos se pone en rojo
@@ -253,7 +269,7 @@ td{
     			{ 
     				do{
     					
-    					if (Integer.parseInt(rs.getString(3))/2 > Integer.parseInt(rs.getString(4)) || Integer.parseInt(rs.getString(3))==0 )
+    					if (Integer.parseInt(rs.getString(3)) >= Integer.parseInt(rs.getString(4))*5 ||  (Integer.parseInt(rs.getString(3))==1 && Integer.parseInt(rs.getString(4))==0) )
     							{
     				%>
     				<div class="=container-fluid">
@@ -271,9 +287,9 @@ td{
 				         	  			<td colspan="2" align="right">Fecha Respuesta : <%= rs.getString(8) %> </td>				         	  			
 				         	  		</tr>
 				         	  		<tr>
-				         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="${pageContext.request.contextPath}/ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
+				         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="${pageContext.request.contextPath}/ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>&tipo=mas&idpregunta=<%= request.getParameter("idpregunta") %>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
 				         	  		 
-				         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span><a  href="${pageContext.request.contextPath}/ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
+				         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span><a  href="${pageContext.request.contextPath}/ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>&tipo=menos&idpregunta=<%= request.getParameter("idpregunta") %>" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
 				         	  		 </tr>
 				         	  	</table>
 				         	  </div>
@@ -284,7 +300,7 @@ td{
 				  	  <hr>
 				  	  <br>
 				    </div>
-				  	  </div>
+				  	  
     				
     				<%
     							}
@@ -308,9 +324,9 @@ td{
     					         	  			
     					         	  		</tr>
     					         	  		<tr>
-    					         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span> <a href="${pageContext.request.contextPath}/ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit" style="margin:2%"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
+    					         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span> <a href="${pageContext.request.contextPath}/ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>&tipo=mas&idpregunta=<%= request.getParameter("idpregunta") %>" class="btn btn-success" type="submit" style="margin:2%"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
     					         	  		 
-    					         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span> <a  href="${pageContext.request.contextPath}/ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-danger" type="submit" style="margin:2%"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
+    					         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span> <a  href="${pageContext.request.contextPath}/ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>&tipo=menos&idpregunta=<%= request.getParameter("idpregunta") %>" class="btn btn-danger" type="submit" style="margin:2%"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
     					         	  		 </tr>
     					         	  	</table>
     					         	  </div>
@@ -321,7 +337,7 @@ td{
     					  	  <hr>
     					  	  <br>
     					    </div>
-    					  	  </div>
+    					  	  
     					  	  
     					  	  <%
     					}
@@ -381,7 +397,7 @@ td{
 			  
 			    <div class="col-md-2 col-md-offset-7" >
 			    <!-- Enviamos los datos para el insert a traves de inputs hidden, como es el id a la pregunta que pertenece y el usuario que realiza la respuesta -->
-				    		<input type="hidden" id="idpregunta" name="idpregunta" value="<%=session.getAttribute("idpregunta")%>">
+				    		<input type="hidden" id="idpregunta" name="idpregunta" value="<%=request.getParameter("idpregunta")%>">
 				    		<input type="hidden" id="idusuario" name="idusuario" value="<%=session.getAttribute("usuario")%>">
 						    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 10%">Publicar Respuesta</button>
 					    </div>
@@ -413,7 +429,7 @@ td{
 						 
 						 </li>
 							<% 
-								ResultSet r=c.sacarresultset("select idrespuesta from dbdamproject.respuestas where idpregunta="+(int)session.getAttribute("idpregunta"));
+								ResultSet r=c.sacarresultset("select idrespuesta from dbdamproject.respuestas where idpregunta="+(String)request.getParameter("idpregunta"));
 							
 								int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;
 									while (r.next())
@@ -425,13 +441,13 @@ td{
 											if (pagpulsada==numeropagina)
 											{
 												%>
-												<li class="active" ><a  href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+												<li class="active" ><a  href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>&idpregunta=<%=request.getParameter("idpregunta")%>"><%=numeropagina%></a></li><%
 											}
 											else
 											{
 												
 											%>
-											<li><a href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											<li><a href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>&idpregunta=<%=request.getParameter("idpregunta")%>"><%=numeropagina%></a></li><%
 											
 											}
 											nuevapaginaion=0;
@@ -447,13 +463,13 @@ td{
 										if (pagpulsada==numeropagina)
 										{
 											%>
-											<li class="active" ><a  href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+											<li class="active" ><a  href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>&idpregunta=<%=request.getParameter("idpregunta")%>"><%=numeropagina%></a></li><%
 										}
 										else
 										{
 											
 										%>
-										<li><a href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>"><%=numeropagina%></a></li><%
+										<li><a href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=respuesta&inicio=<%=inicio%>&fin=<%=fin%>&pagpulsada=<%=numeropagina%>&idpregunta=<%=request.getParameter("idpregunta")%>"><%=numeropagina%></a></li><%
 										
 										}
 										nuevapaginaion=0;
@@ -468,7 +484,11 @@ td{
 	 				  </ul>
 	   			 </div>
 </div>
-    
+
+    <%
+			    	 }
+			    		
+			    	 %>
     
 <%@include file="pie.jsp"%>
 </body>

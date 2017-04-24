@@ -73,6 +73,8 @@ public class ServerletAltaPregunta extends HttpServlet {
 		 * usuario
 		 */
 		String mensaje=request.getParameter("mensajeoculto");
+		System.out.println("servlet altapreg"+mensaje);
+		System.out.println(request.getParameter("mensaje"));
 
 		Conexion c=(Conexion)sesion.getAttribute("conexion");
 		

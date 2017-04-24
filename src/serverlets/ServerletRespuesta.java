@@ -51,11 +51,12 @@ public class ServerletRespuesta extends HttpServlet {
 		 }
 		String usuario=(String)request.getSession().getAttribute("usuario");
 		
-		int idpregunta=Integer.parseInt(request.getParameter("idrespuesta"));
+		int idrespuesta=Integer.parseInt((String)request.getParameter("idrespuesta"));
+		System.out.println(request.getParameter("tipo")+"es el tipo");
 		System.out.println(usuario);
-		System.out.println(idpregunta);
+		System.out.println(idrespuesta);
 		
-		if (!c1.comprobar("select * from votopregunta where idpregunta="+idpregunta+" and idusuario like '"+usuario+"'"))
+		if (!c1.comprobar("select * from Votorespuesta where idrespuesta="+idrespuesta+" and idusuario like '"+usuario+"'"))
 		{
 		      System.out.println("no existe, se haria el insert");
 				/*
@@ -86,7 +87,12 @@ public class ServerletRespuesta extends HttpServlet {
 							e.printStackTrace();
 						}
 					}
-					
+					try {
+						c1.actualizardato("insert into Votorespuesta values ("+idrespuesta+",'"+usuario+"','"+request.getParameter("tipo")+"')");
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 				}
 		else
@@ -94,7 +100,7 @@ public class ServerletRespuesta extends HttpServlet {
 			System.out.println("Existe, no se puede hacer el insert");
 		}
 		
-			response.sendRedirect("respuesta");
+			response.sendRedirect("Respuesta?idpregunta="+request.getParameter("idpregunta"));
 		}
 		
 
@@ -104,7 +110,7 @@ public class ServerletRespuesta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+	
 		HttpSession sesion= request.getSession(true);
 		
 		Conexion ce=(Conexion)sesion.getAttribute("conexion");
@@ -114,7 +120,7 @@ public class ServerletRespuesta extends HttpServlet {
 		sesion.setAttribute("pagpulsada",1); // la pagina que saldra indicada por defecto marcada
 		sesion.setAttribute("iniciores", 0); // el numero desde el que se buscara es decir desde el 0 hasta el ..
 		sesion.setAttribute("finres", 10); // el numero de resultados que mostrara por pagina
-		response.sendRedirect("Respuesta");
+		response.sendRedirect("Respuesta?idpregunta="+request.getParameter("idpregunta"));
 		
 		
 		
