@@ -16,7 +16,10 @@
 
 
 <title>Estudiantes Conectados</title>
-	<%@include file="Cabecera.jsp"%>
+	<%@include file="Cabecera.jsp"
+	
+	%>
+				<% Conexion co = (Conexion)session.getAttribute("conexion"); %>
 <head>
 <script type="text/javascript">
  function bienvenida(){
@@ -33,6 +36,8 @@
 <div class="container">
  
   <!-- Modal -->
+  
+  
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog" > <!--  el bakcgorun modifica el marco -->
     
@@ -63,13 +68,16 @@
  El booleano se pone a true en el serverlet de login al redirigir a esta pagina, lo hacmeos de esta manera
  para que no se este todo el rato mostrando y sea incomodo.
 */
-	if ((boolean)session.getAttribute("bienvenida"))
+
+	if (!co.comprobar("select * from primerinicio where idusuario like '"+session.getAttribute("usuario")+"'"))
 	{
 		%><script type="text/javascript">
 		bienvenida();
 		</script>
 		<%
-		session.setAttribute("bienvenida", false);
+		//session.setAttribute("bienvenida", false);
+		System.out.println("primer inicio");
+		co.actualizardato("insert into primerinicio values ('"+session.getAttribute("usuario")+"',1,'')");
 	}
 %>
 	
@@ -144,7 +152,6 @@
 				Sacaremos las ids de las ultimas 10 preguntas, en un array, este array despues lo recorreremos y pondremos el id de la pregunta en el valor
 				del input que enviamos para lamar al jsp de respuesta y mostraremos el titulo de esa pregunta.
 				*/
-				Conexion co = (Conexion)session.getAttribute("conexion");
 				//co.conectar();
 				
 				int inipag,pagpulsada;

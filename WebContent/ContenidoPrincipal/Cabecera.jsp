@@ -13,7 +13,7 @@
 <link href="${pageContext.request.contextPath}/Bootstrap/css/Estilospropios.css" rel="stylesheet">
 <style>
 	body{
-		background-image: url("Fondos/20.jpg"); <!-- probar el 10,20,y-->
+		background-image: url("Fondos/10.jpg"); <!-- probar el 10,20,y-->
 	}
 </style>
 
