@@ -198,8 +198,7 @@
 		tagssep=tags.split(",")
 		if(tagssep.length<=5)
 			{
-				document.getElementById("idsusados").value+=id+","
-				document.getElementById("idsusados").value=document.getElementById("idsusados").value.substring(0,document.getElementById("idsusados").value.length-1)
+				document.getElementById("idsusados").value+=id+"_"
 				alert(document.getElementById("idsusados").value)
 				document.getElementById("espaciotags").innerHTML+="<span class='label label-info'>"+nombre+"</span>, "
 				primerparametro=document.getElementById("tag").getAttribute('onkeyup').split("(")[1]+"("+document.getElementById("tag").getAttribute('onkeyup').split("(")[2]
