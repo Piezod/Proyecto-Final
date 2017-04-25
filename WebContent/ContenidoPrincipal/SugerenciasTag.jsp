@@ -6,6 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<script>
+
+</script>
 </head>
 <body>
 
@@ -30,7 +34,9 @@ if(request.getParameter("page")!=null){
 		%>
 		
 		<div class="col-md-4">
-			<div class="panel panel-primary">
+			<div class="panel panel-primary" onclick="anadirtag('<%= res.getInt(1) %>','<%= tag %>');">
+			
+				<input type="hidden" id="tag<%= res.getInt(1) %>" name="tag<%= res.getInt(1) %>" value="<%= res.getInt(1) %>">
 				<div class="panel-heading">
 					<%= tag %>
 				</div>
@@ -50,7 +56,7 @@ if(request.getParameter("page")!=null){
 	
 	if(ids.length==0){
 		%>
-		<h3>No encuentras un tag que se ajuste a tu pregunta crea uno</h3>
+		<h3>No encuentras un tag que se ajuste a tu pregunta, crea uno</h3>
 		<div class="panel panel-primary">
 		<div class="panel-heading">
 		<input type="text" class="form-control" placeholder="Tu tag"/>
