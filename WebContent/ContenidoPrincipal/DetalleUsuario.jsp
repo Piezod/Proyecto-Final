@@ -28,11 +28,13 @@ PASSWORD: GgQXVfYTCu3eBsXY
 //ArrayList<String> lista=(ArrayList)request.getAttribute("listausuario");
 //HashMap hm=(HashMap)request.getAttribute("hm");
 HashMap hml=(HashMap)request.getAttribute("hml");
+HashMap hml2=(HashMap)request.getAttribute("inforespuesta");
 String usuario=(String)request.getAttribute("usuario");
 //le pongo a la pagecontext importante para que luego se recorra el foreach
 //pageContext.setAttribute("lista", lista);
 //pageContext.setAttribute("hm",hm );
 pageContext.setAttribute("hml", hml);
+pageContext.setAttribute("inforespuesta", hml2);
 pageContext.setAttribute("usuario", usuario);
 %>
 <!-- 
@@ -62,12 +64,10 @@ pageContext.setAttribute("usuario", usuario);
 	
 	
 	
-	<div class="container-fluid" style="margin-top: 5%">
-	
-					<h1 align="center">Ultimas Preguntas del Usuario : <c:out value="${usuario}"></c:out></h1> 
-		 <div class="col-md-8 col-md-offset-2">
-		
-		  	
+	<div class="container-fluid">
+	<h1 align="center">Ultimas Preguntas del Usuario : <c:out value="${usuario}"></c:out></h1> 
+	 <div class="row">
+		 <div class="col-md-4 col-md-offset-2">
 		  <table>
 			<c:forEach var="item"  items="${hml}">
 			<form action="DetallePregunta" method="POST">
@@ -99,9 +99,37 @@ pageContext.setAttribute("usuario", usuario);
 							</button>
 							</td>
 						</c:forEach>  -->  
+					</tr>
+				
+				</form>
+			</c:forEach>
+		  </table>
+		</div>
+ 
+ 
+ 						<h1 align="center">Ultimas Respuestas del Usuario : <c:out value="${usuario}"></c:out></h1> 
+		 <div class="col-md-4 col-md-offset-2">
+		  <table>
+			<c:forEach var="item"  items="${inforespuesta}">
+			<form action="DetallePregunta" method="POST">
+						<div class="col-md-9">
+						 <tr>
+							 <td>
+								<input type="hidden" name="idpregunta" value="${item.value.get(3)}"></input>
+								<button type="submit" name="submit_param" value="submit_value" 
+								class="list-group-item list-group-item-info">${item.value.get(0)}</button>
+							</td>
+						</div>
+						<td>
+						<div class="col-md-3">
+							<span class="label label-default">${item.value.get(4)}</td>
+									</span></div></td>
+									</tr>
+						</div>
+					</div>
 				</tr>
 				
-		</form>
+			</form>
 			</c:forEach>
 		  </table>
 		</div>
