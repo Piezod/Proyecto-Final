@@ -25,13 +25,13 @@ USERNAME: usrdamproject
 PASSWORD: GgQXVfYTCu3eBsXY
 */
 //Recojo el arraylist los datos necesario
-ArrayList<String> lista=(ArrayList)request.getAttribute("listausuario");
-HashMap hm=(HashMap)request.getAttribute("hm");
+//ArrayList<String> lista=(ArrayList)request.getAttribute("listausuario");
+//HashMap hm=(HashMap)request.getAttribute("hm");
 HashMap hml=(HashMap)request.getAttribute("hml");
 String usuario=(String)request.getAttribute("usuario");
 //le pongo a la pagecontext importante para que luego se recorra el foreach
-pageContext.setAttribute("lista", lista);
-pageContext.setAttribute("hm",hm );
+//pageContext.setAttribute("lista", lista);
+//pageContext.setAttribute("hm",hm );
 pageContext.setAttribute("hml", hml);
 pageContext.setAttribute("usuario", usuario);
 %>
@@ -66,9 +66,11 @@ pageContext.setAttribute("usuario", usuario);
 	
 					<h1 align="center">Ultimas Preguntas del Usuario : <c:out value="${usuario}"></c:out></h1> 
 		 <div class="col-md-8 col-md-offset-2">
-		<form action="DetallePregunta" method="POST">
+		
+		  	
 		  <table>
 			<c:forEach var="item"  items="${hml}">
+			<form action="DetallePregunta" method="POST">
 			<div class="row">
 						<div class="col-md-9">
 						 <tr>
@@ -98,9 +100,10 @@ pageContext.setAttribute("usuario", usuario);
 							</td>
 						</c:forEach>  -->  
 				</tr>
+				
+		</form>
 			</c:forEach>
 		  </table>
-		</form>
 		</div>
  </div>
 </body>
