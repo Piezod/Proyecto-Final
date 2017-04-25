@@ -90,8 +90,10 @@ public class DevolverListas {
 		//	l.add(r.getString(3)); // Descripcion pregunta
 		//	l.add(r.getString(4)); // id usuario
 			l.add(r.getString(5)); //fecha y hora pregunta
-			
+			System.out.println("meto datos"+r.getString(1));
 			hm.put(r.getString(1), l); // configuro cada vuelta del hasmap con la key (idpregunta) y la l que es el arraylist con la info de esa pregunta
+	
+		
 		}
 		c.cerrarconexion();
 		return hm;
