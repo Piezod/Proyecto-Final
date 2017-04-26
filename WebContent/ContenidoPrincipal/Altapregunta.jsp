@@ -200,12 +200,11 @@
 			{
 				document.getElementById("idsusados").value+=id+","
 				document.getElementById("idsusados").value=document.getElementById("idsusados").value.substring(0,document.getElementById("idsusados").value.length-1)
-				alert(document.getElementById("idsusados").value)
 				document.getElementById("espaciotags").innerHTML+="<span class='label label-info'>"+nombre+"</span>, "
 				primerparametro=document.getElementById("tag").getAttribute('onkeyup').split("(")[1]+"("+document.getElementById("tag").getAttribute('onkeyup').split("(")[2]
 				
 				primerparametro=primerparametro.split(",")[0]+"+/"+id
-				
+				recargar()
 				
 				//document.getElementById("tag").getAttribute('onkeyup')="from("+primerparametro+",'tagsugeridos','SugerenciasTag')"
 				//document.getElementById("tag").onkeyup="from(document.getElementById('tag').value,'tagsugeridos','SugerenciasTag')"
