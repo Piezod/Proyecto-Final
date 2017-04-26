@@ -792,21 +792,23 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 
 	public int[] idstag(String busqueda, int inicio){
 		try {
+			System.out.println(busqueda);
 			int idsex=busqueda.split("_").length;
-			if(idsex>=1){
-				idsex--;
+			for(int i=0;i<idsex;i++){
+				System.out.println(i+"-"+busqueda.split("_")[i]);
 			}
+			
 			String exclusionpk="";
-			if(idsex>0){
+			if(idsex>1){
 				exclusionpk="and (";
 			
-			for(int i=0;i<idsex;i++){
+			for(int i=1;i<idsex;i++){
 				if(i!=idsex-1){
-					exclusionpk+="Id not like '"+busqueda.split("_")[i+1]+"'";
-					exclusionpk+=" or ";
+					exclusionpk+="Id not like '"+busqueda.split("_")[i]+"'";
+					exclusionpk+=" and ";
 				}
 				else{
-					exclusionpk+="Id not like '"+busqueda.split("_")[i+1]+"'";
+					exclusionpk+="Id not like '"+busqueda.split("_")[i]+"'";
 
 				}
 			}
