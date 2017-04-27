@@ -642,15 +642,24 @@ public class Conexion {
 	 * 
 	 */
 	
-	public ResultSet resulsetpregunta(String  valorpregunta, int inicio, int fin) {
-		try{
-			Statement consulta = conexion.createStatement();
-			ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit "+inicio+","+fin+"");		
-			return res;
-		}catch(SQLException e){
+	public ResultSet resulsetpregunta(String  valorpregunta, int inicio, int fin) throws SQLException {
+	
 			
-			return null;
-		}
+			System.out.println(valorpregunta);
+			System.out.println(valorpregunta.length());
+			Statement consulta = conexion.createStatement();
+			if (valorpregunta.length()==0)
+			{
+				ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit 0");		
+				
+				return res;
+			}
+			else
+			{
+			ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit "+inicio+","+fin+"");		
+	
+			return res;
+			}
 		
 	}
 	
@@ -786,7 +795,7 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 	public void actualizardato(String query) throws SQLException
 	{
 		Statement insertar=conexion.createStatement();
-		System.out.println(query+"actualizardato");
+		//System.out.println(query+"actualizardato");
 		insertar.executeUpdate(query);
 	}
 

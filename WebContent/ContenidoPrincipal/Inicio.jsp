@@ -76,7 +76,7 @@
 		</script>
 		<%
 		//session.setAttribute("bienvenida", false);
-		System.out.println("primer inicio");
+		//System.out.println("primer inicio");
 		co.actualizardato("insert into primerinicio values ('"+session.getAttribute("usuario")+"',1,'')");
 	}
 %>
