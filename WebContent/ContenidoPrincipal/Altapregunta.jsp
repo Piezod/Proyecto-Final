@@ -181,6 +181,64 @@
 		}
 
 	}
+	
+	function recargar(){
+		primerparametro=document.getElementById("tag").value
+		
+		
+		idsusados=document.getElementById("idsusados").value
+		
+		from(primerparametro+"_"+idsusados,'tagsugeridos','SugerenciasTag')
+		//from(document.getElementById("tag").value+"_"+document.getElementById("idsusados").value,'tagsugeridos','SugerenciasTag')
+		
+	}
+	
+	function borrartag(id){
+		borrar=document.getElementById("spantag"+id)
+		borrar.parentNode.removeChild(borrar)
+		document.getElementById("espaciotags").innerHTML=document.getElementById("espaciotags").innerHTML.substring(2)
+		ids=document.getElementById("idsusados").value.split("_")
+		nuevacadena=""
+		alert(ids.length)
+		contador=0
+		for(i=0;i<ids.length;i++){
+			
+			if(ids[i]!=id)
+				{
+				if(contador==0){
+					nuevacadena+=ids[i]
+					contador++
+				}
+				else{
+					nuevacadena+="_"+ids[i]
+
+				}
+				}
+		}
+		
+		document.getElementById("idsusados").value=nuevacadena
+	}
+	
+	function anadirtag(id,nombre){
+		tags=document.getElementById("espaciotags").innerHTML
+		tagssep=tags.split(",")
+		if(tagssep.length<=5)
+			{
+				document.getElementById("idsusados").value+=id+"_"
+				document.getElementById("espaciotags").innerHTML+="<span id='spantag"+id+"' class='label label-info'>"+nombre+"    <button style='margin-left:2px' class='btn-xs btn-default' onclick='borrartag("+id+")'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></span>, "
+				
+				
+				recargar()
+				
+				//document.getElementById("tag").getAttribute('onkeyup')="from("+primerparametro+",'tagsugeridos','SugerenciasTag')"
+				//document.getElementById("tag").onkeyup="from(document.getElementById('tag').value,'tagsugeridos','SugerenciasTag')"
+				
+				//onkeyup="from(document.getElementById('tag').value,'tagsugeridos','SugerenciasTag')"
+			}
+		
+		
+
+	}
 </script>
 
 
@@ -255,13 +313,16 @@
 
 		<div class="container-fluid">
 			<div class="form-group">
+			<div ><h3 id="espaciotags"></h3></div>
 				<label class="col-md-offset-2 control-label col-sm-1  " for="titulo">
+					<input type="hidden" value="" id="busquedatags">
+					<input type="hidden" value="" id="idsusados">
 					<span class="label label-info "
 					style="font-size: 14px; margin-top: 2px;"> Tags </span>
 				</label>
 				<div class="col-sm-6 col-md-">
 					<input type="text" class="form-control" id="tag"
-						placeholder="Crea tu propio tag o usa los mas buscados" name="tag" onkeyup="from(document.getElementById('tag').value,'tagsugeridos','SugerenciasTag')" >
+						placeholder="Crea tu propio tag o usa los mas buscados" name="tag" onkeyup="from(document.getElementById('tag').value+'_'+document.getElementById('idsusados').value,'tagsugeridos','SugerenciasTag')" >
 					<div class="alert alert-info" id="tagsugeridos"></div>
 				</div>
 			</div>
