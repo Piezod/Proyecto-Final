@@ -56,16 +56,17 @@ if(request.getParameter("page")!=null){
 	
 	if(ids.length==0){
 		%>
+		
 		<h3>No encuentras un tag que se ajuste a tu pregunta, crea uno</h3>
 		<div class="panel panel-primary">
 		<div class="panel-heading">
-		<input type="text" class="form-control" placeholder="Tu tag"/>
+		<input type="text" id="nombretag" class="form-control" placeholder="Tu tag"/>
 		</div>
 		<div class="panel-body">
-			<input type="text" class="form-control" placeholder="Una breve descripcion"/>
+			<input type="text" id="descripciontag" class="form-control" placeholder="Una breve descripcion"/>
 		</div>
 		<div class="panel-footer">
-			<input class="btn btn-primary" type="submit">
+			<input class="btn btn-primary" value="Crear tag" type="button" onclick="from(document.getElementById('nombretag').value+','+document.getElementById('descripciontag').value,'tagsugeridos','ServletAltaTag')">
 		</div>
 		</div>
 		

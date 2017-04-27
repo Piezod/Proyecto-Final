@@ -73,13 +73,20 @@ public class ServerletAltaPregunta extends HttpServlet {
 		 * usuario
 		 */
 		String mensaje=request.getParameter("mensajeoculto");
-		System.out.println("servlet altapreg"+mensaje);
-		System.out.println(request.getParameter("mensaje"));
-
+		
 		Conexion c=(Conexion)sesion.getAttribute("conexion");
 		
 		
 		int idpregunta=c.InsertarPregunta(titulo, mensaje, (String)sesion.getAttribute("usuario"));
+		String tags=request.getParameter("tagsusados");
+		for (int i=0;i<tags.split("_").length;i++){
+			try {
+				c.actualizardato("insert into preguntas_tags values ('"+idpregunta+"','"+tags.split("_")[i]+"')");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		if(idpregunta!=-1){
 		sesion.setAttribute("idpregunta", idpregunta);
 		//c.cerrarconexion();
