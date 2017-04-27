@@ -225,7 +225,7 @@
 		if(tagssep.length<=5)
 			{
 				document.getElementById("idsusados").value+=id+"_"
-				document.getElementById("espaciotags").innerHTML+="<span id='spantag"+id+"' class='label label-info'>"+nombre+"    <button style='margin-left:2px' class='btn-xs btn-default' onclick='borrartag("+id+")'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></span>, "
+				document.getElementById("espaciotags").innerHTML+="<span id='spantag"+id+"' class='label label-info'>"+nombre+"    <button style='margin-left:2px' class='btn btn-link' onclick='borrartag("+id+")'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></span>, "
 				
 				
 				recargar()
