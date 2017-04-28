@@ -161,20 +161,12 @@
 						 <li><a href="#">&laquo;</a></li>
 							<% 
 							
-							
 							/*
-							 Voy a mirar que exista query, si hay query del resulset sera que hay resultados y puedo mirar de paginar, si no los hay nada, 
-							 esto lo hago para arreglar que este vacio la query
+							 saco el numero maximo de respuestas para generar tantas etiquetas de numero como numero existan entre 10, es decir
+							 para 14 saco 2.
 							*/
-							r=c.resulsetpregunta((String)session.getAttribute("search"),inipag,10);
-							if (r.next())
-							{
-								/*
-								 saco el numero maximo de respuestas para generar tantas etiquetas de numero como numero existan entre 10, es decir
-								 para 14 saco 2.
-								*/
 								ResultSet rp=c.sacarresultset("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+(String)session.getAttribute("search")+"%' or titulo like '%"+(String)session.getAttribute("search")+"%'");
-						    
+							
 							
 							int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;
 							while (rp.next())
@@ -228,7 +220,6 @@
 								nuevapaginaion=0;
 								inicio+=10;
 								fin=10;
-							}
 							}
 							//c.cerrarconexion();%>
 						 
