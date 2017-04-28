@@ -13,23 +13,13 @@
 <link href="${pageContext.request.contextPath}/Bootstrap/css/Estilospropios.css" rel="stylesheet">
 <style>
 	body{
-		background-image: url("Fondos/10.jpg"); <!-- probar el 10,20,y-->
+		background-image: url("Fondos/20.jpg"); <!-- probar el 10,20,y-->
 	}
 </style>
 
 </head>
 <body>
-<%
-
-if (session.getAttribute("usuario")==null)
-{
-	response.sendRedirect("login");
-	
-	%>
-<%} 
-
-
-if(session.getAttribute("conexion")!=null){
+<%if(session.getAttribute("conexion")!=null){
 	Conexion c=(Conexion)session.getAttribute("conexion");
 }else{
 	Conexion c=new Conexion();
@@ -81,13 +71,10 @@ if(session.getAttribute("conexion")!=null){
           <ul class="dropdown-menu">
 
             <li><a  class="list-group-item" href="${pageContext.request.contextPath}/AreaUsuario">Datos de usuario</a></li>
-            <%
-            if (session.getAttribute("admin")!=null)
-            {
-            if(session.getAttribute("admin").equals("1")){ %>
+            <%if(session.getAttribute("admin").equals("1")){ %>
             <li role="separator" class="divider"></li>
             <li class="list-group-item-success"><a href="${pageContext.request.contextPath}/ZonaAdmin">Zona Administrador</a></li>
-            <%}} %>
+            <%} %>
             <li role="separator" class="divider"></li>
             <li>
             

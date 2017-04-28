@@ -642,24 +642,15 @@ public class Conexion {
 	 * 
 	 */
 	
-	public ResultSet resulsetpregunta(String  valorpregunta, int inicio, int fin) throws SQLException {
-	
-			
-			System.out.println(valorpregunta);
-			System.out.println(valorpregunta.length());
+	public ResultSet resulsetpregunta(String  valorpregunta, int inicio, int fin) {
+		try{
 			Statement consulta = conexion.createStatement();
-			if (valorpregunta.length()==0)
-			{
-				ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit 0");		
-				
-				return res;
-			}
-			else
-			{
 			ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit "+inicio+","+fin+"");		
-	
 			return res;
-			}
+		}catch(SQLException e){
+			
+			return null;
+		}
 		
 	}
 	
@@ -795,7 +786,7 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 	public void actualizardato(String query) throws SQLException
 	{
 		Statement insertar=conexion.createStatement();
-		//System.out.println(query+"actualizardato");
+		System.out.println(query+"actualizardato");
 		insertar.executeUpdate(query);
 	}
 
@@ -810,11 +801,9 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 			
 			for(int i=1;i<idsex;i++){
 				if(i!=idsex-1){
-<<<<<<< HEAD
+
 					exclusionpk+="Id not like '"+busqueda.split("_")[i]+"'";
-=======
-					exclusionpk+="Id not like '"+busqueda.split("_")[i+1]+"'";
->>>>>>> refs/remotes/origin/Produccion
+
 					exclusionpk+=" and ";
 				}
 				else{

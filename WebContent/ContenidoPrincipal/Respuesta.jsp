@@ -281,9 +281,7 @@ td{
 				         	  <div class="panel-heading">
 				         	  
 			    	 <a href="ServerletDetalleUsuario?usuario=<%= rs.getString(7) %>">
-				         	    <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %>
-				         	     </h3></a>
-				         	     
+				         	    <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %> </h3></a>
 				       	    </div>
 				         	  <div class="panel-body"> <%= rs.getString(2) %> </div>
 				         	  <div class="panel-footer">
@@ -301,18 +299,6 @@ td{
 				         	  </div>
 				       	  </div>
 				          </div>
-				        <% if (c.sacarundatostring("select admin from usuarios where usuario like '"+session.getAttribute("usuario")+"'").equals("1")){ %>
-				          <div class="col-md-1">
-				          	<span class="glyphicon glyphicon-ok"></span>
-				          	<span class="glyphicon glyphicon-remove"></span>
-				          </div>
-				          <%} else if (rs.getString(7).equals(session.getAttribute("usuario"))) 
-				          {
-				          %> <div class="col-md-1">
-				          	<span class="glyphicon glyphicon-pencil"></span>
-				          </div>
-				          <%} %>
-				          
 				  	  </div>
 				  	  <br>
 				  	  <hr>
