@@ -642,15 +642,24 @@ public class Conexion {
 	 * 
 	 */
 	
-	public ResultSet resulsetpregunta(String  valorpregunta, int inicio, int fin) {
-		try{
-			Statement consulta = conexion.createStatement();
-			ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit "+inicio+","+fin+"");		
-			return res;
-		}catch(SQLException e){
+	public ResultSet resulsetpregunta(String  valorpregunta, int inicio, int fin) throws SQLException {
+	
 			
-			return null;
-		}
+			System.out.println(valorpregunta);
+			System.out.println(valorpregunta.length());
+			Statement consulta = conexion.createStatement();
+			if (valorpregunta.length()==0)
+			{
+				ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit 0");		
+				
+				return res;
+			}
+			else
+			{
+			ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit "+inicio+","+fin+"");		
+	
+			return res;
+			}
 		
 	}
 	
@@ -786,16 +795,38 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 	public void actualizardato(String query) throws SQLException
 	{
 		Statement insertar=conexion.createStatement();
-		System.out.println(query+"actualizardato");
+		//System.out.println(query+"actualizardato");
 		insertar.executeUpdate(query);
 	}
 
 	public int[] idstag(String busqueda, int inicio){
 		try {
-			PreparedStatement consulta=conexion.prepareStatement("select * from tags where nombre like '%"+busqueda+"%' or descripcion like '%"+busqueda+"%' limit "+inicio*9+",9");
+			int idsex=busqueda.split("_").length;
+			if(idsex>=1){
+				idsex--;
+			}
+			String exclusionpk="";
+			if(idsex>0){
+				exclusionpk="and (";
+			
+			for(int i=0;i<idsex;i++){
+				if(i!=idsex-1){
+					exclusionpk+="Id not like '"+busqueda.split("_")[i+1]+"'";
+					exclusionpk+=" and ";
+				}
+				else{
+					exclusionpk+="Id not like '"+busqueda.split("_")[i+1]+"'";
+
+				}
+			}
+			exclusionpk+=")";
+			}
+			
+			System.out.println("select * from tags where (nombre like '%"+busqueda.split("_")[0]+"%' or descripcion like '%"+busqueda.split("_")[0]+"%') "+exclusionpk+" limit "+inicio*9+",9");
+			PreparedStatement consulta=conexion.prepareStatement("select * from tags where (nombre like '%"+busqueda.split("_")[0]+"%' or descripcion like '%"+busqueda.split("_")[0]+"%') "+exclusionpk+" limit "+inicio*9+",9");
 			
 			ResultSet res=consulta.executeQuery();
-			int[] ids=new int[contar("select count(*) from tags where nombre like '%"+busqueda+"%' or descripcion like '%"+busqueda+"%' limit "+inicio*9+",9")];
+			int[] ids=new int[contar("select count(*) from tags where  (nombre like '%"+busqueda.split("_")[0]+"%' or descripcion like '%"+busqueda.split("_")[0]+"%') "+exclusionpk+" limit "+inicio*9+",9")];
 			for(int i=0;i<ids.length;i++){
 				res.next();
 				ids[i]=res.getInt(1);

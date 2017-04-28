@@ -51,14 +51,17 @@ public class ServerletDetalleUsuario extends HttpServlet {
 
 	//	System.out.println("entro al dopost");
 		DevolverListas list=new DevolverListas((String)request.getParameter("usuario"));
+		
 		try {
 			
 		//	ArrayList<String> l=list.infousuario();
 		//	HashMap<String, String> hm=list.preguntasusuariohm1();
 			HashMap<String, ArrayList> hml=list.preguntasusuariohm2();
+			HashMap<String, ArrayList> hml2=list.respuestasusuariohm();
 		//	request.setAttribute("listausuario",l);
 		//	request.setAttribute("hm", hm);
 			request.setAttribute("hml", hml);
+			request.setAttribute("inforespuesta", hml2);
 			request.setAttribute("usuario", request.getParameter("usuario"));
 			String nextJSP = "/detalleusuario";
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);

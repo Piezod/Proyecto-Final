@@ -181,6 +181,40 @@
 		}
 
 	}
+	
+	function recargar(){
+		primerparametro=document.getElementById("tag").value
+		
+		
+		idsusados=document.getElementById("idsusados").value
+		
+		from(primerparametro+"_"+idsusados,'tagsugeridos','SugerenciasTag')
+		from(document.getElementById("tag").value+"_"+document.getElementById("idsusados").value,'tagsugeridos','SugerenciasTag')
+		
+	}
+	
+	function anadirtag(id,nombre){
+		tags=document.getElementById("espaciotags").innerHTML
+		tagssep=tags.split(",")
+		if(tagssep.length<=5)
+			{
+				document.getElementById("idsusados").value+=id+"_"
+				alert(document.getElementById("idsusados").value)
+				document.getElementById("espaciotags").innerHTML+="<span class='label label-info'>"+nombre+"</span>, "
+				primerparametro=document.getElementById("tag").getAttribute('onkeyup').split("(")[1]+"("+document.getElementById("tag").getAttribute('onkeyup').split("(")[2]
+				
+				primerparametro=primerparametro.split(",")[0]+"+/"+id
+				
+				
+				//document.getElementById("tag").getAttribute('onkeyup')="from("+primerparametro+",'tagsugeridos','SugerenciasTag')"
+				//document.getElementById("tag").onkeyup="from(document.getElementById('tag').value,'tagsugeridos','SugerenciasTag')"
+				
+				//onkeyup="from(document.getElementById('tag').value,'tagsugeridos','SugerenciasTag')"
+			}
+		
+		
+
+	}
 </script>
 
 
@@ -255,13 +289,16 @@
 
 		<div class="container-fluid">
 			<div class="form-group">
+			<div ><h3 id="espaciotags"></h3></div>
 				<label class="col-md-offset-2 control-label col-sm-1  " for="titulo">
+					<input type="hidden" value="" id="busquedatags">
+					<input type="hidden" value="" id="idsusados">
 					<span class="label label-info "
 					style="font-size: 14px; margin-top: 2px;"> Tags </span>
 				</label>
 				<div class="col-sm-6 col-md-">
 					<input type="text" class="form-control" id="tag"
-						placeholder="Crea tu propio tag o usa los mas buscados" name="tag" onkeyup="from(document.getElementById('tag').value,'tagsugeridos','SugerenciasTag')" >
+						placeholder="Crea tu propio tag o usa los mas buscados" name="tag" onkeyup="from(document.getElementById('tag').value+'_'+document.getElementById('idsusados').value,'tagsugeridos','SugerenciasTag')" >
 					<div class="alert alert-info" id="tagsugeridos"></div>
 				</div>
 			</div>
