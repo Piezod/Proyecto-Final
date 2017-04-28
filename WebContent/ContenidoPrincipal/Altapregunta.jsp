@@ -225,7 +225,13 @@
 		if(tagssep.length<=5)
 			{
 				document.getElementById("idsusados").value+=id+"_"
+<<<<<<< HEAD
 				document.getElementById("espaciotags").innerHTML+="<span id='spantag"+id+"' class='label label-info'>"+nombre+"    <button style='margin-left:2px' class='btn btn-link' onclick='borrartag("+id+")'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></span>, "
+=======
+				alert(document.getElementById("idsusados").value)
+				document.getElementById("espaciotags").innerHTML+="<span class='label label-info'>"+nombre+"</span>, "
+				primerparametro=document.getElementById("tag").getAttribute('onkeyup').split("(")[1]+"("+document.getElementById("tag").getAttribute('onkeyup').split("(")[2]
+>>>>>>> refs/remotes/origin/Produccion
 				
 				
 				recargar()
