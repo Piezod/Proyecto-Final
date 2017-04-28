@@ -195,8 +195,9 @@
 	
 	function borrartag(id){
 		borrar=document.getElementById("spantag"+id)
+		
 		borrar.parentNode.removeChild(borrar)
-		document.getElementById("espaciotags").innerHTML=document.getElementById("espaciotags").innerHTML.substring(2)
+		//document.getElementById("espaciotags").innerHTML=document.getElementById("espaciotags").innerHTML.substring(2)
 		ids=document.getElementById("idsusados").value.split("_")
 		nuevacadena=""
 		alert(ids.length)
@@ -217,6 +218,7 @@
 		}
 		
 		document.getElementById("idsusados").value=nuevacadena
+		recargar();
 	}
 	
 	function anadirtag(id,nombre){
@@ -225,17 +227,8 @@
 		if(tagssep.length<=5)
 			{
 				document.getElementById("idsusados").value+=id+"_"
-<<<<<<< HEAD
-				document.getElementById("espaciotags").innerHTML+="<span id='spantag"+id+"' class='label label-info'>"+nombre+"    <button style='margin-left:2px' class='btn btn-link' onclick='borrartag("+id+")'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></span>, "
-=======
-<<<<<<< HEAD
-				document.getElementById("espaciotags").innerHTML+="<span id='spantag"+id+"' class='label label-info'>"+nombre+"    <button style='margin-left:2px' class='btn btn-link' onclick='borrartag("+id+")'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></span>, "
-=======
-				alert(document.getElementById("idsusados").value)
-				document.getElementById("espaciotags").innerHTML+="<span class='label label-info'>"+nombre+"</span>, "
-				primerparametro=document.getElementById("tag").getAttribute('onkeyup').split("(")[1]+"("+document.getElementById("tag").getAttribute('onkeyup').split("(")[2]
->>>>>>> refs/remotes/origin/Produccion
->>>>>>> refs/remotes/origin/Desarrollo
+				document.getElementById("espaciotags").innerHTML+="<span id='spantag"+id+"'><span class='label label-info'>"+nombre+"    <button style='margin-left:2px' class='btn btn-link' onclick='borrartag("+id+")'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></span>, </span>"
+
 				
 				
 				recargar()
