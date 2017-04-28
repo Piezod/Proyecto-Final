@@ -801,7 +801,15 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 			
 			for(int i=1;i<idsex;i++){
 				if(i!=idsex-1){
+<<<<<<< HEAD
 					exclusionpk+="Id not like '"+busqueda.split("_")[i]+"'";
+=======
+<<<<<<< HEAD
+					exclusionpk+="Id not like '"+busqueda.split("_")[i]+"'";
+=======
+					exclusionpk+="Id not like '"+busqueda.split("_")[i+1]+"'";
+>>>>>>> refs/remotes/origin/Produccion
+>>>>>>> refs/remotes/origin/Desarrollo
 					exclusionpk+=" and ";
 				}
 				else{
