@@ -668,7 +668,7 @@ public class Conexion {
 	public ResultSet sacarrespuestasporid(int  idpregunta, int inicio, int fin) {
 		try{
 			Statement consulta = conexion.createStatement();
-			ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.respuestas where idpregunta="+idpregunta+" limit "+inicio+","+fin+"" );		
+			ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.respuestas where mejorrespuesta=0 and idpregunta="+idpregunta+" limit "+inicio+","+fin+"" );		
 			return res;
 		}catch(SQLException e){
 			

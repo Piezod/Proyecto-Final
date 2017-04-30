@@ -3,6 +3,7 @@ package serverlets;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,15 +46,50 @@ public class ServerletAdminPregunta extends HttpServlet {
 		
 		HttpSession sesion= request.getSession(true);
 		Conexion ce=(Conexion)sesion.getAttribute("conexion");
-		System.out.println("respuesta recogida" +request.getParameter("getres"));
-		try {
-			ce.actualizardato("delete from respuestas where idrespuesta="+request.getParameter("getres"));
-			request.setAttribute("mostrareliminacion", 1);
-			response.sendRedirect("Respuesta?idpregunta="+request.getParameter("idpregunta"));
+		String tipo=request.getParameter("tipo");
+		
+		switch (tipo) {
+		case "confirmarmejor":
+
+			System.out.println("respuesta recogida" +request.getParameter("idrespuestamejor"));
+			System.out.println("confirmamos mejor");
+			try {
+				ce.actualizardato("update respuestas SET mejorrespuesta = 1 WHERE idrespuesta="+request.getParameter("idrespuestamejor"));
+				request.setAttribute("elimina", "validacion");
+				String nextJSP = "/Respuesta?idpregunta="+request.getParameter("idpregunta");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
+				dispatcher.forward(request,response);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			break;
+		case "confirmarbaja":
+			
+			System.out.println("confirmarmos baja");
+			System.out.println("respuesta recogida" +request.getParameter("getres"));
+			try {
+				ce.actualizardato("delete from respuestas where idrespuesta="+request.getParameter("getres"));
+				request.setAttribute("elimina", "eliminacion");
+				request.setAttribute("borrar", 1);
+				//response.sendRedirect("Respuesta?idpregunta="+request.getParameter("idpregunta"));
+				String nextJSP = "/Respuesta?idpregunta="+request.getParameter("idpregunta");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
+				dispatcher.forward(request,response);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			break;
+
+
+		default:
+			break;
 		}
 	}
 

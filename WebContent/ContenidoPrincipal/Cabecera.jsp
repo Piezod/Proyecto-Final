@@ -13,8 +13,101 @@
 <link href="${pageContext.request.contextPath}/Bootstrap/css/Estilospropios.css" rel="stylesheet">
 <style>
 	body{
-		background-image: url("Fondos/20.jpg"); <!-- probar el 10,20,y-->
+	background-color: #F3FAB6;
+		<!-- -->background-image: url("Fondos/20.jpg"); <!-- probar el 10,20,y-->
+		
 	}
+.navbar-default {
+  background-color: #558C89;
+  border-color: #74AFAD;
+}
+.navbar-default .navbar-brand {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #ecdbff;
+}
+.navbar-default .navbar-text {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #ecdbff;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu {
+  background-color: #428bca;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
+  color: #ecdbff;
+  background-color: #3977ac;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li > .divider {
+  background-color: #3977ac;
+}
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+  color: #ecdbff;
+  background-color: #3977ac;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #ecdbff;
+  background-color: #3977ac;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #ecdbff;
+  background-color: #3977ac;
+}
+.navbar-default .navbar-toggle {
+  border-color: #3977ac;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #3977ac;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #ecf0f1;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #ecf0f1;
+}
+.navbar-default .navbar-link {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-link:hover {
+  color: #ecdbff;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #ecf0f1;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ecdbff;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ecdbff;
+    background-color: #3977ac;
+  }
+}
+}
+	
 </style>
 
 </head>
@@ -81,10 +174,10 @@ if(session.getAttribute("conexion")!=null){
         <li class="dropdown" style="margin-right:10px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("usuario") %><span class="caret"></span></a>
           <ul class="dropdown-menu">
 
-            <li><a  class="list-group-item" href="${pageContext.request.contextPath}/AreaUsuario">Datos de usuario</a></li>
+            <li><a href="${pageContext.request.contextPath}/AreaUsuario">Datos de usuario</a></li>
             <%if((session.getAttribute("admin")!=null && session.getAttribute("admin").equals("1"))){ %>
             <li role="separator" class="divider"></li>
-            <li class="list-group-item-success"><a href="${pageContext.request.contextPath}/ZonaAdmin">Zona Administrador</a></li>
+            <li><a href="${pageContext.request.contextPath}/ZonaAdmin">Zona Administrador</a></li>
             <%} %>
             <li role="separator" class="divider"></li>
             <li>
