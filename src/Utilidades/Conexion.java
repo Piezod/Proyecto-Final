@@ -642,16 +642,20 @@ public class Conexion {
 	 * 
 	 */
 	
-	public ResultSet resulsetpregunta(String  valorpregunta, int inicio, int fin) {
-		try{
+	public ResultSet resulsetpregunta(String  valorpregunta, int inicio, int fin) throws SQLException {
+	
 			Statement consulta = conexion.createStatement();
+			if (valorpregunta.length()==0)
+			{
+				ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit 0");		
+				
+				return res;
+			}
+			else
+			{
 			ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+valorpregunta+"%' or titulo like '%"+valorpregunta+"%'limit "+inicio+","+fin+"");		
 			return res;
-		}catch(SQLException e){
-			
-			return null;
-		}
-		
+		}	
 	}
 	
 	/*
