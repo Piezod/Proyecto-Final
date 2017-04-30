@@ -16,7 +16,15 @@
 	
 	
 <script type="text/javascript">
-
+function confirmarbaja(){
+	
+   $('#confirmarbaja').modal('show');
+   alert(document.getElementById("idres").value);
+   document.getElementById("getres").value = document.getElementById("idres").value;
+};
+function confirmarmejor(){
+	   $('#confirmarmejor').modal('show');
+	};
 
 
 function previsualizacion() {
@@ -145,6 +153,9 @@ td{
 
 
 <body>
+
+
+
 
 <div class="container-fluid">
 <div class="row">
@@ -279,9 +290,25 @@ td{
 				    	  <div class="col-md-8 col-md-offset-2">
 				         	<div class="panel panel-info">
 				         	  <div class="panel-heading">
-				         	  
-			    	 <a href="ServerletDetalleUsuario?usuario=<%= rs.getString(7) %>">
-				         	    <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %> </h3></a>
+				         	  	<div class="row">
+				  	  	 		<div class="col-md-10">				  	  	 		
+			    					 <a href="ServerletDetalleUsuario?usuario=<%= rs.getString(7) %>">
+			    					 <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %> </h3></a>
+				  	  	 		</div>
+				  	  	 		<div class="col-md-2">
+				  	  	 		<% if (session.getAttribute("admin").equals("1"))
+				  	  	 			{%>
+							  	  	  			<!--  
+							  	  	  			<a href="${pageContext.request.contextPath}/ServerletAdminPregunta?idpregunta=<%= request.getParameter("idpregunta") %>">
+							  	  	  				
+							  	  	  			-->
+				  	  	  			    <input type="hidden" id="idres" value="<%=rs.getString(1) %>"></input>
+				  	  	  				<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="confirmarbaja();"></span><%=rs.getString(1)%></a>
+				  	  	  				<span class="glyphicon glyphicon-ok" aria-hidden="true" onclick="confirmarmejor();"></span>
+				  	  	  			<%} %>
+				  	  	 		</div>
+				         	    </div>
+				         	    
 				       	    </div>
 				         	  <div class="panel-body"> <%= rs.getString(2) %> </div>
 				         	  <div class="panel-footer">
@@ -299,6 +326,8 @@ td{
 				         	  </div>
 				       	  </div>
 				          </div>
+				  	  	  
+				  	  
 				  	  </div>
 				  	  <br>
 				  	  <hr>
@@ -314,9 +343,22 @@ td{
     					   	  <div class="row">
     					    	  <div class="col-md-8 col-md-offset-2">
     					         	<div class="panel panel-danger">
-    					         	  <div class="panel-heading">
-    					         	    <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %> </h3>
-    					       	    </div>
+    					         	  	  <div class="panel-heading">
+				         	  	<div class="row">
+				  	  	 		<div class="col-md-10">				  	  	 		
+			    					 <a href="ServerletDetalleUsuario?usuario=<%= rs.getString(7) %>">
+			    					 <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %> </h3></a>
+				  	  	 		</div>
+				  	  	 		<div class="col-md-2">
+				  	  	 		<% if (session.getAttribute("admin").equals("1"))
+				  	  	 			{%>
+				  	  	  			<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="confirmarbaja();"></span></a>
+				  	  	  				<span class="glyphicon glyphicon-ok" aria-hidden="true" onclick="confirmarmejor();"></span>
+				  	  	  			<%} %>
+				  	  	 		</div>
+				         	    </div>
+				         	    
+				       	    </div>
     					         	  <div class="panel-body"> <%= rs.getString(2) %> </div>
     					         	  <div class="panel-footer">
     					         	  	
@@ -494,6 +536,68 @@ td{
 			    		
 			    	 %>
     
+    <!-- Modal de confirmar elminar -->	
+<div class="container">
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="confirmarbaja" role="dialog">
+    <div class="modal-dialog" > <!--  el bakcgorun modifica el marco -->
+    
+      <!-- Modal content-->
+      <div class="modal-content"> <!--  este es el backgroun blanco -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Eliminar Respuesta</h4>
+        </div>
+        <div class="modal-body">
+          <p>Estas seguro que quieres eliminarlo</div>
+        <div class="modal-footer" >
+	        <form class="form-horizontal" action="ServerletAdminPregunta" method="POST">
+	       	  <input type="hidden" id="getres" name="getres"></input>
+	          <button type="submit" class="btn btn-info" >Confirmar</button>
+	          	<input type="hidden" id="idpregunta" name="idpregunta" value="<%=request.getParameter("idpregunta")%>">
+				<input type="hidden" id="idusuario" name="idusuario" value="<%=session.getAttribute("usuario")%>">	
+	          <button type="button" class="btn btn-info" data-dismiss="modal" >Cerrar</button>
+          </form>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+    
+    <!-- Modal confirmar mejorar respuesta -->
+        	
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="confirmarmejor" role="dialog">
+    <div class="modal-dialog" > <!--  el bakcgorun modifica el marco -->
+    
+      <!-- Modal content-->
+      <div class="modal-content"> <!--  este es el backgroun blanco -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Confirmar Mejor Pregunta</h4>
+        </div>
+        <div class="modal-body">
+          <p>¿Estas seguro que quieres confirmar esta pregunta para ser la mejor pregunta?</div>
+        <div class="modal-footer" >
+	        <form class="form-horizontal" action="ServerletAdminPregunta" method="POST">
+	       	  <input type="hidden" id="getres" name="getres"></input>
+	          <button type="submit" class="btn btn-info" >Confirmar</button>
+	          	<input type="hidden" id="idpregunta" name="idpregunta" value="<%=request.getParameter("idpregunta")%>">
+				<input type="hidden" id="idusuario" name="idusuario" value="<%=session.getAttribute("usuario")%>">	
+	          <button type="button" class="btn btn-info" data-dismiss="modal" >Cerrar</button>
+          </form>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+ 
+</div>
+   
 <%@include file="pie.jsp"%>
 </body>
 <%//c.cerrarconexion();

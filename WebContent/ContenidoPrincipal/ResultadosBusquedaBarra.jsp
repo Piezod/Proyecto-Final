@@ -158,13 +158,22 @@
 			</div>
 				<div class="col-sm-8" align="center">
 					<ul class="pagination" >
-						 <li><a href="#">&laquo;</a></li>
 							<% 
 							
 							/*
 							 saco el numero maximo de respuestas para generar tantas etiquetas de numero como numero existan entre 10, es decir
 							 para 14 saco 2.
 							*/
+							
+							
+							r=c.resulsetpregunta((String)session.getAttribute("search"),inipag,10);
+							if (r.next())
+							{
+								/*
+								 saco el numero maximo de respuestas para generar tantas etiquetas de numero como numero existan entre 10, es decir
+								 para 14 saco 2.
+								*/
+							
 								ResultSet rp=c.sacarresultset("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+(String)session.getAttribute("search")+"%' or titulo like '%"+(String)session.getAttribute("search")+"%'");
 							
 							
@@ -221,10 +230,8 @@
 								inicio+=10;
 								fin=10;
 							}
+							}
 							//c.cerrarconexion();%>
-						 
-						  
-						  <li><a href="#">&raquo;</a></li>
 	 				  </ul>
 	   			 </div>
 </div>
