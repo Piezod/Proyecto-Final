@@ -19,7 +19,18 @@
 
 </head>
 <body>
-<%if(session.getAttribute("conexion")!=null){
+
+<%
+
+if (session.getAttribute("usuario")==null)
+{
+	response.sendRedirect("login");
+	System.out.println("usuario vacio");
+	%>
+<%} 
+
+
+if(session.getAttribute("conexion")!=null){
 	Conexion c=(Conexion)session.getAttribute("conexion");
 }else{
 	Conexion c=new Conexion();
@@ -71,7 +82,7 @@
           <ul class="dropdown-menu">
 
             <li><a  class="list-group-item" href="${pageContext.request.contextPath}/AreaUsuario">Datos de usuario</a></li>
-            <%if(session.getAttribute("admin").equals("1")){ %>
+            <%if((session.getAttribute("admin")!=null && session.getAttribute("admin").equals("1"))){ %>
             <li role="separator" class="divider"></li>
             <li class="list-group-item-success"><a href="${pageContext.request.contextPath}/ZonaAdmin">Zona Administrador</a></li>
             <%} %>
