@@ -144,7 +144,37 @@
     			/*
     			 Si no hay resultados mostraremos un jsp diciendo que no hay coincidencias
     			*/
-    			out.print("<h1>No hay resultados, crear un jsp con estilo y meterlo aqui</h1>");
+    		%>
+    			<div class="panel panel-info">
+				<div class="panel-heading">
+					
+					<h4 align="center">Se ha realizado una busqueda y no hay resultados. Puedes buscar otra cosa de nuevo
+					 o realizar una nueva pregunta</h4>
+					<br>
+
+				</div>
+				<!-- Envio al serverlet mediante un formulario por el methot post el valor altapregunta.jsp que sera el que recoja y luego sera el que
+   			 recargue -->
+				<div class="panel-body">
+					<!-- ** IMPORTANTE ** -->
+					<!-- ** Crearemos unos botones con el type submit y el name contenido, importante siempre se llamara contenido. Este boton
+    		 sera el encargado de mandarnos el valor del jsp a cargar. En el value pondremos el nombre del jsp sin la extension, todos los 
+    		 botones estaran incluiddos en un formulario que iran redirigidos a un serverlet que se llamara ***serverletcontenido***
+    		  ** -->
+
+					<form action="Pregunta" method="POST">
+						<input type="hidden" name="pagina"
+							value="ServerletAltapregunta.jsp"></input>
+						<!-- ** IMPORTANTE ** -->
+						<h4 align="center">
+							<button class="btn btn-primary btn-lg" type="submit"
+								name="contenido" value="AltaPregunta">Realizar nueva
+								pregunta</button>
+						</h4>
+					</form>
+				</div>
+			</div>
+			<%
     		}
 			  %>
 		</div>
@@ -158,14 +188,14 @@
 			</div>
 				<div class="col-sm-8" align="center">
 					<ul class="pagination" >
-						 <li><a href="#">&laquo;</a></li>
 							<% 
 							
-							
 							/*
-							 Voy a mirar que exista query, si hay query del resulset sera que hay resultados y puedo mirar de paginar, si no los hay nada, 
-							 esto lo hago para arreglar que este vacio la query
+							 saco el numero maximo de respuestas para generar tantas etiquetas de numero como numero existan entre 10, es decir
+							 para 14 saco 2.
 							*/
+							
+							
 							r=c.resulsetpregunta((String)session.getAttribute("search"),inipag,10);
 							if (r.next())
 							{
@@ -173,8 +203,9 @@
 								 saco el numero maximo de respuestas para generar tantas etiquetas de numero como numero existan entre 10, es decir
 								 para 14 saco 2.
 								*/
+							
 								ResultSet rp=c.sacarresultset("SELECT * FROM dbdamproject.preguntas where descripcion like '%"+(String)session.getAttribute("search")+"%' or titulo like '%"+(String)session.getAttribute("search")+"%'");
-						    
+							
 							
 							int nuevapaginaion=0,numeropagina=0,inicio=0,fin=10;
 							while (rp.next())
@@ -231,9 +262,6 @@
 							}
 							}
 							//c.cerrarconexion();%>
-						 
-						  
-						  <li><a href="#">&raquo;</a></li>
 	 				  </ul>
 	   			 </div>
 </div>

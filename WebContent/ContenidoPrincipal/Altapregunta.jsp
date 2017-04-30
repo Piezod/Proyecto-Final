@@ -189,8 +189,36 @@
 		idsusados=document.getElementById("idsusados").value
 		
 		from(primerparametro+"_"+idsusados,'tagsugeridos','SugerenciasTag')
-		from(document.getElementById("tag").value+"_"+document.getElementById("idsusados").value,'tagsugeridos','SugerenciasTag')
+		//from(document.getElementById("tag").value+"_"+document.getElementById("idsusados").value,'tagsugeridos','SugerenciasTag')
 		
+	}
+	
+	function borrartag(id){
+		borrar=document.getElementById("spantag"+id)
+		
+		borrar.parentNode.removeChild(borrar)
+		//document.getElementById("espaciotags").innerHTML=document.getElementById("espaciotags").innerHTML.substring(2)
+		ids=document.getElementById("idsusados").value.split("_")
+		nuevacadena=""
+		alert(ids.length)
+		contador=0
+		for(i=0;i<ids.length;i++){
+			
+			if(ids[i]!=id)
+				{
+				if(contador==0){
+					nuevacadena+=ids[i]
+					contador++
+				}
+				else{
+					nuevacadena+="_"+ids[i]
+
+				}
+				}
+		}
+		
+		document.getElementById("idsusados").value=nuevacadena
+		recargar();
 	}
 	
 	function anadirtag(id,nombre){
@@ -199,12 +227,11 @@
 		if(tagssep.length<=5)
 			{
 				document.getElementById("idsusados").value+=id+"_"
-				alert(document.getElementById("idsusados").value)
-				document.getElementById("espaciotags").innerHTML+="<span class='label label-info'>"+nombre+"</span>, "
-				primerparametro=document.getElementById("tag").getAttribute('onkeyup').split("(")[1]+"("+document.getElementById("tag").getAttribute('onkeyup').split("(")[2]
+				document.getElementById("espaciotags").innerHTML+="<span id='spantag"+id+"'><span class='label label-info'>"+nombre+"    <button style='margin-left:2px' class='btn btn-link' onclick='borrartag("+id+")'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></span>, </span>"
+
 				
-				primerparametro=primerparametro.split(",")[0]+"+/"+id
 				
+				recargar()
 				
 				//document.getElementById("tag").getAttribute('onkeyup')="from("+primerparametro+",'tagsugeridos','SugerenciasTag')"
 				//document.getElementById("tag").onkeyup="from(document.getElementById('tag').value,'tagsugeridos','SugerenciasTag')"
