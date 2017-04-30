@@ -299,6 +299,8 @@
 									onkeyup="previsualizacion();"></textarea>
 								<input type="hidden" id="mensajeoculto" name="mensajeoculto"
 									value="">
+								<input type="hidden" value="" name="idsusados" id="idsusados">
+									
 							</div>
 						</div>
 
@@ -309,6 +311,7 @@
 									Pregunta</button>
 							</div>
 						</div>
+						
 					</form>
 				</div>
 			</div>
@@ -319,7 +322,6 @@
 			<div ><h3 id="espaciotags"></h3></div>
 				<label class="col-md-offset-2 control-label col-sm-1  " for="titulo">
 					<input type="hidden" value="" id="busquedatags">
-					<input type="hidden" value="" id="idsusados">
 					<span class="label label-info "
 					style="font-size: 14px; margin-top: 2px;"> Tags </span>
 				</label>
