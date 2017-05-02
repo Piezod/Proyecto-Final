@@ -78,8 +78,8 @@ public class ServerletAltaPregunta extends HttpServlet {
 		
 		
 		int idpregunta=c.InsertarPregunta(titulo, mensaje, (String)sesion.getAttribute("usuario"));
-		String tags=request.getParameter("tagsusados");
-		System.out.println(tags);
+		String tags=request.getParameter("idsusados");
+
 		for (int i=0;i<tags.split("_").length;i++){
 			try {
 				c.actualizardato("insert into preguntas_tags values ('"+idpregunta+"','"+tags.split("_")[i]+"')");
