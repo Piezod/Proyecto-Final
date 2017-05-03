@@ -188,7 +188,7 @@
 		
 		idsusados=document.getElementById("idsusados").value
 		
-		from(primerparametro+"_"+idsusados,'tagsugeridos','SugerenciasTag')
+		frompag(primerparametro+"_"+idsusados,0,'tagsugeridos','SugerenciasTag')
 		//from(document.getElementById("tag").value+"_"+document.getElementById("idsusados").value,'tagsugeridos','SugerenciasTag')
 		
 	}
