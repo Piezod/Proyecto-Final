@@ -128,7 +128,7 @@ function passwordStrength(password) {
 	//if password has at least one special caracther give 1 point
 	if ( password.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/) )	score++;
 
-	//if password bigger than 12 give another 1 point
+	//if password bigger than 0 give another 1 point
 	if (password.length > 10) score++;
 
 	// display indicator
