@@ -30,31 +30,61 @@ return req;
 var miPeticion = obtiene_http_request();
 //***************************************************************************************
 function from(id,ide,url){
-		var mi_aleatorio=parseInt(Math.random()*99999999);//para que no guarde la página en el caché...
-		var vinculo=url+"?id="+id+"&rand="+mi_aleatorio;
-		//alert(vinculo);
-		miPeticion.open("GET",vinculo,true);//ponemos true para que la petición sea asincrónica
-		miPeticion.onreadystatechange=miPeticion.onreadystatechange=function(){
-               if (miPeticion.readyState==4)
-               {
-				   //alert(miPeticion.readyState);
-                       if (miPeticion.status==200)
-                       {
-                                //alert(miPeticion.status);
-                               //var http=miPeticion.responseXML;
-                               var http=miPeticion.responseText;
-                               document.getElementById(ide).innerHTML= http;
+	var mi_aleatorio=parseInt(Math.random()*99999999);//para que no guarde la pï¿½gina en el cachï¿½...
+	var vinculo=url+"?id="+id+"&rand="+mi_aleatorio;
+	//alert(vinculo);
+	miPeticion.open("GET",vinculo,true);//ponemos true para que la peticiï¿½n sea asincrï¿½nica
+	miPeticion.onreadystatechange=miPeticion.onreadystatechange=function(){
+           if (miPeticion.readyState==4)
+           {
+			   //alert(miPeticion.readyState);
+                   if (miPeticion.status==200)
+                   {
+                            //alert(miPeticion.status);
+                           //var http=miPeticion.responseXML;
+                           var http=miPeticion.responseText;
+                           document.getElementById(ide).innerHTML= http;
 
-                       }
-               }/*else
-               {
-			document.getElementById(ide).innerHTML="<img src='ima/loading.gif' title='cargando...' />";
+                   }
+           }/*else
+           {
+		document.getElementById(ide).innerHTML="<img src='ima/loading.gif' title='cargando...' />";
 
-                }*/
-       }
-       miPeticion.send(null);
+            }*/
+   }
+   miPeticion.send(null);
 
 }
+//************************************************************************************************
+
+function frompag(id,pagina,ide,url){
+	var mi_aleatorio=parseInt(Math.random()*99999999);//para que no guarde la pï¿½gina en el cachï¿½...
+	var vinculo=url+"?id="+id+"&page="+pagina+"&rand="+mi_aleatorio;
+	//alert(vinculo);
+	miPeticion.open("GET",vinculo,true);//ponemos true para que la peticiï¿½n sea asincrï¿½nica
+	miPeticion.onreadystatechange=miPeticion.onreadystatechange=function(){
+           if (miPeticion.readyState==4)
+           {
+			   //alert(miPeticion.readyState);
+                   if (miPeticion.status==200)
+                   {
+                            //alert(miPeticion.status);
+                           //var http=miPeticion.responseXML;
+                           var http=miPeticion.responseText;
+                           document.getElementById(ide).innerHTML= http;
+
+                   }
+           }/*else
+           {
+		document.getElementById(ide).innerHTML="<img src='ima/loading.gif' title='cargando...' />";
+
+            }*/
+   }
+   miPeticion.send(null);
+
+}
+
+
 //************************************************************************************************
 function limpiar()
 {
