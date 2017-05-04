@@ -140,6 +140,16 @@
     <servlet-name>PagiUsuarios</servlet-name>
     <url-pattern>/pagiusuarios</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>zonaadmin</servlet-name>
+    <jsp-file>/ContenidoPrincipal/ZonaAdmin.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>zonaadmin</servlet-name>
+    <url-pattern>/zonaadmin</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>Detalleusuarios</servlet-name>
     <jsp-file>/ContenidoPrincipal/DetalleUsuario.jsp</jsp-file>
@@ -147,5 +157,13 @@
   <servlet-mapping>
     <servlet-name>Detalleusuarios</servlet-name>
     <url-pattern>/detalleusuario</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Solicitudes</servlet-name>
+    <jsp-file>/GestionUsuarios/Solicitudes.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Solicitudes</servlet-name>
+    <url-pattern>/Solicitudes</url-pattern>
   </servlet-mapping>
 </web-app>

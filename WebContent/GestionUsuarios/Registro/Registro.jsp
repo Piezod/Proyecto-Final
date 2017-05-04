@@ -3,6 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+
 <script>
 	function cambiarhidden(id,valor){
 		
@@ -101,6 +103,19 @@
 </head>
 <body>
 		
+		
+<%
+if (session.getAttribute("usuario")==null)
+{
+	response.sendRedirect("login");
+	System.out.println("usuario vacio");
+}else if (!session.getAttribute("admin").equals("1"))
+{
+	response.sendRedirect("login");
+System.out.println("usuario no es admin");
+}%>
+
+		<%@include file="../../ContenidoPrincipal/Cabecera.jsp"%>
 	<div class="container">
 		<div class="row main">
 			<div class="main-login main-center">
@@ -274,7 +289,7 @@
 	<%
 	//Destruyo la sesión para que si refrescas la página o sales no se te 
 	//queden los campos llenos
-	session.invalidate(); %>
+	//session.invalidate(); %>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="Bootstrap/js/jquery-1.11.3.min.js"></script>
 	<!-- <script src="../../Bootstrap/js/jquery-1.11.3.min.js"></script> -->

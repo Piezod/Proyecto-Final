@@ -6,17 +6,14 @@
    <%@ page import="Utilidades.*" %>
 
 
+
 <script src="${pageContext.request.contextPath}/Bootstrap/js/jquery-1.11.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/Bootstrap/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/Bootstrap/js/ajax.js"></script>
 <link href="${pageContext.request.contextPath}/Bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/Bootstrap/css/Estilospropios.css" rel="stylesheet">
-<style>
-	body{
-		background-image: url("Fondos/20.jpg"); <!-- probar el 10,20,y-->
-	}
-</style>
 
+ <LINK href="css/EstilosNavBar.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -81,10 +78,10 @@ if(session.getAttribute("conexion")!=null){
         <li class="dropdown" style="margin-right:10px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("usuario") %><span class="caret"></span></a>
           <ul class="dropdown-menu">
 
-            <li><a  class="list-group-item" href="${pageContext.request.contextPath}/AreaUsuario">Datos de usuario</a></li>
+            <li><a href="${pageContext.request.contextPath}/AreaUsuario">Datos de usuario</a></li>
             <%if((session.getAttribute("admin")!=null && session.getAttribute("admin").equals("1"))){ %>
             <li role="separator" class="divider"></li>
-            <li class="list-group-item-success"><a href="${pageContext.request.contextPath}/ZonaAdmin">Zona Administrador</a></li>
+            <li><a href="${pageContext.request.contextPath}/zonaadmin">Zona Administrador</a></li>
             <%} %>
             <li role="separator" class="divider"></li>
             <li>

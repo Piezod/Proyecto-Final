@@ -16,14 +16,16 @@
 	
 	
 <script type="text/javascript">
-function confirmarbaja(){
+function confirmarbaja(idrespu){
 	
    $('#confirmarbaja').modal('show');
-   alert(document.getElementById("idres").value);
-   document.getElementById("getres").value = document.getElementById("idres").value;
+   //alert(idrespu);
+   document.getElementById("getres").value = idrespu;
 };
-function confirmarmejor(){
-	   $('#confirmarmejor').modal('show');
+function confirmarmejor(idrespu){
+	$('#confirmarmejor').modal('show');
+	   //alert(idrespu);
+	   document.getElementById("idrespuestamejor").value = idrespu;
 	};
 
 
@@ -157,6 +159,9 @@ td{
 
 
 
+
+
+
 <div class="container-fluid">
 <div class="row">
 <div class="col-md-offset-0 col-md-12">
@@ -165,17 +170,42 @@ td{
   		<li class="active">Detalle pregunta</li>
 	</ol>
 </div>
+<%
+
+					
+					if (request.getAttribute("elimina")!=null)
+					{
+						System.out.println("eliminacion no es null");
+						if (request.getAttribute("elimina").equals("eliminacion") 
+								   || request.getAttribute("elimina").equals("validacion"))
+					
+						{
+								System.out.println("eliminacion no es null y vale eliminacion o validacoion");
+							%>
+							<div class="container">
+							<div class="row">
+							<div class="col-md-offset-0 col-md-12">
+							<div class="alert alert-success">
+						    <strong>Realizado !</strong> Se ha llevado a cabo la <%=request.getAttribute("elimina")%> satisfactoriamente
+							  </div></div></div></div>
+							<%
+						}
+					}
+					
+					%>
+<br>
+
+			
 	<div class="container-fluid">
 	<div class="row" style="margin-top: 5%">
 	    <div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-primary ">
 					  <div class="panel-heading">
 					
-					  
 					   <% 
 			   		 	Conexion c=(Conexion)session.getAttribute("conexion");
 			    		//c.conectar();
-			    		int paginas=Integer.parseInt(c.recibirdato("select count(*) from respuestas where idpregunta like '"+request.getParameter("idpregunta")+"'"))/10;
+			    		int paginas=Integer.parseInt(c.recibirdato("select count(*) from respuestas where mejorrespuesta=0 and idpregunta like '"+request.getParameter("idpregunta")+"'"))/10;
 			    		if (request.getParameter("idpregunta")==null)
 							{
 								%>
@@ -188,7 +218,7 @@ td{
 							}
 			    		else if(!c.comprobar("select * from preguntas where idpreguntas like'"+request.getParameter("idpregunta")+"'")){
 			    			%>
-							<h3>Cargar jsp de pagina no encontrada</h3>
+							<h3>Lo siento, algo no ha ido bien y se ha comedito un error, vuelve a la pagina de inicio y vuelve a intentarlo</h3>
 							</div>
 							</div>
 							</div>
@@ -302,9 +332,9 @@ td{
 							  	  	  			<a href="${pageContext.request.contextPath}/ServerletAdminPregunta?idpregunta=<%= request.getParameter("idpregunta") %>">
 							  	  	  				
 							  	  	  			-->
-				  	  	  			    <input type="hidden" id="idres" value="<%=rs.getString(1) %>"></input>
-				  	  	  				<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="confirmarbaja();"></span><%=rs.getString(1)%></a>
-				  	  	  				<span class="glyphicon glyphicon-ok" aria-hidden="true" onclick="confirmarmejor();"></span>
+				  	  	  			    <input type="hidden" id="idresp" value="<%=rs.getString(1) %>"></input>
+				  	  	  				<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="confirmarbaja(<%=rs.getString(1)%>);"></span></a>
+				  	  	  				<span class="glyphicon glyphicon-ok" aria-hidden="true" onclick="confirmarmejor(<%=rs.getString(1)%>);"><%=rs.getString(1)%></span>
 				  	  	  			<%} %>
 				  	  	 		</div>
 				         	    </div>
@@ -352,8 +382,9 @@ td{
 				  	  	 		<div class="col-md-2">
 				  	  	 		<% if (session.getAttribute("admin").equals("1"))
 				  	  	 			{%>
-				  	  	  			<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="confirmarbaja();"></span></a>
-				  	  	  				<span class="glyphicon glyphicon-ok" aria-hidden="true" onclick="confirmarmejor();"></span>
+				  	  	  				<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="confirmarbaja(<%=rs.getString(1)%>);"></span></a>
+				  	  	  				<span class="glyphicon glyphicon-ok" aria-hidden="true" onclick="confirmarmejor(<%=rs.getString(1)%>);"></span>
+				  	  	  			
 				  	  	  			<%} %>
 				  	  	 		</div>
 				         	    </div>
@@ -555,6 +586,7 @@ td{
 	        <form class="form-horizontal" action="ServerletAdminPregunta" method="POST">
 	       	  <input type="hidden" id="getres" name="getres"></input>
 	          <button type="submit" class="btn btn-info" >Confirmar</button>
+	          	<input type="hidden" id="tipo" name="tipo" value="confirmarbaja">
 	          	<input type="hidden" id="idpregunta" name="idpregunta" value="<%=request.getParameter("idpregunta")%>">
 				<input type="hidden" id="idusuario" name="idusuario" value="<%=session.getAttribute("usuario")%>">	
 	          <button type="button" class="btn btn-info" data-dismiss="modal" >Cerrar</button>
@@ -584,8 +616,9 @@ td{
           <p>¿Estas seguro que quieres confirmar esta pregunta para ser la mejor pregunta?</div>
         <div class="modal-footer" >
 	        <form class="form-horizontal" action="ServerletAdminPregunta" method="POST">
-	       	  <input type="hidden" id="getres" name="getres"></input>
+	       	  <input type="hidden" id="idrespuestamejor" name="idrespuestamejor"></input>
 	          <button type="submit" class="btn btn-info" >Confirmar</button>
+	          	<input type="hidden" id="tipo" name="tipo" value="confirmarmejor">	
 	          	<input type="hidden" id="idpregunta" name="idpregunta" value="<%=request.getParameter("idpregunta")%>">
 				<input type="hidden" id="idusuario" name="idusuario" value="<%=session.getAttribute("usuario")%>">	
 	          <button type="button" class="btn btn-info" data-dismiss="modal" >Cerrar</button>
@@ -600,6 +633,7 @@ td{
    
 <%@include file="pie.jsp"%>
 </body>
+
 <%//c.cerrarconexion();
 //cr.cerrarconexion();%>
 </html>

@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+
+#tabla1
+{
+	display:none;
+}
+
+.table-hover tr:hover td, .table-hover tr:hover th {
+   background-color: #ecdbff;
+}
