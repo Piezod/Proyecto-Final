@@ -85,14 +85,14 @@ function mostrarocultar(campo){
 		<div class="col-sm-12 col-xs-12 col-md-0 hidden-md hidden-lg" align="left">
 		      <button type="button" class="btn btn-default"  onclick="from('<%=session.getAttribute("usuario") %>','contenido','DatosUsuario')">Visualizar</button>
 		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','EditarUsuario')">Editar</button>
-		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','ActividadUsuario')">Actividad</button>
+		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','CambioPass')">Cambiar contraseña</button>
 		      
 		  </div>
 		  <div class="col-md-3 col-sm-0 col-xs-0 hidden-sm hidden-xs"  align="right">
 		  	  <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
 		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','DatosUsuario')">Visualizar Datos</button>
 		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','EditarUsuario')">Editar Datos</button>
-		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','ActividadUsuario')">Actividad de usuario</button>
+		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','CambioPass')">Cambiar contraseña</button>
 		      
 	        </div>
 		  </div>
@@ -106,6 +106,38 @@ function mostrarocultar(campo){
 		
 	</div>
 		<%@include file="../ContenidoPrincipal/pie.jsp"%>
+	    <script type="text/javascript">
+/* Password strength indicator */
+function passwordStrength(password) {
+
+	var desc = ['0px', '20%', '40%', '60%', '80%', '100%'];
 	
+	var descClass = ['', 'progress-bar progress-bar-danger', 'progress-bar progress-bar-danger', 'progress-bar progress-bar-warning', 'progress-bar progress-bar-success', 'progress-bar progress-bar-success'];
+
+	var score = 0;
+
+	//if password bigger than 6 give 1 point
+	if (password.length > 6) score++;
+
+	//if password has both lower and uppercase characters give 1 point	
+	if ((password.match(/[a-z]/)) && (password.match(/[A-Z]/))) score++;
+
+	//if password has at least one number give 1 point
+	if (password.match(/d+/)) score++;
+
+	//if password has at least one special caracther give 1 point
+	if ( password.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/) )	score++;
+
+	//if password bigger than 12 give another 1 point
+	if (password.length > 10) score++;
+
+	// display indicator
+	document.getElementById("pstrength").className=descClass[score]
+	document.getElementById("pstrength").style.width=(desc[score])
+	//$("#pstrength").removeClass(descClass[score-1]).addClass.css(desc[score]);
+}
+    
+    
+    </script>
 </body>
 </html>
