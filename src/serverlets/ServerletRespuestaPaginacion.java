@@ -81,7 +81,7 @@ public class ServerletRespuestaPaginacion extends HttpServlet {
 			sesion.setAttribute("pagpulsada", 1); // Nos dice la pagina que ha sido pulsada para que esa sea pulsada y cambie el formato
 			sesion.setAttribute("iniciores",0); // Nos dice el valor inicial de la busqueda en la query
 			sesion.setAttribute("finres", 10); //este dato suele ser 10, es el que nos dice cuantos mostraremos en pantalla
-			System.out.println("Entro por primera vez aqui");
+			//System.out.println("Entro por primera vez aqui");
 			
 		}
 		//System.out.println("Serverletrespuestapaginacion valores pagpulsada,inicio,fin"+Integer.parseInt(request.getParameter("pagpulsada"))+Integer.parseInt(request.getParameter("inicio"))+Integer.parseInt(request.getParameter("fin")));
