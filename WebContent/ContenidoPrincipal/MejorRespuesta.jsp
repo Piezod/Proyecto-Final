@@ -22,14 +22,33 @@
     			ResultSet rs=cr.sacarresultset(query);
     			if (rs.next())
     			{ 
+    				
     				%>
-<div class="=container-fluid">
+    				
+    				<div class="container">
+  						<div class="h1" align="center"> Respuestas Validadas
+    				</div></div>
+    				<%
+    				
+    				do{
+    				%>
+				<div class="=container-fluid">
 				   	  <div class="row">
 				    	  <div class="col-md-8 col-md-offset-2">
 				         	<div class="panel panel-success">
 				         	  <div class="panel-heading">
-				         	    <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %> </h3>
-				       	    </div>
+				         	  <div class="row">
+				  	  	 		<div class="col-md-10">				  	  	 		
+			    					 <a href="ServerletDetalleUsuario?usuario=<%= rs.getString(7) %>">
+			    					 <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %> </h3></a>
+				  	  	 		</div><div class="col-md-2">
+				  	  	 		<% if (session.getAttribute("admin").equals("1"))
+				  	  	 			{%>
+				  	  	  			    <input type="hidden" id="idresp" value="<%=rs.getString(1) %>"></input>
+				  	  	  				<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="confirmarbaja(<%=rs.getString(1)%>);"></span></a>
+				  	  	  			<%} %>
+				  	  	 		</div>
+				       	    </div></div>
 				         	  <div class="panel-body"> <%= rs.getString(2) %> </div>
 				         	  <div class="panel-footer">
 				         	  	
@@ -41,9 +60,9 @@
 				         	  			
 				         	  		</tr>
 				         	  		<tr>
-				         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a class="amodificiada" href="${pageContext.request.contextPath}/ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
+				         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="${pageContext.request.contextPath}/ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>&tipo=mas&idpregunta=<%= request.getParameter("idpregunta") %>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
 				         	  		 
-				         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span><a class="amodificiada" href="${pageContext.request.contextPath}/ServerletRespuesta?resto=1" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
+				         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span><a  href="${pageContext.request.contextPath}/ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>&tipo=menos&idpregunta=<%= request.getParameter("idpregunta") %>" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
 				         	  		 </tr>
 				         	  	</table>
 				         	  </div>
@@ -54,7 +73,8 @@
 				  	  <hr>
 				  	  <br>
 				    </div>
-				    <%} 
+				    <%} while(rs.next());
+    			}  
     			else if (cr.sacarresultset("SELECT * FROM dbdamproject.respuestas where idpregunta="+(int)session.getAttribute("idpregunta")).next())
     			{
     				%>
