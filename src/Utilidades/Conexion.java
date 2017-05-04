@@ -796,7 +796,6 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 
 	public int[] idstag(String busqueda, int inicio,int paginas){
 		try {
-			//System.out.println(busqueda);
 			int idsex=busqueda.split("_").length;
 			
 			String exclusionpk="";
@@ -829,8 +828,9 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 			int[] ids;
 			if(idsex==0){
 				
-				int longitud=contar("select count(*) from tags where  (nombre like '%%' or descripcion like '%%')")%9;
-				if(longitud!=0){
+				int longitud=contar("select count(*) from tags where  (nombre like '%%' or descripcion like '%%')");
+				if(inicio!=paginas){
+				if(longitud<9){
 					ids=new int[longitud];
 				}else if(paginas!=inicio){
 					ids=new int[9];
@@ -838,18 +838,38 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 				else{
 					ids=new int[9];
 				}
+				}
+				else{
+					if(longitud%9!=0){
+						ids=new int[longitud%9];
+					}
+					else{
+						ids=new int[9];
+
+					}
+				}
 				
 			}
 			else{
-				int longitud=contar("select count(*) from tags where  (nombre like '%"+busqueda.split("_")[0]+"%' or descripcion like '%"+busqueda.split("_")[0]+"%') "+exclusionpk)%9;
-				if(longitud!=0&&inicio!=paginas){
+				int longitud=contar("select count(*) from tags where  (nombre like '%"+busqueda.split("_")[0]+"%' or descripcion like '%"+busqueda.split("_")[0]+"%') "+exclusionpk);
+				if(inicio+1!=paginas){
+				if(longitud<9){
 					ids=new int[longitud];
-
+				
 				}else{
 					ids=new int[9];
 				}
+				}
+				else{
+					if(longitud%9!=0){
+						ids=new int[longitud%9];
+					}
+					else{
+						ids=new int[9];
+
+					}
+				}
 			}
-			
 			ResultSet res=consulta.executeQuery();
 			for(int i=0;i<ids.length;i++){
 				if(res.next()){
