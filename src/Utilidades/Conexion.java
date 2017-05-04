@@ -206,7 +206,7 @@ public class Conexion {
 	 * @return
 	 * @throws SQLException
 	 */
-	private int contar(String query) {
+	public int contar(String query) {
 		try{
 		Statement consulta = conexion.createStatement();
 		ResultSet res = consulta.executeQuery(query);
@@ -220,7 +220,7 @@ public class Conexion {
 			return -1;
 		}
 	}
-
+	
 	public String generarusuario(String nombre, String apellido1, String apellido2) throws SQLException {
 		String usuario = "";
 		usuario += nombre.charAt(0);
@@ -794,9 +794,8 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 		insertar.executeUpdate(query);
 	}
 
-	public int[] idstag(String busqueda, int inicio){
+	public int[] idstag(String busqueda, int inicio,int paginas){
 		try {
-			System.out.println(busqueda);
 			int idsex=busqueda.split("_").length;
 			
 			String exclusionpk="";
@@ -819,25 +818,63 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 			}
 			PreparedStatement consulta;
 			if (idsex==0){
-				consulta=conexion.prepareStatement("select * from tags where (nombre like '%%' or descripcion like '%%') limit "+inicio*9+",9");
-				
+				consulta=conexion.prepareStatement("select * from tags where (nombre like '%%' or descripcion like '%%') limit "+inicio*9+","+((inicio+1)*9));
+
 			}else{
-				consulta=conexion.prepareStatement("select * from tags where (nombre like '%"+busqueda.split("_")[0]+"%' or descripcion like '%"+busqueda.split("_")[0]+"%') "+exclusionpk+" limit "+inicio*9+",9");
-				
+				consulta=conexion.prepareStatement("select * from tags where (nombre like '%"+busqueda.split("_")[0]+"%' or descripcion like '%"+busqueda.split("_")[0]+"%') "+exclusionpk+" limit "+inicio*9+","+((inicio+1)*9));
 			}
 			
-			ResultSet res=consulta.executeQuery();
+			
 			int[] ids;
 			if(idsex==0){
-				ids=new int[contar("select count(*) from tags where  (nombre like '%%' or descripcion like '%%') limit "+inicio*9+",9")];
+				
+				int longitud=contar("select count(*) from tags where  (nombre like '%%' or descripcion like '%%')");
+				if(inicio!=paginas){
+				if(longitud<9){
+					ids=new int[longitud];
+				}else if(paginas!=inicio){
+					ids=new int[9];
+				}
+				else{
+					ids=new int[9];
+				}
+				}
+				else{
+					if(longitud%9!=0){
+						ids=new int[longitud%9];
+					}
+					else{
+						ids=new int[9];
+
+					}
+				}
+				
 			}
 			else{
-				ids=new int[contar("select count(*) from tags where  (nombre like '%"+busqueda.split("_")[0]+"%' or descripcion like '%"+busqueda.split("_")[0]+"%') "+exclusionpk+" limit "+inicio*9+",9")];
+				int longitud=contar("select count(*) from tags where  (nombre like '%"+busqueda.split("_")[0]+"%' or descripcion like '%"+busqueda.split("_")[0]+"%') "+exclusionpk);
+				if(inicio+1!=paginas){
+				if(longitud<9){
+					ids=new int[longitud];
+				
+				}else{
+					ids=new int[9];
+				}
+				}
+				else{
+					if(longitud%9!=0){
+						ids=new int[longitud%9];
+					}
+					else{
+						ids=new int[9];
+
+					}
+				}
 			}
-			
+			ResultSet res=consulta.executeQuery();
 			for(int i=0;i<ids.length;i++){
-				res.next();
-				ids[i]=res.getInt(1);
+				if(res.next()){
+					ids[i]=res.getInt(1);
+				}
 			}
 			return ids;
 		} catch (SQLException e) {
@@ -848,6 +885,40 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 		
 		
 		
+	}
+	
+	public int contarconexclusionestags(String idsusados){
+		int idsex=idsusados.split("_").length;
+		
+		String exclusionpk="";
+		if(idsex>1){
+			exclusionpk="and (";
+		
+		for(int i=1;i<idsex;i++){
+			if(i!=idsex-1){
+
+				exclusionpk+="Id not like '"+idsusados.split("_")[i]+"'";
+
+				exclusionpk+=" and ";
+			}
+			else{
+				exclusionpk+="Id not like '"+idsusados.split("_")[i]+"'";
+
+			}
+		}
+		exclusionpk+=")";
+		}
+		int longitud=0;
+		if(idsex==0){
+			longitud=contar("select count(*) from tags where  (nombre like '%%' or descripcion like '%%')");
+			
+		}
+		else{
+			longitud=contar("select count(*) from tags where  (nombre like '%"+idsusados.split("_")[0]+"%' or descripcion like '%"+idsusados.split("_")[0]+"%') "+exclusionpk);
+			
+		}
+		
+		return longitud;
 	}
 }
 	

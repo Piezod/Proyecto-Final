@@ -52,7 +52,7 @@ public class ServerletDetallePregunta extends HttpServlet {
 			 * Sacamos el usuario que ha realizado la pregunta 
 			 */
 			request.getAttribute("titulo");
-			System.out.println(Integer.parseInt(request.getParameter("idpregunta")));
+			//System.out.println(Integer.parseInt(request.getParameter("idpregunta")));
 			int idpregunta= Integer.parseInt(request.getParameter("idpregunta"));
 				sesion.setAttribute("idpregunta", idpregunta);
 				sesion.setAttribute("iniciores",0);
