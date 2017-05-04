@@ -18,8 +18,15 @@ int pagina=0;
 if(request.getParameter("page")!=null){
 		pagina=Integer.parseInt(request.getParameter("page"));
 	}
-	int[] ids=c.idstag(request.getParameter("id"), pagina);
-	
+	String id=request.getParameter("id");
+	int contar=c.contarconexclusionestags(id);
+	int pagmaxima=contar/9;
+	if(contar%9!=0){
+		pagmaxima++;
+	}
+
+	int[] ids=c.idstag(id, pagina,pagmaxima);
+
 	for(int i=0;i<ids.length;i++){
 		if(i==0||i==3||i==6){
 			%>
@@ -31,14 +38,15 @@ if(request.getParameter("page")!=null){
 		String tag,desc;
 		tag=res.getString(2);
 		desc=res.getString(3);
+		if(desc!=null){
 		%>
 		
 		<div class="col-md-4">
 			<div class="panel panel-primary" onclick="anadirtag('<%= res.getInt(1) %>','<%= tag %>');">
 			
 				<input type="hidden" id="tag<%= res.getInt(1) %>" name="tag<%= res.getInt(1) %>" value="<%= res.getInt(1) %>">
-				<div class="panel-heading">
-					<%= tag %>
+				<div class="panel-heading"  style="cursor:pointer">
+					<%=i+ tag %>
 				</div>
 				<div class="panel-body">
 					<%= desc %>
@@ -47,12 +55,83 @@ if(request.getParameter("page")!=null){
 		</div>
 		
 		<%
+		}
 		if(i==2||i==5||i==8||i==ids.length-1){
 			%>
 			</div>
+			
+			
 			<%
 		}
 	}
+	%>
+	
+	<div style="text-align:center">
+				<nav aria-label="Page navigation">
+				  <ul class="pagination">
+				  <% 
+				  	if(pagina==0){
+				  %>
+				  	<li class="disabled"  style="cursor:pointer">
+				  	<a aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    
+				  <%
+				  	}
+				  	else{
+				  %>
+				 	<li  style="cursor:pointer">
+				 	<a onclick="frompag(document.getElementById('tag').value+'_'+document.getElementById('idsusados').value,<%=pagina-1 %>,'tagsugeridos','SugerenciasTag')" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				  <%
+				  	}
+				  %>
+				      </li>
+				    <%
+				    for(int j=0;j<pagmaxima;j++){
+				    	
+				    	if(j==pagina){
+				    	%>
+				    		<li class="active"><a onclick="from(document.getElementById('tag').value+'_'+document.getElementById('idsusados').value,<%=j %>,'tagsugeridos','SugerenciasTag')"><%= j+1 %></a></li>
+
+				    	<%
+				    	}
+				    	else{
+				    	%>
+				    		<li  style="cursor:pointer"><a onclick="frompag(document.getElementById('tag').value+'_'+document.getElementById('idsusados').value,<%=j %>,'tagsugeridos','SugerenciasTag')"><%= j+1 %></a></li>
+				    	
+				    	<%
+				    }
+				    }
+				  	if(pagina+1==pagmaxima){
+				  %>
+				  	<li class="disabled">
+				  	<a aria-label="Next">
+				    
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				  <%
+				  	}
+				  	else{
+				  %>
+				 	<li style="cursor:pointer">
+				 	<a onclick="frompag(document.getElementById('tag').value+'_'+document.getElementById('idsusados').value,<%=pagina+1 %>,'tagsugeridos','SugerenciasTag')" aria-label="Next">
+				    
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				  <%
+				  	}
+				  %>
+				      
+				    </li>
+				  </ul>
+				</nav>			
+			</div>
+	
+	
+	<%
 	
 	if(ids.length==0){
 		%>
