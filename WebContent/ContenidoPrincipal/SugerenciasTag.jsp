@@ -46,7 +46,7 @@ if(request.getParameter("page")!=null){
 			
 				<input type="hidden" id="tag<%= res.getInt(1) %>" name="tag<%= res.getInt(1) %>" value="<%= res.getInt(1) %>">
 				<div class="panel-heading"  style="cursor:pointer">
-					<%=i+ tag %>
+					<%= tag %>
 				</div>
 				<div class="panel-body">
 					<%= desc %>
