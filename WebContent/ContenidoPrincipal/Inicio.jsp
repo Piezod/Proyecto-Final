@@ -15,18 +15,32 @@
 
 
 
-<title>Estudiantes Conectados</title>
 	<%@include file="Cabecera.jsp"%>
 <head>
 <script type="text/javascript">
  function bienvenida(){
     $('#myModal').modal('show');
+    
+    
 };
+
+$(document).ready(function(){
+    $('#cuerpo').fadeIn();
+});
 </script>
 
+
+<style type="text/css">
+#cuerpo{
+    display:none;
+}
+</style>
+
+
+<title>Estudiantes Conectados</title>
 </head>
 
-<body>
+<body id="cuerpo">
 	 
 	 
 	<!-- Modal para notificaciones  -->
@@ -79,10 +93,10 @@ if (!co.comprobar("select * from primerinicio where idusuario like '"+session.ge
 	co.actualizardato("insert into primerinicio values ('"+session.getAttribute("usuario")+"',1,'')");
 }
 %>
-	
+
 	<div class="container-fluid">
 		<div class="container-fluid">
-
+		
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<h1 align="center">Bienvenido a estudiantes conecta2</h1>
@@ -122,8 +136,6 @@ if (!co.comprobar("select * from primerinicio where idusuario like '"+session.ge
 			<div class="row">
 				<div class="col-md-2">
 					<!-- Izquierda -->
-
-
 				</div>
 
 				<div class="col-md-8">
@@ -194,15 +206,15 @@ if (!co.comprobar("select * from primerinicio where idusuario like '"+session.ge
 					</div>
 					<div class="col-md-2">
 						<table>
-							<tr>
-								<td> Usuario: <span class="label label-success"> <abbr
+							<tr>   
+								<td> Usuario: <a href="ServerletDetalleUsuario?usuario=<%=titu[3] %>"><span class="label label-success"> <abbr
 										class="initialism"
-										title="AQUI DESPLIEGO YO LO QUE QUIERO PORQUE SE PUEDE Y MOLA"><%=titu[3]%></abbr></td>
+										title="Detalles del usuario"><%=titu[3]%></abbr></span></a></td>
 								</span>
 							</tr>
 							<tr>
 								<td><span class="label label-default"><abbr
-										title="gg"><%=titu[4]%></abbr></td>
+										title="Fecha de la pregunta"><%=titu[4]%></abbr></td>
 								</span>
 							</tr>
 						</table>
@@ -227,6 +239,7 @@ if (!co.comprobar("select * from primerinicio where idusuario like '"+session.ge
 
 
 	</div>
+
 
 <div class="row">
 			<div class="col-sm-2">

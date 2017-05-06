@@ -334,7 +334,7 @@ td{
 							  	  	  			-->
 				  	  	  			    <input type="hidden" id="idresp" value="<%=rs.getString(1) %>"></input>
 				  	  	  				<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="confirmarbaja(<%=rs.getString(1)%>);"></span></a>
-				  	  	  				<span class="glyphicon glyphicon-ok" aria-hidden="true" onclick="confirmarmejor(<%=rs.getString(1)%>);"><%=rs.getString(1)%></span>
+				  	  	  				<span class="glyphicon glyphicon-ok" aria-hidden="true" onclick="confirmarmejor(<%=rs.getString(1)%>);"></span>
 				  	  	  			<%} %>
 				  	  	 		</div>
 				         	    </div>
@@ -472,12 +472,13 @@ td{
 								</div>
 		  	  			
 			  
-			    <div class="col-md-2 col-md-offset-7" >
+			    <div class="col-md-2 col-md-offset-6 col-xs-4" >
 			    <!-- Enviamos los datos para el insert a traves de inputs hidden, como es el id a la pregunta que pertenece y el usuario que realiza la respuesta -->
 				    		<input type="hidden" id="idpregunta" name="idpregunta" value="<%=request.getParameter("idpregunta")%>">
 				    		<input type="hidden" id="idusuario" name="idusuario" value="<%=session.getAttribute("usuario")%>">
-						    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 10%">Publicar Respuesta</button>
+						    <button type="submit" class="btn btn-primary btn-xs">Publicar Respuesta</button>
 					    </div>
+				
 					    </form>
 					   
 					  </div>

@@ -13,26 +13,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Detalle Usuario</title>
+
+ <script type="text/javascript">
+ $(document).ready(function(){
+	    $('#body').fadeIn();
+	});
+ </script>
+<style type="text/css">
+#input, button, submit
+{
+  border:none;
+  background: none;
+}
+</style>
 </head>
 <body>
 <%@include file="Cabecera.jsp"%>
 <%
-/*
-IP:       31.200.243.193  (isalesianos.com)
-PORT:     51987
-DBNAME:   dbdamproject
-USERNAME: usrdamproject
-PASSWORD: GgQXVfYTCu3eBsXY
-*/
-//Recojo el arraylist los datos necesario
-//ArrayList<String> lista=(ArrayList)request.getAttribute("listausuario");
-//HashMap hm=(HashMap)request.getAttribute("hm");
 HashMap hml=(HashMap)request.getAttribute("hml");
 HashMap hml2=(HashMap)request.getAttribute("inforespuesta");
 String usuario=(String)request.getAttribute("usuario");
-//le pongo a la pagecontext importante para que luego se recorra el foreach
-//pageContext.setAttribute("lista", lista);
-//pageContext.setAttribute("hm",hm );
 pageContext.setAttribute("hml", hml);
 pageContext.setAttribute("inforespuesta", hml2);
 pageContext.setAttribute("usuario", usuario);
@@ -61,68 +61,78 @@ pageContext.setAttribute("usuario", usuario);
 	 para ver los datos que hemos recuperado a traves de nuestras clases java, los datos seran tratados en la clase java, aqui solo se pintaran a traves de
 	 los foreach -->
 	
-	
-	
-	
-	<div class="container-fluid">
 	<h1 align="center">Ultimas Preguntas del Usuario : <c:out value="${usuario}"></c:out></h1> 
-	 <div class="row">
-		 <div class="col-md-4 col-md-offset-2">
-		  <table>
-			<c:forEach var="item"  items="${hml}">
-			<form action="DetallePregunta" method="POST">
-			<div class="row">
-						<div class="col-md-9">
-						 <tr>
-						 <td>
-							<input type="hidden" name="idpregunta" value="${item.key}"></input>
-							<button type="submit" name="submit_param" value="submit_value"
-								class="list-group-item list-group-item-info">${item.value.get(0)}
-								
-							</button></td>
-						</div>
-						<td>
-						<div class="col-md-3">
-							<span class="label label-default">${item.value.get(1)}</td>
-									</span></div></td>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" >
+			<table class="table table-hover">
+				  <tr>
+				  	<th>Pregunta</th>
+				  	<th>Fecha</th>
+				  </tr>
+						<c:forEach var="item"  items="${hml}">
+							<form action="DetallePregunta" method="POST">
+								<div class="row">
+										<div class="col-md-9">
+										 <tr>
+										 <td>
+											<input type="hidden" name="idpregunta" value="${item.key}"></input>
+											<span class="label label-primary"><button type="submit" name="submit_param" value="submit_value"
+												class="nostyle">${item.value.get(0)}
+												
+											</button></span></td>
+										</div>
+										<td>
+										<div class="col-md-2">
+											<span class="label label-default">${item.value.get(1)}</td>
+													</span></div></td>
+													</tr>
+										</div>
+									</div>
 									</tr>
-						</div>
-					</div>
-				
-					<!--
-					dejo esto comentado por si necesitara en un futuro saber com orecorrer un arraylist de un hasmap, de momento no recorrere, lo cogere  amano
-					<c:forEach var="arrayItem" items="${item.value}">
-							<td>
-							<button type="submit" name="submit_param" value="submit_value"
-								class="list-group-item list-group-item-info">${item.value.get(1)}
-								
-							</button>
-							</td>
-						</c:forEach>  -->  
-					</tr>
-				
-				</form>
+					
+							</form>
 			</c:forEach>
 		  </table>
-		</div>
- 
- 
- 						<h1 align="center">Ultimas Respuestas del Usuario : <c:out value="${usuario}"></c:out></h1> 
-		 <div class="col-md-4 col-md-offset-2">
-		  <table>
+			</div>
+			<div class="col-sm-6">
+				 <table class="table table-hover">
+				 	 <tr>
+				  	<th>Respuesta</th>
+				  	<th>Votos Positivos</th>
+				  	<th>Votos Negativos</th>
+				  	<th>Fecha</th>
+				  </tr>
 			<c:forEach var="item"  items="${inforespuesta}">
 			<form action="DetallePregunta" method="POST">
 						<div class="col-md-9">
 						 <tr>
 							 <td>
-								<input type="hidden" name="idpregunta" value="${item.value.get(3)}"></input>
-								<button type="submit" name="submit_param" value="submit_value" 
-								class="list-group-item list-group-item-info">${item.value.get(0)}</button>
+							 <c:set var= "opcion" value="${item.value.get(3)}"></c:set>
+							 <c:choose>
+								 <c:when test="${opcion == 1}">
+									<input type="hidden" name="idpregunta" value="${item.value.get(4)}"></input>
+									<span class="label label-success"><button type="submit" name="submit_param" value="submit_value" class="nostyle" >${item.value.get(0)}</button></span>
+								</c:when>
+								<c:otherwise>
+								<input type="hidden" name="idpregunta" value="${item.value.get(4)}"></input>
+								<span class="label label-primary">	<button type="submit" name="submit_param" value="submit_value" 
+									class="nostyle">${item.value.get(0)}</button></span>
+								</c:otherwise>
+							</c:choose>
 							</td>
 						</div>
 						<td>
 						<div class="col-md-3">
-							<span class="label label-default">${item.value.get(4)}</td>
+							<span class="label label-default">${item.value.get(1)}
+									</span></div></td>
+									<td>
+						<div class="col-md-3">
+							<span class="label label-default">${item.value.get(2)}
+									</span></div></td>
+									<td>
+						<div class="col-md-3">
+							<span class="label label-default">${item.value.get(5)}
 									</span></div></td>
 									</tr>
 						</div>
@@ -132,7 +142,8 @@ pageContext.setAttribute("usuario", usuario);
 			</form>
 			</c:forEach>
 		  </table>
+			</div>
 		</div>
- </div>
+	</div>
 </body>
 </html>
