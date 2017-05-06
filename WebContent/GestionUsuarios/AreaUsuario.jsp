@@ -8,6 +8,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="Bootstrap/js/ajax.js"></script>
 <script type="text/javascript">
+
+function actualizarpass(){
+	pass=document.getElementById("password")
+	repetirpass=document.getElementById("reppass")
+	if(pass.value.length>6){
+	if(pass.value==repetirpass.value){
+		document.getElementById("divestadopass").className=""
+		document.getElementById("divestadopass").innerHTML=""
+		from(pass.value,"divestadopass","ServletCambioPass")	
+	}
+	else{
+		document.getElementById("divestadopass").className="alert alert-danger"
+		document.getElementById("divestadopass").innerHTML="Las contraseñas no coinciden por favor compruebe el contenido"
+	}
+	}
+	else{
+		document.getElementById("divestadopass").className="alert alert-danger"
+		document.getElementById("divestadopass").innerHTML="La contraseña es demasiado corta"
+		}
+}
+
 function Comprobarcampos(){
 
 	if(document.getElementById("gnombre").value==""&&document.getElementById("gapellido2").value==""&&document.getElementById("gapellido1").value==""){
@@ -114,27 +135,28 @@ function passwordStrength(password) {
 	
 	var descClass = ['', 'progress-bar progress-bar-danger', 'progress-bar progress-bar-danger', 'progress-bar progress-bar-warning', 'progress-bar progress-bar-success', 'progress-bar progress-bar-success'];
 
-	var score = 0;
+	var puntos = 0;
 
-	//if password bigger than 6 give 1 point
-	if (password.length > 6) score++;
+	//Si la contraseña es menor que 6 no se puede empezar a evaluar la contraseña
+	if (password.length > 6) 
+		
+	{puntos++;
 
-	//if password has both lower and uppercase characters give 1 point	
-	if ((password.match(/[a-z]/)) && (password.match(/[A-Z]/))) score++;
+	//Si contiene mayusculas y minusculas otorga otro punto de seguridad	
+	if ((password.match(/[a-z]/)) && (password.match(/[A-Z]/))) puntos++;
 
-	//if password has at least one number give 1 point
-	if (password.match(/d+/)) score++;
+	//Si contiene un numero al menos otorga otro punto
+	if (password.match(/d+/)) puntos++;
 
-	//if password has at least one special caracther give 1 point
-	if ( password.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/) )	score++;
+	//Si contiene caracteres especiales otro punto
+	if ( password.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/) )	puntos++;
 
-	//if password bigger than 0 give another 1 point
-	if (password.length > 10) score++;
-
+	//si contiene mas de 10 caracteres otorga otro punto
+	if (password.length > 10) puntos++;
+	}
 	// display indicator
-	document.getElementById("pstrength").className=descClass[score]
-	document.getElementById("pstrength").style.width=(desc[score])
-	//$("#pstrength").removeClass(descClass[score-1]).addClass.css(desc[score]);
+	document.getElementById("pstrength").className=descClass[puntos]
+	document.getElementById("pstrength").style.width=(desc[puntos])
 }
     
     

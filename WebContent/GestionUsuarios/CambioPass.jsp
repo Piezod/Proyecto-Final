@@ -13,7 +13,6 @@
 
 <body>
 <div class="panel panel-default">
-		<form method="post" action="ServletCambioPass" onsubmit="return Comprobarcampos();">
 		<div class="panel-heading" align="center">
 			<h3 align="center">Cambie la contraseña de su cuenta</h3>
 		</div>
@@ -37,35 +36,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="panel-footer">
-		<button type="submit" 
-		<%Conexion c=(Conexion) session.getAttribute("conexion");
-		//c.conectar();
-		if(c.comprobar("select * from dbdamproject.solicitudes where usuario like '"+session.getAttribute("usuario")+"' and pendiente like '1'")){
-			%>
-			class="btn btn-danger" disabled>Solicitud pendiente
-			<%
-		}else{
-		%>
 		
-		
-		
-		
-		
-		class="btn btn-primary">Enviar Solicitud
-		<%
-		}
-		//c.cerrarconexion(); %>
-		
+	</div>
+	<div class="panel-footer" style="text-align:center">
+		<div class="alert alert-info" id="divestadopass"></div>
+		<button onclick="actualizarpass()" class="btn btn-primary">
+			Cambiar contraseña
 		</button>
 		</div>
-		</form>
-	</div>
-	
 	
     
     
 	
-
 </body>
 </html>

@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import Utilidades.Conexion;
 
 /**
  * Servlet implementation class ServletCambioPass
@@ -27,8 +30,24 @@ public class ServletCambioPass extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+		HttpSession sesion=request.getSession(true);
+		Conexion c=(Conexion)sesion.getAttribute("conexion");
+		if(c!=null){
+			if(c.cambiopass(request.getParameter("id"), sesion.getAttribute("usuario").toString())!=-1){
+				response.getWriter().append("<div class='alert alert-success'>Contrase&#241;a cambiada correctamente</div>");
+
+			}
+			else{
+				response.getWriter().append("<div class='alert alert-danger'>ha ocurrido algun error durante el cambio de contrase&#241; intentelo de nuevo mas tarde</div>");
+
+			}
+			
+		}
+		else{
+			response.getWriter().append("<div class='alert alert-danger'>ha ocurrido algun error durante el cambio de contrase&#241; intentelo de nuevo mas tarde</div>");
+
+		}
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

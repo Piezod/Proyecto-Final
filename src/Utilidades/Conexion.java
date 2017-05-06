@@ -159,11 +159,45 @@ public class Conexion {
 			
 	}
 
+	@SuppressWarnings("finally")
+	public int cambiopass(String pass,String user){
+		try{
+			conexion.setAutoCommit(false);
+			//Preparo el update
+			String sql="update dbdamproject.usuarios set pass=? where usuario like ?";
+			PreparedStatement consulta=conexion.prepareStatement(sql);
+			//Quito los caracteres extraños y paso la contraseña a hash
+			consulta.setString(1, pass.replaceAll("\'\"\\@\\$\\%", "").hashCode()+"");
+			consulta.setString(2, user);
+			//Hago el update
+			consulta.executeUpdate();
+			conexion.commit();
+		}catch (SQLException e){
+			//Si hay algun error en el update volvemos a un estado anterior
+			
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				// Si hay algun error en el rollback
+							
+				}
+		}finally {
+			try {
+				conexion.setAutoCommit(true);
+				return 1;
+
+			} catch (SQLException e) {
+				//Si hay algun error en el autocommit
+				return -1;
+			}
+		}
+	}
+	
 	/** Método para actualizar la contraseña a traves de la opcion de recordar la contraseña
 	 * @param pass Nueva contraseña
 	 * @param codigo codigo de validacion
 	 */
-	public void actualizarpass(String pass,String codigo){
+	public int actualizarpass(String pass,String codigo){
 		try{
 			conexion.setAutoCommit(false);
 			//Preparo el update
@@ -189,9 +223,11 @@ public class Conexion {
 		}finally {
 			try {
 				conexion.setAutoCommit(true);
+				return 1;
+
 			} catch (SQLException e) {
 				//Si hay algun error en el autocommit
-							
+				return -1;
 			}
 		}
 	}
