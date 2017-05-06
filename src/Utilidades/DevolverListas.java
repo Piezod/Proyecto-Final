@@ -127,7 +127,7 @@ public class DevolverListas {
 			l.add(gc.recortarcadena(20)); // Titulo respuesta
 			
 			l.add(r.getString(3)); // Votos positivos respuesta
-			
+			l.add(r.getString(4)); //Votos negativos
 			l.add(r.getString(5)); //MEjor respuesta
 			l.add(r.getString(6)); //iddelapregunta
 			l.add(r.getString(8)); // fecha

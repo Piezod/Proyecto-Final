@@ -837,7 +837,7 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 	public void actualizardato(String query) throws SQLException
 	{
 		Statement insertar=conexion.createStatement();
-		System.out.println(query+"actualizardato");
+		System.out.println(query+" actualizardato");
 		insertar.executeUpdate(query);
 	}
 

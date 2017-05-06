@@ -16,7 +16,7 @@ public class SolicitudesAdmin {
 	public HashMap<String, ArrayList> Solicitudespendientes() throws SQLException, ClassNotFoundException
 	{
 		String query="select * from solicitudes where pendiente = 1 ";
-		System.out.println(query);
+		//System.out.println(query);
 		Conexion c=new Conexion();
 		c.conectar();
 		
@@ -37,6 +37,7 @@ public class SolicitudesAdmin {
 			l.add(r.getString(4)); //apellido
 			l.add(r.getString(5)); //apellido2
 			l.add(r.getString(6)); //pendiente
+		//	System.out.println(r.getString(6));
 			hm.put(r.getString(1), l); // configuro cada vuelta del hasmap con la key (idrespuesta) y la l que es el arraylist con la info de esa respuesta
 		}
 		c.cerrarconexion();
