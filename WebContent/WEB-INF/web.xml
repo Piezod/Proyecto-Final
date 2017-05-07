@@ -109,6 +109,14 @@
     <url-pattern>/EditarUsuario</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>CambioPass</servlet-name>
+    <jsp-file>/GestionUsuarios/CambioPass.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CambioPass</servlet-name>
+    <url-pattern>/CambioPass</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Busqueda1</servlet-name>
     <jsp-file>/ContenidoPrincipal/ResultadosBusquedaBarra.jsp</jsp-file>
   </servlet>

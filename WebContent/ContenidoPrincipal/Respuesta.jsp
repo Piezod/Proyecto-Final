@@ -28,6 +28,15 @@ function confirmarmejor(idrespu){
 	   document.getElementById("idrespuestamejor").value = idrespu;
 	};
 
+function validarpregunta(){
+	if(document.getElementById("respuesta").value.trim().length==0)
+		{
+		return false;
+		}
+	else{
+		return true;
+	}
+}
 
 function previsualizacion() {
 
@@ -461,7 +470,7 @@ td{
 			<div class="container-fluid" style="margin-top: 3%">
 							<br>
 							
-			    	  <form class="form-horizontal" action="ServerletRespuesta" method="POST">
+			    	  <form class="form-horizontal" onsubmit="return(validarpregunta())" action="ServerletRespuesta" method="POST">
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="pwd">Descripcion</label>
 									<div class="col-sm-8 col-md-8">
