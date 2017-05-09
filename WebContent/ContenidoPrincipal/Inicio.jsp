@@ -1,9 +1,15 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="serverlets.*"%>
 <%@ page import="Utilidades.*"%>
  <%@page import="java.sql.ResultSet"%>
+ 
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+ <%HashMap tags=(HashMap)request.getAttribute("tags");
+ pageContext.setAttribute("tags", tags);%>
 <!doctype html>
 <html>
 <head>
@@ -217,13 +223,25 @@ if (!co.comprobar("select * from primerinicio where idusuario like '"+session.ge
 						</table>
 					</div>
 					<div class="col-md-8">
-						<code> tag1 </code>
-						,
-						<code> tag2 </code>
-						,
-						<code> tag3 </code>
-						,
-						<code> tag4 </code>
+					
+						<%
+						String query="select * from idpregunta_nombretags where IdPregunta='"+x[i]+"'";
+						
+						ResultSet res=co.sacarresultset(query);
+						int cont=0;
+						while(res.next()){
+							if(cont==0){
+								out.print("<code>"+res.getString(2)+"</code>");
+								
+								cont++;
+							}
+							else{
+								out.print(",<code>"+res.getString(2)+"</code>");
+
+							}
+						}
+						%>
+						
 					</div>
 				</div>
 				<hr>

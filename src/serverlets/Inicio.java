@@ -1,28 +1,29 @@
 package serverlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import Utilidades.Conexion;
+import Utilidades.DevolverListas;
 
 /**
- * Servlet implementation class ServletAltaTag
+ * Servlet implementation class Inicio
  */
-@WebServlet("/ServletAltaTag")
-public class ServletAltaTag extends HttpServlet {
+@WebServlet("/Inicio")
+public class Inicio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletAltaTag() {
+    public Inicio() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,14 +33,10 @@ public class ServletAltaTag extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession sesion=request.getSession(true);
-		Conexion c=(Conexion)sesion.getAttribute("conexion");
-		try {
-			c.actualizardato("insert into tags (Nombre,Descripcion) values ('"+request.getParameter("id").split(",")[0]+"','"+request.getParameter("id").split(",")[1]+"')");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		response.getOutputStream().println("<input type='button' class='btn btn-primary btn-block' value='siguiente' onclick='recargar()'>");
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Home");
+		dispatcher.forward(request,response);
 	}
 
 	/**
@@ -47,7 +44,7 @@ public class ServletAltaTag extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		doGet(request, response);
 		
 	}
 
