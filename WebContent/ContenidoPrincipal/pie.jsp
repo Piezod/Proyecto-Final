@@ -20,9 +20,8 @@ piedepagina {
 <hr>
       <p class="piedepagina" align="center">Copyright &copy; 2017 &middot; Todos los derechos reservados &middot; <a href="${pageContext.request.contextPath}/Inicio" >Estudiantes Conecta2</a></p>
 <hr>
-<script src="${pageContext.request.contextPath}/Bootstrap/js/jquery-1.11.3.min.js"></script>
-<script src="${pageContext.request.contextPath}/Bootstrap/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/Bootstrap/js/ajax.js"></script>
+
+
 
 </body>
 </html>

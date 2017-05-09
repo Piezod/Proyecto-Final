@@ -64,8 +64,19 @@ public class ServeletZonaAdmin extends HttpServlet {
 			}
 			
 			break;
+		case "notificacion":
+			System.out.println("envio a jsp notificacion");
+			
+			String nextJSP = "/notificaciones";
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
+			dispatcher.forward(request,response);
+			
+			break;
 
 		default:
+			String nextJSP1 = "/Inicio";
+			RequestDispatcher dispatcher1 = getServletContext().getRequestDispatcher(nextJSP1);
+			dispatcher1.forward(request,response);
 			break;
 		}
 	}
