@@ -132,7 +132,6 @@ public class Correo {
 					Subject=titulo; 
 					r.getString(1); //usuario
 					r.getString(3); //nombre
-					
 					to=r.getString(7);  // email
 					
 					System.out.println("mensaje enviado a "+r.getString(1));  

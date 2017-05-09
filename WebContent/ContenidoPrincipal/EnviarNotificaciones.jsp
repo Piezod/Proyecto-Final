@@ -222,28 +222,29 @@
 </head>
 <body>
 	<%@include file="Cabecera.jsp"%>
-
+<div class="container">
 <div class="row">
 <div class="col-md-offset-0 col-md-12">
   	<ol class="breadcrumb">
   		<li><a href="${pageContext.request.contextPath}/ServerletContenido">Inicio</a></li>
   		<li class="active">Alta Notificacion</li>
 	</ol>
-</div>
-	<div class="container-fluid"
-		style="margin-top: 5%; margin-right: 10%; margin-left: 10%;">
+</div></div>
+	<div class="container">
+	<div class="row">
+	<div class="col-md-offset-2 col-md-8">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<div class="container-fluid">
 					<div class="col-sm-2 col-md-offset-0 col-md-12">
 						<h2 align="center">
-							Nueva Notificación
-							</h21>
+							Nueva Notificación <%=request.getParameter("id") %>
+							</h2>
 					</div>
 				</div>
 			</div>
 			<!-- El cuerpo de panel lo dejo en blanco pero relleno el formulario en el pie porque quiero el lightgrey -->
-			<div class="panel-body"></div>
+			
 			<div class="panel-footer">
 
 				<div class="container-fluid" style="margin-top: 3%">
@@ -272,14 +273,17 @@
 							</div>
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-2 col-md-2 col-md-offset-5">
+									<input type="hidden" name="tipo" value="<%=request.getParameter("id")%>"></input>
 									<button align="center" type="submit" class="btn btn-primary">Enviar
 										Notificacion </button>
+										
 								</div>
 							</div>
 					</form>
 				</div>
 			</div>
 		</div>
+		</div></div></div></div>
 	<%@include file="pie.jsp"%>
 </body>
 </html>
