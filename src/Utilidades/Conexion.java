@@ -3,19 +3,14 @@ package Utilidades;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Savepoint;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.UUID;
 
 public class Conexion {
 
@@ -61,7 +56,6 @@ public class Conexion {
 		ex.printStackTrace( printWriter );
 		printWriter.flush();
 
-		String error = writer.toString();
 		
 		try{
 			conectar();
@@ -165,11 +159,45 @@ public class Conexion {
 			
 	}
 
+	@SuppressWarnings("finally")
+	public int cambiopass(String pass,String user){
+		try{
+			conexion.setAutoCommit(false);
+			//Preparo el update
+			String sql="update dbdamproject.usuarios set pass=? where usuario like ?";
+			PreparedStatement consulta=conexion.prepareStatement(sql);
+			//Quito los caracteres extraños y paso la contraseña a hash
+			consulta.setString(1, pass.replaceAll("\'\"\\@\\$\\%", "").hashCode()+"");
+			consulta.setString(2, user);
+			//Hago el update
+			consulta.executeUpdate();
+			conexion.commit();
+		}catch (SQLException e){
+			//Si hay algun error en el update volvemos a un estado anterior
+			
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				// Si hay algun error en el rollback
+							
+				}
+		}finally {
+			try {
+				conexion.setAutoCommit(true);
+				return 1;
+
+			} catch (SQLException e) {
+				//Si hay algun error en el autocommit
+				return -1;
+			}
+		}
+	}
+	
 	/** Método para actualizar la contraseña a traves de la opcion de recordar la contraseña
 	 * @param pass Nueva contraseña
 	 * @param codigo codigo de validacion
 	 */
-	public void actualizarpass(String pass,String codigo){
+	public int actualizarpass(String pass,String codigo){
 		try{
 			conexion.setAutoCommit(false);
 			//Preparo el update
@@ -195,9 +223,11 @@ public class Conexion {
 		}finally {
 			try {
 				conexion.setAutoCommit(true);
+				return 1;
+
 			} catch (SQLException e) {
 				//Si hay algun error en el autocommit
-							
+				return -1;
 			}
 		}
 	}
@@ -345,18 +375,34 @@ public class Conexion {
 	}
 	
 
-	private void insertaractividad(int idpreg,int idres,String texto,String usuario,String fecha){
+	private void insertaractividad(int idpreg,int idres,String texto,String usuario,String fecha,String ip){
+		
 		try {
-			PreparedStatement insertar=conexion.prepareStatement("insert into dbdamproject.actividad values (?,?,?,?,?)");
-			insertar.setInt(1, idpreg);
-			insertar.setInt(2, idres);
-			insertar.setString(3, texto);
-			insertar.setString(4, texto);
-			insertar.setString(5, usuario);
-			insertar.executeQuery();
+			String sql="";
+			if(idpreg==0){
+				sql="insert into dbdamproject.actividad (idrespuesta,texto,fecha,usuario,ip) values (?,?,?,?,?)";
+				//System.out.println("insert into dbdamproject.actividad (idrespuesta,texto,fecha,usuario) values ('"+idpreg+"','"+idres+"','"+texto+"','"+fecha+"','"+usuario+"')");
+
+			}
+			else if(idres==0){
+				sql="insert into dbdamproject.actividad (idpregunta,texto,fecha,usuario,ip) values (?,?,?,?,?)";
+				//System.out.println("insert into dbdamproject.actividad (idpregunta,texto,fecha,usuario) values  ('"+idpreg+"','"+idres+"','"+texto+"','"+fecha+"','"+usuario+"')");
+}
+			PreparedStatement insertar=conexion.prepareStatement(sql);
+			if(idpreg==0){
+				insertar.setInt(1, idres);
+			}
+			else if(idres==0){
+				insertar.setInt(1, idpreg);
+			}
+			insertar.setString(2, texto);
+			insertar.setString(3, fecha);
+			insertar.setString(4, usuario);
+			insertar.setString(5, ip);
+			insertar.executeUpdate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			
+			e.printStackTrace();
 		}
 	}
 
@@ -367,7 +413,7 @@ public class Conexion {
 	 * @param usuario
 	 * @return
 	 */
-	public int InsertarPregunta(String titulo,String descripcion,String usuario){
+	public int InsertarPregunta(String titulo,String descripcion,String usuario,String ip){
 		int res=0;
 		try{
 			conexion.setAutoCommit(false);
@@ -385,7 +431,7 @@ public class Conexion {
 		insertar.setString(5, fecha);
 		res=ultimoid("idpreguntas", "preguntas");
 		insertar.executeUpdate();
-		insertaractividad(res, 0, titulo, usuario, fecha);
+		insertaractividad(res, 0, titulo, usuario, fecha,ip);
 		conexion.commit();
 		}catch(SQLException e){
 			res=-1;
@@ -409,6 +455,8 @@ public class Conexion {
 
 	}
 		
+
+
 
 	/** Metodo para sacar todos los usuarios de la base de datos y entregarlos en un array para trabajar con el
 	 * @return Array de usuarios
@@ -518,7 +566,6 @@ public class Conexion {
 			Statement consulta = conexion.createStatement();
 			ResultSet res = consulta.executeQuery("select * from dbdamproject.preguntas where idpreguntas="+id+"");
 
-			int i = 0;
 			if (res.next()) {
 				x[0] = res.getString(1); //idpregunta
 				x[1] = res.getString(2); //titulo
@@ -684,7 +731,7 @@ public class Conexion {
 	
 
 		
-	public int InsertarRespuestas( String respuesta,int idpregunta,String usuario) {
+	public int InsertarRespuestas( String respuesta,int idpregunta,String usuario,String ip) {
 		int res=-1;
 		try{
 			conexion.setAutoCommit(false);
@@ -703,7 +750,7 @@ public class Conexion {
 			insertar.setString(7, usuario);
 			insertar.setString(8, fecha);
 			res=insertar.executeUpdate();
-			insertaractividad(0, ultimoid, respuesta, usuario, fecha);
+			insertaractividad(0, ultimoid, respuesta, usuario, fecha,ip);
 		}catch(SQLException e){
 			
 			return -1;
@@ -790,7 +837,7 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 	public void actualizardato(String query) throws SQLException
 	{
 		Statement insertar=conexion.createStatement();
-		System.out.println(query+"actualizardato");
+		System.out.println(query+" actualizardato");
 		insertar.executeUpdate(query);
 	}
 

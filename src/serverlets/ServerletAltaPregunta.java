@@ -77,7 +77,7 @@ public class ServerletAltaPregunta extends HttpServlet {
 		Conexion c=(Conexion)sesion.getAttribute("conexion");
 		
 		
-		int idpregunta=c.InsertarPregunta(titulo, mensaje, (String)sesion.getAttribute("usuario"));
+		int idpregunta=c.InsertarPregunta(titulo, mensaje, (String)sesion.getAttribute("usuario"),request.getRemoteAddr());
 		String tags=request.getParameter("idsusados");
 
 		for (int i=0;i<tags.split("_").length;i++){

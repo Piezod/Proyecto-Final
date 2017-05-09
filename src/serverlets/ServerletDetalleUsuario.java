@@ -54,12 +54,8 @@ public class ServerletDetalleUsuario extends HttpServlet {
 		
 		try {
 			
-		//	ArrayList<String> l=list.infousuario();
-		//	HashMap<String, String> hm=list.preguntasusuariohm1();
 			HashMap<String, ArrayList> hml=list.preguntasusuariohm2();
 			HashMap<String, ArrayList> hml2=list.respuestasusuariohm();
-		//	request.setAttribute("listausuario",l);
-		//	request.setAttribute("hm", hm);
 			request.setAttribute("hml", hml);
 			request.setAttribute("inforespuesta", hml2);
 			request.setAttribute("usuario", request.getParameter("usuario"));

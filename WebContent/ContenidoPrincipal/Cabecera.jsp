@@ -7,9 +7,6 @@
 
 
 
-<script src="${pageContext.request.contextPath}/Bootstrap/js/jquery-1.11.3.min.js"></script>
-<script src="${pageContext.request.contextPath}/Bootstrap/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/Bootstrap/js/ajax.js"></script>
 <link href="${pageContext.request.contextPath}/Bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/Bootstrap/css/Estilospropios.css" rel="stylesheet">
 

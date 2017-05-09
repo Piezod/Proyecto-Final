@@ -27,14 +27,15 @@
 	System.out.println("usuario vacio al admin");
 	response.sendRedirect("login");
 		}
-		
- 	if (!session.getAttribute("admin").equals("1"))
-{%>
+	else 	if (!session.getAttribute("admin").equals("1"))
+	{%>
 
-<%
-response.sendRedirect("login");
-System.out.println("usuario no es admin");
-} %>
+	<%
+	response.sendRedirect("login");
+	System.out.println("usuario no es admin");
+	} %>
+		
+ 
 
  
 		<div class="container">
