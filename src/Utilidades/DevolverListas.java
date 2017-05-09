@@ -137,4 +137,33 @@ public class DevolverListas {
 		return hm;
 	}
 	
+	public HashMap<String, ArrayList> Tags() throws SQLException, ClassNotFoundException
+	{
+		String query="select * from preguntas";
+		//System.out.println(query);
+		Conexion c=new Conexion();
+		c.conectar();
+		
+		ResultSet res=c.sacarresultset(query);
+		HashMap<String, ArrayList> hm=new HashMap<>();
+		GestionCadenas gc=new GestionCadenas(null);
+		String dato,numero;
+		/*
+		 *  Como las respuestas pueden ser muy largas, mostraremos solo X caracteres. LLamaremos a un metodo de la clase de recortarcadenas
+		 *  y ella sera la que trate la respuesta y la ponga en el hasmap. 
+		 */
+		while (res.next())
+		{
+			query="select * from idpregunta_nombretags where IdPregunta='"+res.getString(1)+"'";
+			ArrayList l=new ArrayList<>();
+			ResultSet res2=c.sacarresultset(query);
+			while(res2.next()){
+				l.add(res.getString(2));
+			}
+			hm.put(res.getString(1), l); // configuro cada vuelta del hasmap con la key (idrespuesta) y la l que es el arraylist con la info de esa respuesta
+		}
+		c.cerrarconexion();
+		return hm;
+	}
+	
 }
