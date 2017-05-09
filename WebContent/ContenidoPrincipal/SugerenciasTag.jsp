@@ -64,6 +64,7 @@ if(request.getParameter("page")!=null){
 			<%
 		}
 	}
+	if(ids.length!=0){
 	%>
 	
 	<div style="text-align:center">
@@ -132,7 +133,7 @@ if(request.getParameter("page")!=null){
 	
 	
 	<%
-	
+	}
 	if(ids.length==0){
 		%>
 		

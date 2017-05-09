@@ -39,7 +39,7 @@ public class ServletAltaTag extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		response.getOutputStream().println("<input type='button' class='btn btn-primary' value='siguiente' onclick='recargar()'>");
+		response.getOutputStream().println("<input type='button' class='btn btn-primary btn-block' value='siguiente' onclick='recargar()'>");
 	}
 
 	/**
