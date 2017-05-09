@@ -1,5 +1,7 @@
 package Utilidades;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -29,6 +31,10 @@ public class Correo {
 		Mensage=mensaje;
 		to=destinatario;
 		Subject=titulo;
+	}
+	public Correo()
+	{
+		
 	}
 	
 	/*
@@ -74,6 +80,69 @@ public class Correo {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+        
+       
     }
+
+
+		public void correoglobal(String mensaje,String titulo) throws SQLException, ClassNotFoundException
+		{
+			Conexion c=new Conexion();
+			c.conectar();
+			String query="select * from usuarios";
+			
+			
+		    ResultSet r=c.sacarresultset(query);
+				while(r.next())
+				{
+					
+					Mensage=mensaje;
+					Subject=titulo; 
+					r.getString(1); //usuario
+					r.getString(3); //nombre
+					
+					to=r.getString(7);  // email
+					
+					System.out.println("mensaje enviado a "+r.getString(1));  
+					//SendMail();
+					
+				}
+			c.cerrarconexion();
+		}
+		
+		public void notificacioncurso(String mensaje,String titulo, String usuario) throws ClassNotFoundException, SQLException
+		{
+			Conexion c=new Conexion();
+			c.conectar();
+			String ciclo="select ciclo from usuarios where usuario like '"+usuario+"'";
+			String curso="select curso from usuarios where usuario like '"+usuario+"'";
+			
+			ciclo=c.sacarundatostring(ciclo);
+			curso=c.sacarundatostring(curso);
+			
+			
+	String query="select * from usuarios where ciclo like '"+ciclo+"' and curso like '"+curso+"' and usuario not like '"+usuario+"'";
+			
+			
+		    ResultSet r=c.sacarresultset(query);
+				while(r.next())
+				{
+					
+					Mensage=mensaje;
+					Subject=titulo; 
+					r.getString(1); //usuario
+					r.getString(3); //nombre
+					
+					to=r.getString(7);  // email
+					
+					System.out.println("mensaje enviado a "+r.getString(1));  
+					//SendMail();
+					
+				}
+			
+			c.cerrarconexion();
+		
+		
+		}
 }
 

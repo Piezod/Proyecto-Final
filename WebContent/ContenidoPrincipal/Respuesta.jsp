@@ -31,6 +31,8 @@ function confirmarmejor(idrespu){
 function validarpregunta(){
 	if(document.getElementById("respuesta").value.trim().length==0)
 		{
+		document.getElementById("descrip").innerHTML="Descripcion vacia";
+		document.getElementById("descrip").style.color="red";
 		return false;
 		}
 	else{
@@ -472,7 +474,7 @@ td{
 							
 			    	  <form class="form-horizontal" onsubmit="return(validarpregunta())" action="ServerletRespuesta" method="POST">
 								<div class="form-group">
-									<label class="control-label col-sm-2" for="pwd">Descripcion</label>
+									<label class="control-label col-sm-2" for="pwd" id="descrip">Descripcion</label>
 									<div class="col-sm-8 col-md-8">
 										<textarea style="overflow-y: scroll; height: 50%; resize: none"
 											class="form-control" rows="10" id="respuesta" name="respuesta" onkeyup="return previsualizacion();"></textarea>
@@ -627,6 +629,38 @@ td{
         <div class="modal-footer" >
 	        <form class="form-horizontal" action="ServerletAdminPregunta" method="POST">
 	       	  <input type="hidden" id="idrespuestamejor" name="idrespuestamejor"></input>
+	          <button type="submit" class="btn btn-info" >Confirmar</button>
+	          	<input type="hidden" id="tipo" name="tipo" value="confirmarmejor">	
+	          	<input type="hidden" id="idpregunta" name="idpregunta" value="<%=request.getParameter("idpregunta")%>">
+				<input type="hidden" id="idusuario" name="idusuario" value="<%=session.getAttribute("usuario")%>">	
+	          <button type="button" class="btn btn-info" data-dismiss="modal" >Cerrar</button>
+          </form>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+ 
+</div>
+   
+   
+           	
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="confirmarmejor" role="dialog">
+    <div class="modal-dialog" > <!--  el bakcgorun modifica el marco -->
+    
+      <!-- Modal content-->
+      <div class="modal-content"> <!--  este es el backgroun blanco -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Confirmar Mejor Pregunta</h4>
+        </div>
+        <div class="modal-body">
+          <p>La respuesta esta vacia</div>
+        <div class="modal-footer" >
+	        <form class="form-horizontal" action="ServerletAdminPregunta" method="POST">
+	       	  <input type="hidden" id="respuestavacia" name="respuestavacia"></input>
 	          <button type="submit" class="btn btn-info" >Confirmar</button>
 	          	<input type="hidden" id="tipo" name="tipo" value="confirmarmejor">	
 	          	<input type="hidden" id="idpregunta" name="idpregunta" value="<%=request.getParameter("idpregunta")%>">

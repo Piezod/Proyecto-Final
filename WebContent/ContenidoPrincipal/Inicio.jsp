@@ -10,14 +10,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
-
-
 	<%@include file="Cabecera.jsp"%>
+	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <head>
 <script type="text/javascript">
+
  function bienvenida(){
     $('#myModal').modal('show');
     
@@ -32,7 +29,7 @@ $(document).ready(function(){
 
 <style type="text/css">
 #cuerpo{
-    display:none;
+display:none;
 }
 </style>
 

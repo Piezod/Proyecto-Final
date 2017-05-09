@@ -172,4 +172,12 @@
     <servlet-name>Solicitudes</servlet-name>
     <url-pattern>/Solicitudes</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>Notificaciones</servlet-name>
+    <jsp-file>/ContenidoPrincipal/EnviarNotificaciones.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Notificaciones</servlet-name>
+    <url-pattern>/notificaciones</url-pattern>
+  </servlet-mapping>
 </web-app>

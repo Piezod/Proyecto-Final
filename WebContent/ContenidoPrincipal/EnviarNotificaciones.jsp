@@ -10,7 +10,7 @@
 		var problema = "";
 
 		if (document.getElementById("titulo").value.length == 0) {
-			problema = "Titulo vacio";
+			problema = "Titulo vacio  ";
 
 			document.getElementById("titulaso").innerHTML = '<div class="form-group has-error has-feedback"><label class="control-label col-sm-2" for="titulo">Titulo:</label><div class="col-sm-6 col-md-8"><input type="text" class="form-control" id="titulo" placeholder="Titulo Pregunta" name="titulo"><span class="glyphicon glyphicon-remove form-control-feedback"></span></div> </div> ';
 
@@ -28,8 +28,9 @@
 			}
 		}
 
-		if (problema.length != 0) {
-			alert(problema)
+		if (problema.length != 0) {	
+		document.getElementById("descrip").innerHTML=problema;
+		document.getElementById("descrip").style.color="red";
 			return false;
 		} else {
 			return true;
@@ -79,34 +80,7 @@
 				while (j < lineasconpre.length && encadenado) {
 					//Comprobamos que no sea la ultima para que no nos de problemas al sumarle 1
 					if (j != lineasconpre.length) {
-						/*
-						Pongamos de ejemplo que tenemos esta cadena
-						    x=0
-						    if(x==0){							    
-						    alert(hola)
-						    }
-						Entonces mostraria
-						    hola
-						el objetivo es que se genere
-						<pre>x=0
-						if(x==0){
-						alert(hola)
-						}</pre>
-						Entonces mostraria
-						<pre>hola</pre>
-						el array generado sería
-						[0]=0
-						[1]=1
-						[2]=2
-						[3]=3
-						[4]=5
-						en este if comprobariamos que 
-						1!=1
-						2!=2
-						3!=3
 						
-						4!=5
-						 */
 						if (parseInt(lineasconpre[j]) + 1 != lineasconpre[j + 1]) {
 							encadenado = false
 						}
@@ -200,7 +174,7 @@
 		//document.getElementById("espaciotags").innerHTML=document.getElementById("espaciotags").innerHTML.substring(2)
 		ids=document.getElementById("idsusados").value.split("_")
 		nuevacadena=""
-		alert(ids.length)
+
 		contador=0
 		for(i=0;i<ids.length;i++){
 			
@@ -244,7 +218,7 @@
 	}
 </script>
 
-<title>Alta pregunta</title>
+<title>Alta Notificacion</title>
 </head>
 <body>
 	<%@include file="Cabecera.jsp"%>
@@ -253,7 +227,7 @@
 <div class="col-md-offset-0 col-md-12">
   	<ol class="breadcrumb">
   		<li><a href="${pageContext.request.contextPath}/ServerletContenido">Inicio</a></li>
-  		<li class="active">Alta pregunta</li>
+  		<li class="active">Alta Notificacion</li>
 	</ol>
 </div>
 	<div class="container-fluid"
@@ -263,7 +237,7 @@
 				<div class="container-fluid">
 					<div class="col-sm-2 col-md-offset-0 col-md-12">
 						<h2 align="center">
-							Nueva Pregunta
+							Nueva Notificación
 							</h21>
 					</div>
 				</div>
@@ -274,99 +248,38 @@
 
 				<div class="container-fluid" style="margin-top: 3%">
 					<br>
-					<form class="form-horizontal" id="altapregunta" name="altapregunta" action="ServerletAltaPregunta" method="POST" onsubmit="return comprobarregistro();">
-
-						<div id="titulaso">
-							<div class="form-group">
-								<label class="control-label col-sm-2" for="titulo">Titulo:</label>
-								<div class="col-sm-8 col-md-8">
-									<input type="text" class="form-control" id="titulo"
-										placeholder="Titulo Pregunta" name="titulo"
-										onkeyup="previsualizacion();">
+					<form class="form-horizontal" id="altanotificacion" name="altanotificacion" action="ServerletNotificacion" method="POST" onsubmit="return comprobarregistro();">
+							<div id="titulaso">
+								<div class="form-group">
+									<label class="control-label col-sm-2" for="titulo">Titulo:</label>
+									<div class="col-sm-8 col-md-8">
+										<input type="text" class="form-control" id="titulo"
+											placeholder="Titulo notificacion" name="titulo"
+											onkeyup="previsualizacion();">
+									</div>
 								</div>
 							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="control-label col-sm-2" for="pwd">Descripcion</label>
-							<div class="col-sm-8 col-md-8">
-								<textarea style="overflow-y: scroll; height: 50%; resize: none"
-									class="form-control" rows="10" id="comment" name="mensaje"
-									onkeyup="previsualizacion();"></textarea>
-								<input type="hidden" id="mensajeoculto" name="mensajeoculto"
-									value="">
-								<input type="hidden" value="" name="idsusados" id="idsusados">
-									
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="pwd" id="descrip">Descripcion</label>
+								<div class="col-sm-8 col-md-8">
+									<textarea style="overflow-y: scroll; height: 50%; resize: none"
+										class="form-control" rows="10" id="comment" name="mensaje"
+										onkeyup="previsualizacion();"></textarea>
+									<input type="hidden" id="mensajeoculto" name="mensajeoculto"
+										value="">
+									<input type="hidden" value="" name="idsusados" id="idsusados">
+								</div>
 							</div>
-						</div>
-
-
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-2 col-md-2 col-md-offset-5">
-								<button align="center" type="submit" class="btn btn-primary">Enviar
-									Pregunta</button>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-2 col-md-2 col-md-offset-5">
+									<button align="center" type="submit" class="btn btn-primary">Enviar
+										Notificacion </button>
+								</div>
 							</div>
-						</div>
-						
 					</form>
 				</div>
 			</div>
 		</div>
-
-		<div class="container-fluid">
-			<div class="form-group">
-			<div ><h3 id="espaciotags"></h3></div>
-				<label class="col-md-offset-2 control-label col-sm-1  " for="titulo">
-					<input type="hidden" value="" id="busquedatags">
-					<span class="label label-info "
-					style="font-size: 14px; margin-top: 2px;"> Tags </span>
-				</label>
-				<div class="col-sm-6 col-md-">
-					<input type="text" class="form-control" id="tag"
-						placeholder="Crea tu propio tag o usa los mas buscados" name="tag" onkeyup="from(document.getElementById('tag').value+'_'+document.getElementById('idsusados').value,'tagsugeridos','SugerenciasTag')" >
-					<div class="alert alert-info" id="tagsugeridos"></div>
-				</div>
-			</div>
-		</div>
-		<br>
-
-		<!-- Mitad de pagina a partir de aqui se gestiona la previsualización  -->
-
-
-		<hr>
-		</hr>
-
-
-		<h3 align="center" id="tituloprevi" onclick="verprevi();">Pulsa
-			para ver la previsualizacion del mensaje</h3>
-		<div id="previ" style="display: none">
-			<div class="row" style="margin-top: 5%">
-				<div class="col-md-8 col-md-offset-2">
-					<div class="panel panel-info">
-						<div class="panel-heading">
-							<%
-								/*
-								Aqui estoy recargando los nombres del usuario de momento , habra que validar que si esta pulsado las mas visitas recargar
-								las preguntas segun el boton del tab pulsado.
-								*/
-							%>
-							<h3 class="panel-title" align="center" id="titulocopia"></h3>
-						</div>
-						<div class="panel-footer">
-							<div class="container-fluid">
-								<div class="col-md-12 col-md-offset-0">
-									<p id="mensajecopia" class="romper"></p>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
 	<%@include file="pie.jsp"%>
 </body>
 </html>
