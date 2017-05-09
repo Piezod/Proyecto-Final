@@ -38,14 +38,14 @@
 				         	<div class="panel panel-success">
 				         	  <div class="panel-heading">
 				         	  <div class="row">
-				  	  	 		<div class="col-md-10">				  	  	 		
+				  	  	 		<div class="col-md-8 col-md-offset-2">				  	  	 		
 			    					 <a href="ServerletDetalleUsuario?usuario=<%= rs.getString(7) %>">
 			    					 <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %> </h3></a>
 				  	  	 		</div><div class="col-md-2">
 				  	  	 		<% if (session.getAttribute("admin").equals("1"))
 				  	  	 			{%>
 				  	  	  			    <input type="hidden" id="idresp" value="<%=rs.getString(1) %>"></input>
-				  	  	  				<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="confirmarbaja(<%=rs.getString(1)%>);"></span></a>
+				  	  	  				<span class="glyphicon glyphicon-remove alert-danger" style="cursor: pointer; cursor: hand;" aria-hidden="true" onclick="confirmarbaja(<%=rs.getString(1)%>);"></span></a>
 				  	  	  			<%} %>
 				  	  	 		</div>
 				       	    </div></div>

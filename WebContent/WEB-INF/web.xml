@@ -37,12 +37,12 @@
     <url-pattern>/postregistro</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>Inicio</servlet-name>
+    <servlet-name>Home</servlet-name>
     <jsp-file>/ContenidoPrincipal/Inicio.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Inicio</servlet-name>
-    <url-pattern>/Inicio</url-pattern>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/Home</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Pregunta</servlet-name>
@@ -172,7 +172,7 @@
     <servlet-name>Solicitudes</servlet-name>
     <url-pattern>/Solicitudes</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>Notificaciones</servlet-name>
     <jsp-file>/ContenidoPrincipal/EnviarNotificaciones.jsp</jsp-file>
   </servlet>
