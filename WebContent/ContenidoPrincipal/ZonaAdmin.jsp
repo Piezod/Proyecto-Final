@@ -5,16 +5,48 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Zona Admin</title>
+<%@include file="Cabecera.jsp"%>
  <LINK href="css/EstilosPagAdmin.css" rel="stylesheet" type="text/css">
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+ 
+ <style type="text/css">
+ #noty,#noty1,#p{
+ display:none;
+ }
+ 
+ </style>
  <script type="text/javascript">
+ 
+ function verp()
+ {
+	 
+	 if (document.getElementById("noty").style.display=="block")
+		 {
+	 document.getElementById("noty").style.display="none";
+	 document.getElementById("noty1").style.display="none";
+		 }
+	 else
+		 {
+		 document.getElementById("noty").style.display="block";
+		 document.getElementById("noty1").style.display="block";
+		 }
+	 
+	 
+ }
  $(document).ready(function(){
 	    $('#tabla1').fadeIn();
 	});
+ 
+	    $("ver").click(function(){
+	    	alert("toogle");
+	        $("noty").toggle();
+	    });
+	    
+	    $("button").click(function(){
+	        $("p").toggle();
+	    });
  </script>
 </head>
 <body>
-<%@include file="Cabecera.jsp"%>
 
 
 <%
@@ -56,13 +88,21 @@
 					  		<td>Subir nuevos archivos</td>
 					  	</tr>
 					  	<tr>
+					  		<td><p id="vertiponotificacion" onclick="verp();"> Enviar Nueva Notificacion</p></td>
+					  	</tr><tr>
+					  		<td id="noty"><a href="ServeletZonaAdmin?opcion=notificacion&tipo=global"><p id="notificacion">Nueva Notificacion Global</p></td>
+					  	</tr><tr>
+					  		<td id="noty1" ><a href="ServeletZonaAdmin?opcion=notificacion&tipo=curso"><p id="notificacion" > Nueva Notificacion por curso y ciclo</p></td>
+					  	</tr>
+					  	
+					  	<tr>
 					  		<td><a href="ServeletZonaAdmin?opcion=solicitud">Solicitudes</a></td>
-					  		
 					  	</tr>
 					  </table>
 					</div>
 				</div>
 			</div>
 		</div>
+		
 </body>
 </html>
