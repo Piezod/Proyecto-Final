@@ -13,6 +13,7 @@ public class DevolverListas {
 		// TODO Auto-generated constructor stub
 		usuario=parameter;
 	}
+
 	
 	public DevolverListas(){
 		
@@ -55,6 +56,7 @@ public class DevolverListas {
 	/*
 	 * Prueba sencilla string string, lo siguiente seria String arraylist
 	 */
+
 
 	public HashMap<String, String> preguntasusuariohm1() throws SQLException, ClassNotFoundException
 	{

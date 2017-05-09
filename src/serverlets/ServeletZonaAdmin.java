@@ -34,7 +34,6 @@ public class ServeletZonaAdmin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
 	}
 
@@ -46,6 +45,7 @@ public class ServeletZonaAdmin extends HttpServlet {
 		String opcion=(String)request.getParameter("opcion");
 		System.out.println("opcion del menu de administracion "+opcion);
 		switch (opcion) {
+		
 		case "solicitud":
 			
 			SolicitudesAdmin sa=new SolicitudesAdmin();
@@ -62,11 +62,11 @@ public class ServeletZonaAdmin extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 			break;
 		case "notificacion":
-			System.out.println("envio a jsp notificacion");
 			
+			System.out.println(request.getParameter("tipo"));
+			request.setAttribute("tipo", request.getParameter("tipo"));
 			String nextJSP = "/notificaciones";
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
 			dispatcher.forward(request,response);
