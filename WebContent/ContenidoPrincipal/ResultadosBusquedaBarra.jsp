@@ -27,8 +27,6 @@
 		  <br>
 	
 	  </div>
-     <div class="panel-body">
-	    </div>
 	  </div>
     </div>
     
@@ -36,7 +34,7 @@
 	<!-- En aqui recargamos el titulo de las preguntas-->
 		<div class="col-md-8 col-md-offset-2">
 			
-	    			<div class="col-md-10">
+	    			<div class="col-md-10 col-md-offset-1">
 					  <% 
 			   	        /*
 			   	        Sacaremos las ids de las ultimas 10 preguntas, en un array, este array despues lo recorreremos y pondremos el id de la pregunta en el valor

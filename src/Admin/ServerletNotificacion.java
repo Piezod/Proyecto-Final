@@ -3,6 +3,7 @@ package Admin;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,17 +48,33 @@ public class ServerletNotificacion extends HttpServlet {
 		
 		
 		System.out.println(titulo+mensaje);
+		String tipo=request.getParameter("tipo");
+		System.out.println(tipo);
 		Correo c=new Correo();
-		try {
-			//c.correoglobal(mensaje, titulo);
-			HttpSession sesion= request.getSession(true);
-			c.notificacioncurso(mensaje, titulo,(String)sesion.getAttribute("usuario") );
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		try
+		{
+				switch (tipo) {
+				case "global":
+					c.correoglobal(mensaje, titulo);
+					break;
+				case "curso":
+					
+					HttpSession sesion= request.getSession(true);
+						c.notificacioncurso(mensaje, titulo,(String)sesion.getAttribute("usuario") );
+					break;
+		
+				default:
+					break;
+				}
+				String nextJSP = "/notificaciones";
+				System.out.println(request.getParameter("tipo"));
+				request.setAttribute("tipo", request.getParameter("tipo"));
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
+				dispatcher.forward(request,response);
+		}
+		
+		catch (Exception e) {
+			System.out.println("error en la zona de notificacion servlert correo");
 		}
 		
 	}

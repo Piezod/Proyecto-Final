@@ -9,7 +9,7 @@
  <LINK href="css/EstilosPagAdmin.css" rel="stylesheet" type="text/css">
  
  <style type="text/css">
- #noty,#noty1,#p{
+ #noty,#noty1{
  display:none;
  }
  
@@ -79,7 +79,25 @@
 		<div class="container" id="tabla1">
 			<div class="row">
 				<div class="col-md-3">
-					<div class="table-responsive">
+						<div class="col-sm-12 col-xs-12 col-md-3 " align="center">
+						<div class="btn-group-vertical">
+							      <button type="button" class="btn btn-primary"  onclick="from('1','llamadaajax','registro')">Registrar Usuarios</button>
+							      <button type="button" class="btn btn-primary"  id="vertiponotificacion" onclick="verp(); ">Enviar notificacion</button>
+							   
+							      <button type="button" class="btn btn-default" id="noty" style="cursor : pointer ; cursor: hand; margin-left: 5%; border-top-right-radius: 4px; border-top-left-radius: 4px; " onclick="from('global','llamadaajax','notificaciones')">Notificacion global</button>
+							      <button type="button" class="btn btn-default" id="noty1" style=" cursor : pointer ; cursor: hand; margin-left: 5%" onclick="from('curso','llamadaajax','notificaciones')">Notificacion a curso</button>
+								 
+								 <a href="ServeletZonaAdmin?opcion=solicitud" class="btn btn-primary">Solicitudes</a>
+						 </div>
+		  	   </div>
+		  <div class="col-md-8 col-sm-12 col-xs-12" id="llamadaajax">
+		  </div>
+    </div>
+    </div></div>    
+					
+					
+					
+					<!-- 
 					  <table class="table table-hover">
 					  	<tr>
 					  		<td><a href="registro">Registrar Usuarios</a></td>
@@ -88,12 +106,12 @@
 					  		<td>Subir nuevos archivos</td>
 					  	</tr>
 					  	<tr>
-					  		<td><p id="vertiponotificacion" onclick="verp();"> Enviar Nueva Notificacion</p></td>
-					  	</tr><tr>
-					  		<td id="noty"><a href="ServeletZonaAdmin?opcion=notificacion&tipo=global"><p id="notificacion">Nueva Notificacion Global</p></td>
-					  	</tr><tr>
-					  		<td id="noty1" ><a href="ServeletZonaAdmin?opcion=notificacion&tipo=curso"><p id="notificacion" > Nueva Notificacion por curso y ciclo</p></td>
-					  	</tr>
+					  		<td><p id="vertiponotificacion" onclick="verp(); "> Enviar Nueva Notificacion</p></td>
+							  	</tr><tr>
+							  		<td id="noty" style="cursor : pointer ; cursor: hand" onclick="from('global','llamadaajax','notificaciones')"><p id="notificacion">Nueva Notificacion Global</p></td>
+							  	</tr><tr>
+							  		<td id="noty1" style=" cursor : pointer ; cursor: hand" onclick="from('curso','llamadaajax','notificaciones')"><p id="notificacion" > Nueva Notificacion por curso y ciclo</p></td>
+							  	</tr>
 					  	
 					  	<tr>
 					  		<td><a href="ServeletZonaAdmin?opcion=solicitud">Solicitudes</a></td>
@@ -101,8 +119,7 @@
 					  </table>
 					</div>
 				</div>
-			</div>
-		</div>
+				<div class="col-md-9" id="llamadaajax"></div> -->
 		
 </body>
 </html>
