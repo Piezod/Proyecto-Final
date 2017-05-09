@@ -268,14 +268,41 @@ td{
 			    			</div>
 			    		
 			    	 </div>
-			    	 <div class="panel-body" align="right">
+			    	 <div class="panel-body" >
+			    	 <div class="row">
+			    	 <div class="col-sm-6" >
+			    	 Tags:
+    					         	  			
+    					         	  			
+    					         	  			<%
+													String q="select * from idpregunta_nombretags where IdPregunta='"+(String)request.getParameter("idpregunta")+"'";
+													
+													ResultSet res=c.sacarresultset(q);
+													int cont=0;
+													while(res.next()){
+														if(cont==0){
+															out.print("<code>"+res.getString(2)+"</code>");
+															
+															cont++;
+														}
+														else{
+															out.print(",<code>"+res.getString(2)+"</code>");
+							
+														}
+													}
+													%>
+    					         	  			
+    					         	  			
+			    	 </div>
+			    	 <div class="col-sm-6" align="right">
 			    	 <a href="ServerletDetalleUsuario?usuario=<%=xo[3] %>">
 			    	 	 <span class="label label-success"  ><%=xo[3] %></span>
 			    	 	</a>
 			    	 			
 			    	 	  <span class="label label-default" ><%=xo[4] %></span>
 			    	 </div>
-			    	 
+			    	 </div>
+			    	 </div>
 			</div>
 
 	  </div>
@@ -332,7 +359,7 @@ td{
 				         	<div class="panel panel-info">
 				         	  <div class="panel-heading">
 				         	  	<div class="row">
-				  	  	 		<div class="col-md-10">				  	  	 		
+				  	  	 		<div class="col-md-8 col-md-offset-2">				  	  	 		
 			    					 <a href="ServerletDetalleUsuario?usuario=<%= rs.getString(7) %>">
 			    					 <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %> </h3></a>
 				  	  	 		</div>
@@ -344,8 +371,8 @@ td{
 							  	  	  				
 							  	  	  			-->
 				  	  	  			    <input type="hidden" id="idresp" value="<%=rs.getString(1) %>"></input>
-				  	  	  				<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="confirmarbaja(<%=rs.getString(1)%>);"></span></a>
-				  	  	  				<span class="glyphicon glyphicon-ok" aria-hidden="true" onclick="confirmarmejor(<%=rs.getString(1)%>);"></span>
+				  	  	  				<span class="glyphicon glyphicon-remove alert-danger" style="cursor: pointer; cursor: hand;" aria-hidden="true" onclick="confirmarbaja(<%=rs.getString(1)%>);"></span></a>
+				  	  	  				<span class="glyphicon glyphicon-ok alert-success" style="cursor: pointer; cursor: hand;" aria-hidden="true" onclick="confirmarmejor(<%=rs.getString(1)%>);"></span>
 				  	  	  			<%} %>
 				  	  	 		</div>
 				         	    </div>
@@ -386,15 +413,15 @@ td{
     					         	<div class="panel panel-danger">
     					         	  	  <div class="panel-heading">
 				         	  	<div class="row">
-				  	  	 		<div class="col-md-10">				  	  	 		
+				  	  	 		<div class="col-md-8 col-md-offset-2">				  	  	 		
 			    					 <a href="ServerletDetalleUsuario?usuario=<%= rs.getString(7) %>">
 			    					 <h3 align="center" class="panel-title">Respuesta de <%= rs.getString(7) %> </h3></a>
 				  	  	 		</div>
 				  	  	 		<div class="col-md-2">
 				  	  	 		<% if (session.getAttribute("admin").equals("1"))
 				  	  	 			{%>
-				  	  	  				<span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="confirmarbaja(<%=rs.getString(1)%>);"></span></a>
-				  	  	  				<span class="glyphicon glyphicon-ok" aria-hidden="true" onclick="confirmarmejor(<%=rs.getString(1)%>);"></span>
+				  	  	  				<span class="glyphicon glyphicon-remove alert-danger" style="cursor: pointer; cursor: hand;" aria-hidden="true" onclick="confirmarbaja(<%=rs.getString(1)%>);"></span></a>
+				  	  	  				<span class="glyphicon glyphicon-ok alert-success" style="cursor: pointer; cursor: hand;" aria-hidden="true" onclick="confirmarmejor(<%=rs.getString(1)%>);"></span>
 				  	  	  			
 				  	  	  			<%} %>
 				  	  	 		</div>
@@ -406,7 +433,7 @@ td{
     					         	  	
     					         	  	<table border="0" width="100%">
     					         	  		<tr>
-    					         	  		
+    					         	  			
     					         	  		
     					         	  			<td colspan="2" align="right">Fecha Respuesta : <%= rs.getString(8) %> </td>
     					         	  			
