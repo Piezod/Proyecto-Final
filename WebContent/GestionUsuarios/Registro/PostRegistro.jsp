@@ -27,7 +27,7 @@
 	  <br>
 	  <strong>Se ha producido algun error mientras registraba el usuario</strong>
 	  <hr>
-	  <a href="${pageContext.request.contextPath}/registro">Pulsa aqui para volver a intentarlo</a><br></div>
+	  <a href="${pageContext.request.contextPath}/zonaadmin">Pulsa aqui para volver a intentarlo</a><br></div>
 	<% } %>
 	</body>
 </html>

@@ -587,13 +587,13 @@ public class Conexion {
 	 * Metodo que devuelve  los datos de las  ultimas preguntas introducidas en la bd
 	 */
 	
-	public int[] idultimas10preguntas(int inicio,int fin) {
+	public int[] idultimas10preguntas(int inicio,int fin,String usuario) {
 		try
 		{
 		int x[] = new int[10];
-
+		String curso=sacarundatostring("select ciclo from usuarios where usuario like '"+usuario+"'");
 		Statement consulta = conexion.createStatement();
-		ResultSet res = consulta.executeQuery("select idpreguntas from dbdamproject.preguntas order by idpreguntas desc limit "+inicio+","+fin+"");
+		ResultSet res = consulta.executeQuery("select idpreguntas from dbdamproject.preguntas where usuario in (select usuario from usuarios where ciclo like '"+curso+"' ) order by idpreguntas desc limit "+inicio+","+fin+"");
 
 		int i = 0;
 		while (res.next()) {

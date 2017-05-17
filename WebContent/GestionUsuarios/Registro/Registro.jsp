@@ -1,82 +1,81 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
 
 
 <script>
-	function cambiarhidden(id,valor){
-		
-		document.getElementById("bt"+id).innerHTML=valor+'<span class="caret"></span>'
-		document.getElementById(id).value=valor	
+function cambiarhidden(id,valor){
+	
+	document.getElementById("bt"+id).innerHTML=valor+'<span class="caret"></span>'
+	document.getElementById(id).value=valor	
+}
+function comprobarregistro() {
+	//Validaciones del formulario
+	
+	var error = "";
+	if (document.getElementById("nombre").value.length == 0) {
+		error += "El nombre no puede estar vacío antes de registrarse";
 	}
-	function comprobarregistro() {
-		//Validaciones del formulario
-		
-		var error = "";
-		if (document.getElementById("nombre").value.length == 0) {
-			error += "El nombre no puede estar vacío antes de registrarse";
-		}
-		if (document.getElementById("apellido1").value.length == 0) {
-			if (error.length != 0) {
-				error += "\n";
-			}
-			error += "El primer apellido no puede estar vacío antes de registrarse";
-		}
-		if (document.getElementById("apellido2").value.length == 0) {
-			if (error.length != 0) {
-				error += "\n";
-			}
-			error += "El segundo apellido no puede estar vacío antes de registrarse";
-		}
-		if (document.getElementById("email").value.length == 0) {
-			if (error.length != 0) {
-				error += "\n";
-			}
-			error += "El email no puede estar vacío antes de registrarse";
-		} else {
-			var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-			if (!re.test(document.getElementById("email").value)) {
-				if (error.length != 0) {
-					error += "\n";
-				}
-				error += "El email no tiene un formato válido";
-			}
-		}
-		
-		
-		if(document.getElementById("ciclo").value.length==0){
-			if (error.length != 0) {
-				error += "\n";
-			}
-			error += "Seleccione un ciclo";
-		}
-		if(document.getElementById("curso").value.length==0){
-			if (error.length != 0) {
-				error += "\n";
-			}
-			error += "Seleccione un curso";
-		}
-		
+	if (document.getElementById("apellido1").value.length == 0) {
 		if (error.length != 0) {
-			alert(error);
-			return false;
-		} else {
-			return true;
+			error += "\n";
 		}
+		error += "El primer apellido no puede estar vacío antes de registrarse";
+	}
+	if (document.getElementById("apellido2").value.length == 0) {
+		if (error.length != 0) {
+			error += "\n";
+		}
+		error += "El segundo apellido no puede estar vacío antes de registrarse";
+	}
+	if (document.getElementById("email").value.length == 0) {
+		if (error.length != 0) {
+			error += "\n";
+		}
+		error += "El email no puede estar vacío antes de registrarse";
+	} else {
+		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+		if (!re.test(document.getElementById("email").value)) {
+			if (error.length != 0) {
+				error += "\n";
+			}
+			error += "El email no tiene un formato válido";
+		}
 	}
 	
-	<% if((session.getAttribute("Emailduplicado")+"").equals("si")){ %>
-	window.onload=function emailduplicado(){
-	alert("El email está duplicado")
+	
+	if(document.getElementById("ciclo").value.length==0){
+		if (error.length != 0) {
+			error += "\n";
+		}
+		error += "Seleccione un ciclo";
+	}
+	if(document.getElementById("curso").value.length==0){
+		if (error.length != 0) {
+			error += "\n";
+		}
+		error += "Seleccione un curso";
 	}
 	
-	
-	
-	<%} %>
+	if (error.length != 0) {
+		alert(error);
+		return false;
+	} else {
+		return true;
+	}
+
+}
+
+<% if((session.getAttribute("Emailduplicado")+"").equals("si")){ 
+session.setAttribute("Emailduplicado","no");%>
+window.onload=function emailduplicado(){
+alert("El email está duplicado")
+}
+
+
+
+<%} %>
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -99,9 +98,7 @@
 	
 <!-- <script src="../../Bootstrap/js/ajax.js"></script> -->
 
-<title>Registro</title>
-</head>
-<body>
+
 		
 		
 <%
@@ -115,9 +112,9 @@ if (session.getAttribute("usuario")==null)
 System.out.println("usuario no es admin");
 }%>
 
-		<%@include file="../../ContenidoPrincipal/Cabecera.jsp"%>
-	<div class="container">
+	<div class="container contenedorregistro">
 		<div class="row main">
+		<div class="col-md-9">
 			<div class="main-login main-center">
 				<form class="" id="registro" method="post"
 					action="ServeletRegistro"
@@ -285,6 +282,7 @@ System.out.println("usuario no es admin");
 				</form>
 			</div>
 		</div>
+		</div>
 	</div>
 	<%
 	//Destruyo la sesión para que si refrescas la página o sales no se te 
@@ -295,7 +293,5 @@ System.out.println("usuario no es admin");
 	<!-- <script src="../../Bootstrap/js/jquery-1.11.3.min.js"></script> -->
 	<script src="Bootstrap/js/bootstrap.min.js"></script>
 	<!--  <script src="../../Bootstrap/js/bootstrap.min.js"></script>-->
-</body>
 
 
-</html>
