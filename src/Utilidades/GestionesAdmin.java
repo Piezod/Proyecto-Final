@@ -15,7 +15,7 @@ public class GestionesAdmin {
 		Conexion c=new Conexion();
 		c.conectar();
 		String query="select * from solicitudes where idsolicitud = "+idsolicitud+"";
-		System.out.println(query);
+		//System.out.println(query);
 		
 		ResultSet r=c.sacarresultset(query);
 		
@@ -26,13 +26,13 @@ public class GestionesAdmin {
 			actualizar(r.getString(4), c, "apellido1",r.getString(2));    //apellido1
 			actualizar(r.getString(5), c, "apellido2",r.getString(2));   //apellido2
 			String queryid="UPDATE solicitudes set pendiente=0 where idsolicitud ="+r.getInt(1);
-			//System.out.println("cambiando el estado "+queryid);
+			////System.out.println("cambiando el estado "+queryid);
 			c.actualizardato(queryid);
 				
 		}
 		else
 		{
-			System.out.println("no se ha podido encontrar la id de solicitud, fallo en la actualizacion");
+			//System.out.println("no se ha podido encontrar la id de solicitud, fallo en la actualizacion");
 		}
 		
 		
@@ -66,7 +66,7 @@ public class GestionesAdmin {
 		Conexion c=new Conexion();
 		c.conectar();
 		String query="select * from solicitudes where idsolicitud = "+idsolicitud+"";
-		System.out.println(query);
+		//System.out.println(query);
 		
 		ResultSet r=c.sacarresultset(query);
 		
@@ -77,7 +77,7 @@ public class GestionesAdmin {
 		}
 		else
 		{
-			System.out.println("no se ha podido encontrar la id de solicitud, fallo en la actualizacion");
+			//System.out.println("no se ha podido encontrar la id de solicitud, fallo en la actualizacion");
 		}
 		
 		

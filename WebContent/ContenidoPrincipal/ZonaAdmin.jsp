@@ -126,7 +126,7 @@
 */
 	if (session.getAttribute("admin")==null)
 	{
-	System.out.println("usuario vacio al admin");
+	//System.out.println("usuario vacio al admin");
 	response.sendRedirect("login");
 		}
 	else 	if (!session.getAttribute("admin").equals("1"))
@@ -134,7 +134,7 @@
 
 	<%
 	response.sendRedirect("login");
-	System.out.println("usuario no es admin");
+	//System.out.println("usuario no es admin");
 	} %>
 		
  
@@ -162,7 +162,7 @@
 		  	   </div>
 		  
     </div>
-    <div class="col-md-8 col-sm-12 col-xs-12" id="llamadaajax">
+    <div class="col-md-6 col-sm-12 col-xs-12" id="llamadaajax">
 		  </div>
     </div></div>    
 					

@@ -52,13 +52,13 @@ public class ServerletRespuesta extends HttpServlet {
 		String usuario=(String)request.getSession().getAttribute("usuario");
 		
 		int idrespuesta=Integer.parseInt((String)request.getParameter("idrespuesta"));
-		System.out.println(request.getParameter("tipo")+"es el tipo");
-		System.out.println(usuario);
-		System.out.println(idrespuesta);
+		//System.out.println(request.getParameter("tipo")+"es el tipo");
+		//System.out.println(usuario);
+		//System.out.println(idrespuesta);
 		
 		if (!c1.comprobar("select * from Votorespuesta where idrespuesta="+idrespuesta+" and idusuario like '"+usuario+"'"))
 		{
-		      System.out.println("no existe, se haria el insert");
+		      //System.out.println("no existe, se haria el insert");
 				/*
 				 * Recogo los valores que me envian desde respuesta por variable, tengo si sumo o resto, en funcion de lo que recoja realizo una u otra operacion
 				 * en la id de pregunta que se recoge por el get.
@@ -97,7 +97,7 @@ public class ServerletRespuesta extends HttpServlet {
 				}
 		else
 		{
-			System.out.println("Existe, no se puede hacer el insert");
+			//System.out.println("Existe, no se puede hacer el insert");
 		}
 		
 			response.sendRedirect("Respuesta?idpregunta="+request.getParameter("idpregunta"));

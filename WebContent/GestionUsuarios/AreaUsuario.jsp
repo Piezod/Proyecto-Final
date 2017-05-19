@@ -103,7 +103,7 @@ function mostrarocultar(campo){
 
 <div class="container-fluid" style="margin-top:5%;">
 		<div class="row container-fluid">
-		<div class="col-sm-12 col-xs-12 col-md-3" align="left">
+		<div class="col-sm-12 col-xs-12 col-md-3 hidden-md hidden-lg" align="left">
 		      <button type="button" class="btn btn-default"  onclick="from('<%=session.getAttribute("usuario") %>','contenido','DatosUsuario')">Visualizar</button>
 		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','EditarUsuario')">Editar</button>
 		      <button type="button" class="btn btn-default" onclick="from('<%=session.getAttribute("usuario") %>','contenido','CambioPass')">Cambiar contraseña</button>

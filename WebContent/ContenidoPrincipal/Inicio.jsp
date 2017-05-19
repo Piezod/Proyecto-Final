@@ -133,33 +133,9 @@ if (!co.comprobar("select * from primerinicio where idusuario like '"+session.ge
 		</div>
 		<hr>
 
-		<div class="container-fluid">
-
-
-			<div class="row">
-				<div class="col-md-2">
-					<!-- Izquierda -->
-				</div>
-
-				<div class="col-md-8">
-					<!-- Centro -->
-					<ul class="nav nav-tabs">
-						<li role="presentation"><a href="#">Mas Contestadas</a></li>
-						<li role="presentation"><a href="#">Semana</a></li>
-						<li role="presentation"><a href="#">Mes</a></li>
-					</ul>
-				</div>
-				<div class="col-md-2">
-					<!-- Derecha -->
-
-
-				</div>
-			</div>
-
-		</div>
-
+		
 		<!-- En aqui recargamos el titulo de las preguntas-->
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-10 col-md-offset-1" style="background-color: #F9F9F9; padding-top: 20px;">
 
 			<%
 				/*
@@ -182,7 +158,7 @@ if (!co.comprobar("select * from primerinicio where idusuario like '"+session.ge
 					pagpulsada=Integer.parseInt(request.getParameter("pagpulsada"));
 				}
 				
-				int[] x = co.idultimas10preguntas(inipag,10,session.getAttribute("usuario").toString());
+				int[] x = co.idultimas10preguntas(inipag,10);
 				
 				for (int i = 0; i < x.length; i++) {
 					

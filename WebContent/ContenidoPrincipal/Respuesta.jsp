@@ -186,12 +186,12 @@ td{
 					
 					if (request.getAttribute("elimina")!=null)
 					{
-						System.out.println("eliminacion no es null");
+						//System.out.println("eliminacion no es null");
 						if (request.getAttribute("elimina").equals("eliminacion") 
 								   || request.getAttribute("elimina").equals("validacion"))
 					
 						{
-								System.out.println("eliminacion no es null y vale eliminacion o validacoion");
+								//System.out.println("eliminacion no es null y vale eliminacion o validacoion");
 							%>
 							<div class="container">
 							<div class="row">

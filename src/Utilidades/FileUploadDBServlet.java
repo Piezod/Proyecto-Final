@@ -36,7 +36,7 @@ public class FileUploadDBServlet extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("error conectar");
+			//System.out.println("error conectar");
 		}
         
         
@@ -46,9 +46,9 @@ public class FileUploadDBServlet extends HttpServlet {
         Part filePart = request.getPart("photo");
         if (filePart != null) {
             // prints out some information for debugging
-            System.out.println(filePart.getName());
-            System.out.println(filePart.getSize());
-            System.out.println(filePart.getContentType());
+            //System.out.println(filePart.getName());
+            //System.out.println(filePart.getSize());
+            //System.out.println(filePart.getContentType());
              
             // obtains input stream of the upload file
             inputStream = filePart.getInputStream();
@@ -59,10 +59,10 @@ public class FileUploadDBServlet extends HttpServlet {
          
         try {
             // connects to the database
-            System.out.println("conecto");
+            //System.out.println("conecto");
             // constructs SQL statement
             String sql = "INSERT INTO dbdamproject.Imagenes (idimagen, imagen) values (?, ?)";
-            System.out.println("la sql es"+sql);
+            //System.out.println("la sql es"+sql);
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, ultimoid("idimagen", "Imagenes"));
             if (inputStream != null) {
@@ -71,17 +71,17 @@ public class FileUploadDBServlet extends HttpServlet {
             }
  
             // sends the statement to the database server
-            System.out.println(statement.toString());
+            //System.out.println(statement.toString());
             int row = statement.executeUpdate();
             if (row > 0) {
                 message = "File uploaded and saved into database";
             }
         } catch (SQLException ex) {
             message = "ERROR: " + ex.getMessage();
-            System.out.println("error catch");
+            //System.out.println("error catch");
             ex.printStackTrace();
         } finally {
-        	System.out.println("error finally");
+        	//System.out.println("error finally");
             if (conn != null) {
                 // closes the database connection
                 try {
@@ -99,7 +99,7 @@ public class FileUploadDBServlet extends HttpServlet {
     }
     
     public void conectar() throws ClassNotFoundException, SQLException {
-    	System.out.println("Entro en conectar");
+    	//System.out.println("Entro en conectar");
 		Class.forName("com.mysql.jdbc.Driver");
 		String url = "jdbc:mysql://31.200.243.193:51987/dbdamproject";
 		Connection con = DriverManager.getConnection(url, "usrdamproject", "GgQXVfYTCu3eBsXY");
@@ -107,7 +107,7 @@ public class FileUploadDBServlet extends HttpServlet {
 			conexion = con;
 		}
 		
-		System.out.println("conecto correcto");
+		//System.out.println("conecto correcto");
 
 	}
     
@@ -116,12 +116,12 @@ public class FileUploadDBServlet extends HttpServlet {
 		Statement consulta = conexion.createStatement();
 		ResultSet res = consulta.executeQuery("select "+primarykey+" from "+tabla);
 		int dev=0;
-		System.out.println("ultimoid");
+		//System.out.println("ultimoid");
 		while(res.next())
 			{
 			dev = res.getInt(primarykey);
 			}
-		System.out.println(dev);
+		//System.out.println(dev);
 		return dev+1;
 	}
 }
