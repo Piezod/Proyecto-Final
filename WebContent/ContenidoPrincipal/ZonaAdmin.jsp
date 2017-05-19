@@ -162,7 +162,7 @@
 		  	   </div>
 		  
     </div>
-    <div class="col-md-8 col-sm-12 col-xs-12" id="llamadaajax">
+    <div class="col-md-6 col-sm-12 col-xs-12" id="llamadaajax">
 		  </div>
     </div></div>    
 					

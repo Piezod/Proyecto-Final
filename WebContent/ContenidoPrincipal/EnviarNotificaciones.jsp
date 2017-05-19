@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -219,20 +218,6 @@
 </script>
 
 <title>Alta Notificacion</title>
-</head>
-<body>
-	<%@include file="Cabecera.jsp"%>
-<div class="container">
-<div class="row">
-<div class="col-md-offset-0 col-md-12">
-  	<ol class="breadcrumb">
-  		<li><a href="${pageContext.request.contextPath}/ServerletContenido">Inicio</a></li>
-  		<li class="active">Alta Notificacion</li>
-	</ol>
-</div></div>
-	<div class="container">
-	<div class="row">
-	<div class="col-md-offset-2 col-md-8">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<div class="container-fluid">
@@ -283,7 +268,6 @@
 				</div>
 			</div>
 		</div>
-		</div></div></div></div>
+		
 	<%@include file="pie.jsp"%>
-</body>
 </html>
