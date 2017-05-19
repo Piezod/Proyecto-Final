@@ -591,7 +591,6 @@ public class Conexion {
 		try
 		{
 		int x[] = new int[10];
-
 		Statement consulta = conexion.createStatement();
 		ResultSet res = consulta.executeQuery("select idpreguntas from dbdamproject.preguntas order by idpreguntas desc limit "+inicio+","+fin+"");
 

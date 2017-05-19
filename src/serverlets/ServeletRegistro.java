@@ -32,7 +32,7 @@ public class ServeletRegistro extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Registro en curso si esta pagina no desaparece <a href='inicio'>pulse aqui</a>");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +50,7 @@ public class ServeletRegistro extends HttpServlet {
 				sesion.setAttribute("ciclo", request.getParameter("ciclo"));
 				sesion.setAttribute("curso", request.getParameter("curso"));
 				//c.cerrarconexion();
-				response.sendRedirect("registro");
+				response.sendRedirect("zonaadmin");
 				
 			}else{
 				String usuario=c.generarusuario(request.getParameter("nombre"), request.getParameter("apellido1"), request.getParameter("apellido2"));
