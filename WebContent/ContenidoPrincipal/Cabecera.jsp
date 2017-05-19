@@ -22,7 +22,7 @@
 if (session.getAttribute("usuario")==null)
 {
 	response.sendRedirect("login");
-	System.out.println("usuario vacio");
+	//System.out.println("usuario vacio");
 	%>
 <%} 
 
@@ -74,7 +74,6 @@ if(session.getAttribute("conexion")!=null){
       </form>
       
        <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Novedades</a></li>
         <li class="dropdown" style="margin-right:10px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("usuario") %><span class="caret"></span></a>
           <ul class="dropdown-menu">
 

@@ -42,14 +42,14 @@ public class ServerletNotificacion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		System.out.println("Serverlet notificacion");
+		//System.out.println("Serverlet notificacion");
 		String titulo=request.getParameter("titulo");
 		String mensaje=request.getParameter("mensaje");
 		
 		
-		System.out.println(titulo+mensaje);
+		//System.out.println(titulo+mensaje);
 		String tipo=request.getParameter("tipo");
-		System.out.println(tipo);
+		//System.out.println(tipo);
 		Correo c=new Correo();
 		try
 		{
@@ -67,14 +67,14 @@ public class ServerletNotificacion extends HttpServlet {
 					break;
 				}
 				String nextJSP = "/notificaciones";
-				System.out.println(request.getParameter("tipo"));
+				//System.out.println(request.getParameter("tipo"));
 				request.setAttribute("tipo", request.getParameter("tipo"));
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
 				dispatcher.forward(request,response);
 		}
 		
 		catch (Exception e) {
-			System.out.println("error en la zona de notificacion servlert correo");
+			//System.out.println("error en la zona de notificacion servlert correo");
 		}
 		
 	}

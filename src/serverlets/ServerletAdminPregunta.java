@@ -34,7 +34,7 @@ public class ServerletAdminPregunta extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		System.out.println("serverlet admin pregunta");
+		//System.out.println("serverlet admin pregunta");
 	}
 
 	/**
@@ -51,8 +51,8 @@ public class ServerletAdminPregunta extends HttpServlet {
 		switch (tipo) {
 		case "confirmarmejor":
 
-			System.out.println("respuesta recogida" +request.getParameter("idrespuestamejor"));
-			System.out.println("confirmamos mejor");
+			//System.out.println("respuesta recogida" +request.getParameter("idrespuestamejor"));
+			//System.out.println("confirmamos mejor");
 			try {
 				ce.actualizardato("update respuestas SET mejorrespuesta = 1 WHERE idrespuesta="+request.getParameter("idrespuestamejor"));
 				request.setAttribute("elimina", "validacion");
@@ -69,8 +69,8 @@ public class ServerletAdminPregunta extends HttpServlet {
 			break;
 		case "confirmarbaja":
 			
-			System.out.println("confirmarmos baja");
-			System.out.println("respuesta recogida" +request.getParameter("getres"));
+			////System.out.println("confirmarmos baja");
+			//System.out.println("respuesta recogida" +request.getParameter("getres"));
 			try {
 				ce.actualizardato("delete from respuestas where idrespuesta="+request.getParameter("getres"));
 				request.setAttribute("elimina", "eliminacion");

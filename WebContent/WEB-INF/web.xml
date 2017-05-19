@@ -180,4 +180,8 @@
     <servlet-name>Notificaciones</servlet-name>
     <url-pattern>/notificaciones</url-pattern>
   </servlet-mapping>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/Error.jsp</location>
+	</error-page> 
 </web-app>

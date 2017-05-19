@@ -126,7 +126,7 @@
 */
 	if (session.getAttribute("admin")==null)
 	{
-	System.out.println("usuario vacio al admin");
+	//System.out.println("usuario vacio al admin");
 	response.sendRedirect("login");
 		}
 	else 	if (!session.getAttribute("admin").equals("1"))
@@ -134,7 +134,7 @@
 
 	<%
 	response.sendRedirect("login");
-	System.out.println("usuario no es admin");
+	//System.out.println("usuario no es admin");
 	} %>
 		
  

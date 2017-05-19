@@ -60,7 +60,7 @@ public class DevolverListas {
 
 	public HashMap<String, String> preguntasusuariohm1() throws SQLException, ClassNotFoundException
 	{
-		System.out.println("select * from preguntas where idusuario like '"+usuario+"'");
+		//System.out.println("select * from preguntas where idusuario like '"+usuario+"'");
 		Conexion c=new Conexion();
 		c.conectar();
 		ResultSet r=c.sacarresultset("select * from preguntas where idusuario like '"+usuario+"'");
@@ -68,7 +68,7 @@ public class DevolverListas {
 		String dato,numero;
 		while (r.next())
 		{
-			System.out.println(r.getString(1)+r.getString(3));
+			//System.out.println(r.getString(1)+r.getString(3));
 			hm.put(r.getString(1), r.getString(3));
 		}
 		c.cerrarconexion();
@@ -84,7 +84,7 @@ public class DevolverListas {
 	 */
 	public HashMap<String, ArrayList> preguntasusuariohm2() throws SQLException, ClassNotFoundException
 	{
-		//System.out.println("select * from preguntas where idusuario like '"+usuario+"'");
+		////System.out.println("select * from preguntas where idusuario like '"+usuario+"'");
 		Conexion c=new Conexion();
 		c.conectar();
 		ResultSet r=c.sacarresultset("select * from preguntas where idusuario like '"+usuario+"'order by fechayhora desc LIMIT  10");
@@ -115,7 +115,7 @@ public class DevolverListas {
 	 */
 	public HashMap<String, ArrayList> respuestasusuariohm() throws SQLException, ClassNotFoundException
 	{
-		//System.out.println("select * from preguntas where idusuario like '"+usuario+"'");
+		////System.out.println("select * from preguntas where idusuario like '"+usuario+"'");
 		Conexion c=new Conexion();
 		c.conectar();
 		

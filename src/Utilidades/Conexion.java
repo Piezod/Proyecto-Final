@@ -62,7 +62,7 @@ public class Conexion {
 			Statement insertar=conexion.createStatement();
 			insertar.executeUpdate("Insert into logs values(null,'"+ex.getMessage()+"')");
 		}catch (SQLException | ClassNotFoundException e){
-			//System.out.println("Error ");
+			////System.out.println("Error ");
 			e.printStackTrace();
 		}
 	}
@@ -356,7 +356,7 @@ public class Conexion {
 
 		try{
 		Statement consulta = conexion.createStatement();
-	//	System.out.println("select max("+primarykey+") from "+tabla);
+	//	//System.out.println("select max("+primarykey+") from "+tabla);
 		ResultSet res = consulta.executeQuery("select max("+primarykey+") from "+tabla);
 		
 		if(res.next())
@@ -369,7 +369,7 @@ public class Conexion {
 		{
 			
 		}
-		System.out.println(dev);
+		//System.out.println(dev);
 		return (dev);
 		
 	}
@@ -381,12 +381,12 @@ public class Conexion {
 			String sql="";
 			if(idpreg==0){
 				sql="insert into dbdamproject.actividad (idrespuesta,texto,fecha,usuario,ip) values (?,?,?,?,?)";
-				//System.out.println("insert into dbdamproject.actividad (idrespuesta,texto,fecha,usuario) values ('"+idpreg+"','"+idres+"','"+texto+"','"+fecha+"','"+usuario+"')");
+				////System.out.println("insert into dbdamproject.actividad (idrespuesta,texto,fecha,usuario) values ('"+idpreg+"','"+idres+"','"+texto+"','"+fecha+"','"+usuario+"')");
 
 			}
 			else if(idres==0){
 				sql="insert into dbdamproject.actividad (idpregunta,texto,fecha,usuario,ip) values (?,?,?,?,?)";
-				//System.out.println("insert into dbdamproject.actividad (idpregunta,texto,fecha,usuario) values  ('"+idpreg+"','"+idres+"','"+texto+"','"+fecha+"','"+usuario+"')");
+				////System.out.println("insert into dbdamproject.actividad (idpregunta,texto,fecha,usuario) values  ('"+idpreg+"','"+idres+"','"+texto+"','"+fecha+"','"+usuario+"')");
 }
 			PreparedStatement insertar=conexion.prepareStatement(sql);
 			if(idpreg==0){
@@ -418,7 +418,7 @@ public class Conexion {
 		try{
 			conexion.setAutoCommit(false);
 		String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-		//System.out.println(fecha);
+		////System.out.println(fecha);
 		//0000-00-00 00:00:00
 		
 		
@@ -514,7 +514,7 @@ public class Conexion {
 	{
 		try{
 			Statement consulta=conexion.createStatement();
-			//System.out.println("sacardato"+query);
+			////System.out.println("sacardato"+query);
 			ResultSet res=consulta.executeQuery(query);
 			String x=null;
 			if (res.next())
@@ -617,7 +617,7 @@ public class Conexion {
 
 			Statement consulta = conexion.createStatement();
 			ResultSet res = consulta.executeQuery(query);
-			System.out.println(query);
+			//System.out.println(query);
 			
 			return res.next();
 		}
@@ -655,7 +655,7 @@ public class Conexion {
 		Statement consulta = conexion.createStatement();
 		ResultSet res = consulta.executeQuery("SELECT count(*) FROM dbdamproject.preguntas where descripcion like '%"+valor+"%'");		
 		int cantidad=0;
-		//System.out.println("metodo busquedaheader");
+		////System.out.println("metodo busquedaheader");
 		if (res.next())
 		{
 			cantidad=res.getInt(1);
@@ -671,7 +671,7 @@ public class Conexion {
 			while (res.next())
 			{
 				valores[i]=res.getInt(1);
-				//System.out.println(res.getInt(1));
+				////System.out.println(res.getInt(1));
 				i++;
 			}
 
@@ -779,7 +779,7 @@ public class Conexion {
 	
 public int SumarVoto( int idrespuesta, String tipovoto){
 	
-	//System.out.println("update dbdamproject.respuestas set "+tipovoto+"=? where idrespuesta="+idrespuesta+"");
+	////System.out.println("update dbdamproject.respuestas set "+tipovoto+"=? where idrespuesta="+idrespuesta+"");
 		try{
 			String sql="update dbdamproject.respuestas set "+tipovoto+"=? where idrespuesta=?";
 			PreparedStatement insertar = conexion.prepareStatement(sql);
@@ -836,7 +836,7 @@ public int SumarVoto( int idrespuesta, String tipovoto){
 	public void actualizardato(String query) throws SQLException
 	{
 		Statement insertar=conexion.createStatement();
-		System.out.println(query+" actualizardato");
+		//System.out.println(query+" actualizardato");
 		insertar.executeUpdate(query);
 	}
 
