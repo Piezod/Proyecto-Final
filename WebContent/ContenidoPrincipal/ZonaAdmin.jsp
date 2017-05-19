@@ -15,7 +15,77 @@
  
  </style>
  <script type="text/javascript">
- 
+ function cambiarhidden(id,valor){
+		
+		document.getElementById("bt"+id).innerHTML=valor+'<span class="caret"></span>'
+		document.getElementById(id).value=valor	
+	}
+	function comprobarregistro() {
+		//Validaciones del formulario
+		
+		var error = "";
+		if (document.getElementById("nombre").value.length == 0) {
+			error += "El nombre no puede estar vacío antes de registrarse";
+		}
+		if (document.getElementById("apellido1").value.length == 0) {
+			if (error.length != 0) {
+				error += "\n";
+			}
+			error += "El primer apellido no puede estar vacío antes de registrarse";
+		}
+		if (document.getElementById("apellido2").value.length == 0) {
+			if (error.length != 0) {
+				error += "\n";
+			}
+			error += "El segundo apellido no puede estar vacío antes de registrarse";
+		}
+		if (document.getElementById("email").value.length == 0) {
+			if (error.length != 0) {
+				error += "\n";
+			}
+			error += "El email no puede estar vacío antes de registrarse";
+		} else {
+			var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+			if (!re.test(document.getElementById("email").value)) {
+				if (error.length != 0) {
+					error += "\n";
+				}
+				error += "El email no tiene un formato válido";
+			}
+		}
+		
+		
+		if(document.getElementById("ciclo").value.length==0){
+			if (error.length != 0) {
+				error += "\n";
+			}
+			error += "Seleccione un ciclo";
+		}
+		if(document.getElementById("curso").value.length==0){
+			if (error.length != 0) {
+				error += "\n";
+			}
+			error += "Seleccione un curso";
+		}
+		
+		if (error.length != 0) {
+			alert(error);
+			return false;
+		} else {
+			return true;
+		}
+
+	}
+	
+	<% if((session.getAttribute("Emailduplicado")+"").equals("si")){ %>
+	window.onload=function emailduplicado(){
+	alert("El email está duplicado")
+	}
+	
+	
+	
+	<%} %>
  function verp()
  {
 	 
@@ -90,9 +160,10 @@
 								 <a href="ServeletZonaAdmin?opcion=solicitud" class="btn btn-primary">Solicitudes</a>
 						 </div>
 		  	   </div>
-		  <div class="col-md-8 col-sm-12 col-xs-12" id="llamadaajax">
-		  </div>
+		  
     </div>
+    <div class="col-md-8 col-sm-12 col-xs-12" id="llamadaajax">
+		  </div>
     </div></div>    
 					
 					
