@@ -182,7 +182,7 @@ if (!co.comprobar("select * from primerinicio where idusuario like '"+session.ge
 					pagpulsada=Integer.parseInt(request.getParameter("pagpulsada"));
 				}
 				
-				int[] x = co.idultimas10preguntas(inipag,10,session.getAttribute("usuario").toString());
+				int[] x = co.idultimas10preguntas(inipag,10);
 				
 				for (int i = 0; i < x.length; i++) {
 					
