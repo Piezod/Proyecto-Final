@@ -59,7 +59,7 @@ public class ServerletLogin extends HttpServlet {
 		{
 			if (request.getParameter("check").equals("on"))
 			{
-		          System.out.println("remember : " + usuarios);
+		          //System.out.println("remember : " + usuarios);
 		          Cookie cUserName = new Cookie("cookuser", usuarios.trim());
 		          Cookie cPassword = new Cookie("cookpass", pass.trim());
 		          cUserName.setMaxAge(60 * 60 * 24 * 15);//15 days

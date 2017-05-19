@@ -19,3 +19,9 @@ body{
   
   
 }
+@media (min-width: 769px){
+	form.navbar-left{
+	width:40%
+	}
+	
+}

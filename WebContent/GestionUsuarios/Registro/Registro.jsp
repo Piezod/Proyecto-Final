@@ -89,12 +89,12 @@ alert("El email está duplicado")
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 <!-- <link rel="stylesheet" href="registro.css"> -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/GestionUsuarios/Registro/registro.css">
-<!-- Google Fonts -->
+<!-- Google Fonts 
 <link href='https://fonts.googleapis.com/css?family=Passion+One'
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Oxygen'
 	rel='stylesheet' type='text/css'>
-	
+	-->
 	
 <!-- <script src="../../Bootstrap/js/ajax.js"></script> -->
 

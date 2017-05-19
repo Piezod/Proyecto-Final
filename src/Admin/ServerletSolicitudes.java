@@ -39,7 +39,7 @@ public class ServerletSolicitudes extends HttpServlet {
 		    response.getWriter().write(text+dato);
 		    // Write response body.
 		    */
-		System.out.println("entro en solicitudserverlet");
+		//System.out.println("entro en solicitudserverlet");
 	}
 
 	/**
@@ -47,9 +47,9 @@ public class ServerletSolicitudes extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("entro en solicitudserverlet");
-		System.out.println(request.getParameter("idsolicitud"));
-		System.out.println(request.getParameter("tipo"));
+		//System.out.println("entro en solicitudserverlet");
+		//System.out.println(request.getParameter("idsolicitud"));
+		//System.out.println(request.getParameter("tipo"));
 		int idsolicitud=Integer.parseInt(request.getParameter("idsolicitud"));
 		
 		GestionesAdmin ga=new GestionesAdmin();
