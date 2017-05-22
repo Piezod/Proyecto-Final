@@ -14,10 +14,10 @@ public class GestionesAdmin {
 	{
 		Conexion c=new Conexion();
 		c.conectar();
-		String query="select * from solicitudes where idsolicitud = "+idsolicitud+"";
-		//System.out.println(query);
+		String query="select * from solicitudes where idsolicitud = "+idsolicitud+" order by idsolicitud desc";
 		
 		ResultSet r=c.sacarresultset(query);
+		System.out.println(query);
 		
 		if (r.next())
 		{
@@ -26,7 +26,6 @@ public class GestionesAdmin {
 			actualizar(r.getString(4), c, "apellido1",r.getString(2));    //apellido1
 			actualizar(r.getString(5), c, "apellido2",r.getString(2));   //apellido2
 			String queryid="UPDATE solicitudes set pendiente=0 where idsolicitud ="+r.getInt(1);
-			////System.out.println("cambiando el estado "+queryid);
 			c.actualizardato(queryid);
 				
 		}

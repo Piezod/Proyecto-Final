@@ -42,7 +42,6 @@ public class ServerletRespuesta extends HttpServlet {
 		 */
 		Conexion c1=(Conexion)request.getSession().getAttribute("conexion");
 		try {
-
 			c1.conectar();
 		}
 		 catch (ClassNotFoundException | SQLException e1) {
@@ -50,15 +49,10 @@ public class ServerletRespuesta extends HttpServlet {
 				e1.printStackTrace();
 		 }
 		String usuario=(String)request.getSession().getAttribute("usuario");
-		
 		int idrespuesta=Integer.parseInt((String)request.getParameter("idrespuesta"));
-		//System.out.println(request.getParameter("tipo")+"es el tipo");
-		//System.out.println(usuario);
-		//System.out.println(idrespuesta);
 		
 		if (!c1.comprobar("select * from Votorespuesta where idrespuesta="+idrespuesta+" and idusuario like '"+usuario+"'"))
 		{
-		      //System.out.println("no existe, se haria el insert");
 				/*
 				 * Recogo los valores que me envian desde respuesta por variable, tengo si sumo o resto, en funcion de lo que recoja realizo una u otra operacion
 				 * en la id de pregunta que se recoge por el get.
@@ -93,7 +87,6 @@ public class ServerletRespuesta extends HttpServlet {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
 				}
 		else
 		{

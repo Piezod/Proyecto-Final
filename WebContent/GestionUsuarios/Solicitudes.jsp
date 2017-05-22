@@ -11,7 +11,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Solicitudes pendientes</title>
 <style type="text/css">
 #wrapper{
     background-image:url('some-image.jpg');
@@ -64,7 +64,7 @@ function resultado()
 	if (tipo=="baja")
 		{
 		$('#info').show();
-		document.getElementById("infotext").innerHTML = "Se ha realizado la baja de la solicitud numero "+idsolicitud+" !!";
+		document.getElementById("infotext").innerHTML = "Se ha realizado la cancelacion de la solicitud numero "+idsolicitud+" !!";
 		
 		}
 	else if (tipo=="cambio")
@@ -92,7 +92,7 @@ function confirmarbaja(idsolicitud){
 		   //alert(idrespu);
 		    document.getElementById("tipo").value = "cambio";
 		   document.getElementById("idsolicitud").value = idsolicitud;
-		   mensaje = "¿Estas seguro de autorizar el cambio?";
+		   mensaje = "Estas seguro de autorizar el cambio?";
 		   document.getElementById("mensajemodal").innerHTML=mensaje;
 		};
 
@@ -137,6 +137,7 @@ System.out.println("usuario no es admin");
 					  <table class="table table-hover">
 		  	<tr>
 		  		<th> Numero peticion</th>
+		  		<th> Usuario </th>
 		  		<th> Nombre solicitado </th>
 		  		<th> Apellido1 </th>
 		  		<th> Apellido2</th>
@@ -151,9 +152,11 @@ System.out.println("usuario no es admin");
 						 	<td>${item.value.get(1)} </td>
 						 	<td>${item.value.get(2)} </td>
 						 	<td>${item.value.get(3)} </td>
+						 	<td>${item.value.get(4)} </td>
 						 	<td> 
-						 		 <span class="glyphicon glyphicon-remove"  style="color:red" aria-hidden="true" onclick="confirmarbaja(${item.value.get(0)});"></span></a>
-				  	  	  		 <span class="glyphicon glyphicon-ok" style="color:green" aria-hidden="true" onclick="confirmarcambio(${item.value.get(0)});"></span>
+						 		 <span class="glyphicon glyphicon-remove" title="cancelar peticion" style="color:red ; cursor: pointer; cursor: hand;" cursor: pointer;
+						 		  aria-hidden="true" onclick="confirmarbaja(${item.value.get(0)});"></span></a>
+				  	  	  		 <span class="glyphicon glyphicon-ok" title="aceptar solicitud" style="color:green; cursor: pointer; cursor: hand;" aria-hidden="true" onclick="confirmarcambio(${item.value.get(0)});"></span>
 				  	  	  	</td>
 						 	<td><img src="Fondos/ajax-loader.gif" id="loading"/></td>
 						</tr>

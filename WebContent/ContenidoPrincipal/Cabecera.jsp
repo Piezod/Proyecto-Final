@@ -49,22 +49,24 @@ if(session.getAttribute("conexion")!=null){
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
           <!-- ** Boton del home ** -->
-    
-			<a href="${pageContext.request.contextPath}/Inicio"><input type="image" src="ServeletImagenes?id=2" name="contenido" style="height: 50px"></input></a>
-      
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+			<a href="${pageContext.request.contextPath}/Inicio">
+				<input type="image" src="ServeletImagenes?id=2" name="contenido" style="height: 50px"></input>
+			</a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1">
+      	<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span>
+      	<span class="icon-bar"></span>
+      </button>
       </div>
+      
     <!-- Collect the nav links, forms, and other content for toggling -->
     
     <div class="collapse navbar-collapse" id="defaultNavbar1">
     
       <ul class="nav navbar-nav">
-      
-      
-    	
-        
-        <li><a href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=usuarios&inicio=0&fin=10&pagpulsada=1&iniciopagina=1">Usuarios</a></li>
-		
+        <li>
+        <a href="${pageContext.request.contextPath}/ServerletRespuestaPaginacion?pag=usuarios&inicio=0&fin=10&pagpulsada=1&iniciopagina=1">
+        Usuarios</a>
+        </li>
       </ul>
       <form class="navbar-form navbar-left" role="search" action="ServeletBusqueda" method="POST" >
         <div class="form-group">
@@ -74,23 +76,25 @@ if(session.getAttribute("conexion")!=null){
       </form>
       
        <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" style="margin-right:10px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("usuario") %><span class="caret"></span></a>
+        <li class="dropdown" style="margin-right:10px">
+        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        	      <%=session.getAttribute("usuario") %>
+        		<span class="caret"></span>
+        	</a>
           <ul class="dropdown-menu">
 
-            <li><a href="${pageContext.request.contextPath}/AreaUsuario">Datos de usuario</a></li>
-            <%if((session.getAttribute("admin")!=null && session.getAttribute("admin").equals("1"))){ %>
-            <li role="separator" class="divider"></li>
-            <li><a href="${pageContext.request.contextPath}/zonaadmin">Zona Administrador</a></li>
-            <%} %>
-            <li role="separator" class="divider"></li>
-            <li>
-            
-            <a href="${pageContext.request.contextPath}/CerrarSesion?logout=1">Cerrar sesion</a>
-            
-            </li>
-          </ul>
-        </li>
-      </ul>
+	            <li><a href="${pageContext.request.contextPath}/AreaUsuario">Datos de usuario</a></li>
+	            <%if((session.getAttribute("admin")!=null && session.getAttribute("admin").equals("1"))){ %>
+	           		 <li role="separator" class="divider"></li>
+	            <li><a href="${pageContext.request.contextPath}/zonaadmin">Zona Administrador</a></li>
+	            <%} %>
+	            <li role="separator" class="divider"></li>
+	            	<li>
+	            	<a href="${pageContext.request.contextPath}/CerrarSesion?logout=1">Cerrar sesion</a>
+	            </li>
+	          </ul>
+	        </li>
+     	 </ul>
        
        </div>
     <!-- /.navbar-collapse --> 

@@ -49,7 +49,6 @@ public class ServeletBusqueda extends HttpServlet {
 		 * queremos buscar, 
 		 */
 		String vb=(String)request.getParameter("valorbusqueda");
-		//System.out.println("serverletbusquedabarra  valor de busqueda "+vb);
 		
 		HttpSession sesion= request.getSession(true);
 			/*

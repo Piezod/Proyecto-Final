@@ -22,9 +22,7 @@
     			ResultSet rs=cr.sacarresultset(query);
     			if (rs.next())
     			{ 
-    				
     				%>
-    				
     				<div class="container">
   						<div class="h1" align="center"> Respuestas Validadas
     				</div></div>
@@ -54,10 +52,7 @@
 				         	  	
 				         	  	<table border="0" width="100%">
 				         	  		<tr>
-				         	  		
-				         	  		
 				         	  			<td colspan="2" align="right">Fecha Respuesta : <%= rs.getString(8) %> </td>
-				         	  			
 				         	  		</tr>
 				         	  		<tr>
 				         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span><a href="${pageContext.request.contextPath}/ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>&tipo=mas&idpregunta=<%= request.getParameter("idpregunta") %>" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
@@ -84,7 +79,7 @@
 			         	<div class="panel panel-warning">
 			         	  <div class="panel-heading">
 			         	  <div class="alert alert-warning alert-dismissable">
-			         	  	   <h3 align="center">no hay ninguna respuseta verificada aún </div>
+			         	  	   <h3 align="center">No hay ninguna respuseta verificada aún </div>
 			         	 
 			       	    </div>
 			       	  </div>
