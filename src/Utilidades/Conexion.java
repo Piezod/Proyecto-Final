@@ -251,6 +251,13 @@ public class Conexion {
 		}
 	}
 	
+	/**Metodo para generar el nombre de usuarios de nuestra aplicacion
+	 * @param nombre Nombre simple o compuesto el cual será la primera letra (o 2 en caso de compuesto)de nuestro nombre de usuario
+	 * @param apellido1 Apellido del usuario cadena de caracteres la cual será incluida completamente en el usuario
+	 * @param apellido2 Apellido del cual se tomara la primera letra al igual que en el nombre
+	 * @return Devuelve el nombre de usuario generado anteriormente
+	 * @throws SQLException
+	 */
 	public String generarusuario(String nombre, String apellido1, String apellido2) throws SQLException {
 		String usuario = "";
 		usuario += nombre.charAt(0);
