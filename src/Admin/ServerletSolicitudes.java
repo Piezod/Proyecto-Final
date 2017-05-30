@@ -47,9 +47,6 @@ public class ServerletSolicitudes extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//System.out.println("entro en solicitudserverlet");
-		//System.out.println(request.getParameter("idsolicitud"));
-		//System.out.println(request.getParameter("tipo"));
 		int idsolicitud=Integer.parseInt(request.getParameter("idsolicitud"));
 		
 		GestionesAdmin ga=new GestionesAdmin();

@@ -58,25 +58,14 @@ public class ServerletAltaPregunta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
-		
-		
 	HttpSession sesion= request.getSession(true);
-		
-		/*
-		 * Sacamos el usuario que ha realizado la pregunta para ingresarlo en la base de datos
-		 */
-		//request.getAttribute("titulo");
 		String titulo= request.getParameter("titulo");
 		/*
 		 * Recogemos el valor del textarea y hacemos un replace \n por el <br> para guardar el salto de linea y el formato que nos ha introducido el 
 		 * usuario
 		 */
 		String mensaje=request.getParameter("mensajeoculto");
-		
 		Conexion c=(Conexion)sesion.getAttribute("conexion");
-		
-		
 		int idpregunta=c.InsertarPregunta(titulo, mensaje, (String)sesion.getAttribute("usuario"),request.getRemoteAddr());
 		String tags=request.getParameter("idsusados");
 

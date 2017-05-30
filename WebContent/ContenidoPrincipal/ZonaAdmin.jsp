@@ -149,15 +149,15 @@
 		<div class="container" id="tabla1">
 			<div class="row">
 				<div class="col-md-3">
-						<div class="col-sm-12 col-xs-12 col-md-3 " align="center">
-						<div class="btn-group-vertical">
-							      <button type="button" class="btn btn-primary"  onclick="from('1','llamadaajax','registro')">Registrar Usuarios</button>
-							      <button type="button" class="btn btn-primary"  id="vertiponotificacion" onclick="verp(); ">Enviar notificacion</button>
+					<div class="col-sm-12 col-xs-12 col-md-3 " align="center">
+					<div class="btn-group-vertical">
+					  <button type="button" class="btn btn-primary"  onclick="from('1','llamadaajax','registro')">Registrar Usuarios</button>
+				      <button type="button" class="btn btn-primary"  id="vertiponotificacion" onclick="verp(); ">Enviar notificacion</button>
 							   
-							      <button type="button" class="btn btn-default" id="noty" style="cursor : pointer ; cursor: hand; margin-left: 5%; border-top-right-radius: 4px; border-top-left-radius: 4px; " onclick="from('global','llamadaajax','notificaciones')">Notificacion global</button>
-							      <button type="button" class="btn btn-default" id="noty1" style=" cursor : pointer ; cursor: hand; margin-left: 5%" onclick="from('curso','llamadaajax','notificaciones')">Notificacion a curso</button>
+					  <button type="button" class="btn btn-default" id="noty" style="cursor : pointer ; cursor: hand; margin-left: 5%; border-top-right-radius: 4px; border-top-left-radius: 4px; " onclick="from('global','llamadaajax','notificaciones')">Notificacion global</button>
+					 <button type="button" class="btn btn-default" id="noty1" style=" cursor : pointer ; cursor: hand; margin-left: 5%" onclick="from('curso','llamadaajax','notificaciones')">Notificacion a curso</button>
 								 
-								 <a href="ServeletZonaAdmin?opcion=solicitud" class="btn btn-primary">Solicitudes</a>
+					<a href="ServeletZonaAdmin?opcion=solicitud" class="btn btn-primary">Solicitudes</a>
 						 </div>
 		  	   </div>
 		  
