@@ -95,6 +95,7 @@ public class DevolverListas {
 		{
 			ArrayList l=new ArrayList<>();
 			gc.setCadena(r.getString(2));
+			gc.quitarpreybr();
 			l.add(gc.recortarcadena(20)); // Titulo pregunta
 		//	l.add(r.getString(3)); // Descripcion pregunta
 		//	l.add(r.getString(4)); // id usuario
@@ -131,6 +132,7 @@ public class DevolverListas {
 		{
 			ArrayList l=new ArrayList<>();
 			gc.setCadena(r.getString(2));
+			gc.quitarpreybr();
 			l.add(gc.recortarcadena(20)); // Titulo respuesta
 			
 			l.add(r.getString(3)); // Votos positivos respuesta

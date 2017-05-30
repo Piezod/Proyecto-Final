@@ -112,7 +112,7 @@
     				{
     					%>
     					<div class="panel-footer">
-    						<h4>La respuesta es <%=r.getString(3).substring(0,250)+" ..." %></h4>
+    						<h4><%=r.getString(3).substring(0,250)+" ..." %></h4>
     					</div>
     					<%
     				}
@@ -120,7 +120,7 @@
     				{
     					%>
     					<div class="panel-footer">
-    						<h4>La respuesta es <%=r.getString(3)+" ..." %></h4>
+    						<h4><%=r.getString(3)+" ..." %></h4>
     					</div>
     					
     					<%

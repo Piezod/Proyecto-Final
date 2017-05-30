@@ -34,6 +34,10 @@ public class GestionCadenas {
 		return cadenaaux;
 	}
 	
+	public void quitarpreybr(){
+		cadena=cadena.replaceAll("<pre>", "").replaceAll("</pre>", "");
+		cadena=cadena.replaceAll("<br>", "");
+	}
 	
 		
 
