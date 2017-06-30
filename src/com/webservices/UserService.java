@@ -26,4 +26,29 @@ import javax.ws.rs.core.MediaType;
 		   return userDao.getUser(login, pass);
 	   }
 
+	   @GET
+	   @Path("/remindpass/{email}")
+	   @Produces(MediaType.TEXT_PLAIN)
+	   public String SendEmailResetPassword(@PathParam("email") String email){
+		   if(userDao.SendEmailResetPassword(email)){
+			   return "Correcto";
+		   }
+		   else{
+			   return "False";
+		   }
+		   
+	   }
+
+	   @GET
+	   @Path("/checkcode/{email}/{code}")
+	   @Produces(MediaType.TEXT_PLAIN)
+	   public String CheckCode(@PathParam("email") String email,@PathParam("code") String code){
+		   if(userDao.CheckEmailValidation(email,code)){
+			   return "Correcto";
+		   }
+		   else{
+			   return "False";
+		   }
+		   
+	   }
 }
