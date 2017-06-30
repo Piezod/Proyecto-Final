@@ -31,7 +31,7 @@ import javax.ws.rs.core.MediaType;
 	   @Produces(MediaType.TEXT_PLAIN)
 	   public String SendEmailResetPassword(@PathParam("email") String email){
 		   if(userDao.SendEmailResetPassword(email)){
-			   return "Correcto";
+			   return "Correct";
 		   }
 		   else{
 			   return "False";
@@ -40,11 +40,24 @@ import javax.ws.rs.core.MediaType;
 	   }
 
 	   @GET
+	   @Path("/checkemail/{email}")
+	   @Produces(MediaType.TEXT_PLAIN)
+	   public String CheckEmail(@PathParam("email") String email){
+		   if(userDao.SendEmailResetPassword(email)){
+			   return "Correct";
+		   }
+		   else{
+			   return "False";
+		   }
+		   
+	   }
+	   
+	   @GET
 	   @Path("/checkcode/{email}/{code}")
 	   @Produces(MediaType.TEXT_PLAIN)
 	   public String CheckCode(@PathParam("email") String email,@PathParam("code") String code){
 		   if(userDao.CheckEmailValidation(email,code)){
-			   return "Correcto";
+			   return "Correct";
 		   }
 		   else{
 			   return "False";
