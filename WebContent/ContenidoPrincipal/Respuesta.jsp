@@ -19,7 +19,6 @@
 function confirmarbaja(idrespu){
 	
    $('#confirmarbaja').modal('show');
-   //alert(idrespu);
    document.getElementById("getres").value = idrespu;
 };
 function confirmarmejor(idrespu){
@@ -371,7 +370,8 @@ td{
 							  	  	  				
 							  	  	  			-->
 				  	  	  			    <input type="hidden" id="idresp" value="<%=rs.getString(1) %>"></input>
-				  	  	  				<span class="glyphicon glyphicon-remove alert-danger" style="cursor: pointer; cursor: hand;" aria-hidden="true" onclick="confirmarbaja(<%=rs.getString(1)%>);"></span></a>
+				  	  	  				<span class="glyphicon glyphicon-remove alert-danger" style="cursor: pointer; cursor: hand;" 
+				  	  	  				aria-hidden="true" onclick="confirmarbaja(<%=rs.getString(1)%>);"></span></a>
 				  	  	  				<span class="glyphicon glyphicon-ok alert-success" style="cursor: pointer; cursor: hand;" aria-hidden="true" onclick="confirmarmejor(<%=rs.getString(1)%>);"></span>
 				  	  	  			<%} %>
 				  	  	 		</div>
@@ -439,7 +439,10 @@ td{
     					         	  			
     					         	  		</tr>
     					         	  		<tr>
-    					         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span> <a href="${pageContext.request.contextPath}/ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>&tipo=mas&idpregunta=<%= request.getParameter("idpregunta") %>" class="btn btn-success" type="submit" style="margin:2%"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
+    					         	  			<td align="right">Votos positivos <span class="resalto"><%= rs.getString(3) %></span> 
+    					         	  			<a href="${pageContext.request.contextPath}/ServerletRespuesta?sumo=1&idrespuesta=<%=rs.getString(1)%>
+    					         	  			&tipo=mas&idpregunta=<%= request.getParameter("idpregunta") %>" class="btn btn-success" type="submit" style="margin:2%">
+    					         	  			<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></td>
     					         	  		 
     					         	  			<td align="right">Votos Negativos <span class="resalto"><%= rs.getString(4) %></span> <a  href="${pageContext.request.contextPath}/ServerletRespuesta?resto=1&idrespuesta=<%=rs.getString(1)%>&tipo=menos&idpregunta=<%= request.getParameter("idpregunta") %>" class="btn btn-danger" type="submit" style="margin:2%"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a></td>
     					         	  		 </tr>
@@ -471,7 +474,7 @@ td{
 				         	<div class="panel panel-warning">
 				         	  <div class="panel-heading">
 				         	  <div class="alert alert-warning alert-dismissable">
-				         	  	   <h3 align="center">No hay respuestas todavia , sé el primero en participar y si la respuesta es buenabuena conseguiras extrapoints</h3>
+				         	  	   <h3 align="center">No hay respuestas todavia , sé el primero en participar y si la respuesta es verificada la veras en lo mas alto </h3>
 				         	  </div>
 				         	 
 				       	    </div>

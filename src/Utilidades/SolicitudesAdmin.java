@@ -15,8 +15,8 @@ public class SolicitudesAdmin {
 	 */
 	public HashMap<String, ArrayList> Solicitudespendientes() throws SQLException, ClassNotFoundException
 	{
-		String query="select * from solicitudes where pendiente = 1 ";
-		//System.out.println(query);
+		String query="select * from solicitudes where pendiente = 1 order by idsolicitud asc ";
+		System.out.println(query);
 		Conexion c=new Conexion();
 		c.conectar();
 		

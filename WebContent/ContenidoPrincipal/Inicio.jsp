@@ -23,8 +23,6 @@
 
  function bienvenida(){
     $('#myModal').modal('show');
-    
-    
 };
 
 $(document).ready(function(){
@@ -91,8 +89,6 @@ if (!co.comprobar("select * from primerinicio where idusuario like '"+session.ge
 	bienvenida();
 	</script>
 	<%
-	//session.setAttribute("bienvenida", false);
-	//System.out.println("primer inicio");
 	co.actualizardato("insert into primerinicio values ('"+session.getAttribute("usuario")+"',1,'')");
 }
 %>
@@ -151,7 +147,6 @@ if (!co.comprobar("select * from primerinicio where idusuario like '"+session.ge
 					inipag=0;
 					pagpulsada=1;
 				}
-				
 				else
 				{
 					inipag=Integer.parseInt(request.getParameter("pagpulsada"))*10-10;
@@ -161,9 +156,6 @@ if (!co.comprobar("select * from primerinicio where idusuario like '"+session.ge
 				int[] x = co.idultimas10preguntas(inipag,10);
 				
 				for (int i = 0; i < x.length; i++) {
-					
-					
-
 					String titu[] = co.sacarpreguntaporid(x[i]);
 					/*
 					Como en este jsp ponemos las preguntas recargadas en arrays fijos de una longitud, lo que realizo es comprobaciones de que no este null
@@ -286,11 +278,7 @@ if (!co.comprobar("select * from primerinicio where idusuario like '"+session.ge
 										inicio+=10;
 										fin=10;
 									}
-									
-								//co.cerrarconexion();
 							%>
-						 
-						  
 						  <li><a href="#">&raquo;</a></li>
 	 				  </ul>
 	   			 </div>

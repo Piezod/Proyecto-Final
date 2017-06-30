@@ -19,6 +19,8 @@
 			if (problema.length != 0) {
 				problema += "\n";
 			}
+			document.getElementById("descrip").innerHTML="Descripcion vacia";
+			document.getElementById("descrip").style.color="#A94442";
 			problema += "Mensaje vacio ";
 			if (document.getElementById("titulo").value.length != 0) {
 				titulo = document.getElementById("titulo").value
@@ -27,9 +29,13 @@
 
 			}
 		}
+		else
+			{
+			document.getElementById("descrip").innerHTML="Descripcion ";
+			document.getElementById("descrip").style.color="black";
+			}
 
 		if (problema.length != 0) {
-			alert(problema)
 			return false;
 		} else {
 			return true;
@@ -286,9 +292,8 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="pwd">Descripcion</label>
+							<label id="descrip" class="control-label col-sm-2" for="pwd">Descripcion</label>
 							<div class="col-sm-8 col-md-8">
 								<textarea style="overflow-y: scroll; height: 50%; resize: none"
 									class="form-control" rows="10" id="comment" name="mensaje"
