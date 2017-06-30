@@ -183,9 +183,21 @@
   <error-page>
     <error-code>404</error-code>
     <location>/Error.jsp</location>
-  </error-page> 
+  </error-page>
   <error-page>
     <error-code>500</error-code>
     <location>/Error.jsp</location>
-  </error-page> 
+  </error-page>
+  <servlet>
+    <servlet-name>Jersey RESTful Application</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>jersey.config.server.provider.packages</param-name>
+      <param-value>com.webservices</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey RESTful Application</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
 </web-app>

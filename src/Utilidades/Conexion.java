@@ -120,6 +120,7 @@ public class Conexion {
 			consulta.setInt(3, 1);
 			ResultSet res = consulta.executeQuery();
 			enc= res.next();
+			System.out.println("select * from dbdamproject.usuarios where usuario like "+user+" and pass like "+pass.hashCode()+" and validado like 1");
 			//Si no encuentra al usuario por login normal
 			if(!enc){
 				//Compruebo si no esta validado y coincide el código de validacion
