@@ -56,7 +56,22 @@ public class UserDao {
 
 	   }
 
+	   public boolean CheckEmail(String email){
+		   Conexion connection=new Conexion();
+		   try {
+			connection.conectar();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			if(connection.comprobar("select * from dbdamproject.usuarios where email like '"+email+"'  and validacion not like '0'")){
+				return true;
+	   }
+			else{
+				return false;
+			}
 
+	   }
 	public boolean CheckEmailValidation(String email, String code) {
 		Conexion connection=new Conexion();
 		   try {
