@@ -120,7 +120,6 @@ public class Conexion {
 			consulta.setInt(3, 1);
 			ResultSet res = consulta.executeQuery();
 			enc= res.next();
-			System.out.println("select * from dbdamproject.usuarios where usuario like "+user+" and pass like "+pass.hashCode()+" and validado like 1");
 			//Si no encuentra al usuario por login normal
 			if(!enc){
 				//Compruebo si no esta validado y coincide el código de validacion
@@ -689,6 +688,24 @@ public class Conexion {
 			return new int[0];
 		}
 	}
+	
+public ResultSet resulsetrespuestasAndroid(int inicio, int fin,int idpregunta) throws SQLException {
+		
+		Statement consulta = conexion.createStatement();
+		
+		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.respuestas where idpregunta like '"+idpregunta+"' order by votospositivos desc,idrespuesta desc limit "+inicio+","+fin+"");		
+		return res;
+	
+}
+	
+	public ResultSet resulsetpreguntasAndroid(int inicio, int fin) throws SQLException {
+		
+		Statement consulta = conexion.createStatement();
+		
+		ResultSet res = consulta.executeQuery("SELECT * FROM dbdamproject.preguntas order by idpreguntas desc limit "+inicio+","+fin+"");		
+		return res;
+	
+}
 	
 	/*
 	 * Metodo que devuelve un resulset para que luego sea recorrido por un for en el jsp de mostrar las preguntas que tengan que ver algo con lo preguntado  y en cada

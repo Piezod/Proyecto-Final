@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 	public class UserService {  
 	   UserDao userDao = new UserDao();  
 	   
+	   
 	   @GET
 	   @Path("/users/{login}/{pass}")
 	   @Produces(MediaType.APPLICATION_JSON)
@@ -43,7 +44,7 @@ import javax.ws.rs.core.MediaType;
 	   @Path("/checkemail/{email}")
 	   @Produces(MediaType.TEXT_PLAIN)
 	   public String CheckEmail(@PathParam("email") String email){
-		   if(userDao.SendEmailResetPassword(email)){
+		   if(userDao.CheckEmail(email)){
 			   return "Correct";
 		   }
 		   else{
@@ -64,4 +65,19 @@ import javax.ws.rs.core.MediaType;
 		   }
 		   
 	   }
+	   
+	   @GET
+	   @Path("/updatepassword/{code}/{newpass}")
+	   @Produces(MediaType.TEXT_PLAIN)
+	   public String UpdatePass(@PathParam("code") String code,@PathParam("newpass") String newpass){
+		   if(userDao.Newpassword(code,newpass)){
+			   
+			   return "Correct";
+		   }
+		   else{
+			   return "False";
+		   }
+		   
+	   }
+	   
 }

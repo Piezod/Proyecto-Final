@@ -28,7 +28,15 @@ public class UserDao {
 				e.printStackTrace();
 			}
 		      user.setPassword(user.getPassword().hashCode()+"");
+		      if(user.isValid()){
+			      user.setEmail(connection.sacarundatostring("select email from usuarios where usuario like '"+user.getUser()+"'"));
+		      }
+		      else{
+		    	  user.setEmail("");
+		      }
 		      userList.add(user);
+		      connection.cerrarconexion();
+
 		      return userList; 
 		   }
 	   
@@ -47,10 +55,13 @@ public class UserDao {
 				String ruta="http://90.162.66.76/EstudiantesConecta2/recuperarpass";
 				Correo correo=new Correo("<h1>Parece que ha perdido su contraseña</h1>Acceda a <a href="+'"'+ruta+"?cod="+validacion+'"'+">este link</a> para reestablecer su contraseña<br>O introduzca este código en su app "+validacion+"<br><strong>Si usted no ha solicitado este cambio ignore este correo</strong>", email, "Recuperacion de contraseña estudiantes conectados");
 				correo.SendMail();
+			    connection.cerrarconexion();
+
 				return true;
 
 	   }
 			else{
+			    connection.cerrarconexion();
 				return false;
 			}
 
@@ -65,9 +76,11 @@ public class UserDao {
 			e.printStackTrace();
 		}
 			if(connection.comprobar("select * from dbdamproject.usuarios where email like '"+email+"'  and validacion not like '0'")){
+			    connection.cerrarconexion();
 				return true;
 	   }
 			else{
+			    connection.cerrarconexion();
 				return false;
 			}
 
@@ -81,13 +94,34 @@ public class UserDao {
 			e.printStackTrace();
 		}
 			if(connection.comprobar("select * from dbdamproject.usuarios where email like '"+email+"' and validacion like '"+code+"'")){
+			    connection.cerrarconexion();
+				return true;
+
+	   }
+			else{
+			    connection.cerrarconexion();
+				return false;
+			}
+
+	}
+
+
+	public boolean Newpassword(String code, String newpass) {
+		// TODO Auto-generated method stub
+		Conexion connection=new Conexion();
+		   try {
+			connection.conectar();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			if(connection.actualizarpass(newpass, code)==1){
 				return true;
 
 	   }
 			else{
 				return false;
 			}
-
 	}
    
 }

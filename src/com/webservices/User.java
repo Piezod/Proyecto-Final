@@ -8,7 +8,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User implements Serializable {  
    private static final long serialVersionUID = 1L; 
    private String user; 
-   private String password; 
+   private String password;
+   private String email;
    private boolean valid;  
    public User(){} 
     
@@ -34,6 +35,16 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	@XmlElement
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@XmlElement
 	public boolean isValid() {
 		return valid;
