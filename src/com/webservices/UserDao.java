@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException; 
 import java.io.ObjectInputStream; 
 import java.io.ObjectOutputStream;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList; 
 import java.util.List;
@@ -122,6 +123,35 @@ public class UserDao {
 			else{
 				return false;
 			}
+	}
+
+
+	public List<UserData> getUserInfo(String user) {
+		// TODO Auto-generated method stub
+		List <UserData> list=new ArrayList<UserData>();
+		Conexion connection=new Conexion();
+		   try {
+			connection.conectar();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		   	ResultSet res=connection.sacarresultset("select * from usuarios where usuario like '"+user+"'");
+
+		   	try {
+				if(res.next()){
+					int questions=connection.contar("select count(*) from preguntas where idusuario like '"+user+"'");
+					int answers=connection.contar("select count(*) from respuestas where idusuario like '"+user+"'");
+					int validanswers=connection.contar("select count(*) from respuestas where idusuario like '"+user+"' and mejorrespuesta like '1'");
+					list.add(new UserData(res.getString(1), res.getString(7), res.getString(3)+" "+res.getString(4)+" "+res.getString(5), questions, answers, validanswers));
+
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					return list;
 	}
    
 }

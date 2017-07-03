@@ -7,18 +7,32 @@ public class Answers {
 	private String titulo; 
 	private String contenido;
 	private String autor;
-	private int positivos,negativos,count;
+	private int positivos,negativos,count,valid;
 	
 	
-	public Answers(int id, String contenido, String autor,int positivos,int negativos,int count) {
+	public Answers(int id, String contenido, String autor,int positivos,int negativos,int valid) {
 		this.id=id;
 		this.contenido = contenido;
 		this.autor = autor;
 		this.positivos=positivos;
 		this.negativos=negativos;
-		this.count=count;
+		this.valid=valid;
 	}
 	
+	
+	@XmlElement
+	public int getValid() {
+		return valid;
+	}
+
+
+
+	public void setValid(int valid) {
+		this.valid = valid;
+	}
+
+
+
 	@XmlElement
 	public int getCount() {
 		return count;

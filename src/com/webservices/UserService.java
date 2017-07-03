@@ -65,7 +65,7 @@ import javax.ws.rs.core.MediaType;
 		   }
 		   
 	   }
-	   
+
 	   @GET
 	   @Path("/updatepassword/{code}/{newpass}")
 	   @Produces(MediaType.TEXT_PLAIN)
@@ -77,6 +77,19 @@ import javax.ws.rs.core.MediaType;
 		   else{
 			   return "False";
 		   }
+		   
+	   }
+	   @GET
+	   @Path("/userdata/{user}")
+	   @Produces(MediaType.APPLICATION_JSON)
+	   public List<UserData> UserData(@PathParam("user") String user){
+		
+		   
+		   
+		   
+		   return userDao.getUserInfo(user);
+			   
+			   
 		   
 	   }
 	   

@@ -4,29 +4,17 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class Questions {
 	private int id;
-	private int count;
 	private String titulo; 
 	private String contenido;
 	private String autor;
 	
 	
 	
-	public Questions(int id,String titulo, String contenido, String autor,int count) {
+	public Questions(int id,String titulo, String contenido, String autor) {
 		this.id=id;
 		this.titulo = titulo;
 		this.contenido = contenido;
 		this.autor = autor;
-		this.count=count;
-	}
-	
-	@XmlElement
-	public int getCount() {
-		return count;
-	}
-
-
-	public void setCount(int count) {
-		this.count = count;
 	}
 
 
