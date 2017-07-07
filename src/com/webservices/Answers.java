@@ -3,23 +3,47 @@ package com.webservices;
 import javax.xml.bind.annotation.XmlElement;
 
 public class Answers {
-	private int id;
-	private String titulo; 
+	private int id,idpregunta;
 	private String contenido;
 	private String autor;
 	private int positivos,negativos,count,valid;
 	
+	public Answers(){
+		
+	}
 	
-	public Answers(int id, String contenido, String autor,int positivos,int negativos,int valid) {
+	public Answers(int idpregunta, String contenido, String autor) {
+		super();
+		this.idpregunta = idpregunta;
+		this.contenido = contenido;
+		this.autor = autor;
+	}
+
+
+	public Answers(int id, String contenido, String autor,int positivos,int negativos,int valid,int idpregunta) {
 		this.id=id;
 		this.contenido = contenido;
 		this.autor = autor;
 		this.positivos=positivos;
 		this.negativos=negativos;
 		this.valid=valid;
+		this.idpregunta=idpregunta;
 	}
 	
 	
+	@XmlElement
+	public int getIdpregunta() {
+		return idpregunta;
+	}
+
+
+
+	public void setIdpregunta(int idpregunta) {
+		this.idpregunta = idpregunta;
+	}
+
+
+
 	@XmlElement
 	public int getValid() {
 		return valid;
@@ -79,13 +103,6 @@ public class Answers {
 
 
 
-	@XmlElement
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
 	
 	@XmlElement
 	public String getContenido() {

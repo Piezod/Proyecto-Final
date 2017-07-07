@@ -752,6 +752,16 @@ public class Conexion {
 				return res;
 
 	}
+	
+	public ResultSet resulsetpreguntasAndroidSearch(int inicio, int fin,String search) throws SQLException {
+
+		Statement consulta = conexion.createStatement();
+
+		ResultSet res = consulta.executeQuery(
+				"SELECT * FROM dbdamproject.preguntas where titulo like '%"+search+"%' or descripcion like '%"+search+"%' order by idpreguntas desc limit " + inicio + "," + fin + "");
+		return res;
+
+	}
 
 	public ResultSet resulsetpreguntasAndroid(int inicio, int fin) throws SQLException {
 
@@ -932,6 +942,18 @@ public class Conexion {
 		insertar.executeUpdate(query);
 	}
 
+	public boolean actualizarTest(int id,double nota) throws SQLException {
+		Statement insertar = conexion.createStatement();
+		// System.out.println(query+" actualizardato");
+		if(insertar.executeUpdate("update examenes set nota="+nota+" where idExamen="+id)<=0){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
+	
 	public int[] idstag(String busqueda, int inicio, int paginas) {
 		try {
 			int idsex = busqueda.split("_").length;
@@ -1052,4 +1074,37 @@ public class Conexion {
 
 		return longitud;
 	}
+
+	public ResultSet resulsettestsAndroid(int inicio, int fin, String user) {
+
+		ResultSet res=null;
+		try {
+			Statement consulta = conexion.createStatement();
+
+			res = consulta.executeQuery(
+					"SELECT * FROM dbdamproject.examenes where idUsuario like '"+user+"' order by fecha ,hora limit " + inicio + "," + fin + "");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	public boolean InsertarExamen(String asignatura,double nota, String fecha, String hora, String user) {
+		try {
+			Statement consulta = conexion.createStatement();
+
+			if(consulta.executeUpdate("insert into examenes (asignatura,nota,fecha,hora,idUsuario) "
+					+ "values ('"+asignatura+"','"+nota+"','"+fecha+"','"+hora+"','"+user+"')")>0){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
+
 }

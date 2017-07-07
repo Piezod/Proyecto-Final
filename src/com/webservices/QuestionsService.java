@@ -1,8 +1,11 @@
 package com.webservices;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.List;
 
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -12,7 +15,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;  
+import javax.ws.rs.core.MediaType;
+
+import org.json.JSONObject;
+
 @Path("/QuestionsService") 
 
 public class QuestionsService {
@@ -33,6 +39,24 @@ public class QuestionsService {
  
 		   return questionsDao.getCountQuestions();
 	   }
+	   
+	   @GET
+	   @Path("/questionssearch/{inicio}/{fin}/{search}")
+	   @Produces(MediaType.APPLICATION_JSON)
+	   public List<Questions> getQuestionsSearch(@PathParam("inicio") int inicio
+			   ,@PathParam("fin") int fin,@PathParam("search") String search){
+ 
+		   return questionsDao.getQuestionssearch(inicio,fin,search);
+	   }
+	   
+	   @GET
+	   @Path("/questionscountsearch/{search}")
+	   @Produces(MediaType.TEXT_PLAIN)
+	   public int getQuestionsCountSeach(@PathParam("search") String search){
+ 
+		   return questionsDao.getCountQuestionssearch(search);
+	   }
+	   
 	   @GET
 	   @Path("/questionsuser/{inicio}/{fin}/{user}")
 	   @Produces(MediaType.APPLICATION_JSON)
@@ -88,19 +112,37 @@ public class QuestionsService {
 	   @GET
 	   @Path("/uploadanswer/{answer}/{user}/{idpregunta}")
 	   @Produces(MediaType.TEXT_PLAIN)
-	   public int uploadAnswer(@PathParam("answer") String answer
+	   public String uploadAnswer(@PathParam("answer") String answer
 			   ,@PathParam("user") String user,@PathParam("idpregunta") int idpregunta){
  
 		   return questionsDao.uploadAnswer(answer,user,idpregunta);
 	   }
+	   
+	   @POST
+	   @Path("/uploadanswer")
+	   @Consumes(MediaType.APPLICATION_JSON)
+	   @Produces(MediaType.APPLICATION_JSON)
+	   public String uploadAnswerPost(String json){
+	        JSONObject jsonobject = new JSONObject(json); 
 
-	   @GET
-	   @Path("/uploadquestion/{title}/{content}/{user}")
-	   @Produces(MediaType.TEXT_PLAIN)
-	   public int uploadQuestion(@PathParam("title") String title
-			   ,@PathParam("content") String content,@PathParam("user") String user){
- 
-		   return questionsDao.uploadQuestion(title,content,user);
+		   return questionsDao.uploadAnswer(jsonobject.getString("answer"),jsonobject.getString("author")
+				   ,jsonobject.getInt("idquestion"));
 	   }
+
+	   
+	   @POST
+	   @Path("/uploadquestion")
+	   @Consumes(MediaType.APPLICATION_JSON)
+	   @Produces(MediaType.APPLICATION_JSON)
+	   public String uploadQuestionPost(String json){
+	        JSONObject jsonobject = new JSONObject(json); 
+
+	        return questionsDao.uploadQuestion(jsonobject.getString("title")
+	        		,jsonobject.getString("content"),
+	        		jsonobject.getString("user"));
+		   
+	   }
+	   
+	   
 
 }

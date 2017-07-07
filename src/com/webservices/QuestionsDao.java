@@ -69,7 +69,7 @@ public class QuestionsDao {
 			while (res.next()) {
 				questionsList.add(new Answers(res.getInt(1),
 						res.getString(2).replaceAll("<br>", "\n").replace("<pre>", "").replaceAll("</pre>", ""),
-						res.getString(7), res.getInt(3), res.getInt(4), res.getInt(5)));
+						res.getString(7), res.getInt(3), res.getInt(4), res.getInt(5),res.getInt(6)));
 
 			}
 		} catch (SQLException e) {
@@ -112,7 +112,7 @@ public class QuestionsDao {
 		return count;
 	}
 
-	public int uploadAnswer(String answer, String user, int idpregunta) {
+	public String uploadAnswer(String answer, String user, int idpregunta) {
 
 		Conexion connection = new Conexion();
 		int count;
@@ -121,13 +121,16 @@ public class QuestionsDao {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println(answer);
+		System.out.println(idpregunta);
+		System.out.println(user);
 		count = connection.InsertarRespuestas(answer.replaceAll("__", "<br>").replaceAll("_", " "), idpregunta,
 				user.replace("_", "."), "0");
 		connection.cerrarconexion();
-		return count;
+		return "{\"result\":"+count+"}";
 	}
 
-	public int uploadQuestion(String title, String content, String user) {
+	public String uploadQuestion(String title, String content, String user) {
 
 		Conexion connection = new Conexion();
 		int count;
@@ -136,10 +139,10 @@ public class QuestionsDao {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		count = connection.InsertarPregunta(title.replaceAll("_", " "),
-				content.replaceAll("__", "<br>").replaceAll("_", " "), user.replace("_", "."), "0");
+		count = connection.InsertarPregunta(title,
+				content, user, "0");
 		connection.cerrarconexion();
-		return count;
+		return "{\"result\":"+count+"}";
 	}
 
 	public List<Questions> getUserQuestions(int inicio, int fin, String user) {
@@ -197,7 +200,7 @@ public class QuestionsDao {
 			while (res.next()) {
 				answersList.add(new Answers(res.getInt(1),
 						res.getString(2).replaceAll("<br>", "\n").replace("<pre>", "").replaceAll("</pre>", ""),
-						res.getString(7), res.getInt(3), res.getInt(4), res.getInt(5)));
+						res.getString(7), res.getInt(3), res.getInt(4), res.getInt(5),res.getInt(6)));
 
 			}
 		} catch (SQLException e) {
@@ -207,4 +210,48 @@ public class QuestionsDao {
 		connection.cerrarconexion();
 		return answersList;
 	}
+
+	public int getCountQuestionssearch(String search) {
+		Conexion connection = new Conexion();
+		int count;
+		try {
+			connection.conectar();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		count = connection.contar("select count(*) from preguntas where titulo like '%"+search+"%' or descripcion like '%"+search+"%'");
+
+		connection.cerrarconexion();
+		return count;
+	}
+
+	public List<Questions> getQuestionssearch(int inicio, int fin, String search) {
+		List<Questions> questionsList = new ArrayList<>();
+		Conexion connection = new Conexion();
+		try {
+			connection.conectar();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+
+			ResultSet res = connection.resulsetpreguntasAndroidSearch(inicio, fin,search);
+			while (res.next()) {
+				questionsList.add(new Questions(res.getInt(1), res.getString(2),
+						res.getString(3).replaceAll("<br>", "\n").replace("<pre>", "").replaceAll("</pre>", ""),
+						res.getString(4)));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		connection.cerrarconexion();
+		return questionsList;
+	}
+	
+	
 }
